@@ -13,3 +13,5 @@ able to search for flights.
 
 The person responsible for writing a given class will also be responsible for writing the 
 tests for that class.
+
+We will use the GitHub flow model.
