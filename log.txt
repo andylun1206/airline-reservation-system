@@ -1,0 +1,15 @@
+***** May 18, 2017 *****
+For team coding style, we will use the default coding style 
+specified by the autoformat tool in Android Studio (Ctrl + Alt + L).
+
+Database tables: User, Flights, Airports, Airlines, BookedFlights
+	Split information into multiple tables to prevent redundant information storage.
+	Table Flights will reference User, Airports, and Airlines.
+	Table BookedFlights will reference User and Flights.
+
+For iteration 1, we will implement the GUI for the big user story: searching for flights.
+This story was chosen because in order to view and compare flights, we first need to be
+able to search for flights.
+
+The person responsible for writing a given class will also be responsible for writing the 
+tests for that class.
