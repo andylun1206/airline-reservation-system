@@ -1,4 +1,4 @@
-package ca.umanitoba.cs.comp3350.saveonflight;
+package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 public class MainActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
