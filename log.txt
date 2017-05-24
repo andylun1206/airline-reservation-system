@@ -1,4 +1,4 @@
-***** May 18, 2017 *****
+***** Meeting: May 18, 2017 *****
 For team coding style, we will use the default coding style 
 specified by the autoformat tool in Android Studio (Ctrl + Alt + L).
 
@@ -9,9 +9,20 @@ Database tables: User, Flights, Airports, Airlines, BookedFlights
 
 For iteration 1, we will implement the GUI for the big user story: searching for flights.
 This story was chosen because in order to view and compare flights, we first need to be
-able to search for flights.
+able to search for flights. If time permits, we'll also implement the GUI for viewing 
+the list of flights which match the search criteria.
 
 The person responsible for writing a given class will also be responsible for writing the 
 tests for that class.
 
 We will use the GitHub flow model.
+
+***** Meeting: May 24, 2017 *****
+Divided iteration 1 user stories into developer tasks. Created an issue on Github for each
+developer task.
+
+Decided to model design of the system after the sample project provided, since this is easier
+and more time efficient than trying to come up with our own.
+	1 model object for each table in the database.
+	1 database access class for each table in the data base.
+
