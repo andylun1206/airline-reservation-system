@@ -48,8 +48,8 @@ public class AccessAirlines {
         return dataAccess.insertAirline(airline);
     }
 
-    public boolean updateAirline() {
-        return dataAccess.updateAirline();
+    public boolean updateAirline(Airline airline) {
+        return dataAccess.updateAirline(airline);
     }
 
     public boolean deleteAirline(Airline airline) {
