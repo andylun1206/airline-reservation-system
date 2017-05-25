@@ -4,20 +4,16 @@ public class Flight {
     private String flightID;
     private Airline airline;
     private String date;
-    private DepartsAndArrives da;
+    private Airport depart;
+    private Airport arrival;
 
-    public Flight(String flightID, String date, Airline airline, DepartsAndArrives da) {
-        this.flightID = flightID;
-        this.date = date;
-        this.airline=airline;
-        this.da = da;
-    }
 
-    public Flight(String flightID, String date, String airline, String depart, String arrives) {
+    public Flight(String flightID, String date, String airline, String depart, String arrival) {
         this.flightID = flightID;
         this.date = date;
         this.airline = new Airline(airline);
-        this.da = new DepartsAndArrives(depart,arrives);
+        this.depart = new Airport(depart);
+        this.arrival = new Airport(arrival);
     }
 
     public void setFlightID(String flightID) {
@@ -40,12 +36,20 @@ public class Flight {
         this.date = date;
     }
 
-    public DepartsAndArrives getDa() {
-        return da;
+    public Airport getDepart() {
+        return depart;
     }
 
-    public void setDa(DepartsAndArrives da) {
-        this.da = da;
+    public void setDepart(Airport depart) {
+        this.depart = depart;
+    }
+
+    public Airport getArrival() {
+        return arrival;
+    }
+
+    public void setArrival(Airport arrival) {
+        this.arrival = arrival;
     }
 
     public String getFlightID() {
@@ -53,7 +57,7 @@ public class Flight {
     }
 
     public String toString() {
-        return "Flight: " + flightID + " " + date + " " + airline + " " + da;
+        return "Flight: " + flightID + " " + date + " " + airline + " " + "from " + depart + " to " + arrival;
     }
 
     public boolean equals(Object object) {
