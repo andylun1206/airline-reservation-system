@@ -1,22 +1,22 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
 public class Airport {
-    private String AirportCode;
+    private String airportCode;
 
     public Airport(String airportCode) {
-        AirportCode = airportCode;
+        this.airportCode = airportCode;
     }
 
     public String getAirportCode() {
-        return AirportCode;
+        return airportCode;
     }
 
     public void setAirportCode(String airportCode) {
-        AirportCode = airportCode;
+        this.airportCode = airportCode;
     }
 
     public String toString() {
-        return "Airport{" + "AirportCode='" + AirportCode + '\'' + '}';
+        return airportCode;
     }
 
     public boolean equals(Object object) {
@@ -27,7 +27,7 @@ public class Airport {
 
             Airport other = (Airport) object;
 
-            if (other.AirportCode.equals(AirportCode)) {
+            if (other.airportCode.equals(airportCode)) {
                 result = true;
             }
         }
