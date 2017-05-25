@@ -7,7 +7,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.DepartsAndArrives;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
@@ -18,7 +17,6 @@ public class DataAccessStub implements DataAccess {
     private ArrayList<Airline> airlines;
     private ArrayList<Airport> airports;
     private ArrayList<BookedFlight> bookedFlights;
-    private ArrayList<DepartsAndArrives> departsAndArrives;
     private ArrayList<Flight> flights;
     private ArrayList<Traveller> travellers;
 
@@ -35,7 +33,6 @@ public class DataAccessStub implements DataAccess {
         Airline airline;
         Airport airport;
         BookedFlight bookedFlight;
-        DepartsAndArrives departsAndArrives;
         Flight flight;
         Traveller traveller;
 
@@ -162,7 +159,7 @@ public class DataAccessStub implements DataAccess {
     }
 
     public boolean updateBookedFlight() {
-        //// TODO: 2017-05-25
+
         return false;
     }
 
