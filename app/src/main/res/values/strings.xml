@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">save on flight</string>
 
+    <string name="contact_email">contact_us@saveonflight.ca</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
