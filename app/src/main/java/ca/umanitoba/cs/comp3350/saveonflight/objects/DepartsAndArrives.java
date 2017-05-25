@@ -1,34 +1,28 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
-
 public class DepartsAndArrives {
-    private Airport departs;
-    private Airport arrives;
+    private String departs;
+    private String arrives;
 
-    public DepartsAndArrives(Airport departs, Airport arrives) {
+    public DepartsAndArrives(String departs, String arrives) {
         this.departs = departs;
         this.arrives = arrives;
     }
 
-    public DepartsAndArrives(String departs, String arrives) {
-        this.departs = new Airport(departs);
-        this.arrives = new Airport(arrives);
-    }
-
     public String getDeparts() {
-        return departs.getAirportCode();
+        return departs;
     }
 
     public void setDeparts(String departs) {
-        this.departs.setAirportCode(departs);
+        this.departs = departs;
     }
 
     public String getArrives() {
-        return arrives.getAirportCode();
+        return arrives;
     }
 
     public void setArrives(String arrives) {
-        this.arrives.setAirportCode(arrives);
+        this.arrives = arrives;
     }
 
     public String toString() {

@@ -50,8 +50,7 @@ public class AccessTravellers {
     }
 
     public boolean updateTraveller() {
-        // TODO
-        return false;
+        return dataAccess.updateTraveller();
     }
 
     public boolean deleteTraveller(Traveller traveller) {

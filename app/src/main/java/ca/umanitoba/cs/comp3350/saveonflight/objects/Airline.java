@@ -24,7 +24,7 @@ public class Airline {
 
         if (object instanceof Airline) {
             Airline other = (Airline) object;
-            if (other.name == name) {
+            if (other.name == name) { // TODO: currently comparing Strings with ==
                 result = true;
             }
         }
