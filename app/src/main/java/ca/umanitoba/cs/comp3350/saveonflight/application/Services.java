@@ -8,9 +8,9 @@ public class Services {
 
     public static DataAccessStub createDataAccess(String dbName) {
         if (dataAccessService == null) {
-            // TODO: implement DataAccessStub methods
-            //dataAccessService = new DataAccessStub(dbName);
-            //dataAccessService.open(Main.DB_NAME);
+            // TODO: Note that the DataAccessStub is currently not implemented
+            dataAccessService = new DataAccessStub(dbName);
+            dataAccessService.open(Main.DB_NAME);
         }
         return dataAccessService;
     }

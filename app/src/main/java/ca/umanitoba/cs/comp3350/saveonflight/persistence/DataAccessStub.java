@@ -28,7 +28,7 @@ public class DataAccessStub {
         this(Main.DB_NAME);
     }
 
-    public void open() {
+    public void open(String dbName) {
         // TODO: Populate the 5 "tables" (ArrayLists) with fake data
 
         System.out.println("Opened " + dbType + " database " + dbName);
