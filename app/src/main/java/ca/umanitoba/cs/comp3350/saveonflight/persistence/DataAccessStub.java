@@ -10,7 +10,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
-public class DataAccessStub {
+public class DataAccessStub implements DataAccess {
     private String dbName;
     private String dbType = "stub";
 
@@ -101,7 +101,17 @@ public class DataAccessStub {
         return false;
     }
 
-    // FLIGHTs TABLE METHODS
+    public ArrayList<BookedFlight> getTravellersBookedFlights(Traveller traveller) {
+        // TODO: return all BookedFlight objects for the specified Traveller (BookedFlight.travellerID == traveller.ID)
+        return null;
+    }
+
+    public ArrayList<BookedFlight> getTravellersOnFlight(Flight flight) {
+        // TODO: return all BookedFlight objects for the specified flight
+        return null;
+    }
+
+    // FLIGHTS TABLE METHODS
     public ArrayList<Flight> getFlights() {
         // TODO
         return null;
