@@ -14,8 +14,16 @@ public class Traveller {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getTravellerID() {
         return travellerID;
+    }
+
+    public void setTravellerID(int travellerID) {
+        this.travellerID = travellerID;
     }
 
     public String toString() {
