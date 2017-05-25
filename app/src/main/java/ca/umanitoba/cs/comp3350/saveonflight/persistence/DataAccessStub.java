@@ -10,7 +10,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
-public class DataAccessStub {
+public class DataAccessStub implements DataAccess {
     private String dbName;
     private String dbType = "stub";
 
