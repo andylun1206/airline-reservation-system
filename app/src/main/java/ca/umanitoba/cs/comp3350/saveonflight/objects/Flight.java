@@ -65,7 +65,7 @@ public class Flight {
 
         if (object instanceof Flight) {
             Flight other = (Flight) object;
-            if (other.flightID == flightID) {
+            if (other.flightID.equals(flightID)) {
                 result = true;
             }
         }

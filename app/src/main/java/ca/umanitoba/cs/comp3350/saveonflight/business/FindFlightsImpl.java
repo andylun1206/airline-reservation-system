@@ -10,7 +10,7 @@ public class FindFlightsImpl implements FindFlights {
     public List<Flight> search() {
         // TODO: make this method do an actual search
 
-        // For now, just return
+        // For now, just return all the Flights in the DB
         AccessFlights dbAccess = new AccessFlights();
         List<Flight> flights = dbAccess.getFlights();
         return flights;
