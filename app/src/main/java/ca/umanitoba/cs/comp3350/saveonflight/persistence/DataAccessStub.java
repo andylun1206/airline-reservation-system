@@ -7,7 +7,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.DepartsAndArrives;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
@@ -18,7 +17,6 @@ public class DataAccessStub implements DataAccess {
     private ArrayList<Airline> airlines;
     private ArrayList<Airport> airports;
     private ArrayList<BookedFlight> bookedFlights;
-    private ArrayList<DepartsAndArrives> departsAndArrives;
     private ArrayList<Flight> flights;
     private ArrayList<Traveller> travellers;
 
@@ -35,7 +33,6 @@ public class DataAccessStub implements DataAccess {
         Airline airline;
         Airport airport;
         BookedFlight bookedFlight;
-        DepartsAndArrives departsAndArrives;
         Flight flight;
         Traveller traveller;
 
@@ -154,7 +151,6 @@ public class DataAccessStub implements DataAccess {
 
     // BOOKEDFLIGHTS TABLE METHODS
     public ArrayList<BookedFlight> getBookedFlights() {
-        // TODO
         return bookedFlights;
     }
 
@@ -163,7 +159,7 @@ public class DataAccessStub implements DataAccess {
     }
 
     public boolean updateBookedFlight() {
-        // TODO
+
         return false;
     }
 
@@ -181,17 +177,35 @@ public class DataAccessStub implements DataAccess {
 
     public ArrayList<BookedFlight> getTravellersBookedFlights(Traveller traveller) {
         // TODO: return all BookedFlight objects for the specified Traveller (BookedFlight.travellerID == traveller.ID)
-        return null;
+
+        ArrayList<BookedFlight> result = new ArrayList<BookedFlight>();
+
+        for(int i = 0; i < bookedFlights.size(); i++)
+        {
+            BookedFlight term = bookedFlights.get(i);
+            if (term.getTraveller().getTravellerID() == traveller.getTravellerID()){
+                result.add(term);
+            }
+        }
+        return result;
     }
 
     public ArrayList<BookedFlight> getTravellersOnFlight(Flight flight) {
         // TODO: return all BookedFlight objects for the specified flight
-        return null;
+        ArrayList<BookedFlight> result = new ArrayList<BookedFlight>();
+
+        for(int i = 0; i < bookedFlights.size(); i++)
+        {
+            BookedFlight term = bookedFlights.get(i);
+            if (term.getFlight().getFlightID().equals(flight.getFlightID()) ){
+                result.add(term);
+            }
+        }
+        return result;
     }
 
     // FLIGHTS TABLE METHODS
     public ArrayList<Flight> getFlights() {
-        // TODO
         return flights;
     }
 
@@ -200,12 +214,11 @@ public class DataAccessStub implements DataAccess {
     }
 
     public boolean updateFlight() {
-        // TODO
+        //// TODO: 2017-05-25
         return false;
     }
 
     public boolean deleteFlight(Flight flight) {
-        // TODO
         int index;
         index = flights.indexOf(flight);
         if (index >= 0)
@@ -219,7 +232,6 @@ public class DataAccessStub implements DataAccess {
 
     // TRAVELLERS TABLE METHODS
     public ArrayList<Traveller> getTravellers() {
-        // TODO
         return travellers;
     }
 
@@ -228,12 +240,10 @@ public class DataAccessStub implements DataAccess {
     }
 
     public boolean updateTraveller() {
-        // TODO
         return false;
     }
 
     public boolean deleteTraveller(Traveller traveller) {
-        // TODO
         int index;
         index = travellers.indexOf(traveller);
         if (index >= 0)
