@@ -7,6 +7,9 @@ public class Flight {
     private Airport depart;
     private Airport arrival;
 
+    public static enum TravelClass {
+        ECONOMY, BUSINESS, FIRST_CLASS
+    }
 
     public Flight(String flightID, String date, String airline, String depart, String arrival) {
         this.flightID = flightID;
