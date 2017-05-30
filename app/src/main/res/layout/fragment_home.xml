@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:weightSum="1">
+    <Space android:layout_width="match_parent" android:layout_height="20px" android:layout_weight="0.25"/>
+    <ImageView
+            android:layout_width="317dp"
+            android:layout_height="272dp"
+            android:id="@+id/imageView_home_app_icon"
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center"/>
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="20px"
+            android:layout_weight="0.37"/>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:id="@+id/button_home_login"/>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:id="@+id/button_home_signup"/>
+</LinearLayout>

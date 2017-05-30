@@ -6,5 +6,16 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_search">Search for Flights</string>
+
+    <!-- Search Activity -->
+    <string name="search_origin">Origin: </string>
+    <string name="search_destination">Destination: </string>
+    <string name="search_departure_date">Departure Date: </string>
+    <string name="search_arrival_date">Arrival Date: </string>
+    <string name="search_num_travellers">Number of Travellers: </string>
+    <string name="search_button_advance">Advance Settings</string>
+    <string name="search_button_search">Search</string>
 </resources>
