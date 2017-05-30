@@ -1,10 +1,12 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
+import java.util.ArrayList;
 import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.application.Services;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccessStub;
 
 public class AccessBookedFlights {
@@ -14,7 +16,7 @@ public class AccessBookedFlights {
     private int currentFlight;
 
     public AccessBookedFlights() {
-        dataAccess = (DataAccessStub) Services.getDataAccess(Main.DB_NAME);
+        dataAccess = Services.getDataAccess(Main.DB_NAME);
         bookedFlights = null;
         flight = null;
         currentFlight = 0;
@@ -36,7 +38,12 @@ public class AccessBookedFlights {
         return deleted;
     }
 
-    // TODO: method for getting flights of a traveller
-    // TODO: method for getting all travellers on a given flight
+    public ArrayList<BookedFlight> getBookedFlightsOf(Traveller t){
+        return dataAccess.getTravellersBookedFlights(t);
+    }
+
+    public ArrayList<BookedFlight> getTravellersOnFlight(Flight f){
+        return dataAccess.getTravellersOnFlight(f);
+    }
 
 }
