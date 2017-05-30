@@ -103,7 +103,14 @@ public class DataAccessStub implements DataAccess {
 
     public boolean updateAirline(Airline airline) {
         // TODO: Not sure what the method signature for these update methods should be - kenny
+        int index;
 
+        index = airlines.indexOf(airline);
+        if(index >= 0)
+        {
+            airlines.set(index, airline);
+            return true;
+        }
         return false;
     }
 
@@ -131,8 +138,15 @@ public class DataAccessStub implements DataAccess {
         return airports.add(airport);
     }
 
-    public boolean updateAirport() {
-        // TODO
+    public boolean updateAirport(Airport airport) {
+        int index;
+
+        index = airports.indexOf(airport);
+        if(index >= 0)
+        {
+            airports.set(index, airport);
+            return true;
+        }
         return false;
     }
 
@@ -158,8 +172,15 @@ public class DataAccessStub implements DataAccess {
         return bookedFlights.add(bookedFlight);
     }
 
-    public boolean updateBookedFlight() {
+    public boolean updateBookedFlight(BookedFlight bookedFlight) {
+        int index;
 
+        index = bookedFlights.indexOf(bookedFlight);
+        if(index >= 0)
+        {
+            bookedFlights.set(index, bookedFlight);
+            return true;
+        }
         return false;
     }
 
@@ -213,8 +234,16 @@ public class DataAccessStub implements DataAccess {
         return flights.add(flight);
     }
 
-    public boolean updateFlight() {
+    public boolean updateFlight(Flight flight) {
         //// TODO: 2017-05-25
+        int index;
+
+        index = flights.indexOf(flight);
+        if(index >= 0)
+        {
+            flights.set(index, flight);
+            return true;
+        }
         return false;
     }
 
@@ -239,7 +268,15 @@ public class DataAccessStub implements DataAccess {
         return travellers.add(traveller);
     }
 
-    public boolean updateTraveller() {
+    public boolean updateTraveller(Traveller traveller) {
+        int index;
+
+        index = travellers.indexOf(traveller);
+        if(index >= 0)
+        {
+            travellers.set(index, traveller);
+            return true;
+        }
         return false;
     }
 

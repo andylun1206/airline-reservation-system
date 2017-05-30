@@ -30,7 +30,7 @@ interface DataAccess {
     public boolean updateAirline(Airline airline);
         // TODO: Not sure what the method signature for these update methods should be - kenny
 
-    public boolean deleteAirline(Airline CurrectAirline);
+    public boolean deleteAirline(Airline airline);
         // TODO: delete the specified airline from the Airlines table
 
     // AIRPORT TABLE METHODS
@@ -39,7 +39,7 @@ interface DataAccess {
 
     public boolean insertAirport(Airport airport);
 
-    public boolean updateAirport();
+    public boolean updateAirport(Airport airport);
 
     public boolean deleteAirport(Airport airport);
 
@@ -49,7 +49,7 @@ interface DataAccess {
 
     public boolean insertBookedFlight(BookedFlight bookedFlight);
 
-    public boolean updateBookedFlight();
+    public boolean updateBookedFlight(BookedFlight bookedFlight);
 
     public boolean deleteBookedFlight(BookedFlight bookedFlight);
 
@@ -62,7 +62,7 @@ interface DataAccess {
 
     public boolean insertFlight(Flight flight);
 
-    public boolean updateFlight();
+    public boolean updateFlight(Flight flight);
 
     public boolean deleteFlight(Flight flight);
 
@@ -71,7 +71,7 @@ interface DataAccess {
     public ArrayList<Traveller> getTravellers();
     public boolean insertTraveller(Traveller traveller);
 
-    public boolean updateTraveller();
+    public boolean updateTraveller(Traveller traveller);
 
     public boolean deleteTraveller(Traveller traveller);
 
