@@ -1,34 +1,29 @@
 package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
-import android.app.DatePickerDialog;
-import android.app.DatePickerDialog.OnDateSetListener;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
-import java.util.Calendar;
-import java.util.Locale;
+import java.util.ArrayList;
 
-public class SearchFragment extends Fragment implements OnDateSetListener{
-	private EditText departureDate;
-	private EditText arrivalDate;
-	private Button advancedSetting;
-	
-	private EditText activeDateDisplay;
+public class SearchFragment extends ListFragment{
+	private SearchCriteriaArrayAdapter adapter;
+	private ArrayList<SearchCriteria> criterias;
 	
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle saveInstanceState) {
-		return inflater.inflate(R.layout.fragment_search_return, container, false);
+		View view = inflater.inflate(R.layout.fragment_search_return, container, false);
+		setDefaultCriterias();
+		adapter = new SearchCriteriaArrayAdapter(getActivity(), R.layout.list_search_criteria, criterias);
+		setListAdapter(adapter);
+		return view;
 	}
 	
 	@Override
@@ -36,53 +31,29 @@ public class SearchFragment extends Fragment implements OnDateSetListener{
 		super.onViewCreated(view, saveInstanceState);
 		getActivity().setTitle(getString(R.string.title_activity_search));
 		
-		this.departureDate = (EditText) getView().findViewById(R.id.editText_search_return_departure_date);
-		this.departureDate.setOnClickListener(new OnClickListener() {
+		getView().findViewById(R.id.button_search_return_advance).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				activeDateDisplay = departureDate;
-				showDatePickerDialog();
-			}
-		});
-		
-		this.arrivalDate = (EditText) getView().findViewById(R.id.editText_search_return_arrival_date);
-		this.arrivalDate.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				activeDateDisplay = arrivalDate;
-				showDatePickerDialog();
-			}
-		});
-		
-		this.advancedSetting = (Button) getView().findViewById(R.id.button_search_return_advance);
-		this.advancedSetting.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				View advancedSettingView = getView().findViewById(R.id.search_return_advanced_settings_checkboxes);
-				
-				if (advancedSettingView.getVisibility() == View.GONE) {
-					getView().findViewById(R.id.search_return_advanced_settings_airline).setVisibility(View.VISIBLE);
-					getView().findViewById(R.id.search_return_advanced_settings_class).setVisibility(View.VISIBLE);
-					advancedSettingView.setVisibility(View.VISIBLE);
+				if (criterias.size() == 5) {
+					criterias.add(new SearchCriteria(R.drawable.ic_plane, getString(R.string.search_airlines)));
+					criterias.add(new SearchCriteria(R.drawable.ic_seat, getString(R.string.search_class)));
+					getView().findViewById(R.id.search_return_advanced_settings_checkboxes).setVisibility(View.VISIBLE);
 				} else {
-					getView().findViewById(R.id.search_return_advanced_settings_airline).setVisibility(View.GONE);
-					getView().findViewById(R.id.search_return_advanced_settings_class).setVisibility(View.GONE);
-					advancedSettingView.setVisibility(View.GONE);
+					criterias.remove(6);
+					criterias.remove(5);
+					getView().findViewById(R.id.search_return_advanced_settings_checkboxes).setVisibility(View.GONE);
 				}
+				adapter.notifyDataSetChanged();
 			}
 		});
 	}
 	
-	private void showDatePickerDialog() {
-		Calendar calendar = Calendar.getInstance();
-		DatePickerDialog dialog = new DatePickerDialog(this.getContext(), this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-		dialog.show();
+	private void setDefaultCriterias() {
+		criterias = new ArrayList<>();
+		criterias.add(new SearchCriteria(R.drawable.ic_takeoff, getString(R.string.search_origin)));
+		criterias.add(new SearchCriteria(R.drawable.ic_landing, getString(R.string.search_destination)));
+		criterias.add(new SearchCriteria(R.drawable.ic_clock, getString(R.string.search_departure_date)));
+		criterias.add(new SearchCriteria(R.drawable.ic_clock, getString(R.string.search_arrival_date)));
+		criterias.add(new SearchCriteria(R.drawable.ic_person, getString(R.string.search_num_travellers)));
 	}
-	
-	@Override
-	public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-		this.activeDateDisplay.setText(String.format(Locale.CANADA, "%04d-%02d-%02d", year, month + 1, dayOfMonth));
-		this.activeDateDisplay = null;
-	}
-	
 }

@@ -2,122 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent" android:weightSum="1">
-    <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-        <TableRow>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/search_origin"
-                    android:textAlignment="textEnd"
-                    android:id="@+id/textView_search_return_origin"/>
-            <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editText_search_return_origin"
-                    android:layout_weight="0.82"
-                    android:inputType="textAutoComplete"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/search_destination"
-                    android:textAlignment="textEnd"
-                    android:id="@+id/textView_search_return_destination"/>
-            <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editText_search_return_destination"
-                    android:layout_weight="0.82"
-                    android:inputType="textAutoComplete"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/search_departure_date"
-                    android:textAlignment="textEnd"
-                    android:id="@+id/textView_search_return_departure_date"/>
-            <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editText_search_return_departure_date"
-                    android:layout_weight="0.82"
-                    android:inputType="date"
-                    android:focusable="false"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/search_arrival_date"
-                    android:textAlignment="textEnd"
-                    android:id="@+id/textView_search_return_arrival_date"/>
-            <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editText_search_return_arrival_date"
-                    android:layout_weight="0.82"
-                    android:inputType="date"
-                    android:focusable="false"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/search_num_travellers"
-                    android:textAlignment="textEnd"
-                    android:id="@+id/textView_search_return_num_travellers"/>
-            <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editText_search_return_num_travellers"
-                    android:layout_weight="0.82"
-                    android:inputType="number"/>
-        </TableRow>
-        <TableRow
-                android:visibility="gone"
-                android:id="@+id/search_return_advanced_settings_airline">
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/search_airlines"
-                    android:textAlignment="textEnd"
-                    android:id="@+id/textView_search_return_airline"/>
-            <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editText_search_return_airline"
-                    android:layout_weight="0.82"
-                    android:inputType="textAutoComplete"/>
-        </TableRow>
-        <TableRow
-                android:visibility="gone"
-                android:id="@+id/search_return_advanced_settings_class">
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/search_class"
-                    android:textAlignment="textEnd"
-                    android:id="@+id/textView_search_return_class"/>
-            <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editText_search_return_class"
-                    android:layout_weight="0.82"
-                    android:inputType="textAutoComplete"/>
-        </TableRow>
-    </TableLayout>
+              android:layout_height="match_parent"
+              android:weightSum="1">
+
+    <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    <Space
+            android:layout_width="10dp"
+            android:layout_height="10dp"/>
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -157,6 +51,5 @@
             android:layout_height="wrap_content"
             android:text="@string/search_button_search"
             android:id="@+id/button_search_return_search"/>
-
 
 </LinearLayout>
