@@ -40,7 +40,7 @@ public class DataAccessStub implements DataAccess {
         airlines.add(airline);
         airline = new Airline("Air Canada");
         airlines.add(airline);
-        airline = new Airline("Winnpeg Air");
+        airline = new Airline("Winnipeg Air");
         airlines.add(airline);
 
         airports = new ArrayList<Airport>();
@@ -60,45 +60,42 @@ public class DataAccessStub implements DataAccess {
         travellers.add(traveller);
 
         flights = new ArrayList<Flight>();
-        flight = new Flight("WJ 001","2017/11/11","WestJet","YWG","YVR");
+        flight = new Flight("WJ 001", "2017/11/11", "WestJet", "YWG", "YVR");
         flights.add(flight);
-        flight = new Flight("WJ 001","2017/12/12","WestJet","YVR","YWG");
+        flight = new Flight("WJ 001", "2017/12/12", "WestJet", "YVR", "YWG");
         flights.add(flight);
-        flight = new Flight("AC 001","2017/9/11","Air Canada","YWG","YYC");
+        flight = new Flight("AC 001", "2017/9/11", "Air Canada", "YWG", "YYC");
         flights.add(flight);
-        flight = new Flight("WA 001","2017/10/11","Winnpeg Air","YWG","YVR");
+        flight = new Flight("WA 001", "2017/10/11", "Winnpeg Air", "YWG", "YVR");
         flights.add(flight);
 
         bookedFlights = new ArrayList<BookedFlight>();
-        bookedFlight = new BookedFlight(0, "Jack","WJ 001","2017/11/11","WestJet","YWG","YVR");
+        bookedFlight = new BookedFlight(0, "Jack", "WJ 001", "2017/11/11", "WestJet", "YWG", "YVR");
         bookedFlights.add(bookedFlight);
-        bookedFlight = new BookedFlight(0, "Jack","WJ 001","2017/12/12","WestJet","YVR","YWG");
+        bookedFlight = new BookedFlight(0, "Jack", "WJ 001", "2017/12/12", "WestJet", "YVR", "YWG");
         bookedFlights.add(bookedFlight);
-        bookedFlight = new BookedFlight(1, "Vicky","AC 001","2017/9/11","Air Canada","YWG","YYC");
+        bookedFlight = new BookedFlight(1, "Vicky", "AC 001", "2017/9/11", "Air Canada", "YWG", "YYC");
         bookedFlights.add(bookedFlight);
-        bookedFlight = new BookedFlight(2, "Amir","WA 001","2017/10/11","Winnpeg Air","YWG","YVR");
+        bookedFlight = new BookedFlight(2, "Amir", "WA 001", "2017/10/11", "Winnpeg Air", "YWG", "YVR");
         bookedFlights.add(bookedFlight);
 
         System.out.println("Opened " + dbType + " database " + dbName);
     }
 
     public void close() {
-
         System.out.println("Closed " + dbType + " database " + dbName);
     }
 
     // AIRLINE TABLE METHDOS
     public ArrayList<Airline> getAirlines() {
-        // TODO: return all airlines
-
-        return airlines;
+        ArrayList<Airline> result = new ArrayList<>();
+        result.addAll(airlines);
+        return result;
     }
 
     public boolean insertAirline(Airline airline) {
         return airlines.add(airline);
     }
-
-    // TODO: public ArrayList<Student> getStudentRandom(Student currentStudent)???
 
     public boolean updateAirline(Airline airline) {
         // TODO: Not sure what the method signature for these update methods should be - kenny
@@ -109,8 +106,7 @@ public class DataAccessStub implements DataAccess {
     public boolean deleteAirline(Airline airline) {
         int index;
         index = airlines.indexOf(airline);
-        if (index >= 0)
-        {
+        if (index >= 0) {
             airlines.remove(index);
             return true;
         }
@@ -120,9 +116,10 @@ public class DataAccessStub implements DataAccess {
 
     // AIRPORT TABLE METHODS
     public ArrayList<Airport> getAirports() {
-        // TODO: return ArrayList of all airports
-
-        return airports;
+        // Return a copy of List
+        ArrayList<Airport> result = new ArrayList<>();
+        result.addAll(airports);
+        return result;
     }
 
     public boolean insertAirport(Airport airport) {
@@ -135,11 +132,9 @@ public class DataAccessStub implements DataAccess {
     }
 
     public boolean deleteAirport(Airport airport) {
-        // TODO
         int index;
         index = airports.indexOf(airport);
-        if (index >= 0)
-        {
+        if (index >= 0) {
             airports.remove(index);
             return true;
         }
@@ -149,7 +144,9 @@ public class DataAccessStub implements DataAccess {
 
     // BOOKEDFLIGHTS TABLE METHODS
     public ArrayList<BookedFlight> getBookedFlights() {
-        return bookedFlights;
+        ArrayList<BookedFlight> result = new ArrayList<>();
+        result.addAll(bookedFlights);
+        return result;
     }
 
     public boolean insertBookedFlight(BookedFlight bookedFlight) {
@@ -157,15 +154,14 @@ public class DataAccessStub implements DataAccess {
     }
 
     public boolean updateBookedFlight() {
-
+        // TODO
         return false;
     }
 
     public boolean deleteBookedFlight(BookedFlight bookedFlight) {
         int index;
         index = bookedFlights.indexOf(bookedFlight);
-        if (index >= 0)
-        {
+        if (index >= 0) {
             bookedFlights.remove(index);
             return true;
         }
@@ -174,14 +170,11 @@ public class DataAccessStub implements DataAccess {
     }
 
     public ArrayList<BookedFlight> getTravellersBookedFlights(Traveller traveller) {
-        // TODO: return all BookedFlight objects for the specified Traveller (BookedFlight.travellerID == traveller.ID)
-
         ArrayList<BookedFlight> result = new ArrayList<BookedFlight>();
 
-        for(int i = 0; i < bookedFlights.size(); i++)
-        {
+        for (int i = 0; i < bookedFlights.size(); i++) {
             BookedFlight term = bookedFlights.get(i);
-            if (term.getTraveller().getTravellerID() == traveller.getTravellerID()){
+            if (term.getTraveller().getTravellerID() == traveller.getTravellerID()) {
                 result.add(term);
             }
         }
@@ -189,13 +182,11 @@ public class DataAccessStub implements DataAccess {
     }
 
     public ArrayList<BookedFlight> getTravellersOnFlight(Flight flight) {
-        // TODO: return all BookedFlight objects for the specified flight
         ArrayList<BookedFlight> result = new ArrayList<BookedFlight>();
 
-        for(int i = 0; i < bookedFlights.size(); i++)
-        {
+        for (int i = 0; i < bookedFlights.size(); i++) {
             BookedFlight term = bookedFlights.get(i);
-            if (term.getFlight().getFlightID().equals(flight.getFlightID()) ){
+            if (term.getFlight().getFlightID().equals(flight.getFlightID())) {
                 result.add(term);
             }
         }
@@ -204,7 +195,9 @@ public class DataAccessStub implements DataAccess {
 
     // FLIGHTS TABLE METHODS
     public ArrayList<Flight> getFlights() {
-        return flights;
+        ArrayList<Flight> result = new ArrayList<>();
+        result.addAll(flights);
+        return result;
     }
 
     public boolean insertFlight(Flight flight) {
@@ -219,8 +212,7 @@ public class DataAccessStub implements DataAccess {
     public boolean deleteFlight(Flight flight) {
         int index;
         index = flights.indexOf(flight);
-        if (index >= 0)
-        {
+        if (index >= 0) {
             flights.remove(index);
             return true;
         }
@@ -230,7 +222,9 @@ public class DataAccessStub implements DataAccess {
 
     // TRAVELLERS TABLE METHODS
     public ArrayList<Traveller> getTravellers() {
-        return travellers;
+        ArrayList<Traveller> result = new ArrayList<>();
+        result.addAll(travellers);
+        return result;
     }
 
     public boolean insertTraveller(Traveller traveller) {
@@ -244,8 +238,7 @@ public class DataAccessStub implements DataAccess {
     public boolean deleteTraveller(Traveller traveller) {
         int index;
         index = travellers.indexOf(traveller);
-        if (index >= 0)
-        {
+        if (index >= 0) {
             travellers.remove(index);
             return true;
         }
