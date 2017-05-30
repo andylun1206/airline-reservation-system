@@ -29,7 +29,6 @@ public class DataAccessStub implements DataAccess {
     }
 
     public void open(String dbName) {
-        // TODO: Populate the 5 "tables" (ArrayLists) with fake data
         Airline airline;
         Airport airport;
         BookedFlight bookedFlight;
@@ -114,10 +113,9 @@ public class DataAccessStub implements DataAccess {
         return false;
     }
 
-    public boolean deleteAirline(Airline CurrectAirline) {
-        // TODO: delete the specified airline from the Airlines table
+    public boolean deleteAirline(Airline airline) {
         int index;
-        index = airlines.indexOf(CurrectAirline);
+        index = airlines.indexOf(airline);
         if (index >= 0)
         {
             airlines.remove(index);
