@@ -26,7 +26,7 @@ public class Services {
     public static void closeDataAccess() {
         if (dataAccessService != null) {
             // TODO: implement close() method
-            //dataAccessService.close();
+            dataAccessService.close();
         }
         dataAccessService = null;
     }

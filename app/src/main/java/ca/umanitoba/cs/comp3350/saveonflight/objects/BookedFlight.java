@@ -4,6 +4,16 @@ public class BookedFlight {
     private Traveller traveller;
     private Flight flight;
 
+    public BookedFlight(Traveller traveller, Flight flight) {
+        this.traveller = traveller;
+        this.flight = flight;
+    }
+
+    public BookedFlight(int travellerID, String travellerName, String flightID, String date, String airline, String depart, String arrives) {
+        this.traveller = new Traveller(travellerID,travellerName);
+        this.flight = new Flight(flightID,date,airline,depart,arrives);
+    }
+
     public Traveller getTraveller() {
         return traveller;
     }

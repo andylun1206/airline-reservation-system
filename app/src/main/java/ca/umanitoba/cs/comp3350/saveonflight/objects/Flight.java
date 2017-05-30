@@ -1,19 +1,26 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
 public class Flight {
-    private int flightID;
+    private String flightID;
     private Airline airline;
     private String date;
     private DepartsAndArrives da;
 
-    public Flight(int flightID, String date, Airline airline, DepartsAndArrives da) {
+    public Flight(String flightID, String date, Airline airline, DepartsAndArrives da) {
         this.flightID = flightID;
         this.date = date;
-        this.airline = airline;
+        this.airline=airline;
         this.da = da;
     }
 
-    public void setFlightID(int flightID) {
+    public Flight(String flightID, String date, String airline, String depart, String arrives) {
+        this.flightID = flightID;
+        this.date = date;
+        this.airline = new Airline(airline);
+        this.da = new DepartsAndArrives(depart,arrives);
+    }
+
+    public void setFlightID(String flightID) {
         this.flightID = flightID;
     }
 
@@ -21,8 +28,8 @@ public class Flight {
         return airline;
     }
 
-    public void setAirline(Airline airline) {
-        this.airline = airline;
+    public void setAirline(String airline) {
+        this.airline.setName(airline);
     }
 
     public String getDate() {
@@ -41,7 +48,7 @@ public class Flight {
         this.da = da;
     }
 
-    public int getFlightID() {
+    public String getFlightID() {
         return flightID;
     }
 
