@@ -9,17 +9,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 public class SearchFragment extends Fragment implements OnDateSetListener{
-	EditText departureDate;
-	EditText arrivalDate;
+	private EditText departureDate;
+	private EditText arrivalDate;
+	private Button advancedSetting;
 	
-	EditText activeDateDisplay;
+	private EditText activeDateDisplay;
 	
 	@Nullable
 	@Override
@@ -50,6 +53,24 @@ public class SearchFragment extends Fragment implements OnDateSetListener{
 				showDatePickerDialog();
 			}
 		});
+		
+		this.advancedSetting = (Button) getView().findViewById(R.id.button_search_return_advance);
+		this.advancedSetting.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				View advancedSettingView = getView().findViewById(R.id.search_return_advanced_settings_checkboxes);
+				
+				if (advancedSettingView.getVisibility() == View.GONE) {
+					getView().findViewById(R.id.search_return_advanced_settings_airline).setVisibility(View.VISIBLE);
+					getView().findViewById(R.id.search_return_advanced_settings_class).setVisibility(View.VISIBLE);
+					advancedSettingView.setVisibility(View.VISIBLE);
+				} else {
+					getView().findViewById(R.id.search_return_advanced_settings_airline).setVisibility(View.GONE);
+					getView().findViewById(R.id.search_return_advanced_settings_class).setVisibility(View.GONE);
+					advancedSettingView.setVisibility(View.GONE);
+				}
+			}
+		});
 	}
 	
 	private void showDatePickerDialog() {
@@ -60,7 +81,7 @@ public class SearchFragment extends Fragment implements OnDateSetListener{
 	
 	@Override
 	public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-		this.activeDateDisplay.setText(String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth));
+		this.activeDateDisplay.setText(String.format(Locale.CANADA, "%04d-%02d-%02d", year, month + 1, dayOfMonth));
 		this.activeDateDisplay = null;
 	}
 	

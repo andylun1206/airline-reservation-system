@@ -16,6 +16,10 @@
     <string name="search_departure_date">Departure Date: </string>
     <string name="search_arrival_date">Arrival Date: </string>
     <string name="search_num_travellers">Number of Travellers: </string>
-    <string name="search_button_advance">Advance Settings</string>
+    <string name="search_nonstop">Nonstop</string>
+    <string name="search_refundable">Refundable</string>
+    <string name="search_airlines">Preferred Airlines: </string>
+    <string name="search_class">Preferred Class: </string>
+    <string name="search_button_advanced">Advanced Settings</string>
     <string name="search_button_search">Search</string>
 </resources>

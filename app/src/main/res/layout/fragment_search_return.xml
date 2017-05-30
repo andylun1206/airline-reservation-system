@@ -81,26 +81,82 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/editText_search_return_num_travellers"
                     android:layout_weight="0.82"
-                    android:inputType="number"
-                    android:focusable="false"/>
+                    android:inputType="number"/>
+        </TableRow>
+        <TableRow
+                android:visibility="gone"
+                android:id="@+id/search_return_advanced_settings_airline">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/search_airlines"
+                    android:textAlignment="textEnd"
+                    android:id="@+id/textView_search_return_airline"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_search_return_airline"
+                    android:layout_weight="0.82"
+                    android:inputType="textAutoComplete"/>
+        </TableRow>
+        <TableRow
+                android:visibility="gone"
+                android:id="@+id/search_return_advanced_settings_class">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/search_class"
+                    android:textAlignment="textEnd"
+                    android:id="@+id/textView_search_return_class"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_search_return_class"
+                    android:layout_weight="0.82"
+                    android:inputType="textAutoComplete"/>
         </TableRow>
     </TableLayout>
     <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
-        <Button
+            android:gravity="center"
+            android:visibility="gone"
+            android:id="@+id/search_return_advanced_settings_checkboxes">
+        <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/search_button_advance"
-                android:id="@+id/button_search_return_advance"/>
-        <Button
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/search_nonstop"
+                android:id="@+id/checkBox_search_return_nonstop"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"/>
+        <Space
+                android:layout_width="10dp"
+                android:layout_height="10dp"/>
+        <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/search_button_search"
-                android:id="@+id/button_search_return_search"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/search_refundable"
+                android:id="@+id/checkBox_search_return_refundable"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"/>
     </LinearLayout>
+    <Space
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/search_button_advanced"
+            android:id="@+id/button_search_return_advance"/>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/search_button_search"
+            android:id="@+id/button_search_return_search"/>
 
 
 </LinearLayout>
