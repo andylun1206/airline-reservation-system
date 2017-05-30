@@ -1,6 +1,5 @@
 package ca.umanitoba.cs.comp3350.saveonflight.application;
 
-
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccessStub;
 
 public class Services {

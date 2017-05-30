@@ -1,5 +1,6 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
+
 import java.util.Date;
 import java.util.List;
 
@@ -46,6 +47,4 @@ public class FindFlightsImpl implements FindFlights {
 
         return null;
     }
-
-
 }
