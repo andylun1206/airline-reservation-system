@@ -10,8 +10,8 @@ public class BookedFlight {
     }
 
     public BookedFlight(int travellerID, String travellerName, String flightID, String date, String airline, String depart, String arrives) {
-        this.traveller = new Traveller(travellerID,travellerName);
-        this.flight = new Flight(flightID,date,airline,depart,arrives);
+        this.traveller = new Traveller(travellerID, travellerName);
+        this.flight = new Flight(flightID, date, airline, depart, arrives);
     }
 
     public Traveller getTraveller() {

@@ -86,7 +86,7 @@ public class DataAccessStub implements DataAccess {
         System.out.println("Closed " + dbType + " database " + dbName);
     }
 
-    // AIRLINE TABLE METHDOS
+    // AIRLINE TABLE METHODS
     public ArrayList<Airline> getAirlines() {
         ArrayList<Airline> result = new ArrayList<>();
         result.addAll(airlines);
@@ -231,8 +231,18 @@ public class DataAccessStub implements DataAccess {
         return travellers.add(traveller);
     }
 
-    public boolean updateTraveller() {
-        return false;
+    public boolean updateTraveller(Traveller traveller, int newID, String newName) {
+        boolean result = false;
+
+        int index = travellers.indexOf(traveller);
+        if (index >= 0) {
+            Traveller toUpdate = travellers.get(index);
+            toUpdate.setTravellerID(newID);
+            toUpdate.setName(newName);
+            result = true;
+        }
+
+        return result;
     }
 
     public boolean deleteTraveller(Traveller traveller) {

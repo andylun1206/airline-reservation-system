@@ -21,12 +21,9 @@ public class Airport {
 
     public boolean equals(Object object) {
         boolean result = false;
-        Airport a;
 
         if (object instanceof Airport) {
-
             Airport other = (Airport) object;
-
             if (other.airportCode.equals(airportCode)) {
                 result = true;
             }

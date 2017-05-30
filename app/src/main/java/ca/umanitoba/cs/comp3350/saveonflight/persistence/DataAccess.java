@@ -41,6 +41,6 @@ interface DataAccess {
     // TRAVELLERS TABLE METHODS
     public ArrayList<Traveller> getTravellers();
     public boolean insertTraveller(Traveller traveller);
-    public boolean updateTraveller();
+    public boolean updateTraveller(Traveller traveller, int newID, String newName);
     public boolean deleteTraveller(Traveller traveller);
 }

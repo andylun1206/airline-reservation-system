@@ -10,9 +10,9 @@ public class FindFlightsImpl implements FindFlights {
 
     @Override
     public List<Flight> getAllFlights() {
-        // If no getAllFlights parameters, just return all the Flights in the DB
-        AccessFlights dbAccess = new AccessFlights();
-        List<Flight> flights = dbAccess.getFlights();
+        // If no parameters, just return all the Flights in the DB
+        AccessFlights accessFlights = new AccessFlights();
+        List<Flight> flights = accessFlights.getFlights();
         return flights;
     }
 
@@ -23,16 +23,27 @@ public class FindFlightsImpl implements FindFlights {
 
         // Get all flights in the DB
         flights = accessFlights.getFlights();
-        for (Flight f : flights) {
+        int i = 0;
+        while (i < flights.size()) {
+            Flight f = flights.get(i);
             // For each Flight, remove it if it doesn't meet any of the search criteria
             // TODO: Should we use the Date class for dates instead of a String?
             if (!f.getAirline().equals(airline) || !f.getDate().equals(date) || !f.getDepart().equals(departs)
                     || !f.getArrival().equals(arrives)) {
-                flights.remove(f);
+                flights.remove(i);
+            }
+            else {
+                i++;
             }
         }
 
         return flights;
+    }
+
+    @Override
+    public List<Flight> search(Airline airline, String date, Airport departs, Airport arrives,
+                               float maxPrice, int numTravellers) {
+        return null;
     }
 
 }
