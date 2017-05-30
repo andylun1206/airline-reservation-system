@@ -1,5 +1,7 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
+import java.util.Date;
+
 public class BookedFlight {
     private Traveller traveller;
     private Flight flight;
@@ -7,11 +9,6 @@ public class BookedFlight {
     public BookedFlight(Traveller traveller, Flight flight) {
         this.traveller = traveller;
         this.flight = flight;
-    }
-
-    public BookedFlight(int travellerID, String travellerName, String flightID, String date, String airline, String depart, String arrives) {
-        this.traveller = new Traveller(travellerID, travellerName);
-        this.flight = new Flight(flightID, date, airline, depart, arrives);
     }
 
     public Traveller getTraveller() {

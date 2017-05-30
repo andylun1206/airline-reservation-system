@@ -1,5 +1,6 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
+import java.util.Date;
 import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
@@ -17,7 +18,7 @@ public class FindFlightsImpl implements FindFlights {
     }
 
     @Override
-    public List<Flight> search(Airline airline, String date, Airport departs, Airport arrives) {
+    public List<Flight> search(Airline airline, Date date, Airport departs, Airport arrives) {
         List<Flight> flights;
         AccessFlights accessFlights = new AccessFlights();
 
@@ -27,9 +28,8 @@ public class FindFlightsImpl implements FindFlights {
         while (i < flights.size()) {
             Flight f = flights.get(i);
             // For each Flight, remove it if it doesn't meet any of the search criteria
-            // TODO: Should we use the Date class for dates instead of a String?
-            if (!f.getAirline().equals(airline) || !f.getDate().equals(date) || !f.getDepart().equals(departs)
-                    || !f.getArrival().equals(arrives)) {
+            if (!f.getAirline().equals(airline) || !f.getDate().equals(date) || !f.getOrigin().equals(departs)
+                    || !f.getDestination().equals(arrives)) {
                 flights.remove(i);
             }
             else {
@@ -41,9 +41,11 @@ public class FindFlightsImpl implements FindFlights {
     }
 
     @Override
-    public List<Flight> search(Airline airline, String date, Airport departs, Airport arrives,
-                               float maxPrice, int numTravellers) {
+    public List<Flight> search(Airport departs, Airport arrives, Date departureDate, Date returnDate,
+                        int numTravellers, int maxPrice, Airline airline, Flight.FlightClass flightClass) {
+
         return null;
     }
+
 
 }

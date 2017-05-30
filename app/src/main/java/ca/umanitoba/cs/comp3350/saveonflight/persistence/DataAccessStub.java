@@ -1,7 +1,11 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
@@ -29,55 +33,66 @@ public class DataAccessStub implements DataAccess {
     }
 
     public void open(String dbName) {
-        Airline airline;
-        Airport airport;
+        Airline westJet, airCanada, winnipegAir;
+        Airport vancouver, winnipeg, calgary;
+        Traveller jack, vicky, amir;
+
         BookedFlight bookedFlight;
-        Flight flight;
-        Traveller traveller;
+        Flight ywgToYvr, yvrToYwg, ywgToYyc, waYwgToYvr;
 
         airlines = new ArrayList<Airline>();
-        airline = new Airline("WestJet");
-        airlines.add(airline);
-        airline = new Airline("Air Canada");
-        airlines.add(airline);
-        airline = new Airline("Winnipeg Air");
-        airlines.add(airline);
+        westJet = new Airline("WestJet");
+        airlines.add(westJet);
+        airCanada = new Airline("Air Canada");
+        airlines.add(airCanada);
+        winnipegAir = new Airline("Winnipeg Air");
+        airlines.add(winnipegAir);
 
         airports = new ArrayList<Airport>();
-        airport = new Airport("YVR");
-        airports.add(airport);
-        airport = new Airport("YWG");
-        airports.add(airport);
-        airport = new Airport("YYC");
-        airports.add(airport);
+        vancouver = new Airport("YVR");
+        airports.add(vancouver);
+        winnipeg = new Airport("YWG");
+        airports.add(winnipeg);
+        calgary = new Airport("YYC");
+        airports.add(calgary);
 
         travellers = new ArrayList<Traveller>();
-        traveller = new Traveller(0, "Jack");
-        travellers.add(traveller);
-        traveller = new Traveller(1, "Vicky");
-        travellers.add(traveller);
-        traveller = new Traveller(2, "Amir");
-        travellers.add(traveller);
+        jack = new Traveller(0, "Jack");
+        travellers.add(jack);
+        vicky = new Traveller(1, "Vicky");
+        travellers.add(vicky);
+        amir = new Traveller(2, "Amir");
+        travellers.add(amir);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy, MM, dd", Locale.CANADA);
 
         flights = new ArrayList<Flight>();
-        flight = new Flight("WJ 001", "2017/11/11", "WestJet", "YWG", "YVR");
-        flights.add(flight);
-        flight = new Flight("WJ 001", "2017/12/12", "WestJet", "YVR", "YWG");
-        flights.add(flight);
-        flight = new Flight("AC 001", "2017/9/11", "Air Canada", "YWG", "YYC");
-        flights.add(flight);
-        flight = new Flight("WA 001", "2017/10/11", "Winnpeg Air", "YWG", "YVR");
-        flights.add(flight);
+        try {
+            ywgToYvr = new Flight("WJ 001", simpleDateFormat.parse("2017, 11, 11"), westJet, winnipeg,
+                    vancouver, 200.00, 200, 0, Flight.FlightClass.ECONOMY);
+            flights.add(ywgToYvr);
+            yvrToYwg = new Flight("WJ 001", simpleDateFormat.parse("2017, 12, 12"), westJet, vancouver,
+                    winnipeg, 350.00, 200, 0, Flight.FlightClass.ECONOMY);
+            flights.add(yvrToYwg);
+            ywgToYyc = new Flight("AC 001", simpleDateFormat.parse("2017, 9, 11"), airCanada, winnipeg,
+                    calgary, 400.00, 150, 0, Flight.FlightClass.BUSINESS);
+            flights.add(ywgToYyc);
+            waYwgToYvr = new Flight("WA 001", simpleDateFormat.parse("2017, 10, 11"), winnipegAir, winnipeg,
+                    vancouver, 500.00, 250, 0, Flight.FlightClass.ECONOMY);
+            flights.add(waYwgToYvr);
 
-        bookedFlights = new ArrayList<BookedFlight>();
-        bookedFlight = new BookedFlight(0, "Jack", "WJ 001", "2017/11/11", "WestJet", "YWG", "YVR");
-        bookedFlights.add(bookedFlight);
-        bookedFlight = new BookedFlight(0, "Jack", "WJ 001", "2017/12/12", "WestJet", "YVR", "YWG");
-        bookedFlights.add(bookedFlight);
-        bookedFlight = new BookedFlight(1, "Vicky", "AC 001", "2017/9/11", "Air Canada", "YWG", "YYC");
-        bookedFlights.add(bookedFlight);
-        bookedFlight = new BookedFlight(2, "Amir", "WA 001", "2017/10/11", "Winnpeg Air", "YWG", "YVR");
-        bookedFlights.add(bookedFlight);
+            bookedFlights = new ArrayList<BookedFlight>();
+            bookedFlight = new BookedFlight(jack, ywgToYvr);
+            bookedFlights.add(bookedFlight);
+            bookedFlight = new BookedFlight(jack, yvrToYwg);
+            bookedFlights.add(bookedFlight);
+            bookedFlight = new BookedFlight(vicky, ywgToYyc);
+            bookedFlights.add(bookedFlight);
+            bookedFlight = new BookedFlight(amir, waYwgToYvr);
+            bookedFlights.add(bookedFlight);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         System.out.println("Opened " + dbType + " database " + dbName);
     }

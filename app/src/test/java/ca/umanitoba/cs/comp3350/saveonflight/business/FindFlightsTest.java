@@ -5,8 +5,11 @@ import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
@@ -34,16 +37,24 @@ public class FindFlightsTest extends TestCase {
 
     public void testSearch() {
         final Airline AIRLINE = new Airline("WestJet");
-        final String DATE = "2017/11/11";
+        final Airline OTHER_AIRLINE = new Airline("Air Canada");
         final Airport DEPARTS = new Airport("YWG");
         final Airport ARRIVES = new Airport("YVR");
+        Date DATE = null;
+        Date OTHER_DATE = null;
 
-        final Airline OTHER_AIRLINE = new Airline("Air Canada");
-        final String OTHER_DATE = "2017/11/12";
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy, MM, dd", Locale.CANADA);
+            DATE = simpleDateFormat.parse("2017, 11, 11");
+            OTHER_DATE = simpleDateFormat.parse("2017, 11, 12");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         List<Flight> searchResults = findFlights.search(AIRLINE, DATE, DEPARTS, ARRIVES);
 
         assertNotNull(searchResults);
+        //assertTrue(searchResults.size() > 0);
         for (Flight f : searchResults) {
             assertTrue(f.getAirline().equals(AIRLINE));
             assertFalse(f.getAirline().equals(OTHER_AIRLINE));
@@ -51,15 +62,12 @@ public class FindFlightsTest extends TestCase {
             assertTrue(f.getDate().equals(DATE));
             assertFalse(f.getDate().equals(OTHER_DATE));
 
-            assertTrue(f.getDepart().equals(DEPARTS));
-            assertFalse(f.getDepart().equals(ARRIVES));
+            assertTrue(f.getOrigin().equals(DEPARTS));
+            assertFalse(f.getOrigin().equals(ARRIVES));
 
-            assertTrue(f.getArrival().equals(ARRIVES));
-            assertFalse(f.getArrival().equals(DEPARTS));
+            assertTrue(f.getDestination().equals(ARRIVES));
+            assertFalse(f.getDestination().equals(DEPARTS));
         }
     }
-
-
-
 
 }
