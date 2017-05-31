@@ -12,30 +12,49 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccessStub;
 public class AccessBookedFlights {
     private DataAccessStub dataAccess;
     private List<BookedFlight> bookedFlights;
-    private Flight flight;
-    private int currentFlight;
+
+    // For iterating through all BookedFlights
+    private BookedFlight currentBf;
+    private int currentIndex;
 
     public AccessBookedFlights() {
         dataAccess = Services.getDataAccess(Main.DB_NAME);
         bookedFlights = null;
-        flight = null;
-        currentFlight = 0;
+        currentBf = null;
+        currentIndex = 0;
     }
 
     public List<BookedFlight> getFlights() {
         return dataAccess.getBookedFlights();
     }
 
-    public boolean addBookedFlight(BookedFlight f) {
-        return dataAccess.insertBookedFlight(f);
+    public BookedFlight getNext() {
+        if (bookedFlights == null) {
+            bookedFlights = dataAccess.getBookedFlights();
+            currentIndex = 0;
+        }
+
+        if (currentIndex < bookedFlights.size()) {
+            currentBf = bookedFlights.get(currentIndex++);
+        } else {
+            bookedFlights = null;
+            currentBf = null;
+            currentIndex = 0;
+        }
+
+        return currentBf;
     }
 
+    public boolean addBookedFlight(BookedFlight bf) {
+        return dataAccess.insertBookedFlight(bf);
+    }
 
-    public BookedFlight deleteFlight(BookedFlight f) {
-        BookedFlight deleted = null;
-        if (dataAccess.deleteBookedFlight(f))
-            deleted = f;
-        return deleted;
+    public boolean updateBookedFlight(BookedFlight bf, Traveller t, Flight f) {
+        return dataAccess.updateBookedFlight(bf, t, f);
+    }
+
+    public boolean deleteFlight(BookedFlight bf) {
+        return dataAccess.deleteBookedFlight(bf);
     }
 
     public ArrayList<BookedFlight> getBookedFlightsOf(Traveller t){

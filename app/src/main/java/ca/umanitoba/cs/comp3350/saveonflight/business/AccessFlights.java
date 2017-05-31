@@ -1,10 +1,12 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
+import java.util.Date;
 import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.application.Services;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccessStub;
 
@@ -50,9 +52,10 @@ public class AccessFlights {
         return dataAccess.insertFlight(flight);
     }
 
-    public boolean updateFlight() {
-//        return dataAccess.updateFlight();
-        return true;
+    public boolean updateFlight(Flight flight, String flightID, Date date, Airline airline, Airport origin,
+                                Airport dest, double price, int capacity, int seatsTaken, Flight.FlightClass flightClass) {
+        return dataAccess.updateFlight(flight, flightID, date, airline, origin, dest, price, capacity, seatsTaken, flightClass);
+
     }
 
     public boolean deleteFlight(Flight flight) {

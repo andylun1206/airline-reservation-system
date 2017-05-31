@@ -18,6 +18,11 @@ public class Flight {
     }
 
     public Flight(String flightID, Date date, Airline airline, Airport origin, Airport destination,
+                  double price, int capacity) {
+        this(flightID, date, airline, origin, destination, price, capacity, 0, FlightClass.ECONOMY);
+    }
+
+    public Flight(String flightID, Date date, Airline airline, Airport origin, Airport destination,
                   double price, int capacity, int seatsTaken, FlightClass flightClass) {
         this.flightID = flightID;
         this.date = date;
@@ -28,6 +33,27 @@ public class Flight {
         this.capacity = capacity;
         this.seatsTaken = seatsTaken;
         this.flightClass = flightClass;
+    }
+
+    public boolean hasSpace() {
+        return capacity > seatsTaken;
+    }
+
+    public int seatsRemaining() {
+        return capacity - seatsTaken;
+    }
+
+    public boolean sellSeats(int numSold) {
+        boolean result = false;
+
+        if (seatsRemaining() >= numSold) {
+            seatsTaken += numSold;
+            result = true;
+        } else {
+            System.out.println("Trying to sell more seats than are available");
+        }
+
+        return result;
     }
 
     public void setFlightID(String flightID) {
@@ -70,7 +96,7 @@ public class Flight {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
