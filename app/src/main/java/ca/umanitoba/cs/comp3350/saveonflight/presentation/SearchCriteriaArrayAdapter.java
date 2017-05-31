@@ -55,7 +55,11 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteria> imp
 			case R.drawable.ic_person:
 				input.setInputType(InputType.TYPE_CLASS_NUMBER);
 				break;
+			case R.drawable.ic_dollar_sign:
+				input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+				break;
 			default:
+				input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
 				break;
 		}
 		

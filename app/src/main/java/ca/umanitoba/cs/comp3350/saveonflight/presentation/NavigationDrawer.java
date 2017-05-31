@@ -1,7 +1,9 @@
 package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -9,10 +11,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 public class NavigationDrawer extends AppCompatActivity
-		implements NavigationView.OnNavigationItemSelectedListener {
+		implements OnNavigationItemSelectedListener {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +27,13 @@ public class NavigationDrawer extends AppCompatActivity
 		
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-				this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+				this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+			@Override
+			public void onDrawerSlide(View drawerView, float slideOffset) {
+				InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+				inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+			}
+		};
 		drawer.setDrawerListener(toggle);
 		toggle.syncState();
 		
@@ -42,28 +52,6 @@ public class NavigationDrawer extends AppCompatActivity
 			super.onBackPressed();
 		}
 	}
-	
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.navigation_drawer, menu);
-//		return true;
-//	}
-	
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		// Handle action bar item clicks here. The action bar will
-//		// automatically handle clicks on the Home/Up button, so long
-//		// as you specify a parent activity in AndroidManifest.xml.
-//		int id = item.getItemId();
-//
-//		//noinspection SimplifiableIfStatement
-//		if (id == R.id.action_settings) {
-//			return true;
-//		}
-//
-//		return super.onOptionsItemSelected(item);
-//	}
 	
 	private void displaySelectedScreen(int itemId) {
 		Fragment fragment = null;

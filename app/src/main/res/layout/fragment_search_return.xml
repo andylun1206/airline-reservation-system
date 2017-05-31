@@ -4,14 +4,18 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:weightSum="1">
-
+    <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_trip_type"
+            android:entries="@array/trip_type"/>
     <ListView
             android:id="@android:id/list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    <Space
-            android:layout_width="10dp"
-            android:layout_height="10dp"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:smoothScrollbar="true"
+            android:scrollbars="vertical"/>
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,18 +42,25 @@
                 android:gravity="center"
                 android:layout_gravity="center_horizontal"/>
     </LinearLayout>
-    <Space
-            android:layout_width="20dp"
-            android:layout_height="20dp"/>
-    <Button
+    <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/search_button_advanced"
-            android:id="@+id/button_search_return_advance"/>
-    <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/search_button_search"
-            android:id="@+id/button_search_return_search"/>
-
+            android:layout_height="0dp"
+            android:layout_weight="0.9"
+            android:layout_marginTop="10dp"
+            android:gravity="center|bottom"
+            android:weightSum="1">
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/search_button_advanced"
+                android:id="@+id/button_search_return_advance"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/search_button_search"
+                android:id="@+id/button_search_return_search"/>
+    </LinearLayout>
 </LinearLayout>

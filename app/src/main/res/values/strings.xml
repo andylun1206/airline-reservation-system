@@ -11,11 +11,16 @@
     <string name="title_activity_search">Search for Flights</string>
 
     <!-- Search Activity -->
+    <string-array name="trip_type">
+        <item>Return</item>
+        <item>One Way</item>
+    </string-array>
     <string name="search_origin">Origin</string>
     <string name="search_destination">Destination</string>
     <string name="search_departure_date">Departure Date</string>
-    <string name="search_arrival_date">Arrival Date</string>
+    <string name="search_return_date">Return Date</string>
     <string name="search_num_travellers">Number of Travellers</string>
+    <string name="search_max_price">Maximum Price</string>
     <string name="search_airlines">Preferred Airlines</string>
     <string name="search_class">Preferred Class</string>
     <string name="search_nonstop">Nonstop</string>

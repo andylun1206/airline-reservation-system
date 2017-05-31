@@ -15,14 +15,34 @@
             android:layout_width="match_parent"
             android:layout_height="20px"
             android:layout_weight="0.37"/>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal">
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Login"
+                android:id="@+id/button_home_login"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Sign Up"
+                android:id="@+id/button_home_signup"/>
+    </LinearLayout>
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
-            android:id="@+id/button_home_login"/>
+            android:layout_marginTop="5dp"
+            android:text="@string/title_activity_search"
+            android:id="@+id/button_home_search"/>
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign Up"
-            android:id="@+id/button_home_signup"/>
+            android:layout_marginTop="5dp"
+            android:text="Check in"
+            android:id="@+id/button_home_checkin"/>
 </LinearLayout>

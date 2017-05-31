@@ -2,10 +2,13 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 public class HomeFragment extends Fragment {
@@ -20,6 +23,18 @@ public class HomeFragment extends Fragment {
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle saveInstanceState) {
 		super.onViewCreated(view, saveInstanceState);
-		getActivity().setTitle("HomeFragment");
+		getActivity().setTitle("Home");
+		
+		Button button = (Button) view.findViewById(R.id.button_home_search);
+		button.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
+				ft.replace(R.id.content_frame, new SearchFragment(), "SearchFragment");
+				ft.commit();
+				
+				((NavigationView) getActivity().findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_search);
+			}
+		});
 	}
 }

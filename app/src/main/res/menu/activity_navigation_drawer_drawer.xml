@@ -14,17 +14,17 @@
                 android:title="@string/title_activity_search"/>
     </group>
 
-    <item android:title="asdf">
-        <menu>
-            <group
-                    android:id="@+id/nav_group_asdf"
-                    android:checkableBehavior="single">
-                <item
-                        android:id="@+id/asdf"
-                        android:icon="@drawable/ic_home"
-                        android:title="@string/title_activity_home"/>
-            </group>
-        </menu>
-    </item>
+    <!--<item android:title="asdf">-->
+        <!--<menu>-->
+            <!--<group-->
+                    <!--android:id="@+id/nav_group_asdf"-->
+                    <!--android:checkableBehavior="single">-->
+                <!--<item-->
+                        <!--android:id="@+id/asdf"-->
+                        <!--android:icon="@drawable/ic_home"-->
+                        <!--android:title="@string/title_activity_home"/>-->
+            <!--</group>-->
+        <!--</menu>-->
+    <!--</item>-->
 
 </menu>
