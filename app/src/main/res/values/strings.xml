@@ -9,6 +9,11 @@
     <string name="title_activity_navigation_drawer">NavigationDrawer</string>
     <string name="title_activity_home">Home</string>
     <string name="title_activity_search">Search for Flights</string>
+    <string name="title_activity_checkin">Check in</string>
+
+    <!--Common Words-->
+    <string name="common_login">Login</string>
+    <string name="common_signup">Sign Up</string>
 
     <!-- Search Activity -->
     <string-array name="trip_type">

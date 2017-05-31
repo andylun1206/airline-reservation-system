@@ -24,6 +24,7 @@ public class HomeFragment extends Fragment {
 	public void onViewCreated(View view, @Nullable Bundle saveInstanceState) {
 		super.onViewCreated(view, saveInstanceState);
 		getActivity().setTitle("Home");
+		((NavigationView) getActivity().findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_home);
 		
 		Button button = (Button) view.findViewById(R.id.button_home_search);
 		button.setOnClickListener(new View.OnClickListener() {
