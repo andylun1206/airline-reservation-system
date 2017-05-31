@@ -9,7 +9,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
@@ -23,9 +22,9 @@ public class SearchFragment extends ListFragment implements OnItemSelectedListen
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle saveInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_search_return, container, false);
+		View view = inflater.inflate(R.layout.fragment_search, container, false);
 		criterias = new ArrayList<>();
-		criteriaAdapter = new SearchCriteriaArrayAdapter(getActivity(), R.layout.list_search_criteria, criterias);
+		criteriaAdapter = new SearchCriteriaArrayAdapter(getActivity(), R.layout.list_item_search_criteria, criterias);
 		setListAdapter(criteriaAdapter);
 		return view;
 	}
@@ -38,7 +37,7 @@ public class SearchFragment extends ListFragment implements OnItemSelectedListen
 		Spinner spinner = (Spinner) view.findViewById(R.id.spinner_trip_type);
 		spinner.setOnItemSelectedListener(this);
 		
-		view.findViewById(R.id.button_search_return_advance).setOnClickListener(new OnClickListener() {
+		view.findViewById(R.id.button_search_advance).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				setAdvancedCriterias();
@@ -58,7 +57,7 @@ public class SearchFragment extends ListFragment implements OnItemSelectedListen
 				break;
 		}
 		criteriaAdapter.notifyDataSetChanged();
-		getView().findViewById(R.id.search_return_advanced_settings_checkboxes).setVisibility(View.GONE);
+		getView().findViewById(R.id.search_advanced_settings_checkboxes).setVisibility(View.GONE);
 	}
 	
 	public void onNothingSelected(AdapterView<?> arg0) { }
@@ -78,7 +77,7 @@ public class SearchFragment extends ListFragment implements OnItemSelectedListen
 	}
 	
 	private void setAdvancedCriterias() {
-		View checkboxes = getView().findViewById(R.id.search_return_advanced_settings_checkboxes);
+		View checkboxes = getView().findViewById(R.id.search_advanced_settings_checkboxes);
 		
 		if (checkboxes.getVisibility() == View.VISIBLE) {
 			switch (((Spinner) getView().findViewById(R.id.spinner_trip_type)).getSelectedItem().toString()) {

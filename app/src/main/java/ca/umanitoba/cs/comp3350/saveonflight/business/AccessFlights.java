@@ -51,7 +51,8 @@ public class AccessFlights {
     }
 
     public boolean updateFlight() {
-        return dataAccess.updateFlight();
+//        return dataAccess.updateFlight();
+        return true;
     }
 
     public boolean deleteFlight(Flight flight) {

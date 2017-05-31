@@ -15,13 +15,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
-public class NavigationDrawer extends AppCompatActivity
+public class MainActivity extends AppCompatActivity
 		implements OnNavigationItemSelectedListener {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_navigation_drawer);
+		setContentView(R.layout.activity_main);
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 		

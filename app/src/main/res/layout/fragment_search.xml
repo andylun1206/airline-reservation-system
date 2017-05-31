@@ -21,13 +21,13 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:visibility="gone"
-            android:id="@+id/search_return_advanced_settings_checkboxes">
+            android:id="@+id/search_advanced_settings_checkboxes">
         <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/search_nonstop"
-                android:id="@+id/checkBox_search_return_nonstop"
+                android:id="@+id/checkBox_search_nonstop"
                 android:gravity="center"
                 android:layout_gravity="center_horizontal"/>
         <Space
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/search_refundable"
-                android:id="@+id/checkBox_search_return_refundable"
+                android:id="@+id/checkBox_search_refundable"
                 android:gravity="center"
                 android:layout_gravity="center_horizontal"/>
     </LinearLayout>
@@ -55,12 +55,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="@string/search_button_advanced"
-                android:id="@+id/button_search_return_advance"/>
+                android:id="@+id/button_search_advance"/>
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="@string/search_button_search"
-                android:id="@+id/button_search_return_search"/>
+                android:id="@+id/button_search_search"/>
     </LinearLayout>
 </LinearLayout>
