@@ -1,8 +1,16 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
+import org.junit.After;
+import org.junit.Before;
 
-import junit.framework.TestCase;
+public class AirlineTest {
+    @Before
+    public void setUp() {
 
-public class AirlineTest extends TestCase {
+    }
 
+    @After
+    public void tearDown() {
+
+    }
 }

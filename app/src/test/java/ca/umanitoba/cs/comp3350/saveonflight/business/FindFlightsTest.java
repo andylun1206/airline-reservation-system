@@ -1,9 +1,8 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
-import junit.framework.TestCase;
-
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,12 +15,12 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 
-public class FindFlightsTest extends TestCase {
-    private FindFlights findFlights;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 
-    public FindFlightsTest(String arg0) {
-        super(arg0);
-    }
+public class FindFlightsTest {
+    private FindFlights findFlights;
 
     @Before
     public void setUp() {
@@ -35,6 +34,7 @@ public class FindFlightsTest extends TestCase {
         Main.shutDown();
     }
 
+    @Test
     public void testSearch() {
         final Airline AIRLINE = new Airline("WestJet");
         final Airline OTHER_AIRLINE = new Airline("Air Canada");
