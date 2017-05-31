@@ -1,19 +1,33 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
+import java.util.Date;
+
 public class Flight {
     private String flightID;
     private Airline airline;
-    private String date;
-    private Airport depart;
-    private Airport arrival;
+    private Date date;
+    private Airport origin;
+    private Airport destination;
+    private double price;
+    private int capacity;
+    private int seatsTaken;
+    private FlightClass flightClass;
 
+    public enum FlightClass {
+        ECONOMY, BUSINESS, FIRST_CLASS;
+    }
 
-    public Flight(String flightID, String date, String airline, String depart, String arrival) {
+    public Flight(String flightID, Date date, Airline airline, Airport origin, Airport destination,
+                  double price, int capacity, int seatsTaken, FlightClass flightClass) {
         this.flightID = flightID;
         this.date = date;
-        this.airline = new Airline(airline);
-        this.depart = new Airport(depart);
-        this.arrival = new Airport(arrival);
+        this.airline = airline;
+        this.origin = origin;
+        this.destination = destination;
+        this.price = price;
+        this.capacity = capacity;
+        this.seatsTaken = seatsTaken;
+        this.flightClass = flightClass;
     }
 
     public void setFlightID(String flightID) {
@@ -28,28 +42,64 @@ public class Flight {
         this.airline.setName(airline);
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setAirline(Airline airline) {
+        this.airline = airline;
+    }
+
+    public Airport getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(Airport origin) {
+        this.origin = origin;
+    }
+
+    public Airport getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Airport destination) {
+        this.destination = destination;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public int getSeatsTaken() {
+        return seatsTaken;
+    }
+
+    public void setSeatsTaken(int seatsTaken) {
+        this.seatsTaken = seatsTaken;
+    }
+
+    public FlightClass getFlightClass() {
+        return flightClass;
+    }
+
+    public void setFlightClass(FlightClass flightClass) {
+        this.flightClass = flightClass;
+    }
+
+    public void setDate(Date date) {
         this.date = date;
-    }
-
-    public Airport getDepart() {
-        return depart;
-    }
-
-    public void setDepart(Airport depart) {
-        this.depart = depart;
-    }
-
-    public Airport getArrival() {
-        return arrival;
-    }
-
-    public void setArrival(Airport arrival) {
-        this.arrival = arrival;
     }
 
     public String getFlightID() {
@@ -57,7 +107,7 @@ public class Flight {
     }
 
     public String toString() {
-        return "Flight: " + flightID + " " + date + " " + airline + " " + "from " + depart + " to " + arrival;
+        return "Flight: " + flightID + " " + date + " " + airline + " " + "from " + origin + " to " + destination;
     }
 
     public boolean equals(Object object) {
@@ -65,7 +115,7 @@ public class Flight {
 
         if (object instanceof Flight) {
             Flight other = (Flight) object;
-            if (other.flightID == flightID) {
+            if (other.flightID.equals(flightID)) {
                 result = true;
             }
         }
