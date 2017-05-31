@@ -1,8 +1,15 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
+import java.util.Date;
+
 public class BookedFlight {
     private Traveller traveller;
     private Flight flight;
+
+    public BookedFlight(Traveller traveller, Flight flight) {
+        this.traveller = traveller;
+        this.flight = flight;
+    }
 
     public Traveller getTraveller() {
         return traveller;

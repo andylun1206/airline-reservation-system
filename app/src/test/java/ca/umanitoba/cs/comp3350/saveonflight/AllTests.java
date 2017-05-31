@@ -3,6 +3,7 @@ package ca.umanitoba.cs.comp3350.saveonflight;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import ca.umanitoba.cs.comp3350.saveonflight.business.FindFlightsTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.TravellerTest;
 
 public class AllTests {
@@ -26,7 +27,7 @@ public class AllTests {
     }
 
     private static void testBusiness() {
-        // TODO SearchFlightsTest
+        suite.addTestSuite(FindFlightsTest.class);
     }
 
 }

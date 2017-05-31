@@ -1,19 +1,36 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
-public class Flight {
-    private int flightID;
-    private Airline airline;
-    private String date;
-    private DepartsAndArrives da;
+import java.util.Date;
 
-    public Flight(int flightID, String date, Airline airline, DepartsAndArrives da) {
+public class Flight {
+    private String flightID;
+    private Airline airline;
+    private Date date;
+    private Airport origin;
+    private Airport destination;
+    private double price;
+    private int capacity;
+    private int seatsTaken;
+    private FlightClass flightClass;
+
+    public enum FlightClass {
+        ECONOMY, BUSINESS, FIRST_CLASS;
+    }
+
+    public Flight(String flightID, Date date, Airline airline, Airport origin, Airport destination,
+                  double price, int capacity, int seatsTaken, FlightClass flightClass) {
         this.flightID = flightID;
         this.date = date;
         this.airline = airline;
-        this.da = da;
+        this.origin = origin;
+        this.destination = destination;
+        this.price = price;
+        this.capacity = capacity;
+        this.seatsTaken = seatsTaken;
+        this.flightClass = flightClass;
     }
 
-    public void setFlightID(int flightID) {
+    public void setFlightID(String flightID) {
         this.flightID = flightID;
     }
 
@@ -21,32 +38,76 @@ public class Flight {
         return airline;
     }
 
+    public void setAirline(String airline) {
+        this.airline.setName(airline);
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
     public void setAirline(Airline airline) {
         this.airline = airline;
     }
 
-    public String getDate() {
-        return date;
+    public Airport getOrigin() {
+        return origin;
     }
 
-    public void setDate(String date) {
+    public void setOrigin(Airport origin) {
+        this.origin = origin;
+    }
+
+    public Airport getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Airport destination) {
+        this.destination = destination;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public int getSeatsTaken() {
+        return seatsTaken;
+    }
+
+    public void setSeatsTaken(int seatsTaken) {
+        this.seatsTaken = seatsTaken;
+    }
+
+    public FlightClass getFlightClass() {
+        return flightClass;
+    }
+
+    public void setFlightClass(FlightClass flightClass) {
+        this.flightClass = flightClass;
+    }
+
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public DepartsAndArrives getDa() {
-        return da;
-    }
-
-    public void setDa(DepartsAndArrives da) {
-        this.da = da;
-    }
-
-    public int getFlightID() {
+    public String getFlightID() {
         return flightID;
     }
 
     public String toString() {
-        return "Flight: " + flightID + " " + date + " " + airline + " " + da;
+        return "Flight: " + flightID + " " + date + " " + airline + " " + "from " + origin + " to " + destination;
     }
 
     public boolean equals(Object object) {
@@ -54,7 +115,7 @@ public class Flight {
 
         if (object instanceof Flight) {
             Flight other = (Flight) object;
-            if (other.flightID == flightID) {
+            if (other.flightID.equals(flightID)) {
                 result = true;
             }
         }
