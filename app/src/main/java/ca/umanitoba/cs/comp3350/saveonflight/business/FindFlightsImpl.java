@@ -47,6 +47,11 @@ public class FindFlightsImpl implements FindFlights {
         ArrayList<Flight> flights = new ArrayList<Flight>();
         flights.add(new Flight("asdf", new Date(), new Airline("asdf"),
                 criteria.getOrigin(), criteria.getDestination(), 1.0, 1, 0, Flight.FlightClass.FIRST_CLASS));
+
+        // Get all Flights that match the search criteria
+
+
+        // Order List by date (so that departures come before all the returns)
         return flights;
     }
 

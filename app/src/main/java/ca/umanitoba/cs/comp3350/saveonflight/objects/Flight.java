@@ -46,8 +46,8 @@ public class Flight implements Parcelable {
         this.flightClass = flightClass;
     }
 
-    public boolean hasSpace() {
-        return capacity > seatsTaken;
+    public boolean isFull() {
+        return seatsRemaining() <= 0;
     }
 
     public int seatsRemaining() {
