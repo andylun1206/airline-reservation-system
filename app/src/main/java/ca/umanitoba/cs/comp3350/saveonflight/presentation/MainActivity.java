@@ -49,8 +49,24 @@ public class MainActivity extends AppCompatActivity
 		drawer.addDrawerListener(toggle);
 		toggle.syncState();
 		
-		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+		final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
+		
+		View headerView = navigationView.getHeaderView(0);
+		
+		headerView.findViewById(R.id.button_header_login).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				ToastActivity.toastComingSoon(MainActivity.this, getString(R.string.common_login));
+			}
+		});
+		
+		headerView.findViewById(R.id.button_header_signup).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				ToastActivity.toastComingSoon(MainActivity.this, getString(R.string.common_signup));
+			}
+		});
 		
 		displaySelectedScreen(R.id.nav_home);
 	}

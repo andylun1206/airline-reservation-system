@@ -1,6 +1,6 @@
 package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
-import android.support.v4.app.FragmentActivity;
+import android.app.Activity;
 import android.widget.Toast;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
@@ -13,7 +13,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.R;
  */
 public class ToastActivity {
 	
-	public static void toastComingSoon(FragmentActivity activity, String feature) {
+	public static void toastComingSoon(Activity activity, String feature) {
 		Toast.makeText(activity, activity.getString(R.string.toast_coming_soon, feature),
 				Toast.LENGTH_SHORT).show();
 	}
