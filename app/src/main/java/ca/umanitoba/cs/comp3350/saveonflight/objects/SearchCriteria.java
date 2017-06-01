@@ -18,7 +18,7 @@ public class SearchCriteria {
     private int numTravellers;
     private double maxPrice;
     private Airline preferredAirline;
-    private Flight.FlightClass preferredClass;
+    private FlightClassEnum preferredClass;
     private boolean nonstop;
     private boolean refundable;
 
@@ -27,7 +27,7 @@ public class SearchCriteria {
 
     public SearchCriteria(Airport origin, Airport destination, Date departureDate, Date returnDate,
                           int numTravellers, double maxPrice, Airline preferredAirline,
-                          Flight.FlightClass preferredClass, boolean nonstop, boolean refundable) {
+                          FlightClassEnum preferredClass, boolean nonstop, boolean refundable) {
         this.origin = origin;
         this.destination = destination;
         this.departureDate = departureDate;
@@ -38,19 +38,6 @@ public class SearchCriteria {
         this.preferredClass = preferredClass;
         this.nonstop = nonstop;
         this.refundable = refundable;
-    }
-
-    public boolean matches(Flight f) {
-        boolean result = true;
-
-        if (!origin.equals(f.getOrigin()) || !destination.equals(f.getDestination()) ||
-                !departureDate.equals(f.getDate()) || !returnDate.equals(f.getDate()) ||
-                numTravellers > f.seatsRemaining() || f.getPrice() > maxPrice || !preferredAirline.equals(f.getAirline()) ||
-                preferredClass != f.getFlightClass()) { // for now, just assume all flights match the nonstop and refundable criteria
-            result = false;
-        }
-
-        return result;
     }
 
     public Airport getOrigin() {
@@ -109,11 +96,11 @@ public class SearchCriteria {
         this.preferredAirline = preferredAirline;
     }
 
-    public Flight.FlightClass getPreferredClass() {
+    public FlightClassEnum getPreferredClass() {
         return preferredClass;
     }
 
-    public void setPreferredClass(Flight.FlightClass preferredClass) {
+    public void setPreferredClass(FlightClassEnum preferredClass) {
         this.preferredClass = preferredClass;
     }
 

@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity
 		displaySelectedScreen(item.getItemId());
 		return true;
 	}
-	
+
 	@Override
 	public void viewFlights(ArrayList<Flight> flights) {
 		ViewFlightsFragment viewFragment = new ViewFlightsFragment();

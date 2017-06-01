@@ -17,6 +17,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.TravellerTest;
         //AirportTest.class,
         //BookedFlightTest.class,
         //FlightTest.class,
+        //SearchCriteriaTest,
         TravellerTest.class,
         FindFlightsTest.class
 })

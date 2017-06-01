@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 
 public class FlightTest {
+    private Flight flight;
+
 
     @Before
     public void setUp() {

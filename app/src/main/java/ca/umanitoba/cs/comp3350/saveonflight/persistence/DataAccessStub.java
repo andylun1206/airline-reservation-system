@@ -12,6 +12,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
 public class DataAccessStub implements DataAccess {
@@ -69,16 +70,16 @@ public class DataAccessStub implements DataAccess {
         flights = new ArrayList<Flight>();
         try {
             ywgToYvr = new Flight("WJ 001", simpleDateFormat.parse("2017, 11, 11"), westJet, winnipeg,
-                    vancouver, 200.00, 200, 0, Flight.FlightClass.ECONOMY);
+                    vancouver, 200.00, 200, 0, FlightClassEnum.ECONOMY);
             flights.add(ywgToYvr);
             yvrToYwg = new Flight("WJ 001", simpleDateFormat.parse("2017, 12, 12"), westJet, vancouver,
-                    winnipeg, 350.00, 200, 0, Flight.FlightClass.ECONOMY);
+                    winnipeg, 350.00, 200, 0, FlightClassEnum.ECONOMY);
             flights.add(yvrToYwg);
             ywgToYyc = new Flight("AC 001", simpleDateFormat.parse("2017, 9, 11"), airCanada, winnipeg,
-                    calgary, 400.00, 150, 0, Flight.FlightClass.BUSINESS);
+                    calgary, 400.00, 150, 0, FlightClassEnum.BUSINESS);
             flights.add(ywgToYyc);
             waYwgToYvr = new Flight("WA 001", simpleDateFormat.parse("2017, 10, 11"), winnipegAir, winnipeg,
-                    vancouver, 500.00, 250, 0, Flight.FlightClass.ECONOMY);
+                    vancouver, 500.00, 250, 0, FlightClassEnum.ECONOMY);
             flights.add(waYwgToYvr);
 
             bookedFlights = new ArrayList<BookedFlight>();
@@ -240,7 +241,7 @@ public class DataAccessStub implements DataAccess {
     }
 
     public boolean updateFlight(Flight flight, String flightID, Date date, Airline airline, Airport origin,
-                                Airport dest, double price, int capacity, int seatsTaken, Flight.FlightClass flightClass) {
+                                Airport dest, double price, int capacity, int seatsTaken, FlightClassEnum flightClass) {
         int index;
 
         index = flights.indexOf(flight);

@@ -7,6 +7,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
 interface DataAccess {
@@ -51,7 +52,7 @@ interface DataAccess {
     public boolean insertFlight(Flight flight);
 
     public boolean updateFlight(Flight flight, String flightID, Date date, Airline airline, Airport origin,
-                                Airport dest, double price, int capacity, int seatsTaken, Flight.FlightClass flightClass);
+                                Airport dest, double price, int capacity, int seatsTaken, FlightClassEnum flightClass);
 
     public boolean deleteFlight(Flight flight);
 

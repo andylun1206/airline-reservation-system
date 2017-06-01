@@ -22,19 +22,15 @@ public class Flight implements Parcelable {
     private double price;
     private int capacity;
     private int seatsTaken;
-    private FlightClass flightClass;
-
-    public enum FlightClass {
-        ECONOMY, BUSINESS, FIRST_CLASS;
-    }
+    private FlightClassEnum flightClass;
 
     public Flight(String flightID, Date date, Airline airline, Airport origin, Airport destination,
                   double price, int capacity) {
-        this(flightID, date, airline, origin, destination, price, capacity, 0, FlightClass.ECONOMY);
+        this(flightID, date, airline, origin, destination, price, capacity, 0, FlightClassEnum.ECONOMY);
     }
 
     public Flight(String flightID, Date date, Airline airline, Airport origin, Airport destination,
-                  double price, int capacity, int seatsTaken, FlightClass flightClass) {
+                  double price, int capacity, int seatsTaken, FlightClassEnum flightClass) {
         this.flightID = flightID;
         this.date = date;
         this.airline = airline;
@@ -127,11 +123,11 @@ public class Flight implements Parcelable {
         this.seatsTaken = seatsTaken;
     }
 
-    public FlightClass getFlightClass() {
+    public FlightClassEnum getFlightClass() {
         return flightClass;
     }
 
-    public void setFlightClass(FlightClass flightClass) {
+    public void setFlightClass(FlightClassEnum flightClass) {
         this.flightClass = flightClass;
     }
 
@@ -198,6 +194,6 @@ public class Flight implements Parcelable {
         price = in.readDouble();
         capacity = in.readInt();
         seatsTaken = in.readInt();
-        flightClass = (FlightClass) in.readSerializable();
+        flightClass = (FlightClassEnum) in.readSerializable();
     }
 }

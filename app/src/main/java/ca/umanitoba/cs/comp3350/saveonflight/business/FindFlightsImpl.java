@@ -8,20 +8,26 @@ import java.util.List;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 
 public class FindFlightsImpl implements FindFlights {
+    private AccessFlights accessFlights;
+
+    public FindFlightsImpl() {
+        accessFlights = new AccessFlights();
+    }
     
-    public List<Flight> getAllFlights() {
+    public ArrayList<Flight> getAllFlights() {
         // If no parameters, just return all the Flights in the DB
-        AccessFlights accessFlights = new AccessFlights();
-        List<Flight> flights = accessFlights.getFlights();
+        accessFlights = new AccessFlights();
+        ArrayList<Flight> flights = accessFlights.getFlights();
         return flights;
     }
 
     @Override
-    public List<Flight> search(Airline airline, Date date, Airport origin, Airport destination) {
-        List<Flight> flights;
+    public ArrayList<Flight> search(Airline airline, Date date, Airport origin, Airport destination) {
+        ArrayList<Flight> flights;
         AccessFlights accessFlights = new AccessFlights();
 
         // Get all flights in the DB
@@ -45,13 +51,13 @@ public class FindFlightsImpl implements FindFlights {
     @Override
     public ArrayList<Flight> search(SearchCriteria criteria) {
         ArrayList<Flight> flights = new ArrayList<Flight>();
+
+        flights = accessFlights.search(criteria);
         flights.add(new Flight("asdf", new Date(), new Airline("asdf"),
-                criteria.getOrigin(), criteria.getDestination(), 1.0, 1, 0, Flight.FlightClass.FIRST_CLASS));
+                criteria.getOrigin(), criteria.getDestination(), 1.0, 1, 0, FlightClassEnum.FIRST_CLASS));
 
         // Get all Flights that match the search criteria
 
-
-        // Order List by date (so that departures come before all the returns)
         return flights;
     }
 

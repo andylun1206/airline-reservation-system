@@ -89,9 +89,9 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 					} else if (row.getResources().getString(R.string.search_max_price).equals(title)) {
 						criteria.setMaxPrice(Double.parseDouble(inputText));
 					} else if (row.getResources().getString(R.string.search_airlines).equals(title)) {
-						criteria.setPreferredAirlines(new Airline(inputText));
+						criteria.setPreferredAirline(new Airline(inputText));
 					} else if (row.getResources().getString(R.string.search_class).equals(title)) {
-						criteria.setPreferredClass(Flight.FlightClass.FIRST_CLASS);
+						criteria.setPreferredClass(FlightClassEnum.FIRST_CLASS);
 					}
 				}
 			}
