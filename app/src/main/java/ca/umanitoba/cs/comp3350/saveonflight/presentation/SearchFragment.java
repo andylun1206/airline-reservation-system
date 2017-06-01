@@ -8,7 +8,6 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
  * @author Andy Lun
  */
 
-import android.location.Criteria;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
@@ -45,6 +44,7 @@ public class SearchFragment extends ListFragment {
 		if (container != null) {
 			container.removeAllViews();
 		}
+		
 		View view = inflater.inflate(R.layout.fragment_search, container, false);
 		criteriaLists = new ArrayList<>();
 		criteriaAdapter = new SearchCriteriaArrayAdapter(getActivity(), R.layout.list_item_search_criteria, criteriaLists);

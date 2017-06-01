@@ -114,11 +114,11 @@ public class MainActivity extends AppCompatActivity
 	
 	@Override
 	public void viewFlights(ArrayList<Flight> flights) {
-		ViewFlightsFragment viewFragment = new ViewFlightsFragment();
+		Fragment viewFragment = new ViewFlightsFragment();
 		Bundle args = new Bundle();
 		args.putParcelableArrayList("flights", flights);
 		viewFragment.setArguments(args);
-		getFragmentManager()
+		getSupportFragmentManager()
 				.beginTransaction()
 				.replace(R.id.content_frame, viewFragment)
 				.commit();

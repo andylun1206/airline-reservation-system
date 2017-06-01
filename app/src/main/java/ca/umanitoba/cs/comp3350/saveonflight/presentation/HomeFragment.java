@@ -54,9 +54,10 @@ public class HomeFragment extends Fragment {
 		view.findViewById(R.id.button_home_search).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				FragmentTransaction ft = getFragmentManager().beginTransaction();
-				ft.replace(R.id.content_frame, new SearchFragment());
-				ft.commit();
+				getFragmentManager()
+						.beginTransaction()
+						.replace(R.id.content_frame, new SearchFragment())
+						.commit();
 				
 				((NavigationView) getActivity().findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_search);
 			}
