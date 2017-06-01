@@ -42,6 +42,9 @@ public class SearchFragment extends ListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle saveInstanceState) {
+		if (container != null) {
+			container.removeAllViews();
+		}
 		View view = inflater.inflate(R.layout.fragment_search, container, false);
 		criteriaLists = new ArrayList<>();
 		criteriaAdapter = new SearchCriteriaArrayAdapter(getActivity(), R.layout.list_item_search_criteria, criteriaLists);
