@@ -63,36 +63,8 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 			@Override
 			public void afterTextChanged(Editable editable) {
 				String inputText = input.getText().toString().trim();
-				String title = criteriaList.getTitle();
-				
 				if (!inputText.isEmpty()) {
-					if (row.getResources().getString(R.string.search_origin).equals(title)) {
-						criteria.setOrigin(new Airport(inputText));
-					} else if (row.getResources().getString(R.string.search_destination).equals(title)) {
-						criteria.setDestination(new Airport(inputText));
-					} else if (row.getResources().getString(R.string.search_departure_date).equals(title)) {
-						try {
-							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
-							criteria.setDepartureDate(sdf.parse(inputText));
-						} catch (ParseException e) {
-							e.printStackTrace();
-						}
-					} else if (row.getResources().getString(R.string.search_return_date).equals(title)) {
-						try {
-							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
-							criteria.setReturnDate(sdf.parse(inputText));
-						} catch (ParseException e) {
-							e.printStackTrace();
-						}
-					} else if (row.getResources().getString(R.string.search_num_travellers).equals(title)) {
-						criteria.setNumTravellers(Integer.parseInt(inputText));
-					} else if (row.getResources().getString(R.string.search_max_price).equals(title)) {
-						criteria.setMaxPrice(Double.parseDouble(inputText));
-					} else if (row.getResources().getString(R.string.search_airlines).equals(title)) {
-						criteria.setPreferredAirlines(new Airline(inputText));
-					} else if (row.getResources().getString(R.string.search_class).equals(title)) {
-						criteria.setPreferredClass(Flight.FlightClass.FIRST_CLASS);
-					}
+					criteria.setField(row, inputText, criteriaList.getTitle());
 				}
 			}
 		});
