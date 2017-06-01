@@ -8,6 +8,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
  * @author Andy Lun
  */
 
+import android.location.Criteria;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
@@ -17,10 +18,13 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.business.FindFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListView;
 
 import java.util.ArrayList;
@@ -70,6 +74,24 @@ public class SearchFragment extends ListFragment {
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> adapterView) { }
+		});
+		
+		((CheckBox) view.findViewById(R.id.checkBox_search_nonstop)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+				SearchCriteria criteria = SearchCriteriaArrayAdapter.getCriteria();
+				criteria.setNonstop(isChecked);
+				SearchCriteriaArrayAdapter.setCriteria(criteria);
+			}
+		});
+
+		((CheckBox) view.findViewById(R.id.checkBox_search_refundable)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+				SearchCriteria criteria = SearchCriteriaArrayAdapter.getCriteria();
+				criteria.setRefundable(isChecked);
+				SearchCriteriaArrayAdapter.setCriteria(criteria);
+			}
 		});
 		
 		view.findViewById(R.id.button_search_advance).setOnClickListener(new OnClickListener() {

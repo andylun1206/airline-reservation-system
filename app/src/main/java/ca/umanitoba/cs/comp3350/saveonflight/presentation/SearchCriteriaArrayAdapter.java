@@ -97,20 +97,6 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 			}
 		});
 		
-//		((CheckBox) row.findViewById(R.id.checkBox_search_nonstop)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//			@Override
-//			public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-//				criteria.setNonstop(isChecked);
-//			}
-//		});
-//
-//		((CheckBox) row.findViewById(R.id.checkBox_search_refundable)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//			@Override
-//			public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-//				criteria.setRefundable(isChecked);
-//			}
-//		});
-		
 		switch(criteriaList.getIcon()) {
 			case R.drawable.ic_clock:
 				input.setInputType(InputType.TYPE_CLASS_DATETIME);
@@ -150,6 +136,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 	}
 	
 	public static SearchCriteria getCriteria() { return criteria; }
+	public static void setCriteria(SearchCriteria newCriteria) { criteria = newCriteria; }
 	public static void resetCriteria() { criteria = new SearchCriteria(); }
 	
 }
