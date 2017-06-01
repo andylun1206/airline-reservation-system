@@ -1,5 +1,13 @@
 package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
+/**
+ * HomeFragment.java
+ *
+ * Fragment for the home page of the application.
+ *
+ * @author Andy Lun
+ */
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -31,7 +39,7 @@ public class HomeFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				FragmentTransaction ft = getFragmentManager().beginTransaction();
-				ft.replace(R.id.content_frame, new SearchFragment(), "SearchFragment");
+				ft.replace(R.id.content_frame, new SearchFragment());
 				ft.commit();
 				
 				((NavigationView) getActivity().findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_search);

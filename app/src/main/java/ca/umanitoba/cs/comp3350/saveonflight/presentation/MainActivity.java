@@ -1,5 +1,13 @@
 package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
+/**
+ * HomeFragment.java
+ *
+ * Fragment for the home page of the application.
+ *
+ * @author Andy Lun
+ */
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,9 +22,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-		implements OnNavigationItemSelectedListener {
+		implements OnNavigationItemSelectedListener, SearchFragment.ViewFlightsListener {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +93,18 @@ public class MainActivity extends AppCompatActivity
 		// Handle navigation view item clicks here.
 		displaySelectedScreen(item.getItemId());
 		return true;
+	}
+	
+	@Override
+	public void viewFlights(ArrayList<Flight> flights) {
+		ViewFlightsFragment viewFragment = new ViewFlightsFragment();
+		Bundle args = new Bundle();
+		args.putParcelableArrayList("flights", flights);
+		viewFragment.setArguments(args);
+		getFragmentManager()
+				.beginTransaction()
+				.replace(R.id.content_frame, viewFragment)
+				.commit();
 	}
 	
 }

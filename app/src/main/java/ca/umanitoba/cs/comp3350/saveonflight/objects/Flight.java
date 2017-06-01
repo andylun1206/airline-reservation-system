@@ -1,8 +1,19 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
+/**
+ * Flight.java
+ *
+ * Object mapped to the flights table DB
+ *
+ * @author Andy Lun
+ */
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class Flight {
+public class Flight implements Parcelable {
     private String flightID;
     private Airline airline;
     private Date date;
@@ -121,5 +132,46 @@ public class Flight {
         }
 
         return result;
+    }
+    
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+    @Override
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeString(flightID);
+        parcel.writeParcelable(airline, flags);
+        parcel.writeSerializable(date);
+        parcel.writeParcelable(origin, flags);
+        parcel.writeParcelable(destination, flags);
+        parcel.writeDouble(price);
+        parcel.writeInt(capacity);
+        parcel.writeInt(seatsTaken);
+        parcel.writeSerializable(flightClass);
+    }
+    
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        @Override
+        public Flight[] newArray(int size) {
+            return new Flight[size];
+        }
+        
+        @Override
+        public Flight createFromParcel(Parcel in) {
+            return new Flight(in);
+        }
+    };
+    
+    public Flight(Parcel in) {
+        flightID = in.readString();
+        airline = in.readParcelable(Airline.class.getClassLoader());
+        date = (Date) in.readSerializable();
+        origin = in.readParcelable(Airport.class.getClassLoader());
+        destination = in.readParcelable(Airport.class.getClassLoader());
+        price = in.readDouble();
+        capacity = in.readInt();
+        seatsTaken = in.readInt();
+        flightClass = (FlightClass) in.readSerializable();
     }
 }
