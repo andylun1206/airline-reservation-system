@@ -37,8 +37,21 @@ public class HomeFragment extends Fragment {
 		getActivity().setTitle("Home");
 		((NavigationView) getActivity().findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_home);
 		
-		Button button = (Button) view.findViewById(R.id.button_home_search);
-		button.setOnClickListener(new View.OnClickListener() {
+		view.findViewById(R.id.button_home_login).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				ToastActivity.toastComingSoon(getActivity(), getString(R.string.common_login));
+			}
+		});
+		
+		view.findViewById(R.id.button_home_signup).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				ToastActivity.toastComingSoon(getActivity(), getString(R.string.common_signup));
+			}
+		});
+		
+		view.findViewById(R.id.button_home_search).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -46,6 +59,13 @@ public class HomeFragment extends Fragment {
 				ft.commit();
 				
 				((NavigationView) getActivity().findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_search);
+			}
+		});
+		
+		view.findViewById(R.id.button_home_checkin).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				ToastActivity.toastComingSoon(getActivity(), getString(R.string.title_activity_checkin));
 			}
 		});
 	}

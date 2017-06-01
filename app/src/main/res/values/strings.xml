@@ -15,6 +15,9 @@
     <string name="common_login">Login</string>
     <string name="common_signup">Sign Up</string>
 
+    <!--Toast Messages-->
+    <string name="toast_coming_soon">%1$s feature coming soon!</string>
+
     <!-- Search Activity -->
     <string-array name="trip_type">
         <item>Return</item>

@@ -23,11 +23,12 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.SearchFragment.ViewFlightsListener;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-		implements OnNavigationItemSelectedListener, SearchFragment.ViewFlightsListener {
+		implements OnNavigationItemSelectedListener, ViewFlightsListener {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
