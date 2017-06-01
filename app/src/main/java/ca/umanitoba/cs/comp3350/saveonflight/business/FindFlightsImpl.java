@@ -19,7 +19,7 @@ public class FindFlightsImpl implements FindFlights {
     }
 
     @Override
-    public List<Flight> search(Airline airline, Date date, Airport departs, Airport arrives) {
+    public List<Flight> search(Airline airline, Date date, Airport origin, Airport destination) {
         List<Flight> flights;
         AccessFlights accessFlights = new AccessFlights();
 
@@ -29,8 +29,8 @@ public class FindFlightsImpl implements FindFlights {
         while (i < flights.size()) {
             Flight f = flights.get(i);
             // For each Flight, remove it if it doesn't meet any of the search criteria
-            if (!f.getAirline().equals(airline) || !f.getDate().equals(date) || !f.getOrigin().equals(departs)
-                    || !f.getDestination().equals(arrives)) {
+            if (!f.getAirline().equals(airline) || !f.getDate().equals(date) || !f.getOrigin().equals(origin)
+                    || !f.getDestination().equals(destination)) {
                 flights.remove(i);
             }
             else {
@@ -42,9 +42,17 @@ public class FindFlightsImpl implements FindFlights {
     }
 
     @Override
-    public List<Flight> search(Airport departs, Airport arrives, Date departureDate, Date returnDate,
+    public List<Flight> search(Airport origin, Airport destination, Date departureDate, Date returnDate,
                         int numTravellers, int maxPrice, Airline airline, Flight.FlightClass flightClass) {
+        List<Flight> flights;
+        AccessFlights accessFlights = new AccessFlights();
+
+        // Get all flights in the DB
+        flights = accessFlights.getFlights();
+        int i = 0;
 
         return null;
     }
+
+
 }
