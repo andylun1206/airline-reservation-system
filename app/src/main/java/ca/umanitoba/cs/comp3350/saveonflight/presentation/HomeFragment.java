@@ -25,6 +25,9 @@ public class HomeFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle saveInstanceState) {
+		if (container != null) {
+			container.removeAllViews();
+		}
 		return inflater.inflate(R.layout.fragment_home, container, false);
 	}
 	
