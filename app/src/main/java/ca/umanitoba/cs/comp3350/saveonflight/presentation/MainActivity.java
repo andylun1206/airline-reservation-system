@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity
 				inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 			}
 		};
-		drawer.setDrawerListener(toggle);
+		drawer.addDrawerListener(toggle);
 		toggle.syncState();
 		
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
