@@ -17,12 +17,14 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.*;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
@@ -47,29 +49,29 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 	@Override
 	public View getView(final int position, final View convertView, final ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		final View row = inflater.inflate(layoutResourceId, parent, false);
-		final SearchCriteriaListView criteriaList = criteriaListList.get(position);
+		final View view = inflater.inflate(layoutResourceId, parent, false);
+		final SearchCriteriaListView row = criteriaListList.get(position);
 		
-		((ImageView) row.findViewById(R.id.imageView_search_criteria_icon)).setImageResource(criteriaList.getIcon());
-		final EditText input = (EditText) row.findViewById(R.id.editText_search_criteria_input);
-		input.setHint(criteriaList.getTitle());
+		((ImageView) view.findViewById(R.id.imageView_search_criteria_icon)).setImageResource(row.getIcon());
+		final EditText input = (EditText) view.findViewById(R.id.editText_search_criteria_input);
+		input.setHint(row.getTitle());
 		input.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) { }
-			
+
 			@Override
 			public void onTextChanged(CharSequence charSequence, int start, int before, int count) { }
-			
+
 			@Override
 			public void afterTextChanged(Editable editable) {
 				String inputText = input.getText().toString().trim();
 				if (!inputText.isEmpty()) {
-					criteria.setField(row, inputText, criteriaList.getTitle());
+					criteria.setField(view, inputText, row.getTitle());
 				}
 			}
 		});
-		
-		switch(criteriaList.getIcon()) {
+
+		switch(row.getIcon()) {
 			case R.drawable.ic_clock:
 				input.setInputType(InputType.TYPE_CLASS_DATETIME);
 				input.setFocusable(false);
@@ -92,7 +94,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 				break;
 		}
 		
-		return row;
+		return view;
 	}
 	
 	@Override
