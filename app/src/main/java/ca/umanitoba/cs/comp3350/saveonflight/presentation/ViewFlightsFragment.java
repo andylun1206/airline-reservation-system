@@ -14,6 +14,7 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListView;
@@ -38,16 +39,30 @@ public class ViewFlightsFragment extends ListFragment {
 		flightAdapter = new ViewFlightsArrayAdapter(getActivity(), R.layout.list_item_view_flights, flightList);
 		setListAdapter(flightAdapter);
 		
+		flights = getArguments().getParcelableArrayList("flights");
+		
 		return view;
 	}
 	
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle saveInstanceState) {
 		super.onViewCreated(view, saveInstanceState);
-		getActivity().setTitle("Flights");
+		getActivity().setTitle(getString(R.string.view_flights_flight_path, flights.get(0).getOrigin().toString(),
+				flights.get(0).getDestination().toString()));
 		
 		flights = getArguments().getParcelableArrayList(getString(R.string.title_activity_view_flights));
 		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
+		
 		flightAdapter.notifyDataSetChanged();
 	}
 }
