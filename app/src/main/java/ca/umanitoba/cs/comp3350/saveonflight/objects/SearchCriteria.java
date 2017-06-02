@@ -98,7 +98,7 @@ public class SearchCriteria {
 		} else if (row.getResources().getString(R.string.search_max_price).equals(title)) {
 			setMaxPrice(Double.parseDouble(inputText));
 		} else if (row.getResources().getString(R.string.search_airlines).equals(title)) {
-			setPreferredAirlines(new Airline(inputText));
+			setPreferredAirlines(new Airline(inputText, 0));
 		} else if (row.getResources().getString(R.string.search_class).equals(title)) {
 			setPreferredClass(Flight.FlightClass.FIRST_CLASS);
 		}

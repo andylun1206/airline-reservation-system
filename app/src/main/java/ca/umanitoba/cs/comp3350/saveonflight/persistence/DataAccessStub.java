@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Locale;
 
 
+import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
@@ -43,19 +44,19 @@ public class DataAccessStub implements DataAccess {
         Flight ywgToYvr, yvrToYwg, ywgToYyc, waYwgToYvr;
 
         airlines = new ArrayList<Airline>();
-        westJet = new Airline("WestJet");
+        westJet = new Airline("WestJet", R.mipmap.ic_westjet);
         airlines.add(westJet);
-        airCanada = new Airline("Air Canada");
+        airCanada = new Airline("Air Canada", R.mipmap.ic_aircanada);
         airlines.add(airCanada);
-        winnipegAir = new Airline("Winnipeg Air");
+        winnipegAir = new Airline("Winnipeg Air", 0);
         airlines.add(winnipegAir);
 
         airports = new ArrayList<Airport>();
-        vancouver = new Airport("YVR");
+        vancouver = new Airport("Vancouver YVR");
         airports.add(vancouver);
-        winnipeg = new Airport("YWG");
+        winnipeg = new Airport("Winnipeg YWG");
         airports.add(winnipeg);
-        calgary = new Airport("YYC");
+        calgary = new Airport("Calgary YYC");
         airports.add(calgary);
 
         travellers = new ArrayList<Traveller>();
@@ -253,8 +254,8 @@ public class DataAccessStub implements DataAccess {
         if (index >= 0) {
             Flight f = flights.get(index);
             f.setFlightID(flightID);
-            f.setDepartTime(departDate);
-            f.setArriveTime(arriveDate);
+            f.setDepartureTime(departDate);
+            f.setArrivalTime(arriveDate);
             f.setAirline(airline);
             f.setOrigin(origin);
             f.setDestination(dest);
@@ -344,7 +345,7 @@ public class DataAccessStub implements DataAccess {
         Flight temp;
         for (int i = 0; i < table.size(); i++) {
             temp = table.get(i);
-            if (!temp.getDepartTime().equals(departureDate)) {
+            if (!temp.getDepartureTime().equals(departureDate)) {
                 table.remove(temp);
                 i--;
             }

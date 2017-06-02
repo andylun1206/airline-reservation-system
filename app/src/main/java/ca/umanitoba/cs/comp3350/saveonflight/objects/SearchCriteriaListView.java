@@ -22,4 +22,9 @@ public class SearchCriteriaListView {
 	
 	public String getTitle() { return title; }
 	public void setTitle(String title) { this.title = title; }
+	
+	@Override
+	public SearchCriteriaListView clone() {
+		return new SearchCriteriaListView(this.icon, this.title);
+	}
 }

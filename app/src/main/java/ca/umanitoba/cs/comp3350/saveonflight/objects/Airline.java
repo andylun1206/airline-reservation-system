@@ -13,9 +13,11 @@ import android.os.Parcelable;
 
 public class Airline implements Parcelable {
     private String name;
+    private int icon;
 
-    public Airline(String name) {
+    public Airline(String name, int icon) {
         this.name = name;
+        this.icon = icon;
     }
 
     public String getName() {
@@ -24,6 +26,14 @@ public class Airline implements Parcelable {
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public int getIcon() {
+        return icon;
+    }
+    
+    public void setIcon(int icon) {
+        this.icon = icon;
     }
 
     public String toString() {
