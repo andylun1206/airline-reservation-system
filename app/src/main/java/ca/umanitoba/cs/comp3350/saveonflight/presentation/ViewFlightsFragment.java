@@ -51,17 +51,18 @@ public class ViewFlightsFragment extends ListFragment {
 				flights.get(0).getDestination().toString()));
 		
 		flights = getArguments().getParcelableArrayList(getString(R.string.title_activity_view_flights));
-		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
-		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
-		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
-		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
-		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
-		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
-		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
-		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
-		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
-		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
-		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC 256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("11:15am - 02:21pm", 419.08, R.mipmap.ic_westjet, "WS 258", "2h 20m"));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC 256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("11:15am - 02:21pm", 419.08, R.mipmap.ic_westjet, "WS 258", "2h 20m"));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC 256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("11:15am - 02:21pm", 419.08, R.mipmap.ic_westjet, "WS 258", "2h 20m"));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC 256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("11:15am - 02:21pm", 419.08, R.mipmap.ic_westjet, "WS 258", "2h 20m"));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC 256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("11:15am - 02:21pm", 419.08, R.mipmap.ic_westjet, "WS 258", "2h 20m"));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC 256", "2h 21m"));
+		flightList.add(new ViewFlightsListView("11:15am - 02:21pm", 419.08, R.mipmap.ic_westjet, "WS 258", "2h 20m"));
 		
 		flightAdapter.notifyDataSetChanged();
 	}

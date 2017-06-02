@@ -44,4 +44,8 @@
     <!-- View Flights Activity -->
     <string name="view_flights_const_flight">Flight:</string>
     <string name="view_flights_flight_path">%1$s &#x2192; %2$s</string>
+    <string name="view_flight_sort_by">Sort by:</string>
+    <string name="view_flight_sort_price">Price</string>
+    <string name="view_flight_sort_time">Time</string>
+    <string name="view_flight_sort_duration">Duration</string>
 </resources>
