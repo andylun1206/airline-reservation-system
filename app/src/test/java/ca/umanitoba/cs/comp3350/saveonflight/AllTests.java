@@ -13,9 +13,9 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.TravellerTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        //AirlineTest.class,
-        //AirportTest.class,
-        //BookedFlightTest.class,
+        AirlineTest.class,
+        AirportTest.class,
+        BookedFlightTest.class,
         FlightTest.class,
         //SearchCriteriaTest,
         TravellerTest.class,

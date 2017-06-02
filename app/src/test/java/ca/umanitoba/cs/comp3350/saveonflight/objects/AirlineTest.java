@@ -22,6 +22,7 @@ public class AirlineTest {
     public void tearDown() {
         airline2 = null;
     }
+
     @Test
     public void testEqualsMethod(){
         assertFalse(AIRLINE.equals(airline2)); //westjet != air canada
