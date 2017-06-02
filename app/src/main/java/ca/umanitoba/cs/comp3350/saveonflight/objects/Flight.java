@@ -22,14 +22,15 @@ public class Flight implements Parcelable {
     private double price;
     private int capacity;
     private int seatsTaken;
-    private FlightClass flightClass;
+    private FlightClassEnum flightClass;
 
-    public enum FlightClass {
-        ECONOMY, BUSINESS, FIRST_CLASS;
+    public Flight(String flightID, Date date, Airline airline, Airport origin, Airport destination,
+                  double price, int capacity) {
+        this(flightID, date, airline, origin, destination, price, capacity, 0, FlightClassEnum.ECONOMY);
     }
 
     public Flight(String flightID, Date date, Airline airline, Airport origin, Airport destination,
-                  double price, int capacity, int seatsTaken, FlightClass flightClass) {
+                  double price, int capacity, int seatsTaken, FlightClassEnum flightClass) {
         this.flightID = flightID;
         this.date = date;
         this.airline = airline;
@@ -39,6 +40,27 @@ public class Flight implements Parcelable {
         this.capacity = capacity;
         this.seatsTaken = seatsTaken;
         this.flightClass = flightClass;
+    }
+
+    public boolean isFull() {
+        return getSeatsRemaining() <= 0;
+    }
+
+    public int getSeatsRemaining() {
+        return capacity - seatsTaken;
+    }
+
+    public boolean sellSeats(int numSold) {
+        boolean result = false;
+
+        if (getSeatsRemaining() >= numSold) {
+            seatsTaken += numSold;
+            result = true;
+        } else {
+            System.out.println("Trying to sell more seats than are available");
+        }
+
+        return result;
     }
 
     public void setFlightID(String flightID) {
@@ -81,7 +103,7 @@ public class Flight implements Parcelable {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -101,11 +123,11 @@ public class Flight implements Parcelable {
         this.seatsTaken = seatsTaken;
     }
 
-    public FlightClass getFlightClass() {
+    public FlightClassEnum getFlightClass() {
         return flightClass;
     }
 
-    public void setFlightClass(FlightClass flightClass) {
+    public void setFlightClass(FlightClassEnum flightClass) {
         this.flightClass = flightClass;
     }
 
@@ -172,6 +194,6 @@ public class Flight implements Parcelable {
         price = in.readDouble();
         capacity = in.readInt();
         seatsTaken = in.readInt();
-        flightClass = (FlightClass) in.readSerializable();
+        flightClass = (FlightClassEnum) in.readSerializable();
     }
 }

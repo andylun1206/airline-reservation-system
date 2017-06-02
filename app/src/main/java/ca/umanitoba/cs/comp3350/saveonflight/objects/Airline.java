@@ -1,6 +1,6 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
-/**
+/*
  * Airline.java
  *
  * Object mapped to the airline table DB
@@ -36,7 +36,7 @@ public class Airline implements Parcelable, Comparable {
 
         if (object instanceof Airline) {
             Airline other = (Airline) object;
-            if (other.name.equals(name)) {
+            if (other.name.equals(this.name)) {
                 result = true;
             }
         }
