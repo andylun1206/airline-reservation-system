@@ -12,11 +12,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class Flight implements Parcelable {
     private String flightID;
     private Airline airline;
-    private Date date;
+    private Date departTime;
+    private Date arriveTime;
     private Airport origin;
     private Airport destination;
     private double price;
@@ -28,10 +30,18 @@ public class Flight implements Parcelable {
         ECONOMY, BUSINESS, FIRST_CLASS;
     }
 
-    public Flight(String flightID, Date date, Airline airline, Airport origin, Airport destination,
+
+    public Flight(String flightID, Date departTime,Date arriveTime, Airline airline, Airport origin, Airport destination,
+                  double price, int capacity) {
+        this(flightID, departTime,arriveTime, airline, origin, destination, price, capacity, 0, FlightClass.ECONOMY);
+    }
+
+    public Flight(String flightID, Date departTime,Date arriveTime, Airline airline, Airport origin, Airport destination,
+
                   double price, int capacity, int seatsTaken, FlightClass flightClass) {
         this.flightID = flightID;
-        this.date = date;
+        this.departTime = departTime;
+        this.arriveTime = arriveTime;
         this.airline = airline;
         this.origin = origin;
         this.destination = destination;
@@ -53,8 +63,11 @@ public class Flight implements Parcelable {
         this.airline.setName(airline);
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDepartTime() {
+        return departTime;
+    }
+    public Date getArriveTime() {
+        return arriveTime;
     }
 
     public void setAirline(Airline airline) {
@@ -81,7 +94,7 @@ public class Flight implements Parcelable {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -109,16 +122,18 @@ public class Flight implements Parcelable {
         this.flightClass = flightClass;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDepartTime(Date date) {
+        this.departTime = date;
     }
+
+    public void setArriveTime(Date date){this.arriveTime = date; }
 
     public String getFlightID() {
         return flightID;
     }
 
     public String toString() {
-        return "Flight: " + flightID + " " + date + " " + airline + " " + "from " + origin + " to " + destination;
+        return "Flight: " + flightID + " " + departTime +" "+ arriveTime + " " + airline + " " + "from " + origin + " to " + destination;
     }
 
     public boolean equals(Object object) {
@@ -133,6 +148,19 @@ public class Flight implements Parcelable {
 
         return result;
     }
+
+    //calculate time duration
+    public long getDurationInMinutes(){
+        long result = getDateDiff(departTime,arriveTime,TimeUnit.MINUTES);
+
+        return result;
+    }
+
+    private long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diffInMillies = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
+    }
+    //end
     
     @Override
     public int describeContents() {
@@ -142,7 +170,8 @@ public class Flight implements Parcelable {
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(flightID);
         parcel.writeParcelable(airline, flags);
-        parcel.writeSerializable(date);
+        parcel.writeSerializable(departTime);
+        parcel.writeSerializable(arriveTime);
         parcel.writeParcelable(origin, flags);
         parcel.writeParcelable(destination, flags);
         parcel.writeDouble(price);
@@ -166,7 +195,8 @@ public class Flight implements Parcelable {
     public Flight(Parcel in) {
         flightID = in.readString();
         airline = in.readParcelable(Airline.class.getClassLoader());
-        date = (Date) in.readSerializable();
+        departTime = (Date) in.readSerializable();
+        arriveTime = (Date) in.readSerializable();
         origin = in.readParcelable(Airport.class.getClassLoader());
         destination = in.readParcelable(Airport.class.getClassLoader());
         price = in.readDouble();
