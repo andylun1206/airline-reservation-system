@@ -1,6 +1,7 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
@@ -49,7 +50,10 @@ interface DataAccess {
   
     public boolean insertFlight(Flight flight);
 
-    public boolean updateFlight(Flight flight);
+
+    public boolean updateFlight(Flight flight, String flightID, Date departDate,Date arriveDate, Airline airline, Airport origin,
+                                Airport dest, double price, int capacity, int seatsTaken, Flight.FlightClass flightClass);
+
 
     public boolean deleteFlight(Flight flight);
 
