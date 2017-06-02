@@ -23,11 +23,12 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.SearchFragment.ViewFlightsListener;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-		implements OnNavigationItemSelectedListener, SearchFragment.ViewFlightsListener {
+		implements OnNavigationItemSelectedListener, ViewFlightsListener {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +46,27 @@ public class MainActivity extends AppCompatActivity
 				inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 			}
 		};
-		drawer.setDrawerListener(toggle);
+		drawer.addDrawerListener(toggle);
 		toggle.syncState();
 		
-		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+		final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
+		
+		View headerView = navigationView.getHeaderView(0);
+		
+		headerView.findViewById(R.id.button_header_login).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				ToastActivity.toastComingSoon(MainActivity.this, getString(R.string.common_login));
+			}
+		});
+		
+		headerView.findViewById(R.id.button_header_signup).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				ToastActivity.toastComingSoon(MainActivity.this, getString(R.string.common_signup));
+			}
+		});
 		
 		displaySelectedScreen(R.id.nav_home);
 	}
