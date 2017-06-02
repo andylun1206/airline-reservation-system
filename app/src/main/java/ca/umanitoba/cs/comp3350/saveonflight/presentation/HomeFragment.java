@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment {
 				FragmentTransaction ft = getFragmentManager().beginTransaction();
 				ft.replace(R.id.content_frame, new SearchFragment());
 				ft.commit();
-
+        
 				((NavigationView) getActivity().findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_search);
 			}
 		});

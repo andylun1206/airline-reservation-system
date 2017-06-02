@@ -8,20 +8,22 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
  * @author Andy Lun
  */
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListView;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class ViewFlightsFragment extends Fragment {
-	List<Flight> flights;
+public class ViewFlightsFragment extends ListFragment {
+	private ViewFlightsArrayAdapter flightAdapter;
+	private ArrayList<ViewFlightsListView> flightList;
+	private ArrayList<Flight> flights;
 	
 	@Nullable
 	@Override
@@ -30,7 +32,13 @@ public class ViewFlightsFragment extends Fragment {
 		if (container != null) {
 			container.removeAllViews();
 		}
-		return inflater.inflate(R.layout.fragment_view_flights, container, false);
+		
+		View view = inflater.inflate(R.layout.fragment_view_flights, container, false);
+		flightList = new ArrayList<>();
+		flightAdapter = new ViewFlightsArrayAdapter(getActivity(), R.layout.list_item_view_flights, flightList);
+		setListAdapter(flightAdapter);
+		
+		return view;
 	}
 	
 	@Override
@@ -38,7 +46,8 @@ public class ViewFlightsFragment extends Fragment {
 		super.onViewCreated(view, saveInstanceState);
 		getActivity().setTitle("Flights");
 		
-		flights = getArguments().getParcelableArrayList("flights");
-		((TextView) view.findViewById(R.id.textView)).setText(flights.get(0).toString());
+		flights = getArguments().getParcelableArrayList(getString(R.string.title_activity_view_flights));
+		flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC256", "2h 21m"));
+		flightAdapter.notifyDataSetChanged();
 	}
 }

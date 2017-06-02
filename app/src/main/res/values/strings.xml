@@ -9,6 +9,7 @@
     <string name="title_activity_navigation_drawer">NavigationDrawer</string>
     <string name="title_activity_home">Home</string>
     <string name="title_activity_search">Search for Flights</string>
+    <string name="title_activity_view_flights">Flights</string>
     <string name="title_activity_checkin">Check in</string>
 
     <!-- Common Words -->
