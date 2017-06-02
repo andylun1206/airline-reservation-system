@@ -150,10 +150,19 @@ public class Flight implements Parcelable {
     }
 
     //calculate time duration
-    public long getDurationInMinutes(){
-        long result = getDateDiff(departTime,arriveTime,TimeUnit.MINUTES);
+    public String getDurationInMinutes(){
+        String r = "";
+        int result = (int)(getDateDiff(departTime,arriveTime,TimeUnit.MINUTES));
 
-        return result;
+        int hours = result/60;
+        int minutes = result%60;
+
+        String hrs = Integer.toString(hours);
+        String mins = Integer.toString(minutes);
+
+        r += hrs + "h " + mins + "m";
+
+        return r;
     }
 
     private long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
