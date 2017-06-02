@@ -344,7 +344,7 @@ public class DataAccessStub implements DataAccess {
         Flight temp;
         for (int i = 0; i < table.size(); i++) {
             temp = table.get(i);
-            if (!temp.getDate().equals(departureDate)) {
+            if (!temp.getDepartTime().equals(departureDate)) {
                 table.remove(temp);
                 i--;
             }
