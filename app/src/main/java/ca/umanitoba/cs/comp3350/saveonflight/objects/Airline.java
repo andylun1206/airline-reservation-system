@@ -10,8 +10,9 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
-public class Airline implements Parcelable {
+public class Airline implements Parcelable, Comparable {
     private String name;
 
     public Airline(String name) {
@@ -66,5 +67,17 @@ public class Airline implements Parcelable {
     
     private Airline(Parcel in) {
         name = in.readString();
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        int result = 0;
+
+        if (o instanceof Airline) {
+            Airline a = (Airline) o;
+            result = name.compareTo(((Airline) o).getName());
+        }
+
+        return result;
     }
 }
