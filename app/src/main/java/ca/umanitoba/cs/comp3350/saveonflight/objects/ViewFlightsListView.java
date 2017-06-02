@@ -1,8 +1,5 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
-/**
- * Created by Andy on 2017-06-01.
- */
 public class ViewFlightsListView {
 	private String time;
 	private double price;

@@ -1,10 +1,9 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 
 public class SortFlights {
@@ -32,11 +31,13 @@ public class SortFlights {
                 comparator = new CapacityComparator();
                 break;
             case SEATS_AVAILABLE:
-
+                comparator = new SeatsAvailableComparator();
                 break;
+            default:
+                comparator = new DateComparator();
         }
 
-        result.sort(comparator);
+        Collections.sort(result, comparator);
         return result;
     }
 
@@ -81,7 +82,7 @@ public class SortFlights {
     private class SeatsAvailableComparator implements Comparator<Flight> {
         @Override
         public int compare(Flight f1, Flight f2) {
-            return 0;
+            return f1.getSeatsRemaining() - f2.getSeatsRemaining();
         }
     }
 }

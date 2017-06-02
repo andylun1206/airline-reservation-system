@@ -11,9 +11,13 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Flight implements Parcelable {
+    public static SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy, MM, dd", Locale.CANADA);
+
     private String flightID;
     private Airline airline;
     private Date date;
