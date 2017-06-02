@@ -44,7 +44,7 @@ public class FindFlightsImpl implements FindFlights {
     public ArrayList<Flight> search(SearchCriteria criteria) {
         ArrayList<Flight> flights = new ArrayList<Flight>();
         flights.add(new Flight("asdf", new Date(), new Airline("asdf"),
-                new Airport("Winnipeg"), new Airport("Toronto"), 1.0, 1, 0, Flight.FlightClass.FIRST_CLASS));
+                new Airport("Winnipeg YWG"), new Airport("Toronto YYZ"), 1.0, 1, 0, Flight.FlightClass.FIRST_CLASS));
         return flights;
     }
 }
