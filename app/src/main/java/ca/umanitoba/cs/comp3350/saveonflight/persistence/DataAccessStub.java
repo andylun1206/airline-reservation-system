@@ -64,20 +64,20 @@ public class DataAccessStub implements DataAccess {
         amir = new Traveller(2, "Amir");
         travellers.add(amir);
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy, MM, dd", Locale.CANADA);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy, MM, dd, HH, mm", Locale.CANADA);
 
         flights = new ArrayList<Flight>();
         try {
-            ywgToYvr = new Flight("WJ 001", simpleDateFormat.parse("2017, 11, 11"), westJet, winnipeg,
+            ywgToYvr = new Flight("WJ 001", simpleDateFormat.parse("2017, 11, 11, 22, 30"),simpleDateFormat.parse("2017, 11, 12, 22, 30"), westJet, winnipeg,
                     vancouver, 200.00, 200, 0, Flight.FlightClass.ECONOMY);
             flights.add(ywgToYvr);
-            yvrToYwg = new Flight("WJ 001", simpleDateFormat.parse("2017, 12, 12"), westJet, vancouver,
+            yvrToYwg = new Flight("WJ 001", simpleDateFormat.parse("2017, 10, 10, 22, 30"),simpleDateFormat.parse("2017, 10, 12, 22, 30"), westJet, vancouver,
                     winnipeg, 350.00, 200, 0, Flight.FlightClass.ECONOMY);
             flights.add(yvrToYwg);
-            ywgToYyc = new Flight("AC 001", simpleDateFormat.parse("2017, 9, 11"), airCanada, winnipeg,
+            ywgToYyc = new Flight("AC 001", simpleDateFormat.parse("2017, 9, 11, 22, 30"),simpleDateFormat.parse("2017, 9, 12, 22, 30"), airCanada, winnipeg,
                     calgary, 400.00, 150, 0, Flight.FlightClass.BUSINESS);
             flights.add(ywgToYyc);
-            waYwgToYvr = new Flight("WA 001", simpleDateFormat.parse("2017, 10, 11"), winnipegAir, winnipeg,
+            waYwgToYvr = new Flight("WA 001", simpleDateFormat.parse("2017, 10, 11, 12, 30"),simpleDateFormat.parse("2017, 10, 11, 22, 30"), winnipegAir, winnipeg,
                     vancouver, 500.00, 250, 0, Flight.FlightClass.ECONOMY);
             flights.add(waYwgToYvr);
 
@@ -242,14 +242,24 @@ public class DataAccessStub implements DataAccess {
         return flights.add(flight);
     }
 
-    public boolean updateFlight(Flight flight) {
-        //// TODO: 2017-05-25
+
+    public boolean updateFlight(Flight flight, String flightID, Date departDate,Date arriveDate, Airline airline, Airport origin,
+                                Airport dest, double price, int capacity, int seatsTaken, Flight.FlightClass flightClass) {
         int index;
 
         index = flights.indexOf(flight);
-        if(index >= 0)
-        {
-            flights.set(index, flight);
+        if (index >= 0) {
+            Flight f = flights.get(index);
+            f.setFlightID(flightID);
+            f.setDepartTime(departDate);
+            f.setArriveTime(arriveDate);
+            f.setAirline(airline);
+            f.setOrigin(origin);
+            f.setDestination(dest);
+            f.setPrice(price);
+            f.setCapacity(capacity);
+            f.setSeatsTaken(seatsTaken);
+            f.setFlightClass(flightClass);
             return true;
         }
         return false;
