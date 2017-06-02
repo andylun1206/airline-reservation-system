@@ -11,12 +11,16 @@
     <string name="title_activity_search">Search for Flights</string>
     <string name="title_activity_checkin">Check in</string>
 
-    <!--Common Words-->
+    <!-- Common Words -->
     <string name="common_login">Login</string>
     <string name="common_signup">Sign Up</string>
 
-    <!--Toast Messages-->
+    <!-- Toast Messages -->
     <string name="toast_coming_soon">%1$s feature coming soon!</string>
+
+    <!-- Home Activity -->
+    <string name="home_greeting">Welcome %1$s!</string>
+    <string name="home_signin">Click here to login/sign up</string>
 
     <!-- Search Activity -->
     <string-array name="trip_type">
