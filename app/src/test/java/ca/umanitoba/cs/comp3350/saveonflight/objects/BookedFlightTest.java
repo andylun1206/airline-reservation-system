@@ -6,10 +6,13 @@ import org.junit.Test;
 
 import java.util.Date;
 
-import static junit.framework.Assert.*;
+import ca.umanitoba.cs.comp3350.saveonflight.R;
+
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 public class BookedFlightTest {
-    private final Traveller JULIA= new Traveller(1,"Julia Stoyko");
+    private final Traveller JULIA = new Traveller(1, "Julia Stoyko");
     private final Traveller JENNIE = new Traveller(2, "Jennie Seo");
     private Flight flight1;
     private Flight flight2;
@@ -18,9 +21,9 @@ public class BookedFlightTest {
 
     @Before
     public void setUp() {
-        flight1 = new Flight("AC01", new Date(),new Airline("Air Canada"),
+        flight1 = new Flight("AC01", new Date(), new Date(), new Airline("Air Canada", R.mipmap.ic_aircanada),
                 new Airport("WPG"), new Airport("YVR"), 599.99, 200, 2, FlightClassEnum.FIRST_CLASS);
-        flight2 = new Flight("WJ01", new Date(), new Airline("WestJet"),
+        flight2 = new Flight("WJ01", new Date(), new Date(), new Airline("WestJet", R.mipmap.ic_westjet),
                 new Airport("TRT"), new Airport("WPG"), 300.00, 150, 0, FlightClassEnum.BUSINESS);
         booked1 = new BookedFlight(JULIA, flight1);
         booked2 = new BookedFlight(JENNIE, flight2);
@@ -35,7 +38,7 @@ public class BookedFlightTest {
     }
 
     @Test
-    public void testEqualsMethod(){
+    public void testEqualsMethod() {
         assertFalse(booked1.equals(booked2));
         booked2.setTraveller(JULIA);
         assertFalse(booked1.equals(booked2));

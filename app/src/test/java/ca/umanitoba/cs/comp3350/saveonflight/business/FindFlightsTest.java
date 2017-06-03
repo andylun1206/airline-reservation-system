@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
@@ -43,8 +44,8 @@ public class FindFlightsTest {
             e.printStackTrace();
         }
 
-        airline = new Airline("WestJet");
-        otherAirline = new Airline("Air Canada");
+        airline = new Airline("WestJet", R.mipmap.ic_westjet);
+        otherAirline = new Airline("Air Canada", R.mipmap.ic_aircanada);
         origin = new Airport("YWG");
         destination = new Airport("YVR");
     }
@@ -58,7 +59,7 @@ public class FindFlightsTest {
 
     @Test
     public void testGetAllFlights() {
-        final Flight f = new Flight("WJ 101", otherDate, airline, origin, destination, 200.00, 50);
+        final Flight f = new Flight("WJ 101", date, otherDate, airline, origin, destination, 200.00, 50);
         AccessFlights accessFlights = new AccessFlights();
         accessFlights.insertFlight(f);
 
@@ -68,26 +69,6 @@ public class FindFlightsTest {
         assertTrue(flights.size() > 0);
 
         accessFlights.deleteFlight(f);
-    }
-
-    @Test
-    public void testSearch() {
-        List<Flight> searchResults = findFlights.search(airline, date, origin, destination);
-
-        assertNotNull(searchResults);
-        for (Flight f : searchResults) {
-            assertTrue(f.getAirline().equals(airline));
-            assertFalse(f.getAirline().equals(otherAirline));
-
-            assertTrue(f.getDate().equals(date));
-            assertFalse(f.getDate().equals(otherDate));
-
-            assertTrue(f.getOrigin().equals(origin));
-            assertFalse(f.getOrigin().equals(destination));
-
-            assertTrue(f.getDestination().equals(destination));
-            assertFalse(f.getDestination().equals(origin));
-        }
     }
 
 }

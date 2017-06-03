@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import ca.umanitoba.cs.comp3350.saveonflight.business.FindFlightsTest;
+import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlightsTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.AirlineTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.AirportTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlightTest;
@@ -19,7 +20,8 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.TravellerTest;
         FlightTest.class,
         //SearchCriteriaTest,
         TravellerTest.class,
-        FindFlightsTest.class
+        FindFlightsTest.class,
+        SortFlightsTest.class
 })
 
 public class AllTests {

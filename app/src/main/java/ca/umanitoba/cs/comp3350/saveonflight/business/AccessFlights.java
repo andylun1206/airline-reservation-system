@@ -55,9 +55,9 @@ public class AccessFlights {
         return dataAccess.insertFlight(flight);
     }
 
-    public boolean updateFlight(Flight flight, String flightID, Date date, Airline airline, Airport origin,
+    public boolean updateFlight(Flight flight, String flightID, Date departureDate, Date arrivalDate, Airline airline, Airport origin,
                                 Airport dest, double price, int capacity, int seatsTaken, FlightClassEnum flightClass) {
-        return dataAccess.updateFlight(flight, flightID, date, airline, origin, dest, price, capacity, seatsTaken, flightClass);
+        return dataAccess.updateFlight(flight, flightID, departureDate, arrivalDate, airline, origin, dest, price, capacity, seatsTaken, flightClass);
 
     }
 

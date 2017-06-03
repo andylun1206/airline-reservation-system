@@ -401,7 +401,7 @@ public class DataAccessStub implements DataAccess {
         return table;
     }
 
-    private ArrayList<Flight> removeByPreferredClass(ArrayList<Flight> table, Flight.FlightClass preferredClass) {
+    private ArrayList<Flight> removeByPreferredClass(ArrayList<Flight> table, FlightClassEnum preferredClass) {
         if (table.isEmpty())
             return null;
         Flight temp;

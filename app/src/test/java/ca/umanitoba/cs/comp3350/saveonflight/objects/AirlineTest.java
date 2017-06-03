@@ -4,17 +4,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ca.umanitoba.cs.comp3350.saveonflight.R;
+
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
 public class AirlineTest {
-    private final Airline AIRLINE  = new Airline("Air Canada");
+    private final Airline AIRLINE  = new Airline("Air Canada", R.mipmap.ic_aircanada);
     private Airline airline2;
     private String wrongObject;
 
     @Before
     public void setUp() {
-        airline2 = new Airline("westjet");
+        airline2 = new Airline("WestJet", R.mipmap.ic_westjet);
         wrongObject = "Air Canada";
     }
 

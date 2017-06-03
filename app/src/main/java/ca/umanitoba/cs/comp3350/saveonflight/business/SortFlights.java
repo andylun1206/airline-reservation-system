@@ -8,18 +8,16 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 
 public class SortFlights {
 
-    public static enum SortParameter {
+    public enum SortParameter {
         DATE, AIRLINE, PRICE, CAPACITY, SEATS_AVAILABLE
     }
 
-    public ArrayList<Flight> sortFlightsBy(ArrayList<Flight> flights, SortParameter sortBy) {
-        ArrayList<Flight> result = new ArrayList<>();
-        result.addAll(flights);
+    public void sortFlightsBy(ArrayList<Flight> flights, SortParameter sortBy) {
         Comparator<Flight> comparator = null;
 
         switch (sortBy) {
             case DATE:
-                comparator = new DateComparator();
+                comparator = new DepartureTimeComparator();
                 break;
             case AIRLINE:
                 comparator = new AirlineComparator();
@@ -34,17 +32,16 @@ public class SortFlights {
                 comparator = new SeatsAvailableComparator();
                 break;
             default:
-                comparator = new DateComparator();
+                comparator = new DepartureTimeComparator();
         }
 
-        Collections.sort(result, comparator);
-        return result;
+        Collections.sort(flights, comparator);
     }
 
-    private class DateComparator implements Comparator<Flight> {
+    private class DepartureTimeComparator implements Comparator<Flight> {
         @Override
         public int compare(Flight f1, Flight f2) {
-            return f1.getDate().compareTo(f2.getDate());
+            return f1.getDepartureTime().compareTo(f2.getDepartureTime());
         }
     }
 
@@ -82,7 +79,8 @@ public class SortFlights {
     private class SeatsAvailableComparator implements Comparator<Flight> {
         @Override
         public int compare(Flight f1, Flight f2) {
-            return f1.getSeatsRemaining() - f2.getSeatsRemaining();
+            // Note: We want descending order here
+            return f2.getSeatsRemaining() - f1.getSeatsRemaining();
         }
     }
 }

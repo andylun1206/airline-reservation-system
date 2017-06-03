@@ -85,7 +85,7 @@ public class Airline implements Parcelable, Comparable {
 
         if (o instanceof Airline) {
             Airline a = (Airline) o;
-            result = name.compareTo(((Airline) o).getName());
+            result = name.compareTo(a.getName());
         }
 
         return result;

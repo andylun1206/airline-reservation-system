@@ -6,11 +6,13 @@ import org.junit.Test;
 
 import java.util.Date;
 
+import ca.umanitoba.cs.comp3350.saveonflight.R;
+
 import static junit.framework.Assert.*;
 
 public class FlightTest {
     private Flight flight;
-    private final Airline AIRLINE = new Airline("WestJet");
+    private final Airline AIRLINE = new Airline("WestJet", R.mipmap.ic_westjet);
     private final Airport ORIGIN = new Airport("YWG");
     private final Airport DEST = new Airport("YVR");
     private final double  PRICE = 300.00;
@@ -19,7 +21,7 @@ public class FlightTest {
 
     @Before
     public void setUp() {
-        flight = new Flight("WJ 101", new Date(), AIRLINE, ORIGIN, DEST, PRICE, CAP, 0, FLIGHT_CLASS);
+        flight = new Flight("WJ 101", new Date(), new Date(), AIRLINE, ORIGIN, DEST, PRICE, CAP, 0, FLIGHT_CLASS);
     }
 
     @After

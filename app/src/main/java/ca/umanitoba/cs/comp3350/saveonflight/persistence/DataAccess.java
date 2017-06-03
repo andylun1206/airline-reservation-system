@@ -51,7 +51,7 @@ interface DataAccess {
   
     public boolean insertFlight(Flight flight);
 
-    public boolean updateFlight(Flight flight, String flightID, Date date, Airline airline, Airport origin,
+    public boolean updateFlight(Flight flight, String flightID, Date departDate, Date arriveDate, Airline airline, Airport origin,
                                 Airport dest, double price, int capacity, int seatsTaken, FlightClassEnum flightClass);
 
     public boolean deleteFlight(Flight flight);
