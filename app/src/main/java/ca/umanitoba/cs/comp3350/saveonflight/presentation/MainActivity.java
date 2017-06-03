@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.SearchFragment.ViewFlightsListener;
 
@@ -33,7 +34,9 @@ public class MainActivity extends AppCompatActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+        Main.startUp();
+
+        setContentView(R.layout.activity_main);
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 		
@@ -70,6 +73,12 @@ public class MainActivity extends AppCompatActivity
 		
 		displaySelectedScreen(R.id.nav_home);
 	}
+
+	@Override
+    public void onDestroy() {
+        super.onDestroy();
+        Main.shutDown();
+    }
 	
 	@Override
 	public void onBackPressed() {
@@ -111,7 +120,7 @@ public class MainActivity extends AppCompatActivity
 		displaySelectedScreen(item.getItemId());
 		return true;
 	}
-	
+
 	@Override
 	public void viewFlights(ArrayList<Flight> flights) {
 		Fragment viewFragment = new ViewFlightsFragment();

@@ -2,7 +2,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
 /**
  * Flight.java
- *
+ * <p>
  * Object mapped to the flights table DB
  *
  * @author Andy Lun
@@ -11,37 +11,42 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class Flight implements Parcelable {
+    public static SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy, MM, dd, HH, mm", Locale.CANADA);
     private String flightID;
     private Airline airline;
-    private Date departTime;
-    private Date arriveTime;
+    private Date departureTime;
+    private Date arrivalTime;
     private Airport origin;
     private Airport destination;
     private double price;
     private int capacity;
     private int seatsTaken;
-    private FlightClass flightClass;
+    private FlightClassEnum flightClass;
 
-    public enum FlightClass {
-        ECONOMY, BUSINESS, FIRST_CLASS;
-    }
-
-
-    public Flight(String flightID, Date departTime,Date arriveTime, Airline airline, Airport origin, Airport destination,
+    public Flight(String flightID, Date departureTime, Date arrivalTime,
+                  Airline airline, Airport origin, Airport destination,
                   double price, int capacity) {
-        this(flightID, departTime,arriveTime, airline, origin, destination, price, capacity, 0, FlightClass.ECONOMY);
+        this(flightID, departureTime, arrivalTime, airline, origin, destination, price, capacity, 0, FlightClassEnum.ECONOMY);
     }
 
-    public Flight(String flightID, Date departTime,Date arriveTime, Airline airline, Airport origin, Airport destination,
+    public Flight(String flightID, Date departureTime, Date arrivalTime,
+                  Airline airline, Airport origin, Airport destination,
+                  double price, int capacity, int seatsTaken) {
+        this(flightID, departureTime, arrivalTime, airline, origin, destination, price, capacity, seatsTaken, FlightClassEnum.ECONOMY);
+    }
 
-                  double price, int capacity, int seatsTaken, FlightClass flightClass) {
+    public Flight(String flightID, Date departureTime, Date  arrivalTime,
+                  Airline airline, Airport origin, Airport destination,
+                  double price, int capacity, int seatsTaken, FlightClassEnum flightClass) {
         this.flightID = flightID;
-        this.departTime = departTime;
-        this.arriveTime = arriveTime;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
         this.airline = airline;
         this.origin = origin;
         this.destination = destination;
@@ -49,6 +54,27 @@ public class Flight implements Parcelable {
         this.capacity = capacity;
         this.seatsTaken = seatsTaken;
         this.flightClass = flightClass;
+    }
+
+    public boolean isFull() {
+        return getSeatsRemaining() <= 0;
+    }
+
+    public int getSeatsRemaining() {
+        return capacity - seatsTaken;
+    }
+
+    public boolean sellSeats(int numSold) {
+        boolean result = false;
+
+        if (getSeatsRemaining() >= numSold) {
+            seatsTaken += numSold;
+            result = true;
+        } else {
+            System.out.println("Trying to sell more seats than are available");
+        }
+
+        return result;
     }
 
     public void setFlightID(String flightID) {
@@ -61,13 +87,6 @@ public class Flight implements Parcelable {
 
     public void setAirline(String airline) {
         this.airline.setName(airline);
-    }
-
-    public Date getDepartTime() {
-        return departTime;
-    }
-    public Date getArriveTime() {
-        return arriveTime;
     }
 
     public void setAirline(Airline airline) {
@@ -114,26 +133,36 @@ public class Flight implements Parcelable {
         this.seatsTaken = seatsTaken;
     }
 
-    public FlightClass getFlightClass() {
+    public FlightClassEnum getFlightClass() {
         return flightClass;
     }
 
-    public void setFlightClass(FlightClass flightClass) {
+    public void setFlightClass(FlightClassEnum flightClass) {
         this.flightClass = flightClass;
     }
-
-    public void setDepartTime(Date date) {
-        this.departTime = date;
-    }
-
-    public void setArriveTime(Date date){this.arriveTime = date; }
 
     public String getFlightID() {
         return flightID;
     }
 
+    public Date getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(Date departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public Date getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(Date arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
     public String toString() {
-        return "Flight: " + flightID + " " + departTime +" "+ arriveTime + " " + airline + " " + "from " + origin + " to " + destination;
+        return "Flight: " + flightID + " " + departureTime + " " + arrivalTime + " " + airline + " " + "from " + origin + " to " + destination;
     }
 
     public boolean equals(Object object) {
@@ -149,38 +178,48 @@ public class Flight implements Parcelable {
         return result;
     }
 
-    //calculate time duration
-    public String getDurationInMinutes(){
-        String result = "";
-        int duration = (int)(getDateDiff(departTime,arriveTime,TimeUnit.MINUTES));
+    // TODO: write tests for these methods
+    public String getFlightDuration() {
+        int duration = (int) getDateDiff(departureTime, arrivalTime, TimeUnit.MINUTES);
+        int hours = duration / 60;
+        int minutes = duration % 60;
 
-        int hours = duration/60;
-        int minutes = duration%60;
-
-        String hrs = Integer.toString(hours);
-        String mins = Integer.toString(minutes);
-
-        result += hrs + "h " + mins + "m";
-
-        return result;
+        return Integer.toString(hours) + "h " + Integer.toString(minutes) + "m";
     }
 
     private long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
-        long diffInMillies = date2.getTime() - date1.getTime();
-        return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
+        long diffInMillis = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInMillis, TimeUnit.MILLISECONDS);
     }
-    //end
-    
+
+    public String getFlightTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.CANADA);
+        return sdf.format(departureTime) + " - " + sdf.format(arrivalTime);
+    }
+
     @Override
     public int describeContents() {
         return 0;
     }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        @Override
+        public Flight[] newArray(int size) {
+            return new Flight[size];
+        }
+
+        @Override
+        public Flight createFromParcel(Parcel in) {
+            return new Flight(in);
+        }
+    };
+
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(flightID);
         parcel.writeParcelable(airline, flags);
-        parcel.writeSerializable(departTime);
-        parcel.writeSerializable(arriveTime);
+        parcel.writeSerializable(departureTime);
+        parcel.writeSerializable(arrivalTime);
         parcel.writeParcelable(origin, flags);
         parcel.writeParcelable(destination, flags);
         parcel.writeDouble(price);
@@ -188,29 +227,17 @@ public class Flight implements Parcelable {
         parcel.writeInt(seatsTaken);
         parcel.writeSerializable(flightClass);
     }
-    
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        @Override
-        public Flight[] newArray(int size) {
-            return new Flight[size];
-        }
-        
-        @Override
-        public Flight createFromParcel(Parcel in) {
-            return new Flight(in);
-        }
-    };
-    
+
     public Flight(Parcel in) {
         flightID = in.readString();
         airline = in.readParcelable(Airline.class.getClassLoader());
-        departTime = (Date) in.readSerializable();
-        arriveTime = (Date) in.readSerializable();
+        departureTime = (Date) in.readSerializable();
+        arrivalTime = (Date) in.readSerializable();
         origin = in.readParcelable(Airport.class.getClassLoader());
         destination = in.readParcelable(Airport.class.getClassLoader());
         price = in.readDouble();
         capacity = in.readInt();
         seatsTaken = in.readInt();
-        flightClass = (FlightClass) in.readSerializable();
+        flightClass = (FlightClassEnum) in.readSerializable();
     }
 }

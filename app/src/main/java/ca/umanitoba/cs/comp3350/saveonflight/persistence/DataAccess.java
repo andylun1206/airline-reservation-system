@@ -7,6 +7,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
 interface DataAccess {
@@ -19,7 +20,7 @@ interface DataAccess {
 
     public boolean insertAirline(Airline airline);
 
-    public boolean updateAirline(Airline airline);
+    public boolean updateAirline(Airline airline, String name);
 
     public boolean deleteAirline(Airline airline);
 
@@ -28,7 +29,7 @@ interface DataAccess {
   
     public boolean insertAirport(Airport airport);
 
-    public boolean updateAirport(Airport airport);
+    public boolean updateAirport(Airport airport, String airportCode);
 
     public boolean deleteAirport(Airport airport);
 
@@ -37,7 +38,7 @@ interface DataAccess {
   
     public boolean insertBookedFlight(BookedFlight bookedFlight);
 
-    public boolean updateBookedFlight(BookedFlight bookedFlight);
+    public boolean updateBookedFlight(BookedFlight bookedFlight, Traveller t, Flight f);
 
     public boolean deleteBookedFlight(BookedFlight bookedFlight);
   
@@ -50,10 +51,8 @@ interface DataAccess {
   
     public boolean insertFlight(Flight flight);
 
-
-    public boolean updateFlight(Flight flight, String flightID, Date departDate,Date arriveDate, Airline airline, Airport origin,
-                                Airport dest, double price, int capacity, int seatsTaken, Flight.FlightClass flightClass);
-
+    public boolean updateFlight(Flight flight, String flightID, Date departDate, Date arriveDate, Airline airline, Airport origin,
+                                Airport dest, double price, int capacity, int seatsTaken, FlightClassEnum flightClass);
 
     public boolean deleteFlight(Flight flight);
 
