@@ -18,5 +18,13 @@ public class ToastActivity {
 				Toast.LENGTH_SHORT).show();
 	}
 	
+	public static void toastMandatoryField(Activity activity, String field) {
+		Toast.makeText(activity, activity.getString(R.string.toast_mandatory_field, field),
+				Toast.LENGTH_SHORT).show();
+	}
+	
+	public static void toastNoResults(Activity activity) {
+		Toast.makeText(activity, activity.getString(R.string.toast_no_result), Toast.LENGTH_SHORT).show();
+	}
 	
 }
