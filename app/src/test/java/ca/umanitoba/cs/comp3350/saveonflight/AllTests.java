@@ -1,34 +1,29 @@
 package ca.umanitoba.cs.comp3350.saveonflight;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 import ca.umanitoba.cs.comp3350.saveonflight.business.FindFlightsTest;
+import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlightsTest;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.AirlineTest;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.AirportTest;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlightTest;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.TravellerTest;
 
+
+@RunWith(Suite.class)
+@Suite.SuiteClasses({
+        AirlineTest.class,
+        AirportTest.class,
+        BookedFlightTest.class,
+        FlightTest.class,
+        //SearchCriteriaTest,
+        TravellerTest.class,
+        FindFlightsTest.class,
+        SortFlightsTest.class
+})
+
 public class AllTests {
-
-    public static TestSuite suite;
-
-    public static Test suite() {
-        suite = new TestSuite("All tests");
-        testObjects();
-        testBusiness();
-        return suite;
-    }
-
-    private static void testObjects() {
-        // TODO
-        //suite.addTestSuite(AirlineTest.class);
-        //suite.addTestSuite(AirportTest.class);
-        //suite.addTestSuite(BookedFlightTest.class);
-        //suite.addTestSuite(FlightTest.class);
-        suite.addTestSuite(TravellerTest.class);
-    }
-
-    private static void testBusiness() {
-        suite.addTestSuite(FindFlightsTest.class);
-    }
-
 }
 

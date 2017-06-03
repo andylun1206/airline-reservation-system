@@ -9,14 +9,20 @@ import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 
 public class FindFlightsImpl implements FindFlights {
-    
-    public List<Flight> getAllFlights() {
+    private AccessFlights accessFlights;
+
+    public FindFlightsImpl() {
+        accessFlights = new AccessFlights();
+    }
+
+    public ArrayList<Flight> getAllFlights() {
         // If no parameters, just return all the Flights in the DB
-        AccessFlights accessFlights = new AccessFlights();
-        List<Flight> flights = accessFlights.getFlights();
+        accessFlights = new AccessFlights();
+        ArrayList<Flight> flights = accessFlights.getFlights();
         return flights;
     }
     
@@ -44,7 +50,7 @@ public class FindFlightsImpl implements FindFlights {
     
     public ArrayList<Flight> search(SearchCriteria criteria) {
         ArrayList<Flight> flights = null;
-        
+
         if (criteria != null && criteria.getOrigin().toString().equalsIgnoreCase("Winnipeg")
                 && criteria.getDestination().toString().equalsIgnoreCase("Toronto")) {
             flights = new ArrayList<>();
@@ -55,7 +61,7 @@ public class FindFlightsImpl implements FindFlights {
                     new Date(), new Airline("West Jet", R.mipmap.ic_westjet),
                     new Airport("Winnipeg YWG"), new Airport("Toronto YYZ"), 190, 200));
         }
-        
+
         return flights;
     }
 }

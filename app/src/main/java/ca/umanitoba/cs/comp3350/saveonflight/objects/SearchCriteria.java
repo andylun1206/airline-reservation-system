@@ -1,8 +1,8 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
 /**
- * Searchjava
- *
+ * SearchCriteria.java
+ * <p>
  * Object representing a search for flights.
  *
  * @author Andy Lun
@@ -24,7 +24,7 @@ public class SearchCriteria {
 	private int numTravellers;
 	private double maxPrice;
 	private Airline preferredAirlines;
-	private Flight.FlightClass preferredClass;
+	private FlightClassEnum preferredClass;
 	private boolean nonstop;
 	private boolean refundable;
 	
@@ -32,7 +32,7 @@ public class SearchCriteria {
 	
 	public SearchCriteria(Airport origin, Airport destination, Date departureDate, Date returnDate,
 	                      int numTravellers, double maxPrice, Airline preferredAirlines,
-	                      Flight.FlightClass preferredClass, boolean nonstop, boolean refundable) {
+	                      FlightClassEnum preferredClass, boolean nonstop, boolean refundable) {
 		this.origin = origin;
 		this.destination = destination;
 		this.departureDate = departureDate;
@@ -65,8 +65,8 @@ public class SearchCriteria {
 	public Airline getPreferredAirlines() { return preferredAirlines; }
 	public void setPreferredAirlines(Airline preferredAirlines) { this.preferredAirlines = preferredAirlines; }
 	
-	public Flight.FlightClass getPreferredClass() { return preferredClass; }
-	public void setPreferredClass(Flight.FlightClass preferredClass) { this.preferredClass = preferredClass; }
+	public FlightClassEnum getPreferredClass() { return preferredClass; }
+	public void setPreferredClass(FlightClassEnum preferredClass) { this.preferredClass = preferredClass; }
 	
 	public boolean isNonstop() { return nonstop; }
 	public void setNonstop(boolean nonstop) { this.nonstop = nonstop; }
@@ -100,7 +100,7 @@ public class SearchCriteria {
 		} else if (row.getResources().getString(R.string.search_airlines).equals(title)) {
 			setPreferredAirlines(new Airline(inputText, 0));
 		} else if (row.getResources().getString(R.string.search_class).equals(title)) {
-			setPreferredClass(Flight.FlightClass.FIRST_CLASS);
+			setPreferredClass(FlightClassEnum.FIRST_CLASS);
 		}
 	}
 }
