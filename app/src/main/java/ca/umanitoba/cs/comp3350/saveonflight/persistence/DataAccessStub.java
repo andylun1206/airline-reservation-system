@@ -314,11 +314,16 @@ public class DataAccessStub implements DataAccess {
         table = createTableByOriginAndDestination(new ArrayList<Flight>(), criteria.getOrigin(), criteria.getDestination());
         table = removeByDepartureDate(table, criteria.getDepartureDate());
         table = removeByNumTravellers(table, criteria.getNumTravellers());
-        table = removeByMaxPrice(table, criteria.getMaxPrice());
-        table = removeByPreferredAirlines(table, criteria.getPreferredAirlines());
-        table = removeByPreferredClass(table, criteria.getPreferredClass());
-        table = removeByNonstop(table, criteria.isNonstop());
-        table = removeByRefundable(table, criteria.isRefundable());
+        if (!(criteria.getMaxPrice() == 0.0))
+            table = removeByMaxPrice(table, criteria.getMaxPrice());
+        if (!(criteria.getPreferredAirlines() == null))
+            table = removeByPreferredAirlines(table, criteria.getPreferredAirlines());
+        if (!(criteria.getPreferredClass() == null))
+            table = removeByPreferredClass(table, criteria.getPreferredClass());
+        if (criteria.isNonstop())
+            table = removeByNonstop(table);
+        if (criteria.isRefundable())
+            table = removeByRefundable(table);
         if (table == null)
             return null;
         //check if table is null return null to say nothing inside
@@ -396,7 +401,6 @@ public class DataAccessStub implements DataAccess {
 
     private ArrayList<Flight> removeByPreferredClass(ArrayList<Flight> table, Flight.FlightClass preferredClass) {
         if (!table.isEmpty()) {
-
             Flight temp;
             for (int i = 0; i < table.size(); i++) {
                 temp = table.get(i);
@@ -409,7 +413,7 @@ public class DataAccessStub implements DataAccess {
         return table;
     }
 
-    private ArrayList<Flight> removeByNonstop(ArrayList<Flight> table, boolean nonstop) {
+    private ArrayList<Flight> removeByNonstop(ArrayList<Flight> table) {
         /*if (table.isEmpty())
             return null;
          */
@@ -417,7 +421,7 @@ public class DataAccessStub implements DataAccess {
         return table;
     }
 
-    private ArrayList<Flight> removeByRefundable(ArrayList<Flight> table, boolean refundable) {
+    private ArrayList<Flight> removeByRefundable(ArrayList<Flight> table) {
         /*if (table.isEmpty())
             return null;
          */
