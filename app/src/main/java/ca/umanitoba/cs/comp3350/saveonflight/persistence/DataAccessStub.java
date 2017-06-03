@@ -7,12 +7,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+
+import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
 public class DataAccessStub implements DataAccess {
@@ -42,19 +45,19 @@ public class DataAccessStub implements DataAccess {
         Flight ywgToYvr, yvrToYwg, ywgToYyc, waYwgToYvr;
 
         airlines = new ArrayList<Airline>();
-        westJet = new Airline("WestJet");
+        westJet = new Airline("WestJet", R.mipmap.ic_westjet);
         airlines.add(westJet);
-        airCanada = new Airline("Air Canada");
+        airCanada = new Airline("Air Canada", R.mipmap.ic_aircanada);
         airlines.add(airCanada);
-        winnipegAir = new Airline("Winnipeg Air");
+        winnipegAir = new Airline("Winnipeg Air", 0);
         airlines.add(winnipegAir);
 
         airports = new ArrayList<Airport>();
-        vancouver = new Airport("YVR");
+        vancouver = new Airport("Vancouver YVR");
         airports.add(vancouver);
-        winnipeg = new Airport("YWG");
+        winnipeg = new Airport("Winnipeg YWG");
         airports.add(winnipeg);
-        calgary = new Airport("YYC");
+        calgary = new Airport("Calgary YYC");
         airports.add(calgary);
 
         travellers = new ArrayList<Traveller>();
@@ -65,20 +68,20 @@ public class DataAccessStub implements DataAccess {
         amir = new Traveller(2, "Amir");
         travellers.add(amir);
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy, MM, dd", Locale.CANADA);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy, MM, dd, HH, mm", Locale.CANADA);
 
         flights = new ArrayList<Flight>();
         try {
-            ywgToYvr = new Flight("WJ 001", simpleDateFormat.parse("2017, 11, 11"), westJet, winnipeg,
+            ywgToYvr = new Flight("WJ 001", simpleDateFormat.parse("2017, 11, 11, 22, 30"),simpleDateFormat.parse("2017, 11, 12, 22, 30"), westJet, winnipeg,
                     vancouver, 200.00, 200, 0, FlightClassEnum.ECONOMY);
             flights.add(ywgToYvr);
-            yvrToYwg = new Flight("WJ 001", simpleDateFormat.parse("2017, 12, 12"), westJet, vancouver,
+            yvrToYwg = new Flight("WJ 001", simpleDateFormat.parse("2017, 10, 10, 22, 30"),simpleDateFormat.parse("2017, 10, 12, 22, 30"), westJet, vancouver,
                     winnipeg, 350.00, 200, 0, FlightClassEnum.ECONOMY);
             flights.add(yvrToYwg);
-            ywgToYyc = new Flight("AC 001", simpleDateFormat.parse("2017, 9, 11"), airCanada, winnipeg,
+            ywgToYyc = new Flight("AC 001", simpleDateFormat.parse("2017, 9, 11, 22, 30"),simpleDateFormat.parse("2017, 9, 12, 22, 30"), airCanada, winnipeg,
                     calgary, 400.00, 150, 0, FlightClassEnum.BUSINESS);
             flights.add(ywgToYyc);
-            waYwgToYvr = new Flight("WA 001", simpleDateFormat.parse("2017, 10, 11"), winnipegAir, winnipeg,
+            waYwgToYvr = new Flight("WA 001", simpleDateFormat.parse("2017, 10, 11, 12, 30"),simpleDateFormat.parse("2017, 10, 11, 22, 30"), winnipegAir, winnipeg,
                     vancouver, 500.00, 250, 0, FlightClassEnum.ECONOMY);
             flights.add(waYwgToYvr);
 
@@ -240,7 +243,7 @@ public class DataAccessStub implements DataAccess {
         return flights.add(flight);
     }
 
-    public boolean updateFlight(Flight flight, String flightID, Date date, Airline airline, Airport origin,
+    public boolean updateFlight(Flight flight, String flightID, Date departDate, Date arriveDate, Airline airline, Airport origin,
                                 Airport dest, double price, int capacity, int seatsTaken, FlightClassEnum flightClass) {
         int index;
 
@@ -248,7 +251,8 @@ public class DataAccessStub implements DataAccess {
         if (index >= 0) {
             Flight f = flights.get(index);
             f.setFlightID(flightID);
-            f.setDate(date);
+            f.setDepartureTime(departDate);
+            f.setArrivalTime(arriveDate);
             f.setAirline(airline);
             f.setOrigin(origin);
             f.setDestination(dest);
@@ -269,6 +273,19 @@ public class DataAccessStub implements DataAccess {
             return true;
         }
         return false;
+    }
+
+    public ArrayList<Flight> searchByCriteria(SearchCriteria criteria) {
+        ArrayList<Flight> table;
+        table = createTableByOriginAndDestination(new ArrayList<Flight>(), criteria.getOrigin(), criteria.getDestination());
+        table = removeByDepartureDate(table, criteria.getDepartureDate());
+        table = removeByNumTravellers(table, criteria.getNumTravellers());
+        table = removeByMaxPrice(table, criteria.getMaxPrice());
+        table = removeByPreferredAirlines(table, criteria.getPreferredAirlines());
+        table = removeByPreferredClass(table, criteria.getPreferredClass());
+        table = removeByNonstop(table, criteria.isNonstop());
+        table = removeByRefundable(table, criteria.isRefundable());
+        return table;
     }
 
 
@@ -307,4 +324,110 @@ public class DataAccessStub implements DataAccess {
         return false;
     }
 
+    private ArrayList<Flight> createTableByOriginAndDestination(ArrayList<Flight> table, Airport origin, Airport destination) {
+        Flight temp;
+        for (int i = 0; i < flights.size(); i++) {
+            temp = flights.get(i);
+            if (temp.getOrigin().equals(origin) && temp.getDestination().equals(destination)) {
+                table.add(temp);
+            }
+        }
+        if (table.isEmpty())
+            return null;
+        return table;
+    }
+
+    private ArrayList<Flight> removeByDepartureDate(ArrayList<Flight> table, Date departureDate) {
+        if (table.isEmpty())
+            return null;
+        Flight temp;
+        for (int i = 0; i < table.size(); i++) {
+            temp = table.get(i);
+            if (!temp.getDepartureTime().equals(departureDate)) {
+                table.remove(temp);
+                i--;
+            }
+        }
+        if (table.isEmpty())
+            return null;
+        return table;
+    }
+
+    private ArrayList<Flight> removeByNumTravellers(ArrayList<Flight> table, int numTravellers) {
+        if (table.isEmpty())
+            return null;
+        Flight temp;
+        for (int i = 0; i < table.size(); i++) {
+            temp = table.get(i);
+            if (temp.getCapacity() < numTravellers) {
+                table.remove(temp);
+                i--;
+            }
+        }
+        if (table.isEmpty())
+            return null;
+        return table;
+    }
+
+    private ArrayList<Flight> removeByMaxPrice(ArrayList<Flight> table, double maxPrice) {
+        if (table.isEmpty())
+            return null;
+        Flight temp;
+        for (int i = 0; i < table.size(); i++) {
+            temp = table.get(i);
+            if (temp.getPrice() > maxPrice) {
+                table.remove(temp);
+                i--;
+            }
+        }
+        if (table.isEmpty())
+            return null;
+        return table;
+    }
+
+    private ArrayList<Flight> removeByPreferredAirlines(ArrayList<Flight> table, Airline preferredAirlines) {
+        if (table.isEmpty())
+            return null;
+        Flight temp;
+        for (int i = 0; i < table.size(); i++) {
+            temp = table.get(i);
+            if (!temp.getAirline().equals(preferredAirlines)) {
+                table.remove(temp);
+                i--;
+            }
+        }
+        if (table.isEmpty())
+            return null;
+        return table;
+    }
+
+    private ArrayList<Flight> removeByPreferredClass(ArrayList<Flight> table, Flight.FlightClass preferredClass) {
+        if (table.isEmpty())
+            return null;
+        Flight temp;
+        for (int i = 0; i < table.size(); i++) {
+            temp = table.get(i);
+            if (!temp.getFlightClass().equals(preferredClass)) {
+                table.remove(temp);
+                i--;
+            }
+        }
+        if (table.isEmpty())
+            return null;
+        return table;
+    }
+
+    private ArrayList<Flight> removeByNonstop(ArrayList<Flight> table, boolean nonstop) {
+        if (table.isEmpty())
+            return null;
+        // Adding more stuff later
+        return table;
+    }
+
+    private ArrayList<Flight> removeByRefundable(ArrayList<Flight> table, boolean refundable) {
+        if (table.isEmpty())
+            return null;
+        // Adding more stuff later
+        return table;
+    }
 }

@@ -18,6 +18,8 @@
 
     <!-- Toast Messages -->
     <string name="toast_coming_soon">%1$s feature coming soon!</string>
+    <string name="toast_mandatory_field">%1$s is required!</string>
+    <string name="toast_no_result">No flights were found with these criterias!</string>
 
     <!-- Home Activity -->
     <string name="home_greeting">Welcome %1$s!</string>
@@ -40,4 +42,12 @@
     <string name="search_refundable">Refundable</string>
     <string name="search_button_advanced">Advanced Options</string>
     <string name="search_button_search">Search</string>
+
+    <!-- View Flights Activity -->
+    <string name="view_flights_const_flight">Flight:</string>
+    <string name="view_flights_flight_path">%1$s - %2$s</string>
+    <string name="view_flight_sort_by">Sort by:</string>
+    <string name="view_flight_sort_price">Price</string>
+    <string name="view_flight_sort_time">Time</string>
+    <string name="view_flight_sort_duration">Duration</string>
 </resources>

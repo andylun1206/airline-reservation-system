@@ -31,7 +31,8 @@ import java.util.List;
 
 public class SearchFragment extends ListFragment {
 	private SearchCriteriaArrayAdapter criteriaAdapter;
-	private ArrayList<SearchCriteriaListView> criteriaLists;
+	private ArrayList<SearchCriteriaListView> mandatoryCriteriaList;
+	private ArrayList<SearchCriteriaListView> optionalCriteriaList;
 	
 	ViewFlightsListener viewFlightsListener;
 	public interface ViewFlightsListener {
@@ -47,8 +48,10 @@ public class SearchFragment extends ListFragment {
 		}
 		
 		View view = inflater.inflate(R.layout.fragment_search, container, false);
-		criteriaLists = new ArrayList<>();
-		criteriaAdapter = new SearchCriteriaArrayAdapter(getActivity(), R.layout.list_item_search_criteria, criteriaLists);
+		mandatoryCriteriaList = new ArrayList<>();
+		optionalCriteriaList = new ArrayList<>();
+		criteriaAdapter = new SearchCriteriaArrayAdapter(getActivity(), R.layout.list_item_search_criteria,
+				mandatoryCriteriaList, optionalCriteriaList);
 		setListAdapter(criteriaAdapter);
 		
 		viewFlightsListener = (ViewFlightsListener) getActivity();
@@ -72,9 +75,9 @@ public class SearchFragment extends ListFragment {
 						setOneWayCriterias();
 						break;
 				}
-				criteriaAdapter.notifyDataSetChanged();
+				criteriaAdapter.notifyDataSetChanged(false);
 				getView().findViewById(R.id.search_advanced_settings_checkboxes).setVisibility(View.GONE);
-				SearchCriteriaArrayAdapter.resetCriteria();
+				SearchCriteriaArrayAdapter.setCriteria(new SearchCriteria());
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> adapterView) { }
@@ -102,50 +105,57 @@ public class SearchFragment extends ListFragment {
 			@Override
 			public void onClick(View view) {
 				setAdvancedCriterias();
-				criteriaAdapter.notifyDataSetChanged();
 			}
 		});
 		
 		view.findViewById(R.id.button_search_search).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				viewFlightsListener.viewFlights(new FindFlightsImpl().search(SearchCriteriaArrayAdapter.getCriteria()));
+				if (criteriaAdapter.verifyCriteria(getActivity())) {
+					ArrayList<Flight> flightList = new FindFlightsImpl().search(SearchCriteriaArrayAdapter.getCriteria());
+					if (flightList != null) {
+						viewFlightsListener.viewFlights(flightList);
+					} else {
+						ToastActivity.toastNoResults(getActivity());
+					}
+				}
 			}
 		});
 	}
 	
 	private void setReturnCriterias() {
-		criteriaLists.clear();
-		setOneWayCriterias();
-		criteriaLists.add(3, new SearchCriteriaListView(R.drawable.ic_clock, getString(R.string.search_return_date)));
+		if (mandatoryCriteriaList.size() == 0) {
+			setOneWayCriterias();
+		}
+		mandatoryCriteriaList.add(3, new SearchCriteriaListView(R.drawable.ic_clock, getString(R.string.search_return_date)));
 	}
 	
 	private void setOneWayCriterias() {
-		criteriaLists.clear();
-		criteriaLists.add(new SearchCriteriaListView(R.drawable.ic_takeoff, getString(R.string.search_origin)));
-		criteriaLists.add(new SearchCriteriaListView(R.drawable.ic_landing, getString(R.string.search_destination)));
-		criteriaLists.add(new SearchCriteriaListView(R.drawable.ic_clock, getString(R.string.search_departure_date)));
-		criteriaLists.add(new SearchCriteriaListView(R.drawable.ic_person, getString(R.string.search_num_travellers)));
+		if (mandatoryCriteriaList.size() == 0) {
+			mandatoryCriteriaList.add(new SearchCriteriaListView(R.drawable.ic_takeoff, getString(R.string.search_origin)));
+			mandatoryCriteriaList.add(new SearchCriteriaListView(R.drawable.ic_landing, getString(R.string.search_destination)));
+			mandatoryCriteriaList.add(new SearchCriteriaListView(R.drawable.ic_clock, getString(R.string.search_departure_date)));
+			mandatoryCriteriaList.add(new SearchCriteriaListView(R.drawable.ic_person, getString(R.string.search_num_travellers)));
+		} else {
+			mandatoryCriteriaList.remove(3);
+		}
 	}
 	
 	private void setAdvancedCriterias() {
 		View checkboxes = getView().findViewById(R.id.search_advanced_settings_checkboxes);
+		boolean isVisible = (checkboxes.getVisibility() == View.VISIBLE);
 		
-		if (checkboxes.getVisibility() == View.VISIBLE) {
-			switch (((Spinner) getView().findViewById(R.id.spinner_trip_type)).getSelectedItem().toString()) {
-				case "Return":
-					setReturnCriterias();
-					break;
-				case "One Way":
-					setOneWayCriterias();
-					break;
-			}
+		if (isVisible) {
 			checkboxes.setVisibility(View.GONE);
 		} else {
-			criteriaLists.add(new SearchCriteriaListView(R.drawable.ic_dollar_sign, getString(R.string.search_max_price)));
-			criteriaLists.add(new SearchCriteriaListView(R.drawable.ic_plane, getString(R.string.search_airlines)));
-			criteriaLists.add(new SearchCriteriaListView(R.drawable.ic_seat, getString(R.string.search_class)));
+			if (optionalCriteriaList.size() == 0) {
+				optionalCriteriaList.add(new SearchCriteriaListView(R.drawable.ic_dollar_sign, getString(R.string.search_max_price)));
+				optionalCriteriaList.add(new SearchCriteriaListView(R.drawable.ic_plane, getString(R.string.search_airlines)));
+				optionalCriteriaList.add(new SearchCriteriaListView(R.drawable.ic_seat, getString(R.string.search_class)));
+			}
 			checkboxes.setVisibility(View.VISIBLE);
 		}
+		
+		criteriaAdapter.notifyDataSetChanged(!isVisible);
 	}
 }

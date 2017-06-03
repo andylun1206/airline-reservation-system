@@ -6,6 +6,7 @@ import org.junit.Test;
 
 public class SearchCriteriaTest {
     private SearchCriteria searchCriteria;
+   // private final Airport origin = new Airport();
 
     @Before
     public void setUp() {

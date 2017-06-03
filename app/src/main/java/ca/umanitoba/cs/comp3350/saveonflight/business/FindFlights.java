@@ -12,7 +12,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 public interface FindFlights {
     ArrayList<Flight> getAllFlights();
 
-    ArrayList<Flight> search(Airline airline, Date departureDate, Airport departs, Airport arrives);
+//    List<Flight> search(Airline airline, Date departureDate, Airport departs, Airport arrives);
 
     ArrayList<Flight> search(SearchCriteria criteria);
 }
