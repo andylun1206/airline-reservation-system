@@ -4,6 +4,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -72,16 +73,16 @@ public class DataAccessStub implements DataAccess {
 
         flights = new ArrayList<Flight>();
         try {
-            ywgToYvr = new Flight("WJ 001", simpleDateFormat.parse("2017, 11, 11, 22, 30"),simpleDateFormat.parse("2017, 11, 12, 22, 30"), westJet, winnipeg,
+            ywgToYvr = new Flight("WJ 001", simpleDateFormat.parse("2017, 11, 11, 22, 30"), simpleDateFormat.parse("2017, 11, 12, 01, 30"), westJet, winnipeg,
                     vancouver, 200.00, 200, 0, FlightClassEnum.ECONOMY);
             flights.add(ywgToYvr);
-            yvrToYwg = new Flight("WJ 001", simpleDateFormat.parse("2017, 10, 10, 22, 30"),simpleDateFormat.parse("2017, 10, 12, 22, 30"), westJet, vancouver,
+            yvrToYwg = new Flight("WJ 001", simpleDateFormat.parse("2017, 10, 10, 22, 30"), simpleDateFormat.parse("2017, 10, 12, 22, 30"), westJet, vancouver,
                     winnipeg, 350.00, 200, 0, FlightClassEnum.ECONOMY);
             flights.add(yvrToYwg);
-            ywgToYyc = new Flight("AC 001", simpleDateFormat.parse("2017, 9, 11, 22, 30"),simpleDateFormat.parse("2017, 9, 12, 22, 30"), airCanada, winnipeg,
+            ywgToYyc = new Flight("AC 001", simpleDateFormat.parse("2017, 9, 11, 22, 30"), simpleDateFormat.parse("2017, 9, 12, 22, 30"), airCanada, winnipeg,
                     calgary, 400.00, 150, 0, FlightClassEnum.BUSINESS);
             flights.add(ywgToYyc);
-            waYwgToYvr = new Flight("WA 001", simpleDateFormat.parse("2017, 10, 11, 12, 30"),simpleDateFormat.parse("2017, 10, 11, 22, 30"), winnipegAir, winnipeg,
+            waYwgToYvr = new Flight("WA 001", simpleDateFormat.parse("2017, 10, 11, 12, 30"), simpleDateFormat.parse("2017, 10, 11, 22, 30"), winnipegAir, winnipeg,
                     vancouver, 500.00, 250, 0, FlightClassEnum.ECONOMY);
             flights.add(waYwgToYvr);
 
@@ -280,14 +281,17 @@ public class DataAccessStub implements DataAccess {
         table = createTableByOriginAndDestination(new ArrayList<Flight>(), criteria.getOrigin(), criteria.getDestination());
         table = removeByDepartureDate(table, criteria.getDepartureDate());
         table = removeByNumTravellers(table, criteria.getNumTravellers());
-        table = removeByMaxPrice(table, criteria.getMaxPrice());
-        table = removeByPreferredAirlines(table, criteria.getPreferredAirlines());
-        table = removeByPreferredClass(table, criteria.getPreferredClass());
-        table = removeByNonstop(table, criteria.isNonstop());
-        table = removeByRefundable(table, criteria.isRefundable());
+        if (!(criteria.getMaxPrice() == 0.0))
+            table = removeByMaxPrice(table, criteria.getMaxPrice());
+        if (!(criteria.getPreferredAirlines() == null))
+            table = removeByPreferredAirlines(table, criteria.getPreferredAirlines());
+        if (!(criteria.getPreferredClass() == null))
+            table = removeByPreferredClass(table, criteria.getPreferredClass());
+        table = removeByNonstop(table);
+        table = removeByRefundable(table);
+
         return table;
     }
-
 
     // TRAVELLERS TABLE METHODS
     public ArrayList<Traveller> getTravellers() {
@@ -333,100 +337,99 @@ public class DataAccessStub implements DataAccess {
             }
         }
         if (table.isEmpty())
-            return null;
+            return new ArrayList<Flight>();
         return table;
     }
 
     private ArrayList<Flight> removeByDepartureDate(ArrayList<Flight> table, Date departureDate) {
-        if (table.isEmpty())
-            return null;
-        Flight temp;
-        for (int i = 0; i < table.size(); i++) {
-            temp = table.get(i);
-            if (!temp.getDepartureTime().equals(departureDate)) {
-                table.remove(temp);
-                i--;
+        Calendar calFilterBy = Calendar.getInstance();
+        calFilterBy.setTime(departureDate);
+
+        if (!table.isEmpty()) {
+            Flight temp;
+            Calendar calTemp = Calendar.getInstance();
+            for (int i = 0; i < table.size(); i++) {
+                temp = table.get(i);
+                calTemp.setTime(temp.getDepartureTime());
+                //if (!temp.getDepartureTime().equals(departureDate)) {
+                if (calTemp.get(Calendar.YEAR) != calFilterBy.get(Calendar.YEAR) ||
+                        calTemp.get(Calendar.DAY_OF_YEAR) != calFilterBy.get(Calendar.DAY_OF_YEAR)) {
+                    table.remove(temp);
+                    i--;
+                }
             }
         }
-        if (table.isEmpty())
-            return null;
         return table;
     }
 
     private ArrayList<Flight> removeByNumTravellers(ArrayList<Flight> table, int numTravellers) {
-        if (table.isEmpty())
-            return null;
-        Flight temp;
-        for (int i = 0; i < table.size(); i++) {
-            temp = table.get(i);
-            if (temp.getCapacity() < numTravellers) {
-                table.remove(temp);
-                i--;
+        if (!table.isEmpty()) {
+            Flight temp;
+            for (int i = 0; i < table.size(); i++) {
+                temp = table.get(i);
+                if (temp.getCapacity() < numTravellers) {
+                    table.remove(temp);
+                    i--;
+                }
             }
         }
-        if (table.isEmpty())
-            return null;
         return table;
     }
 
     private ArrayList<Flight> removeByMaxPrice(ArrayList<Flight> table, double maxPrice) {
-        if (table.isEmpty())
-            return null;
-        Flight temp;
-        for (int i = 0; i < table.size(); i++) {
-            temp = table.get(i);
-            if (temp.getPrice() > maxPrice) {
-                table.remove(temp);
-                i--;
+        if (!table.isEmpty()) {
+            Flight temp;
+            for (int i = 0; i < table.size(); i++) {
+                temp = table.get(i);
+                if (temp.getPrice() > maxPrice) {
+                    table.remove(temp);
+                    i--;
+                }
             }
         }
-        if (table.isEmpty())
-            return null;
         return table;
     }
 
     private ArrayList<Flight> removeByPreferredAirlines(ArrayList<Flight> table, Airline preferredAirlines) {
-        if (table.isEmpty())
-            return null;
-        Flight temp;
-        for (int i = 0; i < table.size(); i++) {
-            temp = table.get(i);
-            if (!temp.getAirline().equals(preferredAirlines)) {
-                table.remove(temp);
-                i--;
+        if (!table.isEmpty()) {
+            Flight temp;
+            for (int i = 0; i < table.size(); i++) {
+                temp = table.get(i);
+                if (!temp.getAirline().equals(preferredAirlines)) {
+                    table.remove(temp);
+                    i--;
+                }
             }
         }
-        if (table.isEmpty())
-            return null;
         return table;
     }
 
     private ArrayList<Flight> removeByPreferredClass(ArrayList<Flight> table, FlightClassEnum preferredClass) {
-        if (table.isEmpty())
-            return null;
-        Flight temp;
-        for (int i = 0; i < table.size(); i++) {
-            temp = table.get(i);
-            if (!temp.getFlightClass().equals(preferredClass)) {
-                table.remove(temp);
-                i--;
+        if (!table.isEmpty()) {
+            Flight temp;
+            for (int i = 0; i < table.size(); i++) {
+                temp = table.get(i);
+                if (!temp.getFlightClass().equals(preferredClass)) {
+                    table.remove(temp);
+                    i--;
+                }
             }
         }
-        if (table.isEmpty())
-            return null;
         return table;
     }
 
-    private ArrayList<Flight> removeByNonstop(ArrayList<Flight> table, boolean nonstop) {
-        if (table.isEmpty())
+    private ArrayList<Flight> removeByNonstop(ArrayList<Flight> table) {
+        /*if (table.isEmpty())
             return null;
+         */
         // Adding more stuff later
         return table;
     }
 
-    private ArrayList<Flight> removeByRefundable(ArrayList<Flight> table, boolean refundable) {
-        if (table.isEmpty())
+    private ArrayList<Flight> removeByRefundable(ArrayList<Flight> table) {
+        /*if (table.isEmpty())
             return null;
+         */
         // Adding more stuff later
         return table;
     }

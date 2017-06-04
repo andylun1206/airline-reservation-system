@@ -155,9 +155,9 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 			isValid = missingRequiredField(activity, R.string.search_destination);
 		} else if (criteria.getDepartureDate() == null || criteria.getDepartureDate().toString().trim().isEmpty()) {
 			isValid = missingRequiredField(activity, R.string.search_departure_date);
-		} else if ((mandatoryCriteriaList == null || mandatoryCriteriaList.size() == 5) &&
+		/*} else if ((mandatoryCriteriaList == null || mandatoryCriteriaList.size() == 5) &&
 				(criteria.getReturnDate() == null || criteria.getReturnDate().toString().trim().isEmpty())) {
-			isValid = missingRequiredField(activity, R.string.search_return_date);
+			isValid = missingRequiredField(activity, R.string.search_return_date);*/
 		} else if (criteria.getNumTravellers() == 0) {
 			isValid = missingRequiredField(activity, R.string.search_num_travellers);
 		}
