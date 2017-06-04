@@ -16,7 +16,6 @@ public class SearchCriteriaTest {
     private final Airport ORIGIN = new Airport("YWG");
     private final Airport DEST = new Airport("YVR");
     private final Date DEPARTURE_DATE = new Date(117,5,6,14,40);
-    private final Date RETURN_DATE = new Date(117,5,16,14,40);
     private final int NUM_TRAVELLERS = 3;
     private final double  MAX = 1000.00;
     private final Airline AIRLINE = new Airline("WestJet", R.mipmap.ic_westjet);
@@ -26,7 +25,7 @@ public class SearchCriteriaTest {
 
     @Before
     public void setUp() {
-        searchCriteria = new SearchCriteria(ORIGIN,DEST,DEPARTURE_DATE,RETURN_DATE,NUM_TRAVELLERS,MAX,AIRLINE,PREFERRED_CLASS,NONSTOP,REFUNDABLE);
+        searchCriteria = new SearchCriteria(ORIGIN,DEST,DEPARTURE_DATE,NUM_TRAVELLERS,MAX,AIRLINE,PREFERRED_CLASS,NONSTOP,REFUNDABLE);
     }
 
     @After
@@ -42,7 +41,6 @@ public class SearchCriteriaTest {
         assertTrue(ORIGIN.equals(searchCriteria.getOrigin()));
         assertTrue(DEST.equals(searchCriteria.getDestination()));
         assertTrue(DEPARTURE_DATE.equals(searchCriteria.getDepartureDate()));
-        assertTrue(RETURN_DATE.equals(searchCriteria.getReturnDate()));
         assertTrue(NUM_TRAVELLERS == searchCriteria.getNumTravellers());
         assertTrue(MAX == searchCriteria.getMaxPrice());
         assertTrue(AIRLINE.equals(searchCriteria.getPreferredAirlines()));
