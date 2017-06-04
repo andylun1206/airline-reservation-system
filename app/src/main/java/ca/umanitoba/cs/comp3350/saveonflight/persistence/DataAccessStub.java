@@ -73,7 +73,7 @@ public class DataAccessStub implements DataAccess {
 
         flights = new ArrayList<Flight>();
         try {
-            ywgToYvr = new Flight("WJ 001", simpleDateFormat.parse("2017, 11, 11, 22, 30"), simpleDateFormat.parse("2017, 11, 12, 22, 30"), westJet, winnipeg,
+            ywgToYvr = new Flight("WJ 001", simpleDateFormat.parse("2017, 11, 11, 22, 30"), simpleDateFormat.parse("2017, 11, 12, 01, 30"), westJet, winnipeg,
                     vancouver, 200.00, 200, 0, FlightClassEnum.ECONOMY);
             flights.add(ywgToYvr);
             yvrToYwg = new Flight("WJ 001", simpleDateFormat.parse("2017, 10, 10, 22, 30"), simpleDateFormat.parse("2017, 10, 12, 22, 30"), westJet, vancouver,
@@ -292,6 +292,7 @@ public class DataAccessStub implements DataAccess {
 
         return table;
     }
+
 
     // TRAVELLERS TABLE METHODS
     public ArrayList<Traveller> getTravellers() {

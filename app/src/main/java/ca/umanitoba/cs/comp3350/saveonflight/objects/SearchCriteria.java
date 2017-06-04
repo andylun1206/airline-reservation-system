@@ -20,7 +20,6 @@ public class SearchCriteria {
 	private Airport origin;
 	private Airport destination;
 	private Date departureDate;
-	private Date returnDate;
 	private int numTravellers;
 	private double maxPrice;
 	private Airline preferredAirlines;
@@ -30,13 +29,12 @@ public class SearchCriteria {
 	
 	public SearchCriteria() { }
 	
-	public SearchCriteria(Airport origin, Airport destination, Date departureDate, Date returnDate,
+	public SearchCriteria(Airport origin, Airport destination, Date departureDate,
 	                      int numTravellers, double maxPrice, Airline preferredAirlines,
 	                      FlightClassEnum preferredClass, boolean nonstop, boolean refundable) {
 		this.origin = origin;
 		this.destination = destination;
 		this.departureDate = departureDate;
-		this.returnDate = returnDate;
 		this.numTravellers = numTravellers;
 		this.maxPrice = maxPrice;
 		this.preferredAirlines = preferredAirlines;
@@ -52,9 +50,6 @@ public class SearchCriteria {
 	
 	public Date getDepartureDate() { return departureDate; }
 	public void setDepartureDate(Date departureDate) { this.departureDate = departureDate; }
-	
-	public Date getReturnDate() { return returnDate; }
-	public void setReturnDate(Date returnDate) { this.returnDate = returnDate; }
 	
 	public int getNumTravellers() {return numTravellers; }
 	public void setNumTravellers(int numTravellers) { this.numTravellers = numTravellers; }
@@ -86,13 +81,13 @@ public class SearchCriteria {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-		} else if (row.getResources().getString(R.string.search_return_date).equals(title)) {
+		/*}else if (row.getResources().getString(R.string.search_return_date).equals(title)) {
 			try {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
 				setReturnDate(sdf.parse(inputText));
 			} catch (ParseException e) {
 				e.printStackTrace();
-			}
+			}*/
 		} else if (row.getResources().getString(R.string.search_num_travellers).equals(title)) {
 			setNumTravellers(Integer.parseInt(inputText));
 		} else if (row.getResources().getString(R.string.search_max_price).equals(title)) {
