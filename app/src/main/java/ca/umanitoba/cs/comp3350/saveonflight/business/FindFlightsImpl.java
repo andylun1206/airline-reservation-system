@@ -49,6 +49,7 @@ public class FindFlightsImpl implements FindFlights {
 //    }
     
     public ArrayList<Flight> search(SearchCriteria criteria) {
+        /*
         ArrayList<Flight> flights = null;
 
         if (criteria != null && criteria.getOrigin().toString().equalsIgnoreCase("Winnipeg")
@@ -60,8 +61,8 @@ public class FindFlightsImpl implements FindFlights {
             flights.add(new Flight("WJ 258", new Date(),
                     new Date(), new Airline("West Jet", R.mipmap.ic_westjet),
                     new Airport("Winnipeg YWG"), new Airport("Toronto YYZ"), 190, 200));
-        }
+        }*/
 
-        return flights;
+        return accessFlights.search(criteria);
     }
 }

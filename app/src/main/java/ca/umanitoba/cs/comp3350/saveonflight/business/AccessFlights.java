@@ -66,8 +66,7 @@ public class AccessFlights {
     }
 
     public ArrayList<Flight> search(SearchCriteria searchCriteria) {
-        // dataAccess.searchFlights(searchCriteria);
-        return null;
+        return dataAccess.searchByCriteria(searchCriteria);
     }
 
 }
