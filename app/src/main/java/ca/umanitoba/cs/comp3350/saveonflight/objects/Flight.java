@@ -67,7 +67,7 @@ public class Flight implements Parcelable {
     public boolean sellSeats(int numSold) {
         boolean result = false;
 
-        if (getSeatsRemaining() >= numSold) {
+        if (numSold >= 0 && getSeatsRemaining() >= numSold) {
             seatsTaken += numSold;
             result = true;
         } else {

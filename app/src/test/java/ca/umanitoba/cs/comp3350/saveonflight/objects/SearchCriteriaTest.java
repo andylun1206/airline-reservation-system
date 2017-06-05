@@ -16,16 +16,16 @@ public class SearchCriteriaTest {
 
     private final Airport ORIGIN = new Airport("YWG");
     private final Airport DEST = new Airport("YVR");
-    private final Date DEPARTURE_DATE = new Date(117,5,6,14,40);
+    private final Date DEPARTURE_DATE = new Date(117, 5, 6, 14, 40);
     private final int NUM_TRAVELLERS = 3;
-    private final double  MAX = 1000.00;
+    private final double MAX = 1000.00;
     private final Airline AIRLINE = new Airline("WestJet", R.mipmap.ic_westjet);
     private final FlightClassEnum PREFERRED_CLASS = FlightClassEnum.FIRST_CLASS;
 
     @Before
     public void setUp() {
-        searchCriteria1 = new SearchCriteria(new Airport("YWG"),new Airport("YVR"),new Date(117,5,6,14,40),3,1000,new Airline("WestJet", R.mipmap.ic_westjet),FlightClassEnum.FIRST_CLASS,true,true);
-        searchCriteria2 = new SearchCriteria(null,null,null,0,0,null,null,false,false);
+        searchCriteria1 = new SearchCriteria(new Airport("YWG"), new Airport("YVR"), new Date(117, 5, 6, 14, 40), 3, 1000, new Airline("WestJet", R.mipmap.ic_westjet), FlightClassEnum.FIRST_CLASS, true, true);
+        searchCriteria2 = new SearchCriteria(null, null, null, 0, 0, null, null, false, false);
 
     }
 
@@ -51,6 +51,7 @@ public class SearchCriteriaTest {
 
 
     }
+
     @Test
     public void testEmpty() {
         System.out.println("\nStarting test Empty searchCriteria");
