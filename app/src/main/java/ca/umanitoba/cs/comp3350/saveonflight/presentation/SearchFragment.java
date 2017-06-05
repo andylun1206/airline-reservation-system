@@ -113,7 +113,7 @@ public class SearchFragment extends ListFragment {
 			public void onClick(View view) {
 				if (criteriaAdapter.verifyCriteria(getActivity())) {
 					ArrayList<Flight> flightList = new FindFlightsImpl().search(SearchCriteriaArrayAdapter.getCriteria());
-					if (flightList != null) {
+					if (flightList != null && !flightList.isEmpty()) {
 						viewFlightsListener.viewFlights(flightList);
 					} else {
 						ToastActivity.toastNoResults(getActivity());
