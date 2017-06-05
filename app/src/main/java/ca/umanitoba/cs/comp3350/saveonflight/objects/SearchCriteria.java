@@ -27,7 +27,7 @@ public class SearchCriteria {
 	private boolean nonstop;
 	private boolean refundable;
 	
-	public SearchCriteria() { };
+	public SearchCriteria() { }
 	
 	public SearchCriteria(Airport origin, Airport destination, Date departureDate,
 	                      int numTravellers, double maxPrice, Airline preferredAirlines,

@@ -293,6 +293,7 @@ public class DataAccessStub implements DataAccess {
         return table;
     }
 
+
     // TRAVELLERS TABLE METHODS
     public ArrayList<Traveller> getTravellers() {
         ArrayList<Traveller> result = new ArrayList<>();
