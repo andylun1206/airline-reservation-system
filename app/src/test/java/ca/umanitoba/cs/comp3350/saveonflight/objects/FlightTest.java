@@ -55,8 +55,11 @@ public class FlightTest {
     }
 
     @Test
-    public void testSetFlightId() {
-        
+    public void testFlightId() {
+        final String NEW_ID = "ABCDEFG";
+        assertNotSame(NEW_ID, flight.getFlightID());
+        flight.setFlightID(NEW_ID);
+        assertEquals(NEW_ID, flight.getFlightID());
     }
 
 
