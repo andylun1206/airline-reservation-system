@@ -178,7 +178,6 @@ public class Flight implements Parcelable {
         return result;
     }
 
-    // TODO: write tests for these methods
     public String getFlightDuration() {
         int duration = (int) getDateDiff(departureTime, arrivalTime, TimeUnit.MINUTES);
         int hours = duration / 60;
