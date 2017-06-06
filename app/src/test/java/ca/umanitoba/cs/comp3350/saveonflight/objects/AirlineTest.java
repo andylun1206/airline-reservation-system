@@ -41,4 +41,7 @@ public class AirlineTest {
         airline2 = null;
         assertFalse(AIRLINE.equals(airline2)); //air canada != null
     }
+
+
 }
+

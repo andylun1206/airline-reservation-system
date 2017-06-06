@@ -1,4 +1,5 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,11 +58,11 @@ public class AccessBookedFlights {
         return dataAccess.deleteBookedFlight(bf);
     }
 
-    public ArrayList<BookedFlight> getBookedFlightsOf(Traveller t){
+    public ArrayList<BookedFlight> getBookedFlightsOf(Traveller t) {
         return dataAccess.getTravellersBookedFlights(t);
     }
 
-    public ArrayList<BookedFlight> getTravellersOnFlight(Flight f){
+    public ArrayList<BookedFlight> getTravellersOnFlight(Flight f) {
         return dataAccess.getTravellersOnFlight(f);
     }
 

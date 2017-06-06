@@ -18,33 +18,31 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListView;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListViewEntry;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListView> implements OnDateSetListener {
+public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListViewEntry> implements OnDateSetListener {
 	private final Context context;
 	private final int layoutResourceId;
-	private ArrayList<SearchCriteriaListView> mandatoryCriteriaList;
-	private ArrayList<SearchCriteriaListView> optionalCriteriaList;
-	private ArrayList<SearchCriteriaListView> fullCriteriaList;
+	private ArrayList<SearchCriteriaListViewEntry> mandatoryCriteriaList;
+	private ArrayList<SearchCriteriaListViewEntry> optionalCriteriaList;
+	private ArrayList<SearchCriteriaListViewEntry> fullCriteriaList;
 	private static SearchCriteria criteria;
 	
 	private EditText activeDateDisplay;
 	
 	public SearchCriteriaArrayAdapter(Context context, int layoutResourceId,
-	                                  ArrayList<SearchCriteriaListView> mandatoryCriteriaList,
-	                                  ArrayList<SearchCriteriaListView> optionalCriteriaList) {
+	                                  ArrayList<SearchCriteriaListViewEntry> mandatoryCriteriaList,
+	                                  ArrayList<SearchCriteriaListViewEntry> optionalCriteriaList) {
 		super(context, layoutResourceId, mandatoryCriteriaList);
 		this.context = context;
 		this.layoutResourceId = layoutResourceId;
@@ -59,11 +57,13 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 	public View getView(final int position, final View convertView, final ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		final View view = inflater.inflate(layoutResourceId, parent, false);
-		final SearchCriteriaListView row = fullCriteriaList.get(position);
+		final SearchCriteriaListViewEntry row = fullCriteriaList.get(position);
 		
 		((ImageView) view.findViewById(R.id.imageView_search_criteria_icon)).setImageResource(row.getIcon());
 		final EditText input = (EditText) view.findViewById(R.id.editText_search_criteria_input);
 		input.setHint(row.getTitle());
+		setDefaults(input, row.getTitle());
+		
 		input.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) { }
@@ -113,12 +113,12 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 	
 	public void notifyDataSetChanged(boolean setOptional) {
 		fullCriteriaList.clear();
-		for (SearchCriteriaListView row : mandatoryCriteriaList) {
+		for (SearchCriteriaListViewEntry row : mandatoryCriteriaList) {
 			fullCriteriaList.add(row.clone());
 		}
 		
 		if (setOptional) {
-			for (SearchCriteriaListView optionalRow : optionalCriteriaList) {
+			for (SearchCriteriaListViewEntry optionalRow : optionalCriteriaList) {
 				fullCriteriaList.add(optionalRow.clone());
 			}
 		}
@@ -155,9 +155,6 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 			isValid = missingRequiredField(activity, R.string.search_destination);
 		} else if (criteria.getDepartureDate() == null || criteria.getDepartureDate().toString().trim().isEmpty()) {
 			isValid = missingRequiredField(activity, R.string.search_departure_date);
-		/*} else if ((mandatoryCriteriaList == null || mandatoryCriteriaList.size() == 5) &&
-				(criteria.getReturnDate() == null || criteria.getReturnDate().toString().trim().isEmpty())) {
-			isValid = missingRequiredField(activity, R.string.search_return_date);*/
 		} else if (criteria.getNumTravellers() == 0) {
 			isValid = missingRequiredField(activity, R.string.search_num_travellers);
 		}
@@ -166,7 +163,21 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 	}
 	
 	private boolean missingRequiredField(Activity activity, int string) {
-		ToastActivity.toastMandatoryField(activity, activity.getString(string));
+		ToastHandler.toastMandatoryField(activity, activity.getString(string));
 		return false;
+	}
+	
+	private void setDefaults(final EditText input, String title) {
+		if (title.equals("Origin")) {
+			input.setText("Winnipeg");
+		} else if (title.equals("Destination")) {
+			input.setText("Vancouver");
+		} else if (title.equals("Departure Date")) {
+			input.setText("2017-11-11");
+		} else if (title.equals("Return Date")) {
+			input.setText("2017-11-11");
+		} else if (title.equals("Number of Travellers")) {
+			input.setText("1");
+		}
 	}
 }
