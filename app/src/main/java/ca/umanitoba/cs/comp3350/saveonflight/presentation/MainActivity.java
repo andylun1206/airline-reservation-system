@@ -1,9 +1,9 @@
 package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 /**
- * HomeFragment.java
+ * MainActivity.java
  *
- * Fragment for the home page of the application.
+ * Activity to handle all fragments involving a navigation drawer.
  *
  * @author Andy Lun
  */
