@@ -57,8 +57,24 @@ and more time efficient than trying to come up with our own.
     - Created Comparators for each parameter we want to be able to search by and then just use the built in Collections.sort() method
         - Passed in the Comparator that corresponds to what parameter we are sorting by
     - After implementation, extracted an interface (SortFlights) and renamed the implementation to SortFlightsImpl
-#### Database (Zhengyu Gu, Long Yu)
 
+#### Database (Zhengyu Gu, Long Yu)
+-   Problem: Database Stub (GitHub issue #3)
+    - Need a Database to store our Data objects
+    - Implemented DataAccessStub, using ArrayList to store our Data objects(make some tables for Data objects)
+        - give Database Stub Some basic functions(make it can operate each table)
+-   Problem: Data Objects (GitHub issue #4,5,6,7,8)
+    - Implemented Data objects class v1 (User, Flights, Airports, Airlines, BookedFlights)
+    - add functions to Data objects class
+-   Problem: Database Stub interface (GitHub issue #20)
+    - create interface for our Database Stub
+-   Problem: get time Duration from a Fight object
+    - Need to calculating the time Duration between arrival time and departure time
+        - adding a new class member: departure time
+        - Implemented calculating time Duration function that returns a value that accurate into minutes
+-   Problem: Database Stub violate SOLID Principles
+    - should not put all of Database tables into one class
+    - separate them, make specific classes to store each table
 
 #### GUI (Andy Chi Fung Lun)
 - Problem: Home screen/Main Activity
