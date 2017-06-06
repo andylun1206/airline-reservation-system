@@ -64,6 +64,8 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 		((ImageView) view.findViewById(R.id.imageView_search_criteria_icon)).setImageResource(row.getIcon());
 		final EditText input = (EditText) view.findViewById(R.id.editText_search_criteria_input);
 		input.setHint(row.getTitle());
+		setDefaults(input, row.getTitle());
+		
 		input.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) { }
@@ -168,5 +170,19 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 	private boolean missingRequiredField(Activity activity, int string) {
 		ToastActivity.toastMandatoryField(activity, activity.getString(string));
 		return false;
+	}
+	
+	private void setDefaults(final EditText input, String title) {
+		if (title.equals("Origin")) {
+			input.setText("Winnipeg");
+		} else if (title.equals("Destination")) {
+			input.setText("Vancouver");
+		} else if (title.equals("Departure Date")) {
+			input.setText("2017-11-11");
+		} else if (title.equals("Return Date")) {
+			input.setText("2017-11-11");
+		} else if (title.equals("Number of Travellers")) {
+			input.setText("1");
+		}
 	}
 }
