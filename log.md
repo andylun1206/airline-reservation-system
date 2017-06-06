@@ -1,4 +1,5 @@
-***** Meeting: May 18, 2017 *****
+##Meeting:
+###May 18, 2017
 For team coding style, we will use the default coding style 
 specified by the autoformat tool in Android Studio (Ctrl + Alt + L).
 
@@ -17,7 +18,7 @@ tests for that class.
 
 We will use the GitHub flow model.
 
-***** Meeting: May 24, 2017 *****
+###May 24, 2017
 Divided iteration 1 user stories into developer tasks. Created an issue on Github for each
 developer task.
 
@@ -25,4 +26,17 @@ Decided to model design of the system after the sample project provided, since t
 and more time efficient than trying to come up with our own.
 	1 model object for each table in the database.
 	1 database access class for each table in the data base.
+
+
+##Iteration 1:
+###Contributions
+
+
+####Business Logic (Shenyun Wang, YouTian Zhang)
+
+
+####Database (Zhengyu Gu, Long Yu)
+
+
+####GUI (Andy Chi Fung Lun)
 
