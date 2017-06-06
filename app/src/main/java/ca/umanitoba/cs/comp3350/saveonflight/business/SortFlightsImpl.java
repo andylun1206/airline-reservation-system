@@ -18,8 +18,12 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 
 public class SortFlightsImpl implements SortFlights {
 
-    // Sorts the List of Flights passed in based on the specified SortParameter.
-    // If any elements are null, they  are placed at the end of the List.
+    /**
+     * Sorts the list of Flights passed in based on the specified SortParameter. List elements will
+     * invalid fields and null elements are placed at the end of the list.
+     * @param flights List of Flights to sort
+     * @param sortBy Field to sort Flights by
+     */
     @Override
     public void sortFlightsBy(ArrayList<Flight> flights, SortParameter sortBy) {
         if (flights == null) {
@@ -57,6 +61,12 @@ public class SortFlightsImpl implements SortFlights {
     }
 
     // Removes and returns the number of null elements in the List
+
+    /**
+     * Checks each Flight in the list passed in for validity.
+     * @param flights The list of Flights to check
+     * @return The number of null elements in the list
+     */
     private int validateInput(ArrayList<Flight> flights) {
         int count = 0;
 
@@ -73,6 +83,9 @@ public class SortFlightsImpl implements SortFlights {
         return count;
     }
 
+    /**
+     * Comparator for sorting by departure date.
+     */
     private class DepartureTimeComparator implements Comparator<Flight> {
         @Override
         public int compare(@NonNull Flight f1, @NonNull Flight f2) {
@@ -90,6 +103,9 @@ public class SortFlightsImpl implements SortFlights {
         }
     }
 
+    /**
+     * Comparator for sorting by Airline.
+     */
     private class AirlineComparator implements Comparator<Flight> {
         @Override
         public int compare(@NonNull Flight f1, @NonNull Flight f2) {
@@ -107,6 +123,9 @@ public class SortFlightsImpl implements SortFlights {
         }
     }
 
+    /**
+     * Comparator for sorting by price.
+     */
     private class PriceComparator implements Comparator<Flight> {
         @Override
         public int compare(@NonNull Flight f1, @NonNull Flight f2) {
@@ -123,6 +142,9 @@ public class SortFlightsImpl implements SortFlights {
         }
     }
 
+    /**
+     * Comparator for searching by capacity.
+     */
     private class CapacityComparator implements Comparator<Flight> {
         @Override
         public int compare(@NonNull Flight f1, @NonNull Flight f2) {
@@ -130,6 +152,9 @@ public class SortFlightsImpl implements SortFlights {
         }
     }
 
+    /**
+     * Comparator for searching by the number of seats available.
+     */
     private class SeatsAvailableComparator implements Comparator<Flight> {
         @Override
         public int compare(@NonNull Flight f1, @NonNull Flight f2) {
