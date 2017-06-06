@@ -22,7 +22,7 @@ import android.widget.CompoundButton;
 import android.widget.Spinner;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.business.FindFlightsImpl;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListViewEntry;
@@ -115,7 +115,7 @@ public class SearchFragment extends ListFragment {
             @Override
             public void onClick(View view) {
                 if (criteriaAdapter.verifyCriteria(getActivity())) {
-                    ArrayList<Flight> flightList = new FindFlightsImpl().search(SearchCriteriaArrayAdapter.getCriteria());
+                    ArrayList<Flight> flightList = new AccessFlights().search(SearchCriteriaArrayAdapter.getCriteria());
                     if (flightList != null && !flightList.isEmpty()) {
                         viewFlightsListener.viewFlights(flightList);
                     } else {
