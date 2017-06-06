@@ -136,6 +136,11 @@ public class SortFlightsTest {
     }
 
     @Test
+    public void testInvalidField() {
+        
+    }
+
+    @Test
     public void testSortByDate() {
         ArrayList<Flight> flightsByDepartureTime = new ArrayList<>();
         flightsByDepartureTime.add(f1);

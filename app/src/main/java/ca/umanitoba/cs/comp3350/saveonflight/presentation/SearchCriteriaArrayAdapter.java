@@ -164,7 +164,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
     }
 
     private boolean missingRequiredField(Activity activity, int string) {
-        ToastActivity.toastMandatoryField(activity, activity.getString(string));
+        ToastHandler.toastMandatoryField(activity, activity.getString(string));
         return false;
     }
 }

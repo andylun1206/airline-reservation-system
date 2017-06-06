@@ -6,13 +6,13 @@ import android.widget.Toast;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 /**
- * ToastActivity.java
+ * ToastHandler.java
  * <p>
  * Collection of all toast message activity.
  *
  * @author Andy Lun
  */
-public class ToastActivity {
+public class ToastHandler {
 
     public static void toastComingSoon(Activity activity, String feature) {
         Toast.makeText(activity, activity.getString(R.string.toast_coming_soon, feature),

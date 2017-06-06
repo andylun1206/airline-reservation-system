@@ -16,7 +16,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
@@ -43,7 +42,7 @@ public class HomeFragment extends Fragment {
         view.findViewById(R.id.button_home_account_info).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToastActivity.toastComingSoon(getActivity(), "Account");
+                ToastHandler.toastComingSoon(getActivity(), "Account");
             }
         });
 
@@ -61,21 +60,21 @@ public class HomeFragment extends Fragment {
         view.findViewById(R.id.button_home_checkin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToastActivity.toastComingSoon(getActivity(), getString(R.string.title_activity_checkin));
+                ToastHandler.toastComingSoon(getActivity(), getString(R.string.title_activity_checkin));
             }
         });
 
 //		view.findViewById(R.id.button_home_login).setOnClickListener(new View.OnClickListener() {
 //			@Override
 //			public void onClick(View view) {
-//				ToastActivity.toastComingSoon(getActivity(), getString(R.string.common_login));
+//				ToastHandler.toastComingSoon(getActivity(), getString(R.string.common_login));
 //			}
 //		});
 //
 //		view.findViewById(R.id.button_home_signup).setOnClickListener(new View.OnClickListener() {
 //			@Override
 //			public void onClick(View view) {
-//				ToastActivity.toastComingSoon(getActivity(), getString(R.string.common_signup));
+//				ToastHandler.toastComingSoon(getActivity(), getString(R.string.common_signup));
 //			}
 //		});
 //
@@ -93,7 +92,7 @@ public class HomeFragment extends Fragment {
 //		view.findViewById(R.id.button_home_checkin).setOnClickListener(new View.OnClickListener() {
 //			@Override
 //			public void onClick(View view) {
-//				ToastActivity.toastComingSoon(getActivity(), getString(R.string.title_activity_checkin));
+//				ToastHandler.toastComingSoon(getActivity(), getString(R.string.title_activity_checkin));
 //			}
 //		});
     }

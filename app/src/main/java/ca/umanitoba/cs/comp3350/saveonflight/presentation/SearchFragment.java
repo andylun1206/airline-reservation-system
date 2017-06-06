@@ -119,7 +119,7 @@ public class SearchFragment extends ListFragment {
                     if (flightList != null && !flightList.isEmpty()) {
                         viewFlightsListener.viewFlights(flightList);
                     } else {
-                        ToastActivity.toastNoResults(getActivity());
+                        ToastHandler.toastNoResults(getActivity());
                     }
                 }
             }
