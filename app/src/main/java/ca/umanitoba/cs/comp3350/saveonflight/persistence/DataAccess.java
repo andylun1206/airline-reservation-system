@@ -15,7 +15,7 @@ interface DataAccess {
 
     public void close();
 
-    // AIRLINE TABLE METHDOS
+    // AIRLINE TABLE METHODS
     public ArrayList<Airline> getAirlines();
 
     public boolean insertAirline(Airline airline);
