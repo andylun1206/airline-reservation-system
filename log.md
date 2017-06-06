@@ -1,4 +1,4 @@
-## Meeting:
+## Meetings:
 ### May 18, 2017
 For team coding style, we will use the default coding style 
 specified by the autoformat tool in Android Studio (Ctrl + Alt + L).
@@ -32,9 +32,31 @@ and more time efficient than trying to come up with our own.
 ### Contributions
 
 
-#### Business Logic (Shenyun Wang, YouTian Zhang)
-
-
+#### Business Logic (Shenyun Wang, You Tian Zhang)
+- Problem: Database Access Objects (GitHub issues #9 - #13)
+    - One dao for each table in our database
+    - Initially did everything like in the sample project
+        - After discussion, removed the 'getSequential' methods
+            - Replaced with a 'getAll' method that returns a list of all entries in the table
+        - Also changed the return types of the methods from String to boolean
+    - After finishing implementations, we extracted an interface for each dao
+- Problem: Logic for searching for Flights (GitHub issue #14)
+    - Should return a List of Flights that match the specified search criteria
+    - Initially used long list of parameters for the search method
+        - Later encapsulated all the search parameters into a class (SearchCriteria)
+    - After discussion, decided to move logic for searching for flights into the database layer
+        - With a real database, we would just perform a SQL query 
+        - So, we ended up just passing on the method call to the database
+- Problem: Logic for sorting Flights (GitHub issue #31)
+    - We want to be able to sort a list of Flights by:
+        - Date
+        - Airline
+        - Price
+        - Capacity
+        - Seats Available
+    - Created Comparators for each parameter we want to be able to search by and then just use the built in Collections.sort() method
+        - Passed in the Comparator that corresponds to what parameter we are sorting by
+    - After implementation, extracted an interface (SortFlights) and renamed the implementation to SortFlightsImpl
 #### Database (Zhengyu Gu, Long Yu)
 
 
