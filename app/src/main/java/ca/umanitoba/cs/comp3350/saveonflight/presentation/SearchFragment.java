@@ -27,7 +27,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SearchFragment extends ListFragment {
 	private SearchCriteriaArrayAdapter criteriaAdapter;

@@ -18,16 +18,14 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
@@ -64,6 +62,8 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 		((ImageView) view.findViewById(R.id.imageView_search_criteria_icon)).setImageResource(row.getIcon());
 		final EditText input = (EditText) view.findViewById(R.id.editText_search_criteria_input);
 		input.setHint(row.getTitle());
+		setDefaults(input, row.getTitle());
+		
 		input.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) { }
@@ -155,9 +155,6 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 			isValid = missingRequiredField(activity, R.string.search_destination);
 		} else if (criteria.getDepartureDate() == null || criteria.getDepartureDate().toString().trim().isEmpty()) {
 			isValid = missingRequiredField(activity, R.string.search_departure_date);
-		/*} else if ((mandatoryCriteriaList == null || mandatoryCriteriaList.size() == 5) &&
-				(criteria.getReturnDate() == null || criteria.getReturnDate().toString().trim().isEmpty())) {
-			isValid = missingRequiredField(activity, R.string.search_return_date);*/
 		} else if (criteria.getNumTravellers() == 0) {
 			isValid = missingRequiredField(activity, R.string.search_num_travellers);
 		}
@@ -168,5 +165,19 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 	private boolean missingRequiredField(Activity activity, int string) {
 		ToastActivity.toastMandatoryField(activity, activity.getString(string));
 		return false;
+	}
+	
+	private void setDefaults(final EditText input, String title) {
+		if (title.equals("Origin")) {
+			input.setText("Winnipeg");
+		} else if (title.equals("Destination")) {
+			input.setText("Vancouver");
+		} else if (title.equals("Departure Date")) {
+			input.setText("2017-11-11");
+		} else if (title.equals("Return Date")) {
+			input.setText("2017-11-11");
+		} else if (title.equals("Number of Travellers")) {
+			input.setText("1");
+		}
 	}
 }

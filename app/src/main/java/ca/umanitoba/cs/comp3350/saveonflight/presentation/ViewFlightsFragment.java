@@ -14,7 +14,6 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListView;
@@ -56,19 +55,6 @@ public class ViewFlightsFragment extends ListFragment {
 			for (Flight f : flights) {
 				flightList.add(new ViewFlightsListView(f.getFlightTime(), f.getPrice(), f.getAirline().getIcon(), f.getFlightID(), f.getFlightDuration()));
 			}
-
-//			flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC 256", "2h 21m"));
-//			flightList.add(new ViewFlightsListView("11:15am - 02:21pm", 419.08, R.mipmap.ic_westjet, "WS 258", "2h 20m"));
-//			flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC 256", "2h 21m"));
-//			flightList.add(new ViewFlightsListView("11:15am - 02:21pm", 419.08, R.mipmap.ic_westjet, "WS 258", "2h 20m"));
-//			flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC 256", "2h 21m"));
-//			flightList.add(new ViewFlightsListView("11:15am - 02:21pm", 419.08, R.mipmap.ic_westjet, "WS 258", "2h 20m"));
-//			flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC 256", "2h 21m"));
-//			flightList.add(new ViewFlightsListView("11:15am - 02:21pm", 419.08, R.mipmap.ic_westjet, "WS 258", "2h 20m"));
-//			flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC 256", "2h 21m"));
-//			flightList.add(new ViewFlightsListView("11:15am - 02:21pm", 419.08, R.mipmap.ic_westjet, "WS 258", "2h 20m"));
-//			flightList.add(new ViewFlightsListView("05:30am - 08:51am", 190, R.mipmap.ic_aircanada, "AC 256", "2h 21m"));
-//			flightList.add(new ViewFlightsListView("11:15am - 02:21pm", 419.08, R.mipmap.ic_westjet, "WS 258", "2h 20m"));
 			
 			flightAdapter.notifyDataSetChanged();
 		}
