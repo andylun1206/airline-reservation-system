@@ -27,11 +27,16 @@ public class AirlineTest {
 
     @Test
     public void testEqualsMethod(){
+        //should result in error
         assertFalse(AIRLINE.equals(airline2)); //westjet != air canada
         airline2.setName("Air Canada");
+        //normal case
         assertTrue(AIRLINE.equals(airline2)); //air canada = air canada
         airline2.setName("");
+        //'empty' airline
         assertFalse(AIRLINE.equals(airline2)); //air canada !=
+
+        //invalid comparison
         assertFalse(AIRLINE.equals(wrongObject)); //air canada != "air canada"
         airline2 = null;
         assertFalse(AIRLINE.equals(airline2)); //air canada != null

@@ -21,9 +21,16 @@ public class AirportTest {
 
     @Test
     public void testEqualsMethod(){
+        //normal cases
         assertFalse(AIRPORT1.equals(airport2)); //WPG01 != WPG02
         airport2.setAirportCode("WPG01");
         assertTrue(AIRPORT1.equals(airport2)); //WPG01 = WPG01
+        //error cases
+        assertFalse(AIRPORT1.equals("WPG01"));
+        assertFalse(AIRPORT1.equals(null));
+        //edge case
+        airport2 = null;
+        assertTrue(airport2.equals(null));
     }
 
 }

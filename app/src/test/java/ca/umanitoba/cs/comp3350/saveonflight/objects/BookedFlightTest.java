@@ -39,10 +39,15 @@ public class BookedFlightTest {
 
     @Test
     public void testEqualsMethod() {
+        //normal comparisons
         assertFalse(booked1.equals(booked2));
         booked2.setTraveller(JULIA);
         assertFalse(booked1.equals(booked2));
         booked2.setFlight(flight1);
         assertTrue(booked1.equals(booked2));
+
+        //invalid comparison
+        assertFalse(booked1.equals("JULIA"));
+        assertFalse(booked1.equals(""));
     }
 }
