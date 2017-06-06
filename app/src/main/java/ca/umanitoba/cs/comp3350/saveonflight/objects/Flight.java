@@ -179,15 +179,15 @@ public class Flight implements Parcelable {
     }
 
     public String getFlightDuration() {
-        int duration = (int) getDateDiff(departureTime, arrivalTime, TimeUnit.MINUTES);
+        int duration = (int) getDateDiff(TimeUnit.MINUTES);
         int hours = duration / 60;
         int minutes = duration % 60;
 
         return Integer.toString(hours) + "h " + Integer.toString(minutes) + "m";
     }
 
-    private long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
-        long diffInMillis = date2.getTime() - date1.getTime();
+    private long getDateDiff(TimeUnit timeUnit) {
+        long diffInMillis = arrivalTime.getTime() - departureTime.getTime();
         return timeUnit.convert(diffInMillis, TimeUnit.MILLISECONDS);
     }
 
