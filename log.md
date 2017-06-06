@@ -45,7 +45,7 @@ and more time efficient than trying to come up with our own.
     - Gathered feedback and created home screen v2 using fragments
         - Replaced logo with a wallpaper
         - Switched locations of buttons
-- Problem: Search screen
+- Problem: Search screen (GitHub issue #1)
     - Created simple search page using listview and fragments
         - Gathered icons from material.io
         - Mapped search criteria to SearchCriteria object
@@ -53,13 +53,13 @@ and more time efficient than trying to come up with our own.
         - Added dropdown for different types of trips
         - Added advanced search criterias
     - Mapped search button to transition to view flights screen
-- Problem: View Flights screen
+- Problem: View Flights screen (GitHub issue #2)
     - Created simple view flight screen using listview and fragments
         - Verified transaction using hardcoded information
         - Added tabs for sort functionality
         - Refactored transaction to use search functionality implemented in business logic
 - Problem: General
-    - Created a simple splash screen to transition from startup to home screen
+    - Created a simple splash screen to transition from startup to home screen (GitHub issue #21)
         - Added logo and app name to splash screen
-    - Added toast messaging for features that are not implemented in this iteration
+    - Added toast messaging for features that are not implemented in this iteration (GitHub issue #26)
     
