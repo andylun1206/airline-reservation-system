@@ -1,5 +1,5 @@
-##Meeting:
-###May 18, 2017
+## Meeting:
+### May 18, 2017
 For team coding style, we will use the default coding style 
 specified by the autoformat tool in Android Studio (Ctrl + Alt + L).
 
@@ -18,7 +18,7 @@ tests for that class.
 
 We will use the GitHub flow model.
 
-###May 24, 2017
+### May 24, 2017
 Divided iteration 1 user stories into developer tasks. Created an issue on Github for each
 developer task.
 
@@ -28,17 +28,17 @@ and more time efficient than trying to come up with our own.
 - 1 database access class for each table in the data base.
 
 
-##Iteration 1:
-###Contributions
+## Iteration 1:
+### Contributions
 
 
-####Business Logic (Shenyun Wang, YouTian Zhang)
+#### Business Logic (Shenyun Wang, YouTian Zhang)
 
 
-####Database (Zhengyu Gu, Long Yu)
+#### Database (Zhengyu Gu, Long Yu)
 
 
-####GUI (Andy Chi Fung Lun)
+#### GUI (Andy Chi Fung Lun)
 - Problem: Home screen/Main Activity
     - Need a home screen/main activity, explored options and found navigation drawer to be optimal choice
     - Implemented home screen v1 with logo and quick navigation buttons

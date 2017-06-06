@@ -1,7 +1,7 @@
 # COMP 3350 - Software Engineering I
-##Group 2 - save on flight
+## Group 2 - save on flight
 
-###Iteration 1:
+### Iteration 1:
 We based our project’s 3-tier architecture off of the sample project’s architecture (presentation, business, and 
 persistence). So, we have the same five packages: application, business, objects, persistence, and presentation.
  
