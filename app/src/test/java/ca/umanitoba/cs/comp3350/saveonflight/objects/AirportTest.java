@@ -1,5 +1,7 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
+import android.os.Parcel;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,6 +43,13 @@ public class AirportTest {
         assertTrue(AIRPORT1.contains(subset));               // Subset match should return true
     }
 
-
-
+    @Test
+    public void testAirportCode() {
+        final String CODE2 = "Winnipeg YWG";
+        assertEquals(CODE1, AIRPORT1.getAirportCode());
+        assertNotSame("ASDASDS", AIRPORT1.getAirportCode());
+        AIRPORT1.setAirportCode(CODE2);
+        assertEquals(CODE2, AIRPORT1.getAirportCode());
+    }
+    
 }
