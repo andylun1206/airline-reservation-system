@@ -43,8 +43,6 @@ public class SearchCriteriaTest {
 
     @Test
     public void testMatches() {
-        System.out.println("\nStarting test searchCriteria");
-
         assertNotNull(searchCriteriaTest1);
         assertTrue(ORIGIN.equals(searchCriteriaTest1.getOrigin()));
         assertTrue(DEST.equals(searchCriteriaTest1.getDestination()));
@@ -62,7 +60,6 @@ public class SearchCriteriaTest {
     }
     @Test
     public void testEmpty() {
-        System.out.println("\nStarting test Empty searchCriteria");
         assertNotNull(searchCriteriaTest2);
         assertNull(searchCriteriaTest2.getOrigin());
         assertNull(searchCriteriaTest2.getDestination());
@@ -75,7 +72,6 @@ public class SearchCriteriaTest {
 
     @Test
     public void testNullData(){
-        System.out.println("\nStarting test null");
         assertNull(searchCriteriaTest3);
     }
 
