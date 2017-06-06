@@ -8,7 +8,9 @@ import java.util.Date;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 public class BookedFlightTest {
@@ -18,6 +20,8 @@ public class BookedFlightTest {
     private Flight flight2;
     private BookedFlight booked1;
     private BookedFlight booked2;
+    private BookedFlight booked3;
+    private BookedFlight booked4;
 
     @Before
     public void setUp() {
@@ -27,7 +31,14 @@ public class BookedFlightTest {
                 new Airport("TRT"), new Airport("WPG"), 300.00, 150, 0, FlightClassEnum.BUSINESS);
         booked1 = new BookedFlight(JULIA, flight1);
         booked2 = new BookedFlight(JENNIE, flight2);
+        booked3 = new BookedFlight(JULIA,flight2);
+        booked4 = new BookedFlight(JULIA,flight1);
+        assertNotNull(booked1);
+        assertNotNull(booked2);
+        assertNotNull(booked3);
+        assertNotNull(booked4);
     }
+
 
     @After
     public void tearDown() {
@@ -38,11 +49,43 @@ public class BookedFlightTest {
     }
 
     @Test
-    public void testEqualsMethod() {
-        assertFalse(booked1.equals(booked2));
-        booked2.setTraveller(JULIA);
-        assertFalse(booked1.equals(booked2));
-        booked2.setFlight(flight1);
-        assertTrue(booked1.equals(booked2));
+    public void testGetTraveller(){
+        assertEquals(booked1.getTraveller(), JULIA);
+        assertFalse(JENNIE.equals(booked1.getTraveller()));
+        assertEquals(booked1.getTraveller().getName(),"Julia Stoyko");
     }
+
+    @Test
+    public void testEqualsMethod() {
+        //normal cases
+        assertFalse(booked1.equals(booked2));//julia != jennie
+        assertFalse(booked1.equals(booked3));//wpg != trt
+
+        assertTrue(booked1.equals(booked4));//julia+AC01 == julia+AC01
+        //error cases
+        assertEquals(booked1, booked2);
+        assertFalse(booked1.equals(null));
+    }
+    @Test
+    public void testSetTravellerMethod(){
+        booked2.setTraveller(JULIA);
+        assertEquals(booked2,booked3);
+        booked3.setTraveller(JENNIE);
+        assertFalse(booked3.equals(booked2));
+    }
+
+    @Test
+    public void testGetFlight(){
+        assertFalse(flight1.equals(booked2.getFlight()));
+        assertEquals(flight1, booked1.getFlight());
+        assertEquals(booked1.getFlight(),booked4.getFlight());
+    }
+    @Test
+    public void testSetFlight(){
+        booked1.setFlight(flight2);
+        assertEquals(booked1,booked3);
+        booked3.setFlight(flight1);
+        assertFalse(booked1.equals(booked3));
+    }
+
 }
