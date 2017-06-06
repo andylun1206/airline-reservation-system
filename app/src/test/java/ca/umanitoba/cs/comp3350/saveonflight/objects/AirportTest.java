@@ -51,5 +51,5 @@ public class AirportTest {
         AIRPORT1.setAirportCode(CODE2);
         assertEquals(CODE2, AIRPORT1.getAirportCode());
     }
-    
+
 }
