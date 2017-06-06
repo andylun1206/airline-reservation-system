@@ -90,6 +90,10 @@ public class MainActivity extends AppCompatActivity
 		}
 	}
 	
+	/**
+	 * Switches fragments based on the navigation drawer item selected.
+	 * @param itemId Id of drawer item selected
+	 */
 	private void displaySelectedScreen(int itemId) {
 		Fragment fragment = null;
 		

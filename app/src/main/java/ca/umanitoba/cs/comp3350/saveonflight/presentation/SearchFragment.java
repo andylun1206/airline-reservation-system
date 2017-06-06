@@ -122,6 +122,9 @@ public class SearchFragment extends ListFragment {
 		});
 	}
 	
+	/**
+	 * Sets all on screen criteria to represent return trips.
+	 */
 	private void setReturnCriterias() {
 		if (mandatoryCriteriaList.size() == 0) {
 			setOneWayCriterias();
@@ -129,6 +132,9 @@ public class SearchFragment extends ListFragment {
 		mandatoryCriteriaList.add(3, new SearchCriteriaListView(R.drawable.ic_clock, getString(R.string.search_return_date)));
 	}
 	
+	/**
+	 * Sets all on screen criteria to represent one way trips.
+	 */
 	private void setOneWayCriterias() {
 		if (mandatoryCriteriaList.size() == 0) {
 			mandatoryCriteriaList.add(new SearchCriteriaListView(R.drawable.ic_takeoff, getString(R.string.search_origin)));
@@ -140,6 +146,9 @@ public class SearchFragment extends ListFragment {
 		}
 	}
 	
+	/**
+	 * Toggles advance options to on screen criterias.
+	 */
 	private void setAdvancedCriterias() {
 		View checkboxes = getView().findViewById(R.id.search_advanced_settings_checkboxes);
 		boolean isVisible = (checkboxes.getVisibility() == View.VISIBLE);
