@@ -10,7 +10,7 @@ import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
 public class AirlineTest {
-    private final Airline AIRLINE  = new Airline("Air Canada", R.mipmap.ic_aircanada);
+    private final Airline AIRLINE = new Airline("Air Canada", R.mipmap.ic_aircanada);
     private Airline airline2;
     private String wrongObject;
 
@@ -26,7 +26,7 @@ public class AirlineTest {
     }
 
     @Test
-    public void testEqualsMethod(){
+    public void testEqualsMethod() {
         assertFalse(AIRLINE.equals(airline2)); //westjet != air canada
         airline2.setName("Air Canada");
         assertTrue(AIRLINE.equals(airline2)); //air canada = air canada

@@ -24,25 +24,25 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListView;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListViewEntry;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListView> implements OnDateSetListener {
+public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListViewEntry> implements OnDateSetListener {
 	private final Context context;
 	private final int layoutResourceId;
-	private ArrayList<SearchCriteriaListView> mandatoryCriteriaList;
-	private ArrayList<SearchCriteriaListView> optionalCriteriaList;
-	private ArrayList<SearchCriteriaListView> fullCriteriaList;
+	private ArrayList<SearchCriteriaListViewEntry> mandatoryCriteriaList;
+	private ArrayList<SearchCriteriaListViewEntry> optionalCriteriaList;
+	private ArrayList<SearchCriteriaListViewEntry> fullCriteriaList;
 	private static SearchCriteria criteria;
 	
 	private EditText activeDateDisplay;
 	
 	public SearchCriteriaArrayAdapter(Context context, int layoutResourceId,
-	                                  ArrayList<SearchCriteriaListView> mandatoryCriteriaList,
-	                                  ArrayList<SearchCriteriaListView> optionalCriteriaList) {
+	                                  ArrayList<SearchCriteriaListViewEntry> mandatoryCriteriaList,
+	                                  ArrayList<SearchCriteriaListViewEntry> optionalCriteriaList) {
 		super(context, layoutResourceId, mandatoryCriteriaList);
 		this.context = context;
 		this.layoutResourceId = layoutResourceId;
@@ -57,7 +57,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 	public View getView(final int position, final View convertView, final ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		final View view = inflater.inflate(layoutResourceId, parent, false);
-		final SearchCriteriaListView row = fullCriteriaList.get(position);
+		final SearchCriteriaListViewEntry row = fullCriteriaList.get(position);
 		
 		((ImageView) view.findViewById(R.id.imageView_search_criteria_icon)).setImageResource(row.getIcon());
 		final EditText input = (EditText) view.findViewById(R.id.editText_search_criteria_input);
@@ -113,12 +113,12 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 	
 	public void notifyDataSetChanged(boolean setOptional) {
 		fullCriteriaList.clear();
-		for (SearchCriteriaListView row : mandatoryCriteriaList) {
+		for (SearchCriteriaListViewEntry row : mandatoryCriteriaList) {
 			fullCriteriaList.add(row.clone());
 		}
 		
 		if (setOptional) {
-			for (SearchCriteriaListView optionalRow : optionalCriteriaList) {
+			for (SearchCriteriaListViewEntry optionalRow : optionalCriteriaList) {
 				fullCriteriaList.add(optionalRow.clone());
 			}
 		}
@@ -163,7 +163,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 	}
 	
 	private boolean missingRequiredField(Activity activity, int string) {
-		ToastActivity.toastMandatoryField(activity, activity.getString(string));
+		ToastHandler.toastMandatoryField(activity, activity.getString(string));
 		return false;
 	}
 	

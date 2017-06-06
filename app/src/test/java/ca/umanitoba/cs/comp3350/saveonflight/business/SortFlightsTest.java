@@ -66,7 +66,7 @@ public class SortFlightsTest {
 
         Airport ywg = new Airport("YWG");
         Airport yvr = new Airport("YVR");
-        Airport yyc = new Airport ("YYC");
+        Airport yyc = new Airport("YYC");
 
         f1 = new Flight(flightID1, d1, a1, westJet, ywg, yvr, 100.0, 100, 100);
         f2 = new Flight(flightID1, d2, a2, fake, yvr, ywg, 200.0, 101, 100);
@@ -90,6 +90,70 @@ public class SortFlightsTest {
         f3 = null;
         f4 = null;
         f5 = null;
+    }
+
+    @Test
+    public void testNullList() {
+        try {
+            // Nothing should happen if we pass null instead of an ArrayList of Flights
+            sortFlights.sortFlightsBy(null, SortFlights.SortParameter.AIRLINE);
+        } catch (NullPointerException e) {
+            fail();
+        }
+
+    }
+
+    @Test
+    public void testEmptyList() {
+        // Nothing should happen
+        ArrayList<Flight> emptyList = new ArrayList<>();
+        sortFlights.sortFlightsBy(emptyList, SortFlights.SortParameter.SEATS_AVAILABLE);
+        assertTrue(emptyList.isEmpty()); // List should still be empty
+    }
+
+    @Test
+    public void testNullElements() {
+        // Try sorting an ArrayList where all elements are null
+        ArrayList<Flight> nullFlights = new ArrayList<>();
+        nullFlights.add(null);
+        nullFlights.add(null);
+        sortFlights.sortFlightsBy(nullFlights, SortFlights.SortParameter.DATE);
+        for (Flight f : nullFlights) {
+            // All elements should still just be null
+            assertNull(f);
+        }
+    }
+
+    @Test
+    public void testSomeValid() {
+        // Some elements are valid, while some are null
+        ArrayList<Flight> someNull = new ArrayList<>();
+        someNull.add(null);
+        someNull.add(null);
+        someNull.add(f1);
+
+        // The null elements should be put at the end of the list
+        sortFlights.sortFlightsBy(someNull, SortFlights.SortParameter.DATE);
+        assertNotNull(someNull.get(0));
+        assertEquals(f1, someNull.get(0));
+        assertNull(someNull.get(1));
+        assertNull(someNull.get(2));
+    }
+
+    @Test
+    public void testInvalidField() {
+        ArrayList<Flight> someInvalidFields = new ArrayList<>();
+        someInvalidFields.add(f1);
+        f2.setDepartureTime(null);
+        someInvalidFields.add(f2);
+        someInvalidFields.add(f3);
+        sortFlights.sortFlightsBy(someInvalidFields, SortFlights.SortParameter.DATE);
+
+        // Flights with invalid fields should be put at the end of the
+        System.out.println(someInvalidFields);
+        assertEquals(f1, someInvalidFields.get(0));
+        assertEquals(f3, someInvalidFields.get(1));
+        assertEquals(f2, someInvalidFields.get(2));
     }
 
     @Test

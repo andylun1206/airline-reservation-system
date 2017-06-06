@@ -2,7 +2,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 /**
  * HomeFragment.java
- *
+ * <p>
  * Fragment for the home page of the application.
  *
  * @author Andy Lun
@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 public class HomeFragment extends Fragment {
@@ -41,7 +42,7 @@ public class HomeFragment extends Fragment {
 		view.findViewById(R.id.button_home_account_info).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ToastActivity.toastComingSoon(getActivity(), "Account");
+				ToastHandler.toastComingSoon(getActivity(), "Account");
 			}
 		});
 		
@@ -59,7 +60,7 @@ public class HomeFragment extends Fragment {
 		view.findViewById(R.id.button_home_checkin).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ToastActivity.toastComingSoon(getActivity(), getString(R.string.title_activity_checkin));
+				ToastHandler.toastComingSoon(getActivity(), getString(R.string.title_activity_checkin));
 			}
 		});
 	}
