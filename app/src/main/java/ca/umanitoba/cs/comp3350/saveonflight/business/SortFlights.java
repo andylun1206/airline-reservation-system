@@ -9,6 +9,7 @@ import java.util.Comparator;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 
 public class SortFlights {
+    private ArrayList<Flight> invalidFlights;
 
     public enum SortParameter {
         DATE, AIRLINE, PRICE, CAPACITY, SEATS_AVAILABLE
@@ -71,14 +72,34 @@ public class SortFlights {
     private class DepartureTimeComparator implements Comparator<Flight> {
         @Override
         public int compare(@NonNull Flight f1, @NonNull Flight f2) {
-            return f1.getDepartureTime().compareTo(f2.getDepartureTime());
+            int result;
+
+            if (f1.getDepartureTime() == null) {
+                result = Integer.MAX_VALUE;
+            } else if (f2.getDepartureTime() == null) {
+                result = Integer.MIN_VALUE;
+            } else {
+                result = f1.getDepartureTime().compareTo(f2.getDepartureTime());
+            }
+
+            return result;
         }
     }
 
     private class AirlineComparator implements Comparator<Flight> {
         @Override
         public int compare(@NonNull Flight f1, @NonNull Flight f2) {
-            return f1.getAirline().compareTo(f2.getAirline());
+            int result;
+
+            if (f1.getAirline() == null) {
+                result = Integer.MAX_VALUE;
+            } else if (f2.getAirline() == null) {
+                result = Integer.MIN_VALUE;
+            } else {
+                result = f1.getAirline().compareTo(f2.getAirline());
+            }
+
+            return result;
         }
     }
 

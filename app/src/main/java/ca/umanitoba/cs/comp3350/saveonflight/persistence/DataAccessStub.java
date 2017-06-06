@@ -420,6 +420,7 @@ public class DataAccessStub implements DataAccess {
         /*if (table.isEmpty())
             return null;
          */
+        // Flight class currently doesn't track nonstop status
         // Adding more stuff later
         return table;
     }
@@ -428,6 +429,7 @@ public class DataAccessStub implements DataAccess {
         /*if (table.isEmpty())
             return null;
          */
+        // Flight currently doesn't track refundable status
         // Adding more stuff later
         return table;
     }
