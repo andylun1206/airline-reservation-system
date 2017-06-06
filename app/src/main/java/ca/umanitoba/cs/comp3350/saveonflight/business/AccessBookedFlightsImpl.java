@@ -10,6 +10,14 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccessStub;
 
+/**
+ * AccessBookedFlightImpl.java
+ * <p>
+ * Implementation of the database access object for the Flights table.
+ *
+ * @author Shenyun Wang
+ */
+
 public class AccessBookedFlightsImpl implements AccessBookedFlights {
     private DataAccessStub dataAccess;
 

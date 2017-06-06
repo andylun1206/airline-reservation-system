@@ -10,7 +10,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 /**
  * AccessBookedFlights.java
  * <p>
- * Database access object for the BookedFlights table.
+ * Interface for the database access object for the BookedFlights table.
  *
  * @author Kenny Zhang
  */

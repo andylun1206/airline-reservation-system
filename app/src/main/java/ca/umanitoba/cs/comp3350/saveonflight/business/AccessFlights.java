@@ -12,7 +12,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 /**
  * AccessFlights.java
  * <p>
- * Database access object for the Flights table.
+ * Interface for the database access object for the Flights table.
  *
  * @author Kenny Zhang
  */

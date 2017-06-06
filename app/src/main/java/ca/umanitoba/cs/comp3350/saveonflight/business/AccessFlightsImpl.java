@@ -13,6 +13,14 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccessStub;
 
+/**
+ * AccessFlightsImpl.java
+ * <p>
+ * Implementation of the database access object responsible for accessing the Flights table.
+ *
+ * @author Kenny Zhang
+ */
+
 public class AccessFlightsImpl implements AccessFlights {
     private DataAccessStub dataAccess;
 

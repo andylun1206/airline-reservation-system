@@ -7,6 +7,14 @@ import ca.umanitoba.cs.comp3350.saveonflight.application.Services;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccessStub;
 
+/**
+ * AccessTravellersImpl.java
+ * <p>
+ * Implementation for the database access object responsible for accessing the Travellers table.
+ *
+ * @author Kenny Zhang
+ */
+
 public class AccessTravellersImpl implements AccessTravellers {
     private DataAccessStub dataAccess;
 

@@ -7,6 +7,14 @@ import ca.umanitoba.cs.comp3350.saveonflight.application.Services;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccessStub;
 
+/**
+ * AccessAirlinesImpl.java
+ * <p>
+ * Implementation for database access object for the Airlines table.
+ *
+ * @author Shenyun Wang
+ */
+
 public class AccessAirlinesImpl implements AccessAirlines {
     private DataAccessStub dataAccess;
 

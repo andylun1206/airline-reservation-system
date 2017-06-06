@@ -7,7 +7,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 /**
  * AccessTravellers.java
  * <p>
- * Database access object for the Travellers table.
+ * Interface for the database access object responsible for accessing the Travellers table.
  *
  * @author Kenny Zhang
  */

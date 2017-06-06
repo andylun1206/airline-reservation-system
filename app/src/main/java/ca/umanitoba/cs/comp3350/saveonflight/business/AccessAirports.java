@@ -7,7 +7,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 /**
  * AccessAirports.java
  * <p>
- * Database access object for the Airports table.
+ * Interface for the database access object for the Airports table.
  *
  * @author Kenny Zhang
  */
