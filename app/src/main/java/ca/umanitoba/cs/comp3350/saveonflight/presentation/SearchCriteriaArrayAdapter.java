@@ -62,7 +62,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 		((ImageView) view.findViewById(R.id.imageView_search_criteria_icon)).setImageResource(row.getIcon());
 		final EditText input = (EditText) view.findViewById(R.id.editText_search_criteria_input);
 		input.setHint(row.getTitle());
-		setDefaults(input, row.getTitle());
+//		setDefaults(input, row.getTitle());
 		
 		input.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -168,6 +168,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 	}
 	
 	private void setDefaults(final EditText input, String title) {
+		
 		if (title.equals("Origin")) {
 			input.setText("Winnipeg");
 		} else if (title.equals("Destination")) {
