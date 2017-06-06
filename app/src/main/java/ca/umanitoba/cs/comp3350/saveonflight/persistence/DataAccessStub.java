@@ -333,12 +333,10 @@ public class DataAccessStub implements DataAccess {
         Flight temp;
         for (int i = 0; i < flights.size(); i++) {
             temp = flights.get(i);
-            if (temp.getOrigin().equals(origin) && temp.getDestination().equals(destination)) {
+            if (temp.getOrigin().contains(origin) && temp.getDestination().contains(destination)) {
                 table.add(temp);
             }
         }
-        if (table.isEmpty())
-            return new ArrayList<Flight>();
         return table;
     }
 
@@ -352,7 +350,6 @@ public class DataAccessStub implements DataAccess {
             for (int i = 0; i < table.size(); i++) {
                 temp = table.get(i);
                 calTemp.setTime(temp.getDepartureTime());
-                //if (!temp.getDepartureTime().equals(departureDate)) {
                 if (calTemp.get(Calendar.YEAR) != calFilterBy.get(Calendar.YEAR) ||
                         calTemp.get(Calendar.DAY_OF_YEAR) != calFilterBy.get(Calendar.DAY_OF_YEAR)) {
                     table.remove(temp);
@@ -423,6 +420,7 @@ public class DataAccessStub implements DataAccess {
         /*if (table.isEmpty())
             return null;
          */
+        // Flight class currently doesn't track nonstop status
         // Adding more stuff later
         return table;
     }
@@ -431,6 +429,7 @@ public class DataAccessStub implements DataAccess {
         /*if (table.isEmpty())
             return null;
          */
+        // Flight currently doesn't track refundable status
         // Adding more stuff later
         return table;
     }

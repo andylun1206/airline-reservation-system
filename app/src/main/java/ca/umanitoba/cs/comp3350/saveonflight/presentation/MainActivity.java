@@ -1,9 +1,9 @@
 package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 /**
- * MainActivity.java
- *
- * Activity to handle all fragments involving a navigation drawer.
+ * HomeFragment.java
+ * <p>
+ * Fragment for the home page of the application.
  *
  * @author Andy Lun
  */
@@ -21,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
@@ -29,52 +30,52 @@ import ca.umanitoba.cs.comp3350.saveonflight.presentation.SearchFragment.ViewFli
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-		implements OnNavigationItemSelectedListener, ViewFlightsListener {
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+        implements OnNavigationItemSelectedListener, ViewFlightsListener {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         Main.startUp();
 
         setContentView(R.layout.activity_main);
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
-		
-		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-				this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
-			@Override
-			public void onDrawerSlide(View drawerView, float slideOffset) {
-				InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-				inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-			}
-		};
-		drawer.addDrawerListener(toggle);
-		toggle.syncState();
-		
-		final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-		navigationView.setNavigationItemSelectedListener(this);
-		
-		View headerView = navigationView.getHeaderView(0);
-		
-		headerView.findViewById(R.id.button_header_login).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				ToastActivity.toastComingSoon(MainActivity.this, getString(R.string.common_login));
-			}
-		});
-		
-		headerView.findViewById(R.id.button_header_signup).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				ToastActivity.toastComingSoon(MainActivity.this, getString(R.string.common_signup));
-			}
-		});
-		
-		displaySelectedScreen(R.id.nav_home);
-	}
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-	@Override
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            }
+        };
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        View headerView = navigationView.getHeaderView(0);
+
+        headerView.findViewById(R.id.button_header_login).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastHandler.toastComingSoon(MainActivity.this, getString(R.string.common_login));
+            }
+        });
+
+        headerView.findViewById(R.id.button_header_signup).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastHandler.toastComingSoon(MainActivity.this, getString(R.string.common_signup));
+            }
+        });
+
+        displaySelectedScreen(R.id.nav_home);
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         Main.shutDown();
@@ -124,7 +125,11 @@ public class MainActivity extends AppCompatActivity
 		displaySelectedScreen(item.getItemId());
 		return true;
 	}
-
+	
+	/**
+	 * Switch context from searching to viewing flights
+	 * @param flights result of search
+	 */
 	@Override
 	public void viewFlights(ArrayList<Flight> flights) {
 		Fragment viewFragment = new ViewFlightsFragment();
@@ -136,5 +141,4 @@ public class MainActivity extends AppCompatActivity
 				.replace(R.id.content_frame, viewFragment)
 				.commit();
 	}
-	
 }

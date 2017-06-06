@@ -16,13 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListView;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListViewEntry;
 
 import java.util.ArrayList;
 
 public class ViewFlightsFragment extends ListFragment {
 	private ViewFlightsArrayAdapter flightAdapter;
-	private ArrayList<ViewFlightsListView> flightList;
+	private ArrayList<ViewFlightsListViewEntry> flightList;
 	private ArrayList<Flight> flights;
 	
 	@Nullable
@@ -53,7 +53,7 @@ public class ViewFlightsFragment extends ListFragment {
 					flights.get(0).getDestination().toString());
 			
 			for (Flight f : flights) {
-				flightList.add(new ViewFlightsListView(f.getFlightTime(), f.getPrice(), f.getAirline().getIcon(), f.getFlightID(), f.getFlightDuration()));
+				flightList.add(new ViewFlightsListViewEntry(f.getFlightTime(), f.getPrice(), f.getAirline().getIcon(), f.getFlightID(), f.getFlightDuration()));
 			}
 			
 			flightAdapter.notifyDataSetChanged();

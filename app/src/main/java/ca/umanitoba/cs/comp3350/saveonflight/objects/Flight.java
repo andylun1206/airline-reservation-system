@@ -41,7 +41,7 @@ public class Flight implements Parcelable {
         this(flightID, departureTime, arrivalTime, airline, origin, destination, price, capacity, seatsTaken, FlightClassEnum.ECONOMY);
     }
 
-    public Flight(String flightID, Date departureTime, Date  arrivalTime,
+    public Flight(String flightID, Date departureTime, Date arrivalTime,
                   Airline airline, Airport origin, Airport destination,
                   double price, int capacity, int seatsTaken, FlightClassEnum flightClass) {
         this.flightID = flightID;
@@ -67,7 +67,7 @@ public class Flight implements Parcelable {
     public boolean sellSeats(int numSold) {
         boolean result = false;
 
-        if (getSeatsRemaining() >= numSold) {
+        if (numSold >= 0 && getSeatsRemaining() >= numSold) {
             seatsTaken += numSold;
             result = true;
         } else {
@@ -178,7 +178,6 @@ public class Flight implements Parcelable {
         return result;
     }
 
-    // TODO: write tests for these methods
     public String getFlightDuration() {
         int duration = (int) getDateDiff(TimeUnit.MINUTES);
         int hours = duration / 60;
