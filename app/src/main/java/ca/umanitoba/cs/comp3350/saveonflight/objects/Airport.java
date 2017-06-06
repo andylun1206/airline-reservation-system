@@ -48,7 +48,7 @@ public class Airport implements Parcelable {
 
         if (object instanceof Airport) {
             Airport airport = (Airport) object;
-            if (airportCode.contains(airport.getAirportCode())) {
+            if (airportCode.toLowerCase().contains(airport.getAirportCode().toLowerCase())) {
                 result = true;
             }
         }
