@@ -15,6 +15,8 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 
 import static junit.framework.Assert.*;
 
+
+
 public class SortFlightsTest {
     private SortFlights sortFlights;
     private ArrayList<Flight> flights;
@@ -22,7 +24,7 @@ public class SortFlightsTest {
 
     @Before
     public void setUp() {
-        sortFlights = new SortFlights();
+        sortFlights = new SortFlightsImpl();
         flights = new ArrayList<>();
 
         String flightID1 = "WJ101";
@@ -150,7 +152,6 @@ public class SortFlightsTest {
         sortFlights.sortFlightsBy(someInvalidFields, SortFlights.SortParameter.DATE);
 
         // Flights with invalid fields should be put at the end of the
-        System.out.println(someInvalidFields);
         assertEquals(f1, someInvalidFields.get(0));
         assertEquals(f3, someInvalidFields.get(1));
         assertEquals(f2, someInvalidFields.get(2));

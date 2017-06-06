@@ -19,16 +19,8 @@ public class ViewFlightsListViewEntry {
         return time;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
-
     public double getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public int getAirline() {
@@ -43,15 +35,7 @@ public class ViewFlightsListViewEntry {
         return flightId;
     }
 
-    public void setFlightId(String flightId) {
-        this.flightId = flightId;
-    }
-
     public String getDuration() {
         return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
     }
 }
