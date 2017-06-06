@@ -1,13 +1,13 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
-public class ViewFlightsListView {
+public class ViewFlightsListViewEntry {
     private String time;
     private double price;
     private int airline;
     private String flightId;
     private String duration;
 
-    public ViewFlightsListView(String time, double price, int airline, String flightId, String duration) {
+    public ViewFlightsListViewEntry(String time, double price, int airline, String flightId, String duration) {
         this.time = time;
         this.price = price;
         this.airline = airline;
