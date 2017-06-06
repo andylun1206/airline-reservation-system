@@ -15,8 +15,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 
 import static junit.framework.Assert.*;
 
-
-
 public class SortFlightsTest {
     private SortFlights sortFlights;
     private ArrayList<Flight> flights;

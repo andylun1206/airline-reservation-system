@@ -1,6 +1,10 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
-import java.util.Date;
+/**
+ * BookedFlight.java
+ * <p>
+ * Object mapped to the BookedFlight table in the database.
+ */
 
 public class BookedFlight {
     private Traveller traveller;

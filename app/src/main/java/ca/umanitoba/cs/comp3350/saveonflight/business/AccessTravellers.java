@@ -12,7 +12,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  * @author Kenny Zhang
  */
 
-interface AccessTravellers {
+public interface AccessTravellers {
     List<Traveller> getTravellers();
 
     boolean insertTraveller(Traveller traveller);

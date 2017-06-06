@@ -3,7 +3,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
 /**
  * SearchCriteriaListViewEntry.java
  * <p>
- * Object representing an entry in the listview on the search page.
+ * Object representing an entry in the ListView on the search page.
  *
  * @author Andy Lun
  */

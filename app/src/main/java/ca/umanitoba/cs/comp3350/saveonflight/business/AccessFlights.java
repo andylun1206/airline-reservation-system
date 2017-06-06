@@ -17,7 +17,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
  * @author Kenny Zhang
  */
 
-interface AccessFlights {
+public interface AccessFlights {
     ArrayList<Flight> getFlights();
 
     boolean insertFlight(Flight flight);

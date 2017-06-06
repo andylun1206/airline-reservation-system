@@ -11,7 +11,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
  *
  * @author Kenny Zhang
  */
-interface AccessAirports {
+public interface AccessAirports {
     List<Airport> getAirports();
 
     boolean addAirport(Airport a);

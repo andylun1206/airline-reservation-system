@@ -12,7 +12,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
  * @author Kenny Zhang
  */
 
-interface SortFlights {
+public interface SortFlights {
     // Sorts the List of Flights passed in based on the specified SortParameter.
     // If any elements are null, they  are placed at the end of the List.
     void sortFlightsBy(ArrayList<Flight> flights, SortParameter sortBy);

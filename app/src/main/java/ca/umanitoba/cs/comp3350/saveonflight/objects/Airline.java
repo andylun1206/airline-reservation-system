@@ -1,8 +1,8 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
-/*
+/**
  * Airline.java
- *
+ * <p>
  * Object mapped to the airline table DB
  *
  * @author Andy Lun

@@ -2,6 +2,14 @@ package ca.umanitoba.cs.comp3350.saveonflight.application;
 
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccessStub;
 
+/**
+ * Services.java
+ * <p>
+ * Provides facilities for opening and closing the connection the the database.
+ *
+ * @author Kenny Zhang
+ */
+
 public class Services {
     private static DataAccessStub dataAccessService = null;
 
