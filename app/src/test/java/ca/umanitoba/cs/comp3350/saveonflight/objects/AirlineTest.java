@@ -38,14 +38,14 @@ public class AirlineTest {
 
     @Test
     public void testEqualsMethod() {
-        assertFalse(AIRLINE.equals(airline2)); //westjet != air canada
+        assertFalse(AIRLINE.equals(airline2));    //westjet != air canada
         airline2.setName(AC);
-        assertTrue(AIRLINE.equals(airline2)); //air canada = air canada
+        assertTrue(AIRLINE.equals(airline2));     //air canada = air canada
         airline2.setName("");
-        assertFalse(AIRLINE.equals(airline2)); //air canada !=
+        assertFalse(AIRLINE.equals(airline2));    //air canada !=
         assertFalse(AIRLINE.equals(wrongObject)); //air canada != "air canada"
         airline2 = null;
-        assertFalse(AIRLINE.equals(airline2)); //air canada != null
+        assertFalse(AIRLINE.equals(airline2));    //air canada != null
     }
 
     @Test
