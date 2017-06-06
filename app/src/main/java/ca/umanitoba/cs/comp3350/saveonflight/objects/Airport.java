@@ -43,6 +43,18 @@ public class Airport implements Parcelable {
         return result;
     }
 
+    public boolean contains(Object object) {
+        boolean result = false;
+
+        if (object instanceof Airport) {
+            Airport airport = (Airport) object;
+            if (airportCode.contains(airport.getAirportCode())) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -68,4 +80,5 @@ public class Airport implements Parcelable {
     private Airport(Parcel in) {
         airportCode = in.readString();
     }
+
 }
