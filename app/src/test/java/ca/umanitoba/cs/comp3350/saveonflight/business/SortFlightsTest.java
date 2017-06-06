@@ -120,6 +120,22 @@ public class SortFlightsTest {
     }
 
     @Test
+    public void testSomeValid() {
+        // Some elements are valid, while some are null
+        ArrayList<Flight> someNull = new ArrayList<>();
+        someNull.add(null);
+        someNull.add(null);
+        someNull.add(f1);
+
+        // The null elements should be put at the end of the list
+        sortFlights.sortFlightsBy(someNull, SortFlights.SortParameter.DATE);
+        assertNotNull(someNull.get(0));
+        assertEquals(f1, someNull.get(0));
+        assertNull(someNull.get(1));
+        assertNull(someNull.get(2));
+    }
+
+    @Test
     public void testSortByDate() {
         ArrayList<Flight> flightsByDepartureTime = new ArrayList<>();
         flightsByDepartureTime.add(f1);

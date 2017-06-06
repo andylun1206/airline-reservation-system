@@ -1,5 +1,7 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,12 +14,16 @@ public class SortFlights {
         DATE, AIRLINE, PRICE, CAPACITY, SEATS_AVAILABLE
     }
 
+    // Sorts the List of Flights passed in based on the specified SortParameter.
+    // If any elements are null, they  are placed at the end of the List.
     public void sortFlightsBy(ArrayList<Flight> flights, SortParameter sortBy) {
-        if (flights == null || !isValidList(flights)) {
+        if (flights == null) {
             return;
         }
+        // Remove any null objects from the list prior to sorting
+        int numNull = validateInput(flights);
 
-        Comparator<Flight> comparator = null;
+        Comparator<Flight> comparator;
         switch (sortBy) {
             case DATE:
                 comparator = new DepartureTimeComparator();
@@ -39,36 +45,46 @@ public class SortFlights {
         }
 
         Collections.sort(flights, comparator);
+        // Re-add the null elements to the end of the list
+        for (int i = 0; i < numNull; i++) {
+            flights.add(null);
+        }
     }
 
-    private boolean isValidList(ArrayList<Flight> flights) {
-        boolean valid = true;
-        for (Flight f : flights) {
-            if (f == null) {
-                valid = false;
-                break;
+    // Removes and returns the number of null elements in the List
+    private int validateInput(ArrayList<Flight> flights) {
+        int count = 0;
+
+        int i = 0;
+        while (i < flights.size()) {
+            if (flights.get(i) == null) {
+                flights.remove(i);
+                count++;
+            } else {
+                i++;
             }
         }
-        return valid;
+
+        return count;
     }
 
     private class DepartureTimeComparator implements Comparator<Flight> {
         @Override
-        public int compare(Flight f1, Flight f2) {
+        public int compare(@NonNull Flight f1, @NonNull Flight f2) {
             return f1.getDepartureTime().compareTo(f2.getDepartureTime());
         }
     }
 
     private class AirlineComparator implements Comparator<Flight> {
         @Override
-        public int compare(Flight f1, Flight f2) {
+        public int compare(@NonNull Flight f1, @NonNull Flight f2) {
             return f1.getAirline().compareTo(f2.getAirline());
         }
     }
 
     private class PriceComparator implements Comparator<Flight> {
         @Override
-        public int compare(Flight f1, Flight f2) {
+        public int compare(@NonNull Flight f1, @NonNull Flight f2) {
             int res = 0;
 
             double diff = f1.getPrice() - f2.getPrice();
@@ -84,14 +100,14 @@ public class SortFlights {
 
     private class CapacityComparator implements Comparator<Flight> {
         @Override
-        public int compare(Flight f1, Flight f2) {
+        public int compare(@NonNull Flight f1, @NonNull Flight f2) {
             return f1.getCapacity() - f2.getCapacity();
         }
     }
 
     private class SeatsAvailableComparator implements Comparator<Flight> {
         @Override
-        public int compare(Flight f1, Flight f2) {
+        public int compare(@NonNull Flight f1, @NonNull Flight f2) {
             // Note: We want descending order here
             return f2.getSeatsRemaining() - f1.getSeatsRemaining();
         }
