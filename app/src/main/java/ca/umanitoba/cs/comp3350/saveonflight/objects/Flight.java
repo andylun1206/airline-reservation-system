@@ -186,11 +186,6 @@ public class Flight implements Parcelable {
         return Integer.toString(hours) + "h " + Integer.toString(minutes) + "m";
     }
 
-    private long getDateDiff(TimeUnit timeUnit) {
-        long diffInMillis = arrivalTime.getTime() - departureTime.getTime();
-        return timeUnit.convert(diffInMillis, TimeUnit.MILLISECONDS);
-    }
-
     public String getFlightTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.CANADA);
         return sdf.format(departureTime) + " - " + sdf.format(arrivalTime);
@@ -238,5 +233,10 @@ public class Flight implements Parcelable {
         capacity = in.readInt();
         seatsTaken = in.readInt();
         flightClass = (FlightClassEnum) in.readSerializable();
+    }
+
+    private long getDateDiff(TimeUnit timeUnit) {
+        long diffInMillis = arrivalTime.getTime() - departureTime.getTime();
+        return timeUnit.convert(diffInMillis, TimeUnit.MILLISECONDS);
     }
 }

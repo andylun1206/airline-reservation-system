@@ -185,11 +185,6 @@ public class FlightTest {
     }
 
     @Test
-    public void testGetDateDiff() {
-        // TODO
-    }
-
-    @Test
     public void testGetFlightTime() {
         final String EXPECTED = "12:00 - 15:00";
         assertEquals(EXPECTED, flight.getFlightTime());
