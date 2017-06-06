@@ -13,8 +13,11 @@ public class SortFlights {
     }
 
     public void sortFlightsBy(ArrayList<Flight> flights, SortParameter sortBy) {
-        Comparator<Flight> comparator = null;
+        if (flights == null || !isValidList(flights)) {
+            return;
+        }
 
+        Comparator<Flight> comparator = null;
         switch (sortBy) {
             case DATE:
                 comparator = new DepartureTimeComparator();
@@ -36,6 +39,17 @@ public class SortFlights {
         }
 
         Collections.sort(flights, comparator);
+    }
+
+    private boolean isValidList(ArrayList<Flight> flights) {
+        boolean valid = true;
+        for (Flight f : flights) {
+            if (f == null) {
+                valid = false;
+                break;
+            }
+        }
+        return valid;
     }
 
     private class DepartureTimeComparator implements Comparator<Flight> {

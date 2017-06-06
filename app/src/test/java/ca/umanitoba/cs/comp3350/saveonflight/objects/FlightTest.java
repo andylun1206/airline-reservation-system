@@ -43,22 +43,6 @@ public class FlightTest {
     }
 
     @Test
-    public void testSeatsRemaining() {
-        assertEquals(CAP, flight.getSeatsRemaining());
-        flight.sellSeats(5);
-        assertEquals(CAP - 5, flight.getSeatsRemaining());
-    }
-
-    @Test
-    public void testIsFull() {
-        assertFalse(flight.isFull());
-        assertTrue(flight.sellSeats(1));
-        assertFalse(flight.isFull());
-        assertTrue(flight.sellSeats(flight.getSeatsRemaining()));
-        assertTrue(flight.isFull());
-    }
-
-    @Test
     public void testSellSeats() {
         assertEquals(0, flight.getSeatsTaken()); // Initially, no seats should be sold
         assertFalse(flight.sellSeats(-1));       // Should not be able to sell negative seats
@@ -75,6 +59,22 @@ public class FlightTest {
         assertEquals(CAP, seatsSold);            // The number of seats we sell should equal the capacity of the flight
 
         assertFalse(flight.sellSeats(1));        // After the Flight is full, trying to sell anymore seats should not work
+    }
+
+    @Test
+    public void testSeatsRemaining() {
+        assertEquals(CAP, flight.getSeatsRemaining());
+        flight.sellSeats(5);
+        assertEquals(CAP - 5, flight.getSeatsRemaining());
+    }
+
+    @Test
+    public void testIsFull() {
+        assertFalse(flight.isFull());
+        assertTrue(flight.sellSeats(1));
+        assertFalse(flight.isFull());
+        assertTrue(flight.sellSeats(flight.getSeatsRemaining()));
+        assertTrue(flight.isFull());
     }
 
     @Test

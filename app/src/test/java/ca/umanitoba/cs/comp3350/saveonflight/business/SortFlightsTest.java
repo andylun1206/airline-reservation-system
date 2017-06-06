@@ -66,7 +66,7 @@ public class SortFlightsTest {
 
         Airport ywg = new Airport("YWG");
         Airport yvr = new Airport("YVR");
-        Airport yyc = new Airport ("YYC");
+        Airport yyc = new Airport("YYC");
 
         f1 = new Flight(flightID1, d1, a1, westJet, ywg, yvr, 100.0, 100, 100);
         f2 = new Flight(flightID1, d2, a2, fake, yvr, ywg, 200.0, 101, 100);
@@ -90,6 +90,33 @@ public class SortFlightsTest {
         f3 = null;
         f4 = null;
         f5 = null;
+    }
+
+    @Test
+    public void testNullList() {
+        // Nothing should happen if we pass null instead of an ArrayList of Flights
+        sortFlights.sortFlightsBy(null, SortFlights.SortParameter.AIRLINE);
+    }
+
+    @Test
+    public void testEmptyList() {
+        // Nothing should happen
+        ArrayList<Flight> emptyList = new ArrayList<>();
+        sortFlights.sortFlightsBy(emptyList, SortFlights.SortParameter.SEATS_AVAILABLE);
+        assertTrue(emptyList.isEmpty()); // List should still be empty
+    }
+
+    @Test
+    public void testNullElements() {
+        // Try sorting an ArrayList where all elements are null
+        ArrayList<Flight> nullFlights = new ArrayList<>();
+        nullFlights.add(null);
+        nullFlights.add(null);
+        sortFlights.sortFlightsBy(nullFlights, SortFlights.SortParameter.DATE);
+        for (Flight f : nullFlights) {
+            // All elements should still just be null
+            assertNull(f);
+        }
     }
 
     @Test
