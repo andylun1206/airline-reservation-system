@@ -41,7 +41,7 @@ public class Flight implements Parcelable {
         this(flightID, departureTime, arrivalTime, airline, origin, destination, price, capacity, seatsTaken, FlightClassEnum.ECONOMY);
     }
 
-    public Flight(String flightID, Date departureTime, Date  arrivalTime,
+    public Flight(String flightID, Date departureTime, Date arrivalTime,
                   Airline airline, Airport origin, Airport destination,
                   double price, int capacity, int seatsTaken, FlightClassEnum flightClass) {
         this.flightID = flightID;

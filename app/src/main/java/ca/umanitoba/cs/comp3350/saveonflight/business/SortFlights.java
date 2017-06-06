@@ -74,8 +74,7 @@ public class SortFlights {
             double diff = f1.getPrice() - f2.getPrice();
             if (diff > 0) {
                 res = (int) Math.ceil(diff);
-            }
-            else if (diff < 0) {
+            } else if (diff < 0) {
                 res = (int) Math.floor(diff);
             }
 

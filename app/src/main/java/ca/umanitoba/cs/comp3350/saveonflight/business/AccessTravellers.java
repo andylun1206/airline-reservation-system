@@ -35,8 +35,7 @@ public class AccessTravellers {
         if (currentIndex < travellers.size()) {
             currentTraveller = travellers.get(currentIndex);
             currentIndex++;
-        }
-        else {
+        } else {
             travellers = null;
             currentTraveller = null;
             currentIndex = 0;

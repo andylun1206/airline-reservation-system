@@ -26,7 +26,7 @@ interface DataAccess {
 
     // AIRPORT TABLE METHODS
     public ArrayList<Airport> getAirports();
-  
+
     public boolean insertAirport(Airport airport);
 
     public boolean updateAirport(Airport airport, String airportCode);
@@ -35,20 +35,20 @@ interface DataAccess {
 
     // BOOKEDFLIGHTS TABLE METHODS
     public ArrayList<BookedFlight> getBookedFlights();
-  
+
     public boolean insertBookedFlight(BookedFlight bookedFlight);
 
     public boolean updateBookedFlight(BookedFlight bookedFlight, Traveller t, Flight f);
 
     public boolean deleteBookedFlight(BookedFlight bookedFlight);
-  
+
     public ArrayList<BookedFlight> getTravellersBookedFlights(Traveller traveller);
-  
+
     public ArrayList<BookedFlight> getTravellersOnFlight(Flight flight);
 
     // FLIGHTS TABLE METHODS
     public ArrayList<Flight> getFlights();
-  
+
     public boolean insertFlight(Flight flight);
 
     public boolean updateFlight(Flight flight, String flightID, Date departDate, Date arriveDate, Airline airline, Airport origin,
@@ -58,7 +58,7 @@ interface DataAccess {
 
     // TRAVELLERS TABLE METHODS
     public ArrayList<Traveller> getTravellers();
-  
+
     public boolean insertTraveller(Traveller traveller);
 
     public boolean updateTraveller(Traveller traveller, int newID, String newName);

@@ -48,8 +48,6 @@ public class SearchCriteriaTest {
         assertTrue(PREFERRED_CLASS.equals(searchCriteria1.getPreferredClass()));
         assertTrue(searchCriteria1.isNonstop());
         assertTrue(searchCriteria1.isRefundable());
-
-
     }
 
     @Test

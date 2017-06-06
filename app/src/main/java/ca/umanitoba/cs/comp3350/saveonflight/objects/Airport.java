@@ -2,7 +2,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
 /**
  * Airport.java
- *
+ * <p>
  * Object mapped to the airport table DB
  *
  * @author Andy Lun
@@ -11,7 +11,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Airport implements Parcelable{
+public class Airport implements Parcelable {
     private String airportCode;
 
     public Airport(String airportCode) {
@@ -42,28 +42,29 @@ public class Airport implements Parcelable{
 
         return result;
     }
-    
+
     @Override
     public int describeContents() {
         return 0;
     }
+
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(airportCode);
     }
-    
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         @Override
         public Airport[] newArray(int size) {
             return new Airport[size];
         }
-        
+
         @Override
         public Airport createFromParcel(Parcel in) {
             return new Airport(in);
         }
     };
-    
+
     private Airport(Parcel in) {
         airportCode = in.readString();
     }

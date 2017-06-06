@@ -25,7 +25,7 @@ public class FindFlightsImpl implements FindFlights {
         ArrayList<Flight> flights = accessFlights.getFlights();
         return flights;
     }
-    
+
     public ArrayList<Flight> search(SearchCriteria criteria) {
         return accessFlights.search(criteria);
     }

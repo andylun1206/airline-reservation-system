@@ -15,14 +15,14 @@ public class AccessAirports {
     private Airport currentAirport;
     private int currentIndex;
 
-    AccessAirports(){
+    AccessAirports() {
         dataAccess = (DataAccessStub) Services.getDataAccess(Main.DB_NAME);
-        airports =  null;
+        airports = null;
         currentAirport = null;
         currentIndex = 0;
     }
 
-    public List<Airport> getAirports(){
+    public List<Airport> getAirports() {
         return dataAccess.getAirports();
     }
 
@@ -44,7 +44,7 @@ public class AccessAirports {
         return currentAirport;
     }
 
-    public boolean addAirport(Airport a){
+    public boolean addAirport(Airport a) {
         return dataAccess.insertAirport(a);
     }
 
@@ -52,7 +52,7 @@ public class AccessAirports {
         return dataAccess.updateAirport(a, airportCode);
     }
 
-    public boolean deleteAirport(Airport a){
+    public boolean deleteAirport(Airport a) {
         return dataAccess.deleteAirport(a);
     }
 }
