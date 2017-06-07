@@ -62,7 +62,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 		((ImageView) view.findViewById(R.id.imageView_search_criteria_icon)).setImageResource(row.getIcon());
 		final EditText input = (EditText) view.findViewById(R.id.editText_search_criteria_input);
 		input.setHint(row.getTitle());
-		setDefaults(input, row.getTitle());
+//		setDefaults(input, row.getTitle());
 		
 		input.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -111,6 +111,10 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 		return fullCriteriaList.size();
 	}
 	
+	/**
+	 * Notifies search fragment that the criteria dataset has changed
+	 * @param setOptional True if advance options are togged on, else false
+	 */
 	public void notifyDataSetChanged(boolean setOptional) {
 		fullCriteriaList.clear();
 		for (SearchCriteriaListViewEntry row : mandatoryCriteriaList) {
@@ -132,20 +136,36 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 		this.activeDateDisplay = null;
 	}
 	
+	/**
+	 * Initializes a date picker to the current date
+	 */
 	private void showDatePickerDialog() {
 		Calendar calendar = Calendar.getInstance();
 		DatePickerDialog dialog = new DatePickerDialog(this.getContext(), this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 		dialog.show();
 	}
 	
+	/**
+	 * Get the search criteria used to search for flights
+	 * @return search criteria
+	 */
 	public static SearchCriteria getCriteria() {
 		return criteria;
 	}
 	
+	/**
+	 * Set the search criteria used to search for flights
+	 * @param newCriteria new set of search criterias to be assigned
+	 */
 	public static void setCriteria(SearchCriteria newCriteria) {
 		criteria = newCriteria;
 	}
 	
+	/**
+	 * Verifies that the set of criterias match the set requirements
+	 * @param activity current activity
+	 * @return True if the requirements are met, else false
+	 */
 	public boolean verifyCriteria(Activity activity) {
 		boolean isValid = true;
 		
@@ -162,12 +182,24 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
 		return isValid;
 	}
 	
-	private boolean missingRequiredField(Activity activity, int string) {
-		ToastHandler.toastMandatoryField(activity, activity.getString(string));
+	/**
+	 * Generates a toast message to notify the user that a field is mandatory
+	 * @param activity current activity
+	 * @param field field name
+	 * @return false
+	 */
+	private boolean missingRequiredField(Activity activity, int field) {
+		ToastHandler.toastMandatoryField(activity, activity.getString(field));
 		return false;
 	}
 	
+	/**
+	 * Set default text for marker
+	 * @param input input field
+	 * @param title row hint
+	 */
 	private void setDefaults(final EditText input, String title) {
+		
 		if (title.equals("Origin")) {
 			input.setText("Winnipeg");
 		} else if (title.equals("Destination")) {
