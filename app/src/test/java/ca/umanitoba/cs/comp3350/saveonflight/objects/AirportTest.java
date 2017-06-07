@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class AirportTest {
     private final String CODE1 = "WPG01";
@@ -59,6 +60,7 @@ public class AirportTest {
         assertFalse(airport3.equals(AIRPORT1));
     }
 
+    @Test
     public void testContains() {
         assertFalse(AIRPORT1.contains(null));
         assertFalse(AIRPORT1.contains("ASDJIASJ"));
@@ -69,4 +71,15 @@ public class AirportTest {
         assertTrue(AIRPORT1.contains(subset));               // Subset match should return true
     }
 
+    @Test
+    public void testParcelable() {
+        Parcel parcel = mock(Parcel.class);
+        when(parcel.readString()).thenReturn(AIRPORT1.getAirportCode());
+        assertNotNull(parcel);
+        AIRPORT1.writeToParcel(parcel, 0);
+        parcel.setDataPosition(0);
+        Airport parceledAirport = (Airport) Airport.CREATOR.createFromParcel(parcel);
+        assertEquals(parceledAirport, AIRPORT1);
+        parcel.recycle();
+    }
 }
