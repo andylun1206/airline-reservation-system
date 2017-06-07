@@ -51,7 +51,8 @@ public class SearchCriteriaListViewEntryTest {
     public void testClone() {
         SearchCriteriaListViewEntry testEntry = entry1.clone();
         assertNotNull(testEntry);
-        assertEquals(testEntry, entry1);
         assertFalse(testEntry.equals(entry2));
+        assertEquals(1, entry1.getIcon());
+        assertEquals(s1, entry1.getTitle());
     }
 }

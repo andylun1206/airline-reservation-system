@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity
      * @return the Fragment currently defining the Activity's UI
      */
     private Fragment getVisibleFragment() {
-        FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         List<Fragment> fragments = fragmentManager.getFragments();
         if (fragments != null) {
             for (Fragment f : fragments) {
