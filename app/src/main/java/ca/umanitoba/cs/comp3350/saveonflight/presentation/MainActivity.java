@@ -1,9 +1,9 @@
 package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 /**
- * HomeFragment.java
+ * MainActivity.java
  * <p>
- * Fragment for the home page of the application.
+ * Activity for the home, search, and view flights screens of the application.
  *
  * @author Andy Lun
  */
@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -28,6 +29,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.SearchFragment.ViewFlightsListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements OnNavigationItemSelectedListener, ViewFlightsListener {
@@ -87,51 +89,83 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Fragment f = getVisibleFragment();
+
+            if (f instanceof ViewFlightsFragment) {
+                displaySelectedScreen(R.id.nav_search);
+            } else if (f instanceof  SearchFragment) {
+                displaySelectedScreen(R.id.nav_home);
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
-    private void displaySelectedScreen(int itemId) {
-        Fragment fragment = null;
-
-        switch (itemId) {
-            case R.id.nav_home:
-                fragment = new HomeFragment();
-                break;
-            case R.id.nav_search:
-                fragment = new SearchFragment();
-                break;
+    /**
+     * Returns the Fragment currently defining the Activity's UI.
+     * @return the Fragment currently defining the Activity's UI
+     */
+    private Fragment getVisibleFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        if (fragments != null) {
+            for (Fragment f : fragments) {
+                if (f != null && f.isVisible()) {
+                    return f;
+                }
+            }
         }
-
-        if (fragment != null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.content_frame, fragment)
-                    .commit();
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        return null;
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        displaySelectedScreen(item.getItemId());
-        return true;
-    }
+	/**
+	 * Switches fragments based on the navigation drawer item selected.
+	 * @param itemId Id of drawer item selected
+	 */
+	private void displaySelectedScreen(int itemId) {
+		Fragment fragment = null;
 
-    @Override
-    public void viewFlights(ArrayList<Flight> flights) {
-        Fragment viewFragment = new ViewFlightsFragment();
-        Bundle args = new Bundle();
-        args.putParcelableArrayList("flights", flights);
-        viewFragment.setArguments(args);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.content_frame, viewFragment)
-                .commit();
-    }
+		switch (itemId) {
+			case R.id.nav_home:
+				fragment = new HomeFragment();
+				break;
+			case R.id.nav_search:
+				fragment = new SearchFragment();
+				break;
+		}
 
+		if (fragment != null) {
+			getSupportFragmentManager()
+					.beginTransaction()
+					.replace(R.id.content_frame, fragment)
+					.commit();
+		}
+
+		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		drawer.closeDrawer(GravityCompat.START);
+	}
+
+	@SuppressWarnings("StatementWithEmptyBody")
+	@Override
+	public boolean onNavigationItemSelected(MenuItem item) {
+		// Handle navigation view item clicks here.
+		displaySelectedScreen(item.getItemId());
+		return true;
+	}
+
+	/**
+	 * Switch context from searching to viewing flights
+	 * @param flights result of search
+	 */
+	@Override
+	public void viewFlights(ArrayList<Flight> flights) {
+		Fragment viewFragment = new ViewFlightsFragment();
+		Bundle args = new Bundle();
+		args.putParcelableArrayList("flights", flights);
+		viewFragment.setArguments(args);
+		getSupportFragmentManager()
+				.beginTransaction()
+				.replace(R.id.content_frame, viewFragment)
+				.commit();
+	}
 }

@@ -63,7 +63,6 @@ public class BookedFlightTest {
 
         assertTrue(booked1.equals(booked4));//julia+AC01 == julia+AC01
         //error cases
-        assertEquals(booked1, booked2);
         assertFalse(booked1.equals(null));
     }
     @Test
