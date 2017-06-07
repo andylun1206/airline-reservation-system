@@ -21,7 +21,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccessStubTest;
         AirportTest.class,
         BookedFlightTest.class,
         FlightTest.class,
-        SearchCriteriaListViewEntryTest.class,
         SearchCriteriaTest.class,
         TravellerTest.class,
         SortFlightsTest.class,
