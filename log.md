@@ -50,10 +50,8 @@ and more time efficient than trying to come up with our own.
 - Problem: Logic for sorting Flights (GitHub issue #31)
     - We want to be able to sort a list of Flights by:
         - Date
-        - Airline
+        - Duration
         - Price
-        - Capacity
-        - Seats Available
     - Created Comparators for each parameter we want to be able to search by and then just use the built in Collections.sort() method
         - Passed in the Comparator that corresponds to what parameter we are sorting by
     - After implementation, extracted an interface (SortFlights) and renamed the implementation to SortFlightsImpl
