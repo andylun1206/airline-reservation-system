@@ -53,6 +53,7 @@ public abstract class DataAccessStub implements DataAccess {
     public void close() {
         System.out.println("Closed " + dbType + " database " + dbName);
     }
+    public abstract void initialize();
 
     public abstract boolean update(Object... o);
 

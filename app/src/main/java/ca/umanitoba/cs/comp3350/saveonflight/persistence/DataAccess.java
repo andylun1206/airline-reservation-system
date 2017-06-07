@@ -16,6 +16,8 @@ interface DataAccess {
 
     public void close();
 
+    public void initialize();
+
     public boolean update(Object... o);
 
     public boolean insert(Object o);
