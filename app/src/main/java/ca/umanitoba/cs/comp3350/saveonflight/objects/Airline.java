@@ -12,7 +12,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-public class Airline implements Parcelable, Comparable {
+public class Airline implements Parcelable, Comparable  {
     private String name;
     private int icon;
 
