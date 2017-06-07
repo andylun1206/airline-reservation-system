@@ -2,7 +2,9 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
 import org.junit.After;
 import org.junit.Before;
+
 import org.junit.Ignore;
+
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
@@ -36,7 +38,7 @@ public class ViewFlightsListViewEntryTest {
         assertEquals("8:00am", entry1.getTime());
         assertFalse((entry1.getTime()).equals(entry2.getTime()));
     }
-    
+
     @Test
     public void testGetPrice() {
         assertEquals(entry1.getPrice(), 350.0);

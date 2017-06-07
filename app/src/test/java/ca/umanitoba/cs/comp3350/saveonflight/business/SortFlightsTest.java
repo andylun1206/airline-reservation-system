@@ -40,20 +40,20 @@ public class SortFlightsTest {
         Date d5 = null;
         Date a5 = null;
         try {
-            d1 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 06, 54");
+            d1 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 06, 54"); // 3 hours
             a1 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 09, 54");
 
-            d2 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 08, 07, 30");
+            d2 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 08, 07, 30"); // 4 hours 24 min
             a2 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 08, 11, 54");
 
-            d3 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 09, 08, 24");
+            d3 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 09, 08, 24"); // 4 hours 30 min
             a3 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 09, 12, 54");
 
-            d4 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 09, 01, 13, 00");
+            d4 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 09, 01, 13, 00"); // 2 hours 54 min
             a4 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 15, 54");
 
-            d5 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 06, 55");
-            a5 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 09, 55");
+            d5 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 06, 55"); // 3 hours 1 min
+            a5 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 09, 56");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -227,6 +227,21 @@ public class SortFlightsTest {
         sortFlights.sortFlightsBy(flights, SortFlights.SortParameter.SEATS_AVAILABLE);
         for (int i = 0; i < flights.size(); i++) {
             assertEquals(flightsBySeatsAvailable.get(i), flights.get(i));
+        }
+    }
+
+    @Test
+    public void testSortByDuration() {
+        ArrayList<Flight> flightsByDuration = new ArrayList<>();
+        flightsByDuration.add(f4);
+        flightsByDuration.add(f1);
+        flightsByDuration.add(f5);
+        flightsByDuration.add(f2);
+        flightsByDuration.add(f3);
+
+        sortFlights.sortFlightsBy(flights, SortFlights.SortParameter.DURATION);
+        for (int i = 0; i < flights.size(); i++) {
+            assertEquals(flightsByDuration.get(i), flights.get(i));
         }
     }
 }

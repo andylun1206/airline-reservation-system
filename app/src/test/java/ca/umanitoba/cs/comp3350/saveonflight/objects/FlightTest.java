@@ -1,5 +1,7 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
+import android.os.Parcel;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +13,8 @@ import java.util.GregorianCalendar;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 import static junit.framework.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class FlightTest {
     private Flight flight;

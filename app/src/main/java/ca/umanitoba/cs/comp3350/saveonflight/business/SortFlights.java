@@ -22,6 +22,6 @@ public interface SortFlights {
     void sortFlightsBy(ArrayList<Flight> flights, SortParameter sortBy);
 
     enum SortParameter {
-        DATE, AIRLINE, PRICE, CAPACITY, SEATS_AVAILABLE
+        DATE, AIRLINE, PRICE, CAPACITY, SEATS_AVAILABLE, DURATION
     }
 }

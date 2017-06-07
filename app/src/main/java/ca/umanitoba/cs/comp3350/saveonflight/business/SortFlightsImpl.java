@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.concurrent.TimeUnit;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 
@@ -48,6 +49,9 @@ public class SortFlightsImpl implements SortFlights {
                 break;
             case SEATS_AVAILABLE:
                 comparator = new SeatsAvailableComparator();
+                break;
+            case DURATION:
+                comparator = new DurationComparator();
                 break;
             default:
                 comparator = new DepartureTimeComparator();
@@ -160,6 +164,13 @@ public class SortFlightsImpl implements SortFlights {
         public int compare(@NonNull Flight f1, @NonNull Flight f2) {
             // Note: We want descending order here
             return f2.getSeatsRemaining() - f1.getSeatsRemaining();
+        }
+    }
+
+    private class DurationComparator implements Comparator<Flight> {
+        @Override
+        public int compare(@NonNull Flight f1, @NonNull Flight f2) {
+            return (int) (f1.getDateDiff(TimeUnit.MINUTES) - f2.getDateDiff(TimeUnit.MINUTES));
         }
     }
 }
