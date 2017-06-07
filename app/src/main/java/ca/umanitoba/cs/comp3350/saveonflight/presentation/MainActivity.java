@@ -1,9 +1,9 @@
 package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 /**
- * HomeFragment.java
+ * MainActivity.java
  * <p>
- * Fragment for the home page of the application.
+ * Activity for the home, search, and view flights screens of the application.
  *
  * @author Andy Lun
  */
@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -28,6 +29,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.SearchFragment.ViewFlightsListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements OnNavigationItemSelectedListener, ViewFlightsListener {
@@ -87,8 +89,29 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Fragment f = getVisibleFragment();
+
+            if (f instanceof ViewFlightsFragment) {
+                displaySelectedScreen(R.id.nav_search);
+            } else if (f instanceof  SearchFragment) {
+                displaySelectedScreen(R.id.nav_home);
+            } else {
+                super.onBackPressed();
+            }
         }
+    }
+
+    private Fragment getVisibleFragment() {
+        FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        if (fragments != null) {
+            for (Fragment f : fragments) {
+                if (f != null && f.isVisible()) {
+                    return f;
+                }
+            }
+        }
+        return null;
     }
 
     private void displaySelectedScreen(int itemId) {
