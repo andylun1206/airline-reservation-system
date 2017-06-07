@@ -15,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlights;
+import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListViewEntry;
 
@@ -52,13 +54,43 @@ public class ViewFlightsFragment extends ListFragment {
 			title = getString(R.string.view_flights_flight_path, flights.get(0).getOrigin().toString(),
 					flights.get(0).getDestination().toString());
 			
-			for (Flight f : flights) {
-				flightList.add(new ViewFlightsListViewEntry(f.getFlightTime(), f.getPrice(), f.getAirline().getIcon(), f.getFlightID(), f.getFlightDuration()));
-			}
-			
-			flightAdapter.notifyDataSetChanged();
+			updateFlightList();
 		}
 		
 		getActivity().setTitle(title);
+		
+		view.findViewById(R.id.button_view_flight_sort_duration).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				ToastHandler.toastComingSoon(getActivity(), "Sort by duration");
+			}
+		});
+		
+		view.findViewById(R.id.button_view_flight_sort_price).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				new SortFlightsImpl().sortFlightsBy(flights, SortFlights.SortParameter.PRICE);
+				updateFlightList();
+			}
+		});
+		
+		view.findViewById(R.id.button_view_flight_sort_time).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				new SortFlightsImpl().sortFlightsBy(flights, SortFlights.SortParameter.DATE);
+				updateFlightList();
+			}
+		});
 	}
+	
+	private void updateFlightList() {
+		flightList.clear();
+		
+		for (Flight f : flights) {
+			flightList.add(new ViewFlightsListViewEntry(f.getFlightTime(), f.getPrice(), f.getAirline().getIcon(), f.getFlightID(), f.getFlightDuration()));
+		}
+		
+		flightAdapter.notifyDataSetChanged();
+	}
+	
 }
