@@ -74,9 +74,18 @@ public class DataAccessStub implements DataAccess {
         flights = new ArrayList<Flight>();
         try {
             ywgToYvr = new Flight("WJ 001", simpleDateFormat.parse("2017, 11, 11, 22, 30"), simpleDateFormat.parse("2017, 11, 12, 01, 30"), westJet, winnipeg,
+                    vancouver, 400.00, 200, 0, FlightClassEnum.ECONOMY);
+            flights.add(ywgToYvr);
+            ywgToYvr = new Flight("WJ 002", simpleDateFormat.parse("2017, 11, 11, 00, 30"), simpleDateFormat.parse("2017, 11, 12, 01, 30"), westJet, winnipeg,
                     vancouver, 200.00, 200, 0, FlightClassEnum.ECONOMY);
             flights.add(ywgToYvr);
-            yvrToYwg = new Flight("WJ 001", simpleDateFormat.parse("2017, 10, 10, 22, 30"), simpleDateFormat.parse("2017, 10, 12, 22, 30"), westJet, vancouver,
+            ywgToYvr = new Flight("WJ 003", simpleDateFormat.parse("2017, 11, 11, 13, 30"), simpleDateFormat.parse("2017, 11, 12, 01, 30"), westJet, winnipeg,
+                    vancouver, 300.00, 200, 0, FlightClassEnum.ECONOMY);
+            flights.add(ywgToYvr);
+            ywgToYvr = new Flight("WJ 004", simpleDateFormat.parse("2017, 11, 11, 14, 30"), simpleDateFormat.parse("2017, 11, 12, 01, 30"), westJet, winnipeg,
+                    vancouver, 500.00, 200, 0, FlightClassEnum.ECONOMY);
+            flights.add(ywgToYvr);
+            yvrToYwg = new Flight("WJ 005", simpleDateFormat.parse("2017, 10, 10, 08, 30"), simpleDateFormat.parse("2017, 10, 12, 22, 30"), westJet, vancouver,
                     winnipeg, 350.00, 200, 0, FlightClassEnum.ECONOMY);
             flights.add(yvrToYwg);
             ywgToYyc = new Flight("AC 001", simpleDateFormat.parse("2017, 9, 11, 22, 30"), simpleDateFormat.parse("2017, 9, 12, 22, 30"), airCanada, winnipeg,
