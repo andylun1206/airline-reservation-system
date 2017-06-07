@@ -19,7 +19,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
-public abstract class DataAccessStub implements DataAccess {
+public class DataAccessStub implements DataAccess {
     private String dbName;
     private String dbType = "stub";
     private AirlineTable airlineTable;
@@ -47,24 +47,27 @@ public abstract class DataAccessStub implements DataAccess {
         bookedFlightTable.initialize();
         flightTable = new FlightTable("Flight");
         flightTable.initialize();
-        System.out.println("Opened " + dbType + " database " + dbName);
+        System.out.println("Opened " + dbType + " database ");
     }
 
     public void close() {
-        System.out.println("Closed " + dbType + " database " + dbName);
+        System.out.println("Closed " + dbType + " database ");
     }
-    public abstract void initialize();
 
-    public abstract boolean update(Object... o);
+    public void initialize(){}
 
-    public abstract boolean insert(Object o);
+    public boolean update(Object... o){return false;}
 
-    public abstract boolean remove(Object o);
+    public boolean insert(Object o){return false;}
+
+    public boolean remove(Object o){return false;}
 
     //abstract void find(Object o);//add, update, remove, find
 
     // AIRLINE TABLE METHODS
-    public ArrayList<Airline> getAirlines() {return airlineTable.getAirlines();}
+    public ArrayList<Airline> getAirlines() {
+        return airlineTable.getAirlines();
+    }
 
     /*public boolean insertAirline(Airline airline) {}
 
@@ -74,7 +77,9 @@ public abstract class DataAccessStub implements DataAccess {
 */
 
     // AIRPORT TABLE METHODS
-    public ArrayList<Airport> getAirports() {return airportTable.getAirports();}
+    public ArrayList<Airport> getAirports() {
+        return airportTable.getAirports();
+    }
 
     /*public boolean insertAirport(Airport airport) {}
 
@@ -84,7 +89,9 @@ public abstract class DataAccessStub implements DataAccess {
 */
 
     // BOOKEDFLIGHTS TABLE METHODS
-    public ArrayList<BookedFlight> getBookedFlights() {return bookedFlightTable.getBookedFlights();}
+    public ArrayList<BookedFlight> getBookedFlights() {
+        return bookedFlightTable.getBookedFlights();
+    }
 
     /*public boolean insertBookedFlight(BookedFlight bookedFlight) {}
 
@@ -117,7 +124,9 @@ public abstract class DataAccessStub implements DataAccess {
     }
 
     // FLIGHTS TABLE METHODS
-    public ArrayList<Flight> getFlights() {return flightTable.getFlights();}
+    public ArrayList<Flight> getFlights() {
+        return flightTable.getFlights();
+    }
 
     /*public boolean insertFlight(Flight flight) {}
 
