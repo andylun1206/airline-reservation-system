@@ -1,5 +1,13 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
+/**
+ * ViewFlightsListViewEntry.java
+ * <p>
+ * Object representing an entry in the ListView on the view flights page.
+ *
+ * @author Andy Lun
+ */
+
 public class ViewFlightsListViewEntry {
     private String time;
     private double price;

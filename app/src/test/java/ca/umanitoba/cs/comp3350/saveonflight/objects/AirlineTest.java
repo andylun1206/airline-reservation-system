@@ -20,7 +20,7 @@ public class AirlineTest {
     @Before
     public void setUp() {
         airline2 = new Airline(WJ, R.mipmap.ic_westjet);
-        wrongObject = "Air Caaanada";
+        wrongObject = "Air Canada";
     }
 
     @After
@@ -35,7 +35,11 @@ public class AirlineTest {
         airline2.setName(AC);
         assertEquals(AC, airline2.getName());
     }
-
+    @Test
+    public void testGetIcon(){
+        assertEquals(airline2.getIcon(),R.mipmap.ic_westjet);
+        assertFalse(AIRLINE.getIcon()==R.mipmap.ic_westjet);
+    }
     @Test
     public void testEqualsMethod() {
         assertFalse(AIRLINE.equals(airline2));    //westjet != air canada

@@ -1,9 +1,9 @@
 package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 /**
- * HomeFragment.java
+ * MainActivity.java
  * <p>
- * Fragment for the home page of the application.
+ * Activity for the home, search, and view flights screens of the application.
  *
  * @author Andy Lun
  */
@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -28,6 +29,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.SearchFragment.ViewFlightsListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements OnNavigationItemSelectedListener, ViewFlightsListener {
@@ -80,24 +82,49 @@ public class MainActivity extends AppCompatActivity
         super.onDestroy();
         Main.shutDown();
     }
-	
-	@Override
-	public void onBackPressed() {
-		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-		if (drawer.isDrawerOpen(GravityCompat.START)) {
-			drawer.closeDrawer(GravityCompat.START);
-		} else {
-			super.onBackPressed();
-		}
-	}
-	
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            Fragment f = getVisibleFragment();
+
+            if (f instanceof ViewFlightsFragment) {
+                displaySelectedScreen(R.id.nav_search);
+            } else if (f instanceof  SearchFragment) {
+                displaySelectedScreen(R.id.nav_home);
+            } else {
+                super.onBackPressed();
+            }
+        }
+    }
+
+    /**
+     * Returns the Fragment currently defining the Activity's UI.
+     * @return the Fragment currently defining the Activity's UI
+     */
+    private Fragment getVisibleFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        if (fragments != null) {
+            for (Fragment f : fragments) {
+                if (f != null && f.isVisible()) {
+                    return f;
+                }
+            }
+        }
+        return null;
+    }
+
 	/**
 	 * Switches fragments based on the navigation drawer item selected.
 	 * @param itemId Id of drawer item selected
 	 */
 	private void displaySelectedScreen(int itemId) {
 		Fragment fragment = null;
-		
+
 		switch (itemId) {
 			case R.id.nav_home:
 				fragment = new HomeFragment();
@@ -106,18 +133,18 @@ public class MainActivity extends AppCompatActivity
 				fragment = new SearchFragment();
 				break;
 		}
-		
+
 		if (fragment != null) {
 			getSupportFragmentManager()
 					.beginTransaction()
 					.replace(R.id.content_frame, fragment)
 					.commit();
 		}
-		
+
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);
 	}
-	
+
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
 	public boolean onNavigationItemSelected(MenuItem item) {
@@ -125,7 +152,7 @@ public class MainActivity extends AppCompatActivity
 		displaySelectedScreen(item.getItemId());
 		return true;
 	}
-	
+
 	/**
 	 * Switch context from searching to viewing flights
 	 * @param flights result of search

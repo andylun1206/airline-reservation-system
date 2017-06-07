@@ -12,7 +12,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
  * @author Kenny Zhang
  */
 
-interface AccessAirlines {
+public interface AccessAirlines {
     List<Airline> getAirlines();
 
     boolean insertAirline(Airline airline);

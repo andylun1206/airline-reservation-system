@@ -86,12 +86,12 @@ public class FlightTest {
         final Date ARRIVE = cal.getTime();
         Flight otherFlight = new Flight("AC101", DEPART, ARRIVE, AC, ORIGIN, DEST, PRICE, CAP, 0, FLIGHT_CLASS);
 
-        assertNotSame(null, flight);
-        assertNotSame(FLIGHT_ID, flight);
-        assertNotSame(otherFlight, flight);
+        assertFalse(null == flight);              // null
+        assertFalse(flight.equals(FLIGHT_ID));    // Not same class
+        assertFalse(otherFlight.equals(flight));  // Same class, but not same Flight
 
         otherFlight.setFlightID(FLIGHT_ID);
-        assertEquals(otherFlight, flight);
+        assertEquals(otherFlight, flight);        // Same Flight
     }
 
 
@@ -99,7 +99,7 @@ public class FlightTest {
     public void testFlightId() {
         final String NEW_ID = "ABCDEFG";
         assertEquals(FLIGHT_ID, flight.getFlightID());
-        assertNotSame(NEW_ID, flight.getFlightID());
+        assertFalse(flight.getFlightID().equals(NEW_ID));
         flight.setFlightID(NEW_ID);
         assertEquals(NEW_ID, flight.getFlightID());
     }
@@ -108,7 +108,7 @@ public class FlightTest {
     public void testAirline() {
         final Airline NEW_AIRLINE = new Airline("Air Spain", R.mipmap.ic_launcher);
         assertEquals(AIRLINE, flight.getAirline());
-        assertNotSame(NEW_AIRLINE, flight.getAirline());
+        assertFalse(flight.getAirline().equals(NEW_AIRLINE));
         flight.setAirline(NEW_AIRLINE);
         assertEquals(NEW_AIRLINE, flight.getAirline());
     }
@@ -117,7 +117,7 @@ public class FlightTest {
     public void testOrigin() {
         final Airport NEW_ORIGIN = new Airport("Flin Flon International YYY");
         assertEquals(ORIGIN, flight.getOrigin());
-        assertNotSame(NEW_ORIGIN, flight.getOrigin());
+        assertFalse(flight.getOrigin().equals(NEW_ORIGIN));
         flight.setOrigin(NEW_ORIGIN);
         assertEquals(NEW_ORIGIN, flight.getOrigin());
     }
@@ -126,7 +126,7 @@ public class FlightTest {
     public void testDestination() {
         final Airport NEW_DEST = new Airport("The Moon");
         assertEquals(DEST, flight.getDestination());
-        assertNotSame(NEW_DEST, flight.getDestination());
+        assertFalse(flight.getDestination().equals(NEW_DEST));
         flight.setDestination(NEW_DEST);
         assertEquals(NEW_DEST, flight.getDestination());
     }
@@ -135,7 +135,7 @@ public class FlightTest {
     public void testCapacity() {
         final int OTHER_CAP = 1;
         assertEquals(CAP, flight.getCapacity());
-        assertNotSame(OTHER_CAP, flight.getCapacity());
+        assertTrue(flight.getCapacity() != OTHER_CAP);
         flight.setCapacity(OTHER_CAP);
         assertEquals(OTHER_CAP, flight.getCapacity());
     }
@@ -153,7 +153,7 @@ public class FlightTest {
     @Test
     public void testFlightClass() {
         assertEquals(FLIGHT_CLASS, flight.getFlightClass());
-        assertNotSame(FlightClassEnum.ECONOMY, flight.getFlightClass());
+        assertTrue(FlightClassEnum.ECONOMY != flight.getFlightClass());
         flight.setFlightClass(FlightClassEnum.ECONOMY);
         assertEquals(FlightClassEnum.ECONOMY, flight.getFlightClass());
     }
@@ -163,7 +163,7 @@ public class FlightTest {
         cal.set(2017, 1, 1, 12, 2);
         final Date NEW_DEPARTURE_TIME = cal.getTime();
         assertEquals(departureTime, flight.getDepartureTime());
-        assertNotSame(NEW_DEPARTURE_TIME, flight.getDepartureTime());
+        assertFalse(flight.getDepartureTime().equals(NEW_DEPARTURE_TIME));
         flight.setDepartureTime(NEW_DEPARTURE_TIME);
         assertEquals(NEW_DEPARTURE_TIME, flight.getDepartureTime());
     }
@@ -173,7 +173,7 @@ public class FlightTest {
         cal.set(2017, 1, 1, 15, 2);
         final Date NEW_ARRIVAL_TIME = cal.getTime();
         assertEquals(arrivalTime, flight.getArrivalTime());
-        assertNotSame(NEW_ARRIVAL_TIME, flight.getArrivalTime());
+        assertFalse(flight.getArrivalTime().equals(NEW_ARRIVAL_TIME));
         flight.setArrivalTime(NEW_ARRIVAL_TIME);
         assertEquals(NEW_ARRIVAL_TIME, flight.getArrivalTime());
     }
