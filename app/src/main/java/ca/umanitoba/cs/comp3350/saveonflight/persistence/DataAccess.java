@@ -8,6 +8,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
 interface DataAccess {
@@ -15,8 +16,30 @@ interface DataAccess {
 
     public void close();
 
-    // AIRLINE TABLE METHDOS
+    public boolean update(Object... o);
+
+    public boolean insert(Object o);
+
+    public boolean remove(Object o);
+
     public ArrayList<Airline> getAirlines();
+
+    public ArrayList<Airport> getAirports();
+
+    public ArrayList<BookedFlight> getBookedFlights();
+
+    public ArrayList<Flight> getFlights();
+
+    public ArrayList<Traveller> getTravellers();
+
+    public ArrayList<BookedFlight> getTravellersBookedFlights(Traveller traveller);
+
+    public ArrayList<BookedFlight> getTravellersOnFlight(Flight flight);
+
+    public ArrayList<Flight> searchByCriteria(SearchCriteria criteria);
+
+    /*// AIRLINE TABLE METHDOS
+
 
     public boolean insertAirline(Airline airline);
 
@@ -25,7 +48,7 @@ interface DataAccess {
     public boolean deleteAirline(Airline airline);
 
     // AIRPORT TABLE METHODS
-    public ArrayList<Airport> getAirports();
+
   
     public boolean insertAirport(Airport airport);
 
@@ -34,20 +57,18 @@ interface DataAccess {
     public boolean deleteAirport(Airport airport);
 
     // BOOKEDFLIGHTS TABLE METHODS
-    public ArrayList<BookedFlight> getBookedFlights();
+
   
     public boolean insertBookedFlight(BookedFlight bookedFlight);
 
     public boolean updateBookedFlight(BookedFlight bookedFlight, Traveller t, Flight f);
 
     public boolean deleteBookedFlight(BookedFlight bookedFlight);
-  
-    public ArrayList<BookedFlight> getTravellersBookedFlights(Traveller traveller);
-  
-    public ArrayList<BookedFlight> getTravellersOnFlight(Flight flight);
+  */
 
-    // FLIGHTS TABLE METHODS
-    public ArrayList<Flight> getFlights();
+
+    /*// FLIGHTS TABLE METHODS
+
   
     public boolean insertFlight(Flight flight);
 
@@ -57,11 +78,11 @@ interface DataAccess {
     public boolean deleteFlight(Flight flight);
 
     // TRAVELLERS TABLE METHODS
-    public ArrayList<Traveller> getTravellers();
+
   
     public boolean insertTraveller(Traveller traveller);
 
     public boolean updateTraveller(Traveller traveller, int newID, String newName);
 
-    public boolean deleteTraveller(Traveller traveller);
+    public boolean deleteTraveller(Traveller traveller);*/
 }

@@ -21,8 +21,8 @@ public class BookedFlightTable extends DataAccessStub {
 
     public void initialize() {
         bookedFlights = new ArrayList<BookedFlight>();
-        ArrayList<Traveller> travellers=super.getTravellers();
-        ArrayList<Flight> flights=super.getFlights();
+        ArrayList<Traveller> travellers = super.getTravellers();
+        ArrayList<Flight> flights = super.getFlights();
         bookedFlight = new BookedFlight(travellers.get(0), flights.get(0));
         bookedFlights.add(bookedFlight);
         bookedFlight = new BookedFlight(travellers.get(0), flights.get(1));
@@ -41,10 +41,11 @@ public class BookedFlightTable extends DataAccessStub {
         return result;
     }
 
-    public boolean insert(Object o){
+    public boolean insert(Object o) {
         return bookedFlights.add((BookedFlight) o);
     }
-    public boolean update(Object... o){
+
+    public boolean update(Object... o) {
         int index;
 
         index = bookedFlights.indexOf((BookedFlight) o[0]);
@@ -57,7 +58,8 @@ public class BookedFlightTable extends DataAccessStub {
 
         return false;
     }
-    public boolean remove(Object o){
+
+    public boolean remove(Object o) {
         int index;
         index = bookedFlights.indexOf((BookedFlight) o);
         if (index >= 0) {
@@ -67,7 +69,8 @@ public class BookedFlightTable extends DataAccessStub {
         return false;
 
     }
-    public void find(Object o){
 
-    }
+    /*public void find(Object o) {
+
+    }*/
 }

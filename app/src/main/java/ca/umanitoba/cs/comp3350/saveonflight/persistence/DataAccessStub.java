@@ -54,43 +54,43 @@ public abstract class DataAccessStub implements DataAccess {
         System.out.println("Closed " + dbType + " database " + dbName);
     }
 
-    abstract boolean update(Object... o);
+    public abstract boolean update(Object... o);
 
-    abstract boolean insert(Object o);
+    public abstract boolean insert(Object o);
 
-    abstract boolean remove(Object o);
+    public abstract boolean remove(Object o);
 
     //abstract void find(Object o);//add, update, remove, find
 
     // AIRLINE TABLE METHODS
-    public ArrayList<Airline> getAirlines() {}
+    public ArrayList<Airline> getAirlines() {return airlineTable.getAirlines();}
 
-    public boolean insertAirline(Airline airline) {}
+    /*public boolean insertAirline(Airline airline) {}
 
     public boolean updateAirline(Airline airline, String name) {}
 
     public boolean deleteAirline(Airline airline) {}
-
+*/
 
     // AIRPORT TABLE METHODS
-    public ArrayList<Airport> getAirports() {}
+    public ArrayList<Airport> getAirports() {return airportTable.getAirports();}
 
-    public boolean insertAirport(Airport airport) {}
+    /*public boolean insertAirport(Airport airport) {}
 
     public boolean updateAirport(Airport airport, String airportCode) {}
 
     public boolean deleteAirport(Airport airport) {}
-
+*/
 
     // BOOKEDFLIGHTS TABLE METHODS
-    public ArrayList<BookedFlight> getBookedFlights() {}
+    public ArrayList<BookedFlight> getBookedFlights() {return bookedFlightTable.getBookedFlights();}
 
-    public boolean insertBookedFlight(BookedFlight bookedFlight) {}
+    /*public boolean insertBookedFlight(BookedFlight bookedFlight) {}
 
     public boolean updateBookedFlight(BookedFlight bookedFlight, Traveller t, Flight f) {}
 
     public boolean deleteBookedFlight(BookedFlight bookedFlight) {}
-
+*/
     public ArrayList<BookedFlight> getTravellersBookedFlights(Traveller traveller) {
         ArrayList<BookedFlight> result = new ArrayList<BookedFlight>();
 
@@ -116,15 +116,15 @@ public abstract class DataAccessStub implements DataAccess {
     }
 
     // FLIGHTS TABLE METHODS
-    public ArrayList<Flight> getFlights() {}
+    public ArrayList<Flight> getFlights() {return flightTable.getFlights();}
 
-    public boolean insertFlight(Flight flight) {}
+    /*public boolean insertFlight(Flight flight) {}
 
     public boolean updateFlight(Flight flight, String flightID, Date departDate, Date arriveDate, Airline airline, Airport origin,
                                 Airport dest, double price, int capacity, int seatsTaken, FlightClassEnum flightClass) {}
 
     public boolean deleteFlight(Flight flight) {}
-
+*/
     public ArrayList<Flight> searchByCriteria(SearchCriteria criteria) {
         ArrayList<Flight> table;
         table = createTableByOriginAndDestination(new ArrayList<Flight>(), criteria.getOrigin(), criteria.getDestination());
@@ -145,39 +145,15 @@ public abstract class DataAccessStub implements DataAccess {
 
     // TRAVELLERS TABLE METHODS
     public ArrayList<Traveller> getTravellers() {
-        ArrayList<Traveller> result = new ArrayList<>();
-        result.addAll(travellerTable.getTravellers());
-        return result;
+        return travellerTable.getTravellers();
     }
 
-    public boolean insertTraveller(Traveller traveller) {
-        return travellerTable.getTravellers().add(traveller);
-    }
+    /*public boolean insertTraveller(Traveller traveller) {}
 
-    public boolean updateTraveller(Traveller traveller, int newID, String newName) {
-        boolean result = false;
+    public boolean updateTraveller(Traveller traveller, int newID, String newName) {}
 
-        int index = travellerTable.getTravellers().indexOf(traveller);
-        if (index >= 0) {
-            Traveller toUpdate = travellerTable.getTravellers().get(index);
-            toUpdate.setTravellerID(newID);
-            toUpdate.setName(newName);
-            result = true;
-        }
-
-        return result;
-    }
-
-    public boolean deleteTraveller(Traveller traveller) {
-        int index;
-        index = travellerTable.getTravellers().indexOf(traveller);
-        if (index >= 0) {
-            travellerTable.getTravellers().remove(index);
-            return true;
-        }
-        return false;
-    }
-
+    public boolean deleteTraveller(Traveller traveller) {}
+*/
     private ArrayList<Flight> createTableByOriginAndDestination(ArrayList<Flight> table, Airport origin, Airport destination) {
         Flight temp;
         for (int i = 0; i < flightTable.getFlights().size(); i++) {
