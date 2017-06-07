@@ -53,10 +53,7 @@ public class SearchCriteriaTest {
         assertTrue(PREFERRED_CLASS.equals(searchCriteriaTest1.getPreferredClass()));
         assertTrue(searchCriteriaTest1.isNonstop());
         assertTrue(searchCriteriaTest1.isRefundable());
-
         assertFalse(searchCriteria.equals(searchCriteriaTest1));//same condition but different search
-
-
     }
 
     @Test
