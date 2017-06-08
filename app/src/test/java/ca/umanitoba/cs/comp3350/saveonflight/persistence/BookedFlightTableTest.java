@@ -26,6 +26,8 @@ public class BookedFlightTableTest {
     @BeforeClass
     public static void setUp() {
         bookedFlightTable = new BookedFlightTable();
+        new TravellerTable().initialize();
+        new FlightTable().initialize();
         bookedFlightTable.initialize();
         original = BookedFlightTable.getBookedFlights();
     }
@@ -42,7 +44,7 @@ public class BookedFlightTableTest {
 
     @Test
     public void testAddNull() {
-        bookedFlightTable.add(nullCase);
+        bookedFlightTable.add(null);
         assertEquals("Add null but actually add something", original, BookedFlightTable.getBookedFlights());
     }
 
@@ -75,7 +77,7 @@ public class BookedFlightTableTest {
 
     @Test
     public void testUpdateNull() {
-        assertFalse("update to null?", bookedFlightTable.update(nullCase));
+        assertFalse("update to null?", bookedFlightTable.update(null));
     }
 
 
@@ -83,7 +85,7 @@ public class BookedFlightTableTest {
     public void testUpdateValid() {
         bookedFlightTable.add(validCase);
         // well done it at next teration
-        assertFalse("should update a null object", bookedFlightTable.update(nullCase));
+        assertFalse("should update a null object", bookedFlightTable.update(null));
 
         bookedFlightTable.remove(validCase);
     }

@@ -101,28 +101,30 @@ public class FlightTable implements FlightAccess {
 
     public boolean update(Flight flight) {
         boolean isUpdated = false;
-        Date departureTime = flight.getDepartureTime();
-        String flightId = flight.getFlightID();
-        int changes = 0;
-        int index = 0;
-        Flight temp;
-        for (int i = 0; i < flights.size(); i++) {
-            temp = flights.get(i);
-            if (temp.getDepartureTime().equals(departureTime) && temp.getFlightID().equals(flightId)) {
-                changes++;
-                index = i;
+        if(flight != null) {
+            Date departureTime = flight.getDepartureTime();
+            String flightId = flight.getFlightID();
+            int changes = 0;
+            int index = 0;
+            Flight temp;
+            for (int i = 0; i < flights.size(); i++) {
+                temp = flights.get(i);
+                if (temp.getDepartureTime().equals(departureTime) && temp.getFlightID().equals(flightId)) {
+                    changes++;
+                    index = i;
+                }
             }
-        }
-        if (changes != 0) {
-            isUpdated = true;
-            flights.get(index).setAirline(flight.getAirline());
-            flights.get(index).setArrivalTime(flight.getArrivalTime());
-            flights.get(index).setOrigin(flight.getOrigin());
-            flights.get(index).setDestination(flight.getDestination());
-            flights.get(index).setPrice(flight.getPrice());
-            flights.get(index).setCapacity(flight.getCapacity());
-            flights.get(index).setSeatsTaken(flight.getSeatsTaken());
-            flights.get(index).setFlightClass(flight.getFlightClass());
+            if (changes != 0) {
+                isUpdated = true;
+                flights.get(index).setAirline(flight.getAirline());
+                flights.get(index).setArrivalTime(flight.getArrivalTime());
+                flights.get(index).setOrigin(flight.getOrigin());
+                flights.get(index).setDestination(flight.getDestination());
+                flights.get(index).setPrice(flight.getPrice());
+                flights.get(index).setCapacity(flight.getCapacity());
+                flights.get(index).setSeatsTaken(flight.getSeatsTaken());
+                flights.get(index).setFlightClass(flight.getFlightClass());
+            }
         }
         return isUpdated;
     }

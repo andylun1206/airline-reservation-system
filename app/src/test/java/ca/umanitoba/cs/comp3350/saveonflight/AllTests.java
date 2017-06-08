@@ -17,6 +17,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTableTest;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTableTest;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTableTest;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTableTest;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTableTest;
 
 
 @RunWith(Suite.class)
@@ -33,7 +34,8 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTableTest;
         AirlineTableTest.class,
         AirportTableTest.class,
         TravellerTableTest.class,
-        BookedFlightTableTest.class
+        BookedFlightTableTest.class,
+        FlightTableTest.class
 })
 
 public class AllTests {

@@ -47,9 +47,8 @@ public class TravellerTableTest {
 
     @Test
     public void testAddValid() {
-        travellerTable.add(vaildCase);
-        //need find
-        assertEquals("Failed to add Cathay Pacific to airlineTable.", vaildCase,vaildCase );
+
+        assertTrue("Failed to add Cathay Pacific to airlineTable.", travellerTable.add(vaildCase) );
 
         travellerTable.remove(vaildCase);
     }
@@ -66,10 +65,6 @@ public class TravellerTableTest {
         assertFalse("removed null?", travellerTable.remove(null));
     }
 
-    @Test
-    public void testRemoveEmptyName() {
-        assertTrue("cant remove EmptyName object", travellerTable.remove(emptyNameCase));
-    }
 
     @Test
     public void testRemoveValid() {
@@ -82,16 +77,12 @@ public class TravellerTableTest {
         assertFalse("update to null?", travellerTable.update(null));
     }
 
-    @Test
-    public void testUpdateEmptyNameFlight(){
-        assertFalse("should update a EmptyName object", travellerTable.update(emptyNameCase));
-    }
 
     @Test
     public void testUpdateValid(){
         travellerTable.add(vaildCase);
         assertTrue("should update a EmptyName object", travellerTable.update(new Traveller(10,"Jack")));
 
-        travellerTable.remove(vaildCase);
+        travellerTable.remove(new Traveller(10,"Jack"));
     }
 }
