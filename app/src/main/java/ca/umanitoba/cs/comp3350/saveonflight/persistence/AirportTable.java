@@ -62,20 +62,22 @@ public class AirportTable implements DataAccess<Airport> {
 
     public boolean update(Airport airport) {
         boolean isUpdated = false;
-        String code = airport.getAirportCode();
-        int index = 0;
-        int changes = 0;
-        Airport temp;
-        for (int i = 0; i < airports.size(); i++) {
-            temp = airports.get(i);
-            if (temp.getAirportCode().equals(code)) {
-                changes++;
-                index = i;
+        if(airport!=null) {
+            String code = airport.getAirportCode();
+            int index = 0;
+            int changes = 0;
+            Airport temp;
+            for (int i = 0; i < airports.size(); i++) {
+                temp = airports.get(i);
+                if (temp.getAirportCode().equals(code)) {
+                    changes++;
+                    index = i;
+                }
             }
-        }
-        if (changes != 0) {
-            airports.get(index).setAirportCode(code);
-            isUpdated = true;
+            if (changes != 0) {
+                airports.get(index).setAirportCode(code);
+                isUpdated = true;
+            }
         }
         return isUpdated;
     }
