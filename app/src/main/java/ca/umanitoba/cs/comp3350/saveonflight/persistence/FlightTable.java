@@ -47,9 +47,10 @@ public class FlightTable implements DataAccessStub<Flight>, FlightAccess {
 
         if (airports != null && airCanada != null && westJet != null) {
             try {
+                //AC
                 flights.add(new Flight("AC 256", sdf.parse("2017-11-11 05:30"), sdf.parse("2017-11-11 08:51"), airCanada,
                         AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 350.52, 200, 0, FlightClassEnum.ECONOMY));
-                flights.add(new Flight("AC 260", sdf.parse("2017-11-11 7:30"), sdf.parse("2017-11-11 10:52"), airCanada,
+                flights.add(new Flight("AC 260", sdf.parse("2017-11-11 07:30"), sdf.parse("2017-11-11 10:52"), airCanada,
                         AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 325.82, 200, 0, FlightClassEnum.ECONOMY));
                 flights.add(new Flight("AC 264", sdf.parse("2017-11-11 10:50"), sdf.parse("2017-11-11 14:10"), airCanada,
                         AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 403.20, 200, 0, FlightClassEnum.ECONOMY));
@@ -63,6 +64,21 @@ public class FlightTable implements DataAccessStub<Flight>, FlightAccess {
                         AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 320.49, 200, 0, FlightClassEnum.ECONOMY));
                 flights.add(new Flight("AC 274", sdf.parse("2017-11-11 21:00"), sdf.parse("2017-11-12 00:21"), airCanada,
                         AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 420.12, 200, 0, FlightClassEnum.ECONOMY));
+                //WJ
+                flights.add(new Flight("WJ 520", sdf.parse("2017-11-11 05:10"), sdf.parse("2017-11-12 08:30"), westJet,
+                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 342.10, 200, 0, FlightClassEnum.ECONOMY));
+                flights.add(new Flight("WJ 534", sdf.parse("2017-11-11 09:00"), sdf.parse("2017-11-12 12:20"), westJet,
+                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 562.23, 200, 0, FlightClassEnum.ECONOMY));
+                flights.add(new Flight("WJ 546", sdf.parse("2017-11-11 11:20"), sdf.parse("2017-11-12 14:40"), westJet,
+                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 178.23, 200, 0, FlightClassEnum.ECONOMY));
+                flights.add(new Flight("WJ 258", sdf.parse("2017-11-11 16:00"), sdf.parse("2017-11-12 19:20"), westJet,
+                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 297.23, 200, 0, FlightClassEnum.ECONOMY));
+                flights.add(new Flight("WJ 562", sdf.parse("2017-11-11 17:15"), sdf.parse("2017-11-12 20:35"), westJet,
+                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 344.25, 200, 0, FlightClassEnum.ECONOMY));
+                flights.add(new Flight("WJ 490", sdf.parse("2017-11-11 18:15"), sdf.parse("2017-11-12 21:35"), westJet,
+                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 547.67, 200, 0, FlightClassEnum.ECONOMY));
+
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
