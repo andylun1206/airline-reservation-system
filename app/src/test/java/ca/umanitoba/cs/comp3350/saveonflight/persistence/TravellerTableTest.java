@@ -6,10 +6,15 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static junit.framework.Assert.*;
+
 import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 
 public class TravellerTableTest {
     private static ArrayList<Traveller> original;

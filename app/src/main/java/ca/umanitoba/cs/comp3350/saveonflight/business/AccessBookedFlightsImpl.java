@@ -1,13 +1,13 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * AccessBookedFlightImpl.java

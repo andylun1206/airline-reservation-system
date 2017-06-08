@@ -8,7 +8,10 @@ import java.util.Date;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
 
 public class SearchCriteriaTest {
     private SearchCriteria searchCriteria;

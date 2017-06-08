@@ -6,18 +6,18 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static junit.framework.Assert.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.AirlineTest;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 
 public class FlightTableTest {
     private static ArrayList<Flight> original;

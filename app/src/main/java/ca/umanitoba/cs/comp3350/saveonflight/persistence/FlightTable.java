@@ -1,13 +1,17 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
-import ca.umanitoba.cs.comp3350.saveonflight.objects.*;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 
 /**
  * FlightTable.java

@@ -1,9 +1,9 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
+import java.util.ArrayList;
+
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
-
-import java.util.ArrayList;
 
 /**
  * AccessFlights.java
