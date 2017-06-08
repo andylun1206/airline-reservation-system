@@ -12,7 +12,9 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListViewEntry
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.TravellerTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListViewEntryTest;
+
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTableTest;
+
 
 
 @RunWith(Suite.class)

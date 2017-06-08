@@ -1,7 +1,7 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
 /**
- * DataAccessStub.java
+ * DataAccess.java
  * <p>
  * Database Access Stub
  *
@@ -11,7 +11,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
  * @author Andy Lun
  */
 
-public interface DataAccessStub<E> {
+public interface DataAccess<E> {
     void initialize();
     boolean update(E e);
     boolean add(E e);

@@ -16,8 +16,9 @@ public interface SortFlights {
 
     /**
      * Sorts the list of Flights passed in based on the specified SortParameter.
+     *
      * @param flights List of Flights to sort
-     * @param sortBy Field to sort Flights by
+     * @param sortBy  Field to sort Flights by
      */
     void sortFlightsBy(ArrayList<Flight> flights, SortParameter sortBy);
 

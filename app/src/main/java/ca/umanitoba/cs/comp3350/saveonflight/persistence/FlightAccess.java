@@ -9,6 +9,6 @@ import java.util.ArrayList;
  * Created by longyu on 2017-06-07.
  */
 
-public interface FlightAccess {
+public interface FlightAccess extends DataAccess<Flight> {
     public ArrayList<Flight> findBySearchCriteria(SearchCriteria criteria);
 }

@@ -18,7 +18,7 @@ import java.util.Locale;
  */
 
 
-public class FlightTable implements DataAccessStub<Flight>, FlightAccess {
+public class FlightTable implements FlightAccess {
     private static ArrayList<Flight> flights = null;
 
     public FlightTable() {
@@ -165,8 +165,7 @@ public class FlightTable implements DataAccessStub<Flight>, FlightAccess {
                 table.add(temp);
             }
         }
-        if (table.isEmpty())
-            return new ArrayList<Flight>();
+
         return table;
     }
 

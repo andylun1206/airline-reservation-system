@@ -1,6 +1,7 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTable;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 
 public class AccessTravellersImpl implements AccessTravellers {
-    private TravellerTable travellerDB;
+    private static DataAccess<Traveller> travellerDB;
 
     public AccessTravellersImpl() {
         if (travellerDB == null) {
