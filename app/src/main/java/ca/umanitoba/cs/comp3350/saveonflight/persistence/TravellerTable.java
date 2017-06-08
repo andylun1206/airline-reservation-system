@@ -1,8 +1,8 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
-import java.util.ArrayList;
-
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
+
+import java.util.ArrayList;
 
 /**
  * TravellerTable.java
@@ -13,23 +13,18 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  */
 
 public class TravellerTable implements DataAccessStub<Traveller> {
-    private String dbName;
     private static ArrayList<Traveller> travellers = null;
 
-    public TravellerTable(String dbName) {
-        this.dbName = dbName;
+    public TravellerTable() {
     }
 
     public void initialize() {
-        Traveller jack, vicky, amir;
-        travellers = new ArrayList<Traveller>();
-        jack = new Traveller(0, "Jack");
-        travellers.add(jack);
-        vicky = new Traveller(1, "Vicky");
-        travellers.add(vicky);
-        amir = new Traveller(2, "Amir");
-        travellers.add(amir);
-        System.out.println("Opened " + " database " + dbName);
+        if (travellers == null) {
+            travellers = new ArrayList<Traveller>();
+            travellers.add(new Traveller(0, "Jack"));
+            travellers.add(new Traveller(1, "Vicky"));
+            travellers.add(new Traveller(2, "Amir"));
+        }
     }
 
     public static ArrayList<Traveller> getTravellers() {
@@ -37,7 +32,19 @@ public class TravellerTable implements DataAccessStub<Traveller> {
     }
 
     public boolean add(Traveller traveller) {
-        return travellers.add(traveller);
+        boolean result = true;
+        if (traveller != null && traveller.getTravellerID() != 0) {
+
+            for (Traveller traveller1 : travellers) {
+                if (traveller.equals(traveller1))
+                    result = false;
+            }
+            if (result)
+                result = travellers.add(traveller);
+        } else {
+            result = false;
+        }
+        return result;
     }
 
     public boolean update(Traveller traveller) {
@@ -62,13 +69,14 @@ public class TravellerTable implements DataAccessStub<Traveller> {
     }
 
     public boolean remove(Traveller traveller) {
+        boolean result = false;
         int index;
         index = travellers.indexOf(traveller);
         if (index >= 0) {
             travellers.remove(index);
-            return true;
+            result = true;
         }
-        return false;
+        return result;
     }
 
 }

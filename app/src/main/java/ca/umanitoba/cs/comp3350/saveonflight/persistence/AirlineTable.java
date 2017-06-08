@@ -1,9 +1,9 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
-import java.util.ArrayList;
-
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
+
+import java.util.ArrayList;
 
 /**
  * AirlineTable.java
@@ -14,17 +14,17 @@ import ca.umanitoba.cs.comp3350.saveonflight.R;
  */
 
 public class AirlineTable implements DataAccessStub<Airline> {
-    private String dbName;
-    private static ArrayList<Airline> airlines;
+    private static ArrayList<Airline> airlines = null;
 
-    public AirlineTable(String dbName) {
-        this.dbName = dbName;
+    public AirlineTable() {
     }
 
     public void initialize() {
-        airlines = new ArrayList<Airline>();
-        airlines.add(new Airline("WestJet", R.mipmap.ic_westjet));
-        airlines.add(new Airline("Air Canada", R.mipmap.ic_aircanada);
+        if (airlines == null) {
+            airlines = new ArrayList<Airline>();
+            airlines.add(new Airline("WestJet", R.mipmap.ic_westjet));
+            airlines.add(new Airline("Air Canada", R.mipmap.ic_aircanada));
+        }
     }
 
     public static ArrayList<Airline> getAirlines() {
@@ -44,7 +44,20 @@ public class AirlineTable implements DataAccessStub<Airline> {
     }
 
     public boolean add(Airline airline) {
-        return airlines.add(airline);
+        boolean result = true;
+        if (airline != null && !airline.getName().isEmpty() && airline.getIcon() != 0) {
+            for (Airline airline1 : airlines) {
+                if (airline.equals(airline1)) {
+                    result = false;
+                }
+            }
+            if (result) {
+                result = airlines.add(airline);
+            }
+        } else {
+            result = false;
+        }
+        return result;
     }
 
     public boolean update(Airline airline) {
@@ -70,13 +83,14 @@ public class AirlineTable implements DataAccessStub<Airline> {
     }
 
     public boolean remove(Airline airline) {
+        boolean result = false;
         int index;
         index = airlines.indexOf(airline);
         if (index >= 0) {
             airlines.remove(index);
-            return true;
+            result = true;
         }
-        return false;
+        return result;
     }
 
 }

@@ -2,7 +2,6 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 import android.app.Activity;
 import android.widget.Toast;
-
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 /**

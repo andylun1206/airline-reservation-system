@@ -1,8 +1,8 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
-import java.util.ArrayList;
-
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
+
+import java.util.ArrayList;
 
 /**
  * AirportTable.java
@@ -13,24 +13,22 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
  */
 
 public class AirportTable implements DataAccessStub<Airport> {
-    private String dbName;
     private static ArrayList<Airport> airports = null;
 
-    public AirportTable(String dbName) {
-        this.dbName = dbName;
+    public AirportTable() {
     }
 
     public void initialize() {
-
-        airports = new ArrayList<Airport>();
-        airports.add(new Airport("Vancouver YVR"));
-        airports.add(new Airport("Winnipeg YWG"));
-        airports.add(new Airport("Calgary YYC"));
-        airports.add(new Airport("Toronto YYZ"));
-        airports.add(new Airport("Montréal YUL"));
-        airports.add(new Airport("Ottawa YOW"));
-        airports.add(new Airport("Québec YQB"));
-
+        if (airports == null) {
+            airports = new ArrayList<Airport>();
+            airports.add(new Airport("Vancouver YVR"));
+            airports.add(new Airport("Winnipeg YWG"));
+            airports.add(new Airport("Calgary YYC"));
+            airports.add(new Airport("Toronto YYZ"));
+            airports.add(new Airport("Montréal YUL"));
+            airports.add(new Airport("Ottawa YOW"));
+            airports.add(new Airport("Québec YQB"));
+        }
     }
 
     public static ArrayList<Airport> getAirports() {
@@ -48,7 +46,18 @@ public class AirportTable implements DataAccessStub<Airport> {
     }
 
     public boolean add(Airport airport) {
-        return airports.add(airport);
+        boolean result = true;
+        if (airport != null && !airport.getAirportCode().isEmpty()) {
+            for (Airport airport1 : airports) {
+                if (airport.equals(airport1))
+                    result = false;
+            }
+            if (result)
+                result = airports.add(airport);
+        } else {
+            result = false;
+        }
+        return result;
     }
 
     public boolean update(Airport airport) {
@@ -72,13 +81,14 @@ public class AirportTable implements DataAccessStub<Airport> {
     }
 
     public boolean remove(Airport airport) {
+        boolean result = false;
         int index;
         index = airports.indexOf(airport);
         if (index >= 0) {
             airports.remove(index);
-            return true;
+            result = true;
         }
-        return false;
+        return result;
     }
 
 }

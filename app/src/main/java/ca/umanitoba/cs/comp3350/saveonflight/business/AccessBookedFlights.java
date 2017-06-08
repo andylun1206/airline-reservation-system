@@ -1,11 +1,11 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * AccessBookedFlights.java
@@ -20,7 +20,7 @@ public interface AccessBookedFlights {
 
     boolean addBookedFlight(BookedFlight bf);
 
-    boolean updateBookedFlight(BookedFlight bf, Traveller t, Flight f);
+    boolean updateBookedFlight(BookedFlight bf);
 
     boolean deleteFlight(BookedFlight bf);
 

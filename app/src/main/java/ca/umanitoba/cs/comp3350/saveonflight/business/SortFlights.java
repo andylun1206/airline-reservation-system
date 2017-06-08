@@ -1,8 +1,8 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
-import java.util.ArrayList;
-
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+
+import java.util.ArrayList;
 
 /**
  * SortFlights.java
