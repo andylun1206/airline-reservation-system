@@ -46,12 +46,13 @@ public class AirportTable implements DataAccessStub<Airport> {
     }
 
     public boolean add(Airport airport) {
+        boolean result = false;
         if (airport == null) {
-            return false;
+            return result;
         }
         for (Airport airport1 : airports) {
             if (airport.equals(airport1))
-                return false;
+                return result;
         }
         return airports.add(airport);
     }
@@ -77,13 +78,14 @@ public class AirportTable implements DataAccessStub<Airport> {
     }
 
     public boolean remove(Airport airport) {
+        boolean result = false;
         int index;
         index = airports.indexOf(airport);
         if (index >= 0) {
             airports.remove(index);
-            return true;
+            result = true;
         }
-        return false;
+        return result;
     }
 
 }

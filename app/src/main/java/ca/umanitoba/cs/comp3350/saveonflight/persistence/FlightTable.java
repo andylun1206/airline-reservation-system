@@ -84,13 +84,13 @@ public class FlightTable implements DataAccessStub<Flight>, FlightAccess {
     }
 
     public boolean add(Flight flight) {
-
+        boolean result = false;
         if (flight == null) {
-            return false;
+            return result;
         }
         for (Flight flight1 : flights) {
             if (flight.equals(flight1))
-                return false;
+                return result;
         }
         return flights.add(flight);
     }
@@ -124,13 +124,14 @@ public class FlightTable implements DataAccessStub<Flight>, FlightAccess {
     }
 
     public boolean remove(Flight flight) {
+        boolean result = false;
         int index;
         index = flights.indexOf(flight);
         if (index >= 0) {
             flights.remove(index);
-            return true;
+            result = true;
         }
-        return false;
+        return result;
     }
 
     public ArrayList<Flight> findBySearchCriteria(SearchCriteria criteria) {
@@ -152,6 +153,8 @@ public class FlightTable implements DataAccessStub<Flight>, FlightAccess {
 
     private ArrayList<Flight> createTableByOriginAndDestination(ArrayList<Flight> table, Airport origin, Airport destination) {
         Flight temp;
+        if (flights == null)
+            return table;
         for (int i = 0; i < flights.size(); i++) {
             temp = flights.get(i);
             if (temp.getOrigin().contains(origin) && temp.getDestination().contains(destination)) {

@@ -37,12 +37,13 @@ public class BookedFlightTable implements DataAccessStub<BookedFlight> {
     }
 
     public boolean add(BookedFlight bookedFlight) {
+        boolean result = false;
         if (bookedFlight == null) {
-            return false;
+            return result;
         }
         for (BookedFlight bookedFlight1 : bookedFlights) {
             if (bookedFlight.equals(bookedFlight1))
-                return false;
+                return result;
         }
         return bookedFlights.add(bookedFlight);
     }
@@ -70,13 +71,14 @@ public class BookedFlightTable implements DataAccessStub<BookedFlight> {
     }
 
     public boolean remove(BookedFlight bookedFlight) {
+        boolean result = false;
         int index;
         index = bookedFlights.indexOf(bookedFlight);
         if (index >= 0) {
             bookedFlights.remove(index);
-            return true;
+            result = true;
         }
-        return false;
+        return result;
 
     }
 

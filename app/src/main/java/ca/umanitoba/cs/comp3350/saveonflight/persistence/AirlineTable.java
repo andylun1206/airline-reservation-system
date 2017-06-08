@@ -44,12 +44,13 @@ public class AirlineTable implements DataAccessStub<Airline> {
     }
 
     public boolean add(Airline airline) {
+        boolean result = false;
         if (airline == null) {
-            return false;
+            return result;
         }
         for (Airline airline1 : airlines) {
             if (airline.equals(airline1)) {
-                return false;
+                return result;
             }
         }
         return airlines.add(airline);
@@ -78,13 +79,14 @@ public class AirlineTable implements DataAccessStub<Airline> {
     }
 
     public boolean remove(Airline airline) {
+        boolean result = false;
         int index;
         index = airlines.indexOf(airline);
         if (index >= 0) {
             airlines.remove(index);
-            return true;
+            result = true;
         }
-        return false;
+        return result;
     }
 
 }

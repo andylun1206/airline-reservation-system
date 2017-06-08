@@ -32,12 +32,13 @@ public class TravellerTable implements DataAccessStub<Traveller> {
     }
 
     public boolean add(Traveller traveller) {
+        boolean result = false;
         if (traveller == null) {
-            return false;
+            return result;
         }
         for (Traveller traveller1 : travellers) {
             if (traveller.equals(traveller1))
-                return false;
+                return result;
         }
         return travellers.add(traveller);
     }
@@ -64,13 +65,14 @@ public class TravellerTable implements DataAccessStub<Traveller> {
     }
 
     public boolean remove(Traveller traveller) {
+        boolean result = false;
         int index;
         index = travellers.indexOf(traveller);
         if (index >= 0) {
             travellers.remove(index);
-            return true;
+            result = true;
         }
-        return false;
+        return result;
     }
 
 }
