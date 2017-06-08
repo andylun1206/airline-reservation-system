@@ -45,14 +45,14 @@ public class AccessAirlines {
     }
 
     public boolean insertAirline(Airline airline) {
-        return dataAccess.insertAirline(airline);
+        return dataAccess.insert(airline);
     }
 
     public boolean updateAirline(Airline airline, String name) {
-        return dataAccess.updateAirline(airline, name);
+        return dataAccess.update(airline, name);
     }
 
     public boolean deleteAirline(Airline airline) {
-        return dataAccess.deleteAirline(airline);
+        return dataAccess.remove(airline);
     }
 }

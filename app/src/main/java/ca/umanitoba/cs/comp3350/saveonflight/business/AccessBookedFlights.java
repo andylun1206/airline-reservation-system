@@ -46,15 +46,15 @@ public class AccessBookedFlights {
     }
 
     public boolean addBookedFlight(BookedFlight bf) {
-        return dataAccess.insertBookedFlight(bf);
+        return dataAccess.insert(bf);
     }
 
     public boolean updateBookedFlight(BookedFlight bf, Traveller t, Flight f) {
-        return dataAccess.updateBookedFlight(bf, t, f);
+        return dataAccess.update(bf, t, f);
     }
 
     public boolean deleteFlight(BookedFlight bf) {
-        return dataAccess.deleteBookedFlight(bf);
+        return dataAccess.remove(bf);
     }
 
     public ArrayList<BookedFlight> getBookedFlightsOf(Traveller t){
