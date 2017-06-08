@@ -32,15 +32,19 @@ public class TravellerTable implements DataAccessStub<Traveller> {
     }
 
     public boolean add(Traveller traveller) {
-        boolean result = false;
-        if (traveller == null) {
-            return result;
+        boolean result = true;
+        if (traveller != null && traveller.getTravellerID() != 0) {
+
+            for (Traveller traveller1 : travellers) {
+                if (traveller.equals(traveller1))
+                    result = false;
+            }
+            if (result)
+                result = travellers.add(traveller);
+        } else {
+            result = false;
         }
-        for (Traveller traveller1 : travellers) {
-            if (traveller.equals(traveller1))
-                return result;
-        }
-        return travellers.add(traveller);
+        return result;
     }
 
     public boolean update(Traveller traveller) {

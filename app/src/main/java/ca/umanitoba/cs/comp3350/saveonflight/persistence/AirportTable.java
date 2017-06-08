@@ -46,15 +46,18 @@ public class AirportTable implements DataAccessStub<Airport> {
     }
 
     public boolean add(Airport airport) {
-        boolean result = false;
-        if (airport == null) {
-            return result;
+        boolean result = true;
+        if (airport != null && !airport.getAirportCode().isEmpty()) {
+            for (Airport airport1 : airports) {
+                if (airport.equals(airport1))
+                    result = false;
+            }
+            if (result)
+                result = airports.add(airport);
+        } else {
+            result = false;
         }
-        for (Airport airport1 : airports) {
-            if (airport.equals(airport1))
-                return result;
-        }
-        return airports.add(airport);
+        return result;
     }
 
     public boolean update(Airport airport) {

@@ -37,15 +37,18 @@ public class BookedFlightTable implements DataAccessStub<BookedFlight> {
     }
 
     public boolean add(BookedFlight bookedFlight) {
-        boolean result = false;
-        if (bookedFlight == null) {
-            return result;
+        boolean result = true;
+        if (bookedFlight != null && bookedFlight.getTraveller().getTravellerID() != 0 && (!bookedFlight.getFlight().getFlightID().isEmpty() && !bookedFlight.getFlight().getDepartureTime().equals(null))) {
+            for (BookedFlight bookedFlight1 : bookedFlights) {
+                if (bookedFlight.equals(bookedFlight1))
+                    result = false;
+            }
+            if (result)
+                result = bookedFlights.add(bookedFlight);
+        } else {
+            result = false;
         }
-        for (BookedFlight bookedFlight1 : bookedFlights) {
-            if (bookedFlight.equals(bookedFlight1))
-                return result;
-        }
-        return bookedFlights.add(bookedFlight);
+        return result;
     }
 
     public boolean update(BookedFlight bookedFlight) {

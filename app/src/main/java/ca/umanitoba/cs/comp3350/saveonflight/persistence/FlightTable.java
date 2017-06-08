@@ -84,15 +84,19 @@ public class FlightTable implements DataAccessStub<Flight>, FlightAccess {
     }
 
     public boolean add(Flight flight) {
-        boolean result = false;
-        if (flight == null) {
-            return result;
+        boolean result = true;
+        if (flight != null && (!flight.getFlightID().isEmpty() && !flight.getDepartureTime().equals(null))) {
+
+            for (Flight flight1 : flights) {
+                if (flight.equals(flight1))
+                    result = false;
+            }
+            if (result)
+                result = flights.add(flight);
+        } else {
+            result = false;
         }
-        for (Flight flight1 : flights) {
-            if (flight.equals(flight1))
-                return result;
-        }
-        return flights.add(flight);
+        return result;
     }
 
     public boolean update(Flight flight) {

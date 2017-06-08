@@ -44,16 +44,20 @@ public class AirlineTable implements DataAccessStub<Airline> {
     }
 
     public boolean add(Airline airline) {
-        boolean result = false;
-        if (airline == null) {
-            return result;
-        }
-        for (Airline airline1 : airlines) {
-            if (airline.equals(airline1)) {
-                return result;
+        boolean result = true;
+        if (airline != null && !airline.getName().isEmpty() && airline.getIcon() != 0) {
+            for (Airline airline1 : airlines) {
+                if (airline.equals(airline1)) {
+                    result = false;
+                }
             }
+            if (result) {
+                result = airlines.add(airline);
+            }
+        } else {
+            result = false;
         }
-        return airlines.add(airline);
+        return result;
     }
 
     public boolean update(Airline airline) {
