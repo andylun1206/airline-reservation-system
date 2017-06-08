@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Long Yu
  */
 
-public class TravellerTable implements DataAccessStub<Traveller> {
+public class TravellerTable implements DataAccess<Traveller> {
     private static ArrayList<Traveller> travellers = null;
 
     public TravellerTable() {

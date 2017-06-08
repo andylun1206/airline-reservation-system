@@ -70,8 +70,6 @@ public class Flight implements Parcelable {
         if (numSold >= 0 && getSeatsRemaining() >= numSold) {
             seatsTaken += numSold;
             result = true;
-        } else {
-            System.out.println("Trying to sell more seats than are available");
         }
 
         return result;

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author Long Yu
  */
 
-public class AirlineTable implements DataAccessStub<Airline> {
+public class AirlineTable implements DataAccess<Airline> {
     private static ArrayList<Airline> airlines = null;
 
     public AirlineTable() {

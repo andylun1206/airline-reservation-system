@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Long Yu
  */
 
-public class BookedFlightTable implements DataAccessStub<BookedFlight> {
+public class BookedFlightTable implements DataAccess<BookedFlight> {
     private static ArrayList<BookedFlight> bookedFlights = null;
 
     public BookedFlightTable() {

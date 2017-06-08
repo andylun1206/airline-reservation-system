@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Long Yu
  */
 
-public class AirportTable implements DataAccessStub<Airport> {
+public class AirportTable implements DataAccess<Airport> {
     private static ArrayList<Airport> airports = null;
 
     public AirportTable() {
