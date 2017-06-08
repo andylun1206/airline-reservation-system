@@ -45,14 +45,14 @@ public class AccessAirports {
     }
 
     public boolean addAirport(Airport a){
-        return dataAccess.insertAirport(a);
+        return dataAccess.insert(a);
     }
 
     public boolean updateAirport(Airport a, String airportCode) {
-        return dataAccess.updateAirport(a, airportCode);
+        return dataAccess.update(a, airportCode);
     }
 
     public boolean deleteAirport(Airport a){
-        return dataAccess.deleteAirport(a);
+        return dataAccess.remove(a);
     }
 }

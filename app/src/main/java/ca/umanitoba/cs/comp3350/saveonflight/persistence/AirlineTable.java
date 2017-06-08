@@ -47,7 +47,6 @@ public class AirlineTable extends DataAccessStub {
     }
 
     public boolean insert(Object o) {
-
         return airlines.add((Airline) o);
     }
 

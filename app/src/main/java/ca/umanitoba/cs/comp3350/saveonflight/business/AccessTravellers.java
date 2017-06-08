@@ -46,14 +46,14 @@ public class AccessTravellers {
     }
 
     public boolean insertTravller(Traveller traveller) {
-        return dataAccess.insertTraveller(traveller);
+        return dataAccess.insert(traveller);
     }
 
     public boolean updateTraveller(Traveller traveller, int newID, String newName) {
-        return dataAccess.updateTraveller(traveller, newID, newName);
+        return dataAccess.update(traveller, newID, newName);
     }
 
     public boolean deleteTraveller(Traveller traveller) {
-        return dataAccess.deleteTraveller(traveller);
+        return dataAccess.remove(traveller);
     }
 }

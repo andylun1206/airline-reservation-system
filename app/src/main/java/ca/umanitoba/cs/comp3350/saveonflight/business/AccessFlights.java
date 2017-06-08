@@ -52,17 +52,17 @@ public class AccessFlights {
     }
 
     public boolean insertFlight(Flight flight) {
-        return dataAccess.insertFlight(flight);
+        return dataAccess.insert(flight);
     }
 
     public boolean updateFlight(Flight flight, String flightID, Date departureDate, Date arrivalDate, Airline airline, Airport origin,
                                 Airport dest, double price, int capacity, int seatsTaken, FlightClassEnum flightClass) {
-        return dataAccess.updateFlight(flight, flightID, departureDate, arrivalDate, airline, origin, dest, price, capacity, seatsTaken, flightClass);
+        return dataAccess.update(flight, flightID, departureDate, arrivalDate, airline, origin, dest, price, capacity, seatsTaken, flightClass);
 
     }
 
     public boolean deleteFlight(Flight flight) {
-        return dataAccess.deleteFlight(flight);
+        return dataAccess.remove(flight);
     }
 
     public ArrayList<Flight> search(SearchCriteria searchCriteria) {
