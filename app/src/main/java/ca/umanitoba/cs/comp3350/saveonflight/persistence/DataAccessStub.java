@@ -1,15 +1,18 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
 
+/*
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
+*/
 
+import java.util.ArrayList;
 
-import ca.umanitoba.cs.comp3350.saveonflight.R;
+/*import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
@@ -17,17 +20,36 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;*/
 
-public class DataAccessStub implements DataAccess {
-    private String dbName;
+/**
+ * DataAccessStub.java
+ * <p>
+ * Database Access Stub
+ *
+ * @author Long Yu
+ * @author Zhengyu Gu
+ * @author Kenny Zhang
+ */
+
+interface DataAccessStub<E> {
+
+    public void initialize();
+
+    public boolean update(E e);
+
+    public boolean add(E e);
+
+    public boolean remove(E e);
+
+
+    /*private String dbName;
     private String dbType = "stub";
-
-    private ArrayList<Airline> airlines;
-    private ArrayList<Airport> airports;
-    private ArrayList<BookedFlight> bookedFlights;
-    private ArrayList<Flight> flights;
-    private ArrayList<Traveller> travellers;
+    private AirlineTable airlineTable;
+    private AirportTable airportTable;
+    private TravellerTable travellerTable;
+    private BookedFlightTable bookedFlightTable;
+    private FlightTable flightTable;
 
     public DataAccessStub(String dbName) {
         this.dbName = dbName;
@@ -38,191 +60,64 @@ public class DataAccessStub implements DataAccess {
     }
 
     public void open(String dbName) {
-        Airline westJet, airCanada, winnipegAir;
-        Airport vancouver, winnipeg, calgary;
-        Traveller jack, vicky, amir;
-
-        BookedFlight bookedFlight;
-        Flight ywgToYvr, yvrToYwg, ywgToYyc, waYwgToYvr;
-
-        airlines = new ArrayList<Airline>();
-        westJet = new Airline("WestJet", R.mipmap.ic_westjet);
-        airlines.add(westJet);
-        airCanada = new Airline("Air Canada", R.mipmap.ic_aircanada);
-        airlines.add(airCanada);
-        winnipegAir = new Airline("Winnipeg Air", 0);
-        airlines.add(winnipegAir);
-
-        airports = new ArrayList<Airport>();
-        vancouver = new Airport("Vancouver YVR");
-        airports.add(vancouver);
-        winnipeg = new Airport("Winnipeg YWG");
-        airports.add(winnipeg);
-        calgary = new Airport("Calgary YYC");
-        airports.add(calgary);
-
-        travellers = new ArrayList<Traveller>();
-        jack = new Traveller(0, "Jack");
-        travellers.add(jack);
-        vicky = new Traveller(1, "Vicky");
-        travellers.add(vicky);
-        amir = new Traveller(2, "Amir");
-        travellers.add(amir);
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy, MM, dd, HH, mm", Locale.CANADA);
-
-        flights = new ArrayList<Flight>();
-        try {
-            ywgToYvr = new Flight("WJ 001", simpleDateFormat.parse("2017, 11, 11, 22, 30"), simpleDateFormat.parse("2017, 11, 12, 01, 30"), westJet, winnipeg,
-                    vancouver, 400.00, 200, 0, FlightClassEnum.ECONOMY);
-            flights.add(ywgToYvr);
-            ywgToYvr = new Flight("WJ 002", simpleDateFormat.parse("2017, 11, 11, 00, 30"), simpleDateFormat.parse("2017, 11, 12, 01, 30"), westJet, winnipeg,
-                    vancouver, 200.00, 200, 0, FlightClassEnum.ECONOMY);
-            flights.add(ywgToYvr);
-            ywgToYvr = new Flight("WJ 003", simpleDateFormat.parse("2017, 11, 11, 13, 30"), simpleDateFormat.parse("2017, 11, 12, 01, 30"), westJet, winnipeg,
-                    vancouver, 300.00, 200, 0, FlightClassEnum.ECONOMY);
-            flights.add(ywgToYvr);
-            ywgToYvr = new Flight("WJ 004", simpleDateFormat.parse("2017, 11, 11, 14, 30"), simpleDateFormat.parse("2017, 11, 12, 01, 30"), westJet, winnipeg,
-                    vancouver, 500.00, 200, 0, FlightClassEnum.ECONOMY);
-            flights.add(ywgToYvr);
-            yvrToYwg = new Flight("WJ 005", simpleDateFormat.parse("2017, 10, 10, 08, 30"), simpleDateFormat.parse("2017, 10, 12, 22, 30"), westJet, vancouver,
-                    winnipeg, 350.00, 200, 0, FlightClassEnum.ECONOMY);
-            flights.add(yvrToYwg);
-            ywgToYyc = new Flight("AC 001", simpleDateFormat.parse("2017, 9, 11, 22, 30"), simpleDateFormat.parse("2017, 9, 12, 22, 30"), airCanada, winnipeg,
-                    calgary, 400.00, 150, 0, FlightClassEnum.BUSINESS);
-            flights.add(ywgToYyc);
-            waYwgToYvr = new Flight("WA 001", simpleDateFormat.parse("2017, 10, 11, 12, 30"), simpleDateFormat.parse("2017, 10, 11, 22, 30"), winnipegAir, winnipeg,
-                    vancouver, 500.00, 250, 0, FlightClassEnum.ECONOMY);
-            flights.add(waYwgToYvr);
-
-            bookedFlights = new ArrayList<BookedFlight>();
-            bookedFlight = new BookedFlight(jack, ywgToYvr);
-            bookedFlights.add(bookedFlight);
-            bookedFlight = new BookedFlight(jack, yvrToYwg);
-            bookedFlights.add(bookedFlight);
-            bookedFlight = new BookedFlight(vicky, ywgToYyc);
-            bookedFlights.add(bookedFlight);
-            bookedFlight = new BookedFlight(amir, waYwgToYvr);
-            bookedFlights.add(bookedFlight);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("Opened " + dbType + " database " + dbName);
+        airlineTable = new AirlineTable("Airline");
+        airlineTable.initialize();
+        airportTable = new AirportTable("Airport");
+        airportTable.initialize();
+        travellerTable = new TravellerTable("Traveller");
+        travellerTable.initialize();
+        bookedFlightTable = new BookedFlightTable("BookedFlight");
+        bookedFlightTable.initialize();
+        flightTable = new FlightTable("Flight");
+        flightTable.initialize();
+        System.out.println("Opened " + dbType + " database ");
     }
 
     public void close() {
-        System.out.println("Closed " + dbType + " database " + dbName);
+        System.out.println("Closed " + dbType + " database ");
     }
+*/
 
     // AIRLINE TABLE METHODS
-    public ArrayList<Airline> getAirlines() {
-        ArrayList<Airline> result = new ArrayList<>();
-        result.addAll(airlines);
-        return result;
-    }
+    /*public ArrayList<Airline> getAirlines() {
+        return airlineTable.getAirlines();
+    }*/
 
-    public boolean insertAirline(Airline airline) {
-        return airlines.add(airline);
-    }
+    /*public boolean insertAirline(Airline airline) {}
 
-    public boolean updateAirline(Airline airline, String name) {
-        int index;
+    public boolean updateAirline(Airline airline, String name) {}
 
-        index = airlines.indexOf(airline);
-        if (index >= 0) {
-            airlines.get(index).setName(name);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean deleteAirline(Airline airline) {
-        int index;
-        index = airlines.indexOf(airline);
-        if (index >= 0) {
-            airlines.remove(index);
-            return true;
-        }
-        return false;
-    }
-
+    public boolean deleteAirline(Airline airline) {}
+*/
 
     // AIRPORT TABLE METHODS
-    public ArrayList<Airport> getAirports() {
-        // Return a copy of List
-        ArrayList<Airport> result = new ArrayList<>();
-        result.addAll(airports);
-        return result;
-    }
+    /*public ArrayList<Airport> getAirports() {
+        return airportTable.getAirports();
+    }*/
 
-    public boolean insertAirport(Airport airport) {
-        return airports.add(airport);
-    }
+    /*public boolean insertAirport(Airport airport) {}
 
-    public boolean updateAirport(Airport airport, String airportCode) {
-        int index;
+    public boolean updateAirport(Airport airport, String airportCode) {}
 
-        index = airports.indexOf(airport);
-        if (index >= 0) {
-            airports.get(index).setAirportCode(airportCode);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean deleteAirport(Airport airport) {
-        int index;
-        index = airports.indexOf(airport);
-        if (index >= 0) {
-            airports.remove(index);
-            return true;
-        }
-        return false;
-    }
-
+    public boolean deleteAirport(Airport airport) {}
+*/
 
     // BOOKEDFLIGHTS TABLE METHODS
-    public ArrayList<BookedFlight> getBookedFlights() {
-        ArrayList<BookedFlight> result = new ArrayList<>();
-        result.addAll(bookedFlights);
-        return result;
-    }
+    /*public ArrayList<BookedFlight> getBookedFlights() {
+        return bookedFlightTable.getBookedFlights();
+    }*/
 
-    public boolean insertBookedFlight(BookedFlight bookedFlight) {
-        return bookedFlights.add(bookedFlight);
-    }
+    /*public boolean insertBookedFlight(BookedFlight bookedFlight) {}
 
-    public boolean updateBookedFlight(BookedFlight bookedFlight, Traveller t, Flight f) {
-        int index;
+    public boolean updateBookedFlight(BookedFlight bookedFlight, Traveller t, Flight f) {}
 
-        index = bookedFlights.indexOf(bookedFlight);
-        if (index >= 0) {
-            BookedFlight temp = bookedFlights.get(index);
-            temp.setTraveller(t);
-            temp.setFlight(f);
-            return true;
-        }
-
-        return false;
-    }
-
-    public boolean deleteBookedFlight(BookedFlight bookedFlight) {
-        int index;
-        index = bookedFlights.indexOf(bookedFlight);
-        if (index >= 0) {
-            bookedFlights.remove(index);
-            return true;
-        }
-        return false;
-
-    }
-
-    public ArrayList<BookedFlight> getTravellersBookedFlights(Traveller traveller) {
+    public boolean deleteBookedFlight(BookedFlight bookedFlight) {}
+*/
+    /*public ArrayList<BookedFlight> getTravellersBookedFlights(Traveller traveller) {
         ArrayList<BookedFlight> result = new ArrayList<BookedFlight>();
 
-        for (int i = 0; i < bookedFlights.size(); i++) {
-            BookedFlight term = bookedFlights.get(i);
+        for (int i = 0; i < bookedFlightTable.getBookedFlights().size(); i++) {
+            BookedFlight term = bookedFlightTable.getBookedFlights().get(i);
             if (term.getTraveller().getTravellerID() == traveller.getTravellerID()) {
                 result.add(term);
             }
@@ -233,59 +128,28 @@ public class DataAccessStub implements DataAccess {
     public ArrayList<BookedFlight> getTravellersOnFlight(Flight flight) {
         ArrayList<BookedFlight> result = new ArrayList<BookedFlight>();
 
-        for (int i = 0; i < bookedFlights.size(); i++) {
-            BookedFlight term = bookedFlights.get(i);
+        for (int i = 0; i < bookedFlightTable.getBookedFlights().size(); i++) {
+            BookedFlight term = bookedFlightTable.getBookedFlights().get(i);
             if (term.getFlight().getFlightID().equals(flight.getFlightID())) {
                 result.add(term);
             }
         }
         return result;
     }
-
+*/
     // FLIGHTS TABLE METHODS
-    public ArrayList<Flight> getFlights() {
-        ArrayList<Flight> result = new ArrayList<>();
-        result.addAll(flights);
-        return result;
-    }
+    /*public ArrayList<Flight> getFlights() {
+        return flightTable.getFlights();
+    }*/
 
-    public boolean insertFlight(Flight flight) {
-        return flights.add(flight);
-    }
+    /*public boolean insertFlight(Flight flight) {}
 
     public boolean updateFlight(Flight flight, String flightID, Date departDate, Date arriveDate, Airline airline, Airport origin,
-                                Airport dest, double price, int capacity, int seatsTaken, FlightClassEnum flightClass) {
-        int index;
+                                Airport dest, double price, int capacity, int seatsTaken, FlightClassEnum flightClass) {}
 
-        index = flights.indexOf(flight);
-        if (index >= 0) {
-            Flight f = flights.get(index);
-            f.setFlightID(flightID);
-            f.setDepartureTime(departDate);
-            f.setArrivalTime(arriveDate);
-            f.setAirline(airline);
-            f.setOrigin(origin);
-            f.setDestination(dest);
-            f.setPrice(price);
-            f.setCapacity(capacity);
-            f.setSeatsTaken(seatsTaken);
-            f.setFlightClass(flightClass);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean deleteFlight(Flight flight) {
-        int index;
-        index = flights.indexOf(flight);
-        if (index >= 0) {
-            flights.remove(index);
-            return true;
-        }
-        return false;
-    }
-
-    public ArrayList<Flight> searchByCriteria(SearchCriteria criteria) {
+    public boolean deleteFlight(Flight flight) {}
+*/
+    /*public ArrayList<Flight> searchByCriteria(SearchCriteria criteria) {
         ArrayList<Flight> table;
         table = createTableByOriginAndDestination(new ArrayList<Flight>(), criteria.getOrigin(), criteria.getDestination());
         table = removeByDepartureDate(table, criteria.getDepartureDate());
@@ -304,48 +168,26 @@ public class DataAccessStub implements DataAccess {
 
 
     // TRAVELLERS TABLE METHODS
-    public ArrayList<Traveller> getTravellers() {
-        ArrayList<Traveller> result = new ArrayList<>();
-        result.addAll(travellers);
-        return result;
-    }
+    *//*public ArrayList<Traveller> getTravellers() {
+        return travellerTable.getTravellers();
+    }*//*
 
-    public boolean insertTraveller(Traveller traveller) {
-        return travellers.add(traveller);
-    }
+    *//*public boolean insertTraveller(Traveller traveller) {}
 
-    public boolean updateTraveller(Traveller traveller, int newID, String newName) {
-        boolean result = false;
+    public boolean updateTraveller(Traveller traveller, int newID, String newName) {}
 
-        int index = travellers.indexOf(traveller);
-        if (index >= 0) {
-            Traveller toUpdate = travellers.get(index);
-            toUpdate.setTravellerID(newID);
-            toUpdate.setName(newName);
-            result = true;
-        }
-
-        return result;
-    }
-
-    public boolean deleteTraveller(Traveller traveller) {
-        int index;
-        index = travellers.indexOf(traveller);
-        if (index >= 0) {
-            travellers.remove(index);
-            return true;
-        }
-        return false;
-    }
-
+    public boolean deleteTraveller(Traveller traveller) {}
+*//*
     private ArrayList<Flight> createTableByOriginAndDestination(ArrayList<Flight> table, Airport origin, Airport destination) {
         Flight temp;
-        for (int i = 0; i < flights.size(); i++) {
-            temp = flights.get(i);
-            if (temp.getOrigin().contains(origin) && temp.getDestination().contains(destination)) {
+        for (int i = 0; i < flightTable.getFlights().size(); i++) {
+            temp = flightTable.getFlights().get(i);
+            if (temp.getOrigin().equals(origin) && temp.getDestination().equals(destination)) {
                 table.add(temp);
             }
         }
+        if (table.isEmpty())
+            return new ArrayList<Flight>();
         return table;
     }
 
@@ -359,6 +201,7 @@ public class DataAccessStub implements DataAccess {
             for (int i = 0; i < table.size(); i++) {
                 temp = table.get(i);
                 calTemp.setTime(temp.getDepartureTime());
+                //if (!temp.getDepartureTime().equals(departureDate)) {
                 if (calTemp.get(Calendar.YEAR) != calFilterBy.get(Calendar.YEAR) ||
                         calTemp.get(Calendar.DAY_OF_YEAR) != calFilterBy.get(Calendar.DAY_OF_YEAR)) {
                     table.remove(temp);
@@ -426,20 +269,19 @@ public class DataAccessStub implements DataAccess {
     }
 
     private ArrayList<Flight> removeByNonstop(ArrayList<Flight> table) {
-        /*if (table.isEmpty())
+        *//*if (table.isEmpty())
             return null;
-         */
-        // Flight class currently doesn't track nonstop status
+         *//*
         // Adding more stuff later
         return table;
     }
 
     private ArrayList<Flight> removeByRefundable(ArrayList<Flight> table) {
-        /*if (table.isEmpty())
+        *//*if (table.isEmpty())
             return null;
-         */
-        // Flight currently doesn't track refundable status
+         *//*
         // Adding more stuff later
         return table;
     }
+*/
 }
