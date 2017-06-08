@@ -2,7 +2,8 @@
 ## Group 2 - save on flight
 
 ### Iteration 1:
-Iteration 1 - README
+Group 2: Save on Flights Iteration 1 README
+
 We based our project’s 3-tier architecture off of the sample project’s architecture (presentation, business, and persistence). So, we have the same five packages: application, business, objects, persistence, and presentation.
  
 In the business package, we have five data access objects (one for each table in our database) as well as the the business logic class for sorting flights on the comparison page (SortFlights).
@@ -17,7 +18,14 @@ Finally, the presentation package contains all classes related to the applicatio
  
 The team’s log file is found in the root directory of our project (log.md). The GitHub repository can be found at https://github.com/andylun1206/save-on-flight.
  
-One major implemented feature in this iteration was the ability to search for flights that match some specified set of criteria (round trip vs. one way, origin, destination, etc.). From the home screen, the user can get to this feature in the GUI by either using the “SEARCH FOR FLIGHTS” button or by selecting the “Search for Flights” option from the navigation drawer. Since our stub database has a very small number of entries, it is highly unlikely that a random search will give any results. So, we added default values to all input fields that will give a search result.
+One major implemented feature in this iteration was the ability to search for flights that match some specified set of criteria (round trip vs. one way, origin, destination, etc.). From the home screen, the user can get to this feature in the GUI by either using the “SEARCH FOR FLIGHTS” button or by selecting the “Search for Flights” option from the navigation drawer on the left. Since our stub database has a very small number of flight entries, it is highly unlikely that a random search will give any results. One search which will give results is:
+- Trip type: One Way
+- Origin: Winnipeg
+- Destination: Vancouver
+- Departure Date: 2017-11-11 (November 11, 2017)
+- Number of Travellers: 1
+
+Currently, both the one way and the return trip options only return one way trips.
  
-Another feature of our app is the ability to view a list of flights and to sort them with respect on various criteria. Upon performing a search which yields a non-empty result, you will be brought to the view flights screen. Currently, this feature is only partially implemented. The list of flights returned from the search will be shown in the order it came in. The business logic for sorting the list of flights for comparison purposes has been written, but hasn’t been connected to the GUI.
+Another feature of our app is the ability to view a list of flights and to sort them based on various criteria. Upon performing a search which yields a non-empty result, you will be brought to the view flights screen. The list of flights returned from the search will be shown in the order it came in. To compare the list of flights, three buttons allow the user to sort the flights based on price, departure time, and duration.
 
