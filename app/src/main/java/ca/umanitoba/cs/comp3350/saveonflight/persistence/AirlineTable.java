@@ -24,7 +24,7 @@ public class AirlineTable implements DataAccessStub<Airline> {
     public void initialize() {
         airlines = new ArrayList<Airline>();
         airlines.add(new Airline("WestJet", R.mipmap.ic_westjet));
-        airlines.add(new Airline("Air Canada", R.mipmap.ic_aircanada);
+        airlines.add(new Airline("Air Canada", R.mipmap.ic_aircanada));
     }
 
     public static ArrayList<Airline> getAirlines() {
