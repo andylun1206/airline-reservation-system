@@ -1,8 +1,8 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
-import java.util.ArrayList;
-
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
+
+import java.util.ArrayList;
 
 /**
  * AirportTable.java
@@ -13,24 +13,21 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
  */
 
 public class AirportTable implements DataAccessStub<Airport> {
-    private String dbName;
     private static ArrayList<Airport> airports = null;
 
-    public AirportTable(String dbName) {
-        this.dbName = dbName;
-    }
+    public AirportTable() { }
 
     public void initialize() {
-
-        airports = new ArrayList<Airport>();
-        airports.add(new Airport("Vancouver YVR"));
-        airports.add(new Airport("Winnipeg YWG"));
-        airports.add(new Airport("Calgary YYC"));
-        airports.add(new Airport("Toronto YYZ"));
-        airports.add(new Airport("Montréal YUL"));
-        airports.add(new Airport("Ottawa YOW"));
-        airports.add(new Airport("Québec YQB"));
-
+        if (airports == null) {
+            airports = new ArrayList<Airport>();
+            airports.add(new Airport("Vancouver YVR"));
+            airports.add(new Airport("Winnipeg YWG"));
+            airports.add(new Airport("Calgary YYC"));
+            airports.add(new Airport("Toronto YYZ"));
+            airports.add(new Airport("Montréal YUL"));
+            airports.add(new Airport("Ottawa YOW"));
+            airports.add(new Airport("Québec YQB"));
+        }
     }
 
     public static ArrayList<Airport> getAirports() {

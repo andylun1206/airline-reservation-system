@@ -1,8 +1,8 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
-import java.util.List;
-
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
+
+import java.util.List;
 
 /**
  * AccessTravellers.java
@@ -17,7 +17,7 @@ public interface AccessTravellers {
 
     boolean insertTraveller(Traveller traveller);
 
-    boolean updateTraveller(Traveller traveller, int newID, String newName);
+    boolean updateTraveller(Traveller traveller);
 
     boolean deleteTraveller(Traveller traveller);
 }

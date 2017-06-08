@@ -1,8 +1,8 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
-import java.util.List;
-
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
+
+import java.util.List;
 
 /**
  * AccessAirports.java
@@ -16,7 +16,7 @@ public interface AccessAirports {
 
     boolean addAirport(Airport a);
 
-    boolean updateAirport(Airport a, String airportCode);
+    boolean updateAirport(Airport a);
 
     boolean deleteAirport(Airport a);
 }

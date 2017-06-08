@@ -1,8 +1,8 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
-import java.util.List;
-
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
+
+import java.util.List;
 
 /**
  * AccessAirlines.java
@@ -17,7 +17,7 @@ public interface AccessAirlines {
 
     boolean insertAirline(Airline airline);
 
-    boolean updateAirline(Airline airline, String name);
+    boolean updateAirline(Airline airline);
 
     boolean deleteAirline(Airline airline);
 }
