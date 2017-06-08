@@ -21,25 +21,26 @@ import java.util.Locale;
 public class FlightTable implements DataAccessStub<Flight>, FlightAccess {
     private static ArrayList<Flight> flights = null;
 
-    public FlightTable() { }
+    public FlightTable() {
+    }
 
     public void initialize() {
         if (flights == null) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CANADA);
             flights = new ArrayList<Flight>();
-            
+
             if (AirlineTable.getAirlines() == null) {
                 new AirlineTable().initialize();
             }
-            
+
             if (AirportTable.getAirports() == null) {
                 new AirportTable().initialize();
             }
-            
+
             try {
                 Airline airCanada = AirlineTable.findAirline("Air Canada");
                 Airline westJet = AirlineTable.findAirline("WestJet");
-                
+
                 //AC
                 flights.add(new Flight("AC 256", sdf.parse("2017-11-11 05:30"), sdf.parse("2017-11-11 08:51"), airCanada,
                         AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 350.52, 200, 0, FlightClassEnum.ECONOMY));
@@ -83,6 +84,14 @@ public class FlightTable implements DataAccessStub<Flight>, FlightAccess {
     }
 
     public boolean add(Flight flight) {
+
+        if (flight == null) {
+            return false;
+        }
+        for (Flight flight1 : flights) {
+            if (flight.equals(flight1))
+                return false;
+        }
         return flights.add(flight);
     }
 
@@ -140,7 +149,7 @@ public class FlightTable implements DataAccessStub<Flight>, FlightAccess {
 
         return table;
     }
-    
+
     private ArrayList<Flight> createTableByOriginAndDestination(ArrayList<Flight> table, Airport origin, Airport destination) {
         Flight temp;
         for (int i = 0; i < flights.size(); i++) {

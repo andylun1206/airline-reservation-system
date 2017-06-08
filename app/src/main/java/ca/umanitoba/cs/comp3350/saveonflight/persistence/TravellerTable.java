@@ -15,7 +15,8 @@ import java.util.ArrayList;
 public class TravellerTable implements DataAccessStub<Traveller> {
     private static ArrayList<Traveller> travellers = null;
 
-    public TravellerTable() { }
+    public TravellerTable() {
+    }
 
     public void initialize() {
         if (travellers == null) {
@@ -31,6 +32,13 @@ public class TravellerTable implements DataAccessStub<Traveller> {
     }
 
     public boolean add(Traveller traveller) {
+        if (traveller == null) {
+            return false;
+        }
+        for (Traveller traveller1 : travellers) {
+            if (traveller.equals(traveller1))
+                return false;
+        }
         return travellers.add(traveller);
     }
 

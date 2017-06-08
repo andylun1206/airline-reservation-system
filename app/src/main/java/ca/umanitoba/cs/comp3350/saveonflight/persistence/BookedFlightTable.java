@@ -17,7 +17,8 @@ import java.util.ArrayList;
 public class BookedFlightTable implements DataAccessStub<BookedFlight> {
     private static ArrayList<BookedFlight> bookedFlights = null;
 
-    public BookedFlightTable() { }
+    public BookedFlightTable() {
+    }
 
     public void initialize() {
         if (bookedFlights == null) {
@@ -36,6 +37,13 @@ public class BookedFlightTable implements DataAccessStub<BookedFlight> {
     }
 
     public boolean add(BookedFlight bookedFlight) {
+        if (bookedFlight == null) {
+            return false;
+        }
+        for (BookedFlight bookedFlight1 : bookedFlights) {
+            if (bookedFlight.equals(bookedFlight1))
+                return false;
+        }
         return bookedFlights.add(bookedFlight);
     }
 

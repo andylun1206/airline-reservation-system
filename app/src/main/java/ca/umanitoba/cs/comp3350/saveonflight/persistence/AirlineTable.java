@@ -16,7 +16,8 @@ import java.util.ArrayList;
 public class AirlineTable implements DataAccessStub<Airline> {
     private static ArrayList<Airline> airlines = null;
 
-    public AirlineTable() { }
+    public AirlineTable() {
+    }
 
     public void initialize() {
         if (airlines == null) {
@@ -43,6 +44,14 @@ public class AirlineTable implements DataAccessStub<Airline> {
     }
 
     public boolean add(Airline airline) {
+        if (airline == null) {
+            return false;
+        }
+        for (Airline airline1 : airlines) {
+            if (airline.equals(airline1)) {
+                return false;
+            }
+        }
         return airlines.add(airline);
     }
 

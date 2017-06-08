@@ -15,7 +15,8 @@ import java.util.ArrayList;
 public class AirportTable implements DataAccessStub<Airport> {
     private static ArrayList<Airport> airports = null;
 
-    public AirportTable() { }
+    public AirportTable() {
+    }
 
     public void initialize() {
         if (airports == null) {
@@ -45,6 +46,13 @@ public class AirportTable implements DataAccessStub<Airport> {
     }
 
     public boolean add(Airport airport) {
+        if (airport == null) {
+            return false;
+        }
+        for (Airport airport1 : airports) {
+            if (airport.equals(airport1))
+                return false;
+        }
         return airports.add(airport);
     }
 
