@@ -15,6 +15,7 @@ public class Services {
 
     /**
      * Open connection to the database.
+     *
      * @param dbName Name of the database to open.
      * @return Returns an instance of the DB.
      */

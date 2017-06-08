@@ -43,9 +43,6 @@ public class DataAccessStubTest {
     public void testSearchByCriteria() throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy, MM, dd, HH, mm", Locale.CANADA);
         searchCriteria = new SearchCriteria(new Airport("YVR"), new Airport("YWG"), simpleDateFormat.parse("2017, 11, 11, 22, 30"), 2, 0.0, null, null, false, false);
-        /*Airport origin, Airport destination, Date departureDate, Date returnDate,
-                          int numTravellers, double maxPrice, Airline preferredAirlines,
-	                      Flight.FlightClass preferredClass, boolean nonstop, boolean refundable*/
         assertNotNull(dataAccessStub.searchByCriteria(searchCriteria));
     }
 }

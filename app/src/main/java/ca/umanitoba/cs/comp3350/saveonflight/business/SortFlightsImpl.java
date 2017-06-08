@@ -22,8 +22,9 @@ public class SortFlightsImpl implements SortFlights {
     /**
      * Sorts the list of Flights passed in based on the specified SortParameter. List elements will
      * invalid fields and null elements are placed at the end of the list.
+     *
      * @param flights List of Flights to sort
-     * @param sortBy Field to sort Flights by
+     * @param sortBy  Field to sort Flights by
      */
     @Override
     public void sortFlightsBy(ArrayList<Flight> flights, SortParameter sortBy) {
@@ -68,6 +69,7 @@ public class SortFlightsImpl implements SortFlights {
 
     /**
      * Checks each Flight in the list passed in for validity.
+     *
      * @param flights The list of Flights to check
      * @return The number of null elements in the list
      */
