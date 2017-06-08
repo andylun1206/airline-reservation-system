@@ -38,22 +38,31 @@ public class FlightTable implements DataAccessStub<Flight>, FlightAccess {
 
     public void initialize() {
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy, MM, dd, HH, mm", Locale.CANADA);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CANADA);
         flights = new ArrayList<Flight>();
 
         ArrayList<Airport> airports = AirportTable.getAirports();
-        ArrayList<Airline> airlines = AirlineTable.getAirlines();
+        Airline airCanada = AirlineTable.findAirline("Air Canada");
+        Airline westJet = AirlineTable.findAirline("WestJet");
 
-        if (airlines != null) {
+        if (airports != null && airCanada != null && westJet != null) {
             try {
-                flights.add(new Flight("WJ 001", simpleDateFormat.parse("2017, 11, 11, 22, 30"), simpleDateFormat.parse("2017, 11, 12, 01, 30"), airlines.get(0), airports.get(1),
-                        airports.get(0), 200.00, 200, 0, FlightClassEnum.ECONOMY));
-                flights.add(new Flight("WJ 001", simpleDateFormat.parse("2017, 10, 10, 22, 30"), simpleDateFormat.parse("2017, 10, 12, 22, 30"), airlines.get(0), airports.get(0),
-                        airports.get(1), 350.00, 200, 0, FlightClassEnum.ECONOMY));
-                flights.add(new Flight("AC 001", simpleDateFormat.parse("2017, 9, 11, 22, 30"), simpleDateFormat.parse("2017, 9, 12, 22, 30"), airlines.get(1), airports.get(1),
-                        airports.get(2), 400.00, 150, 0, FlightClassEnum.BUSINESS));
-                flights.add(new Flight("WA 001", simpleDateFormat.parse("2017, 10, 11, 12, 30"), simpleDateFormat.parse("2017, 10, 11, 22, 30"), airlines.get(0), airports.get(1),
-                        airports.get(0), 500.00, 250, 0, FlightClassEnum.ECONOMY));
+                flights.add(new Flight("AC 256", sdf.parse("2017-11-11 05:30"), sdf.parse("2017-11-11 08:51"), airCanada,
+                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 350.52, 200, 0, FlightClassEnum.ECONOMY));
+                flights.add(new Flight("AC 260", sdf.parse("2017-11-11 7:30"), sdf.parse("2017-11-11 10:52"), airCanada,
+                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 325.82, 200, 0, FlightClassEnum.ECONOMY));
+                flights.add(new Flight("AC 264", sdf.parse("2017-11-11 10:50"), sdf.parse("2017-11-11 14:10"), airCanada,
+                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 403.20, 200, 0, FlightClassEnum.ECONOMY));
+                flights.add(new Flight("AC 266", sdf.parse("2017-11-11 12:20"), sdf.parse("2017-11-11 15:41"), airCanada,
+                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 467.29, 200, 0, FlightClassEnum.ECONOMY));
+                flights.add(new Flight("AC 268", sdf.parse("2017-11-11 14:35"), sdf.parse("2017-11-11 17:56"), airCanada,
+                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 210.87, 200, 0, FlightClassEnum.ECONOMY));
+                flights.add(new Flight("AC 270", sdf.parse("2017-11-11 16:45"), sdf.parse("2017-11-11 20:06"), airCanada,
+                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 629.05, 200, 0, FlightClassEnum.ECONOMY));
+                flights.add(new Flight("AC 272", sdf.parse("2017-11-11 18:45"), sdf.parse("2017-11-11 22:07"), airCanada,
+                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 320.49, 200, 0, FlightClassEnum.ECONOMY));
+                flights.add(new Flight("AC 274", sdf.parse("2017-11-11 21:00"), sdf.parse("2017-11-12 00:21"), airCanada,
+                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 420.12, 200, 0, FlightClassEnum.ECONOMY));
             } catch (ParseException e) {
                 e.printStackTrace();
             }

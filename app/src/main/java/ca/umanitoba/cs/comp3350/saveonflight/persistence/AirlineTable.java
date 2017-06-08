@@ -16,29 +16,34 @@ import ca.umanitoba.cs.comp3350.saveonflight.R;
 public class AirlineTable implements DataAccessStub<Airline> {
     private String dbName;
     private static ArrayList<Airline> airlines;
-    private Airline westJet, airCanada;
 
     public AirlineTable(String dbName) {
         this.dbName = dbName;
     }
 
     public void initialize() {
-
         airlines = new ArrayList<Airline>();
-        westJet = new Airline("WestJet", R.mipmap.ic_westjet);
-        airlines.add(westJet);
-        airCanada = new Airline("Air Canada", R.mipmap.ic_aircanada);
-        airlines.add(airCanada);
-
-        System.out.println("Opened " + " database " + dbName);
+        airlines.add(new Airline("WestJet", R.mipmap.ic_westjet));
+        airlines.add(new Airline("Air Canada", R.mipmap.ic_aircanada);
     }
 
     public static ArrayList<Airline> getAirlines() {
         return airlines;
     }
 
-    public boolean add(Airline airline) {
+    public static Airline findAirline(String airlineName) {
+        Airline result = null;
 
+        for (Airline airline : airlines) {
+            if (airline.getName().toLowerCase().contains(airlineName.toLowerCase())) {
+                result = airline;
+            }
+        }
+
+        return result;
+    }
+
+    public boolean add(Airline airline) {
         return airlines.add(airline);
     }
 
