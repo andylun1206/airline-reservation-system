@@ -1,12 +1,13 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
 import android.support.annotation.NonNull;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.TimeUnit;
+
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 
 /**
  * SortFlightsImpl.java

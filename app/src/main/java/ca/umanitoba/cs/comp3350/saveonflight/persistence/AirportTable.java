@@ -1,8 +1,8 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
-
 import java.util.ArrayList;
+
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 
 /**
  * AirportTable.java

@@ -1,10 +1,10 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
+import java.util.List;
+
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTable;
-
-import java.util.List;
 
 /**
  * AccessTravellersImpl.java

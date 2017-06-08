@@ -1,10 +1,10 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
+import java.util.List;
+
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
-
-import java.util.List;
 
 /**
  * AccessAirportsImpl.java

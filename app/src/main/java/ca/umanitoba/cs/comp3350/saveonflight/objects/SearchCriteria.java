@@ -9,12 +9,13 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
  */
 
 import android.view.View;
-import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 public class SearchCriteria {
     private Airport origin;
