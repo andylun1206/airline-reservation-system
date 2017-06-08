@@ -17,7 +17,8 @@ import java.util.ArrayList;
 public class BookedFlightTable implements DataAccessStub<BookedFlight> {
     private static ArrayList<BookedFlight> bookedFlights = null;
 
-    public BookedFlightTable() { }
+    public BookedFlightTable() {
+    }
 
     public void initialize() {
         if (bookedFlights == null) {
@@ -36,7 +37,18 @@ public class BookedFlightTable implements DataAccessStub<BookedFlight> {
     }
 
     public boolean add(BookedFlight bookedFlight) {
-        return bookedFlights.add(bookedFlight);
+        boolean result = true;
+        if (bookedFlight != null && bookedFlight.getTraveller().getTravellerID() != 0 && (!bookedFlight.getFlight().getFlightID().isEmpty() && !bookedFlight.getFlight().getDepartureTime().equals(null))) {
+            for (BookedFlight bookedFlight1 : bookedFlights) {
+                if (bookedFlight.equals(bookedFlight1))
+                    result = false;
+            }
+            if (result)
+                result = bookedFlights.add(bookedFlight);
+        } else {
+            result = false;
+        }
+        return result;
     }
 
     public boolean update(BookedFlight bookedFlight) {
@@ -62,13 +74,14 @@ public class BookedFlightTable implements DataAccessStub<BookedFlight> {
     }
 
     public boolean remove(BookedFlight bookedFlight) {
+        boolean result = false;
         int index;
         index = bookedFlights.indexOf(bookedFlight);
         if (index >= 0) {
             bookedFlights.remove(index);
-            return true;
+            result = true;
         }
-        return false;
+        return result;
 
     }
 
