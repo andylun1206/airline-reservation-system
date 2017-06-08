@@ -6,21 +6,28 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import static junit.framework.Assert.*;
+
 import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
 public class BookedFlightTableTest {
     private static ArrayList<BookedFlight> original;
     private static BookedFlightTable bookedFlightTable;
-    private BookedFlight emptyNameCase = new BookedFlight("");
-    private BookedFlight vaildCase = new BookedFlight("myAirport MAT");
+    ArrayList<Traveller> travellers = TravellerTable.getTravellers();
+    ArrayList<Flight> flights = FlightTable.getFlights();
+    private BookedFlight nullCase = new BookedFlight(null, null);
+    private BookedFlight validCase = new BookedFlight(travellers.get(2), flights.get(7));
+
     @BeforeClass
     public static void setUp() {
-        bookedFlightTable = new AirportTable();
+        bookedFlightTable = new BookedFlightTable();
         bookedFlightTable.initialize();
-        original = AirportTable.getAirports();
+        original = BookedFlightTable.getBookedFlights();
     }
 
     @Test
@@ -30,68 +37,54 @@ public class BookedFlightTableTest {
 
     @Test
     public void testInitialize() {
-        assertEquals("Initialize is not work", original, AirportTable.getAirports());
+        assertEquals("Initialize is not work", original, BookedFlightTable.getBookedFlights());
     }
 
     @Test
     public void testAddNull() {
-        bookedFlightTable.add(null);
-        assertEquals("add null but actually add something", original, AirportTable.getAirports());
+        bookedFlightTable.add(nullCase);
+        assertEquals("Add null but actually add something", original, BookedFlightTable.getBookedFlights());
     }
 
-    @Test
-    public void testAddEmptyName() {
-        bookedFlightTable.add(emptyNameCase);
-        assertEquals("adding none since object but it shouldn't add", original, AirportTable.getAirports());
-    }
 
     @Test
     public void testAddValid() {
-        bookedFlightTable.add(vaildCase);
-        assertEquals("Failed to add Cathay Pacific to airlineTable.", vaildCase, AirportTable.findAirport("myAirport MAT"));
-
-        bookedFlightTable.remove(vaildCase);
+        bookedFlightTable.add(validCase);
+        assertFalse("Failed to add validCase to BookedFlightTable.", bookedFlightTable.add(validCase));
+        bookedFlightTable.remove(validCase);
     }
+
     @Test
     public void testAddDuplicate() {
-
-        assertTrue("Failed to add unique airline 'dup'", bookedFlightTable.add(vaildCase));
-        assertFalse("Succeeded adding a duplicate.", bookedFlightTable.add(vaildCase));
-
-        bookedFlightTable.remove(vaildCase);
+        assertTrue("Failed to add unique airline 'dup'", bookedFlightTable.add(validCase));
+        assertFalse("Succeeded adding a duplicate.", bookedFlightTable.add(validCase));
+        bookedFlightTable.remove(validCase);
     }
+
     @Test
     public void testRemoveNull() {
         assertFalse("removed null?", bookedFlightTable.remove(null));
     }
 
-    @Test
-    public void testRemoveEmptyName() {
-        assertFalse("cant remove EmptyName object", bookedFlightTable.remove(emptyNameCase));
-    }
 
     @Test
     public void testRemoveValid() {
-        bookedFlightTable.add(vaildCase);
-        assertTrue("fail to remove Valid object", bookedFlightTable.remove(vaildCase));
+        bookedFlightTable.add(validCase);
+        assertTrue("fail to remove Valid object", bookedFlightTable.remove(validCase));
     }
 
     @Test
-    public void testUpdateNull(){
-        assertFalse("update to null?", bookedFlightTable.update(null));
+    public void testUpdateNull() {
+        assertFalse("update to null?", bookedFlightTable.update(nullCase));
     }
 
-    @Test
-    public void testUpdateEmptyNameFlight(){
-        assertFalse("should update a EmptyName object", bookedFlightTable.update(emptyNameCase));
-    }
 
     @Test
-    public void testUpdateValid(){
-        bookedFlightTable.add(vaildCase);
+    public void testUpdateValid() {
+        bookedFlightTable.add(validCase);
         // well done it at next teration
-        assertFalse("should update a EmptyName object", bookedFlightTable.update(new BookedFlight("America UMA")));
+        assertFalse("should update a null object", bookedFlightTable.update(nullCase));
 
-        bookedFlightTable.remove(vaildCase);
+        bookedFlightTable.remove(validCase);
     }
 }
