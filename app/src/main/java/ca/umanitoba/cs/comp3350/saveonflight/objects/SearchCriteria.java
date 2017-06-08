@@ -9,7 +9,6 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
  */
 
 import android.view.View;
-
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 import java.text.ParseException;

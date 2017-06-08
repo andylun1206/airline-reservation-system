@@ -1,10 +1,10 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
-import java.util.ArrayList;
-
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
+
+import java.util.ArrayList;
 
 /**
  * BookedFlightTable.java
@@ -15,27 +15,20 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  */
 
 public class BookedFlightTable implements DataAccessStub<BookedFlight> {
-    private String dbName;
-    private BookedFlight bookedFlight;
     private static ArrayList<BookedFlight> bookedFlights = null;
 
-    public BookedFlightTable(String dbName) {
-        this.dbName = dbName;
-    }
+    public BookedFlightTable() { }
 
     public void initialize() {
-        bookedFlights = new ArrayList<BookedFlight>();
-        ArrayList<Traveller> travellers = TravellerTable.getTravellers();
-        ArrayList<Flight> flights = FlightTable.getFlights();
-        bookedFlight = new BookedFlight(travellers.get(0), flights.get(0));
-        bookedFlights.add(bookedFlight);
-        bookedFlight = new BookedFlight(travellers.get(0), flights.get(1));
-        bookedFlights.add(bookedFlight);
-        bookedFlight = new BookedFlight(travellers.get(1), flights.get(2));
-        bookedFlights.add(bookedFlight);
-        bookedFlight = new BookedFlight(travellers.get(2), flights.get(3));
-        bookedFlights.add(bookedFlight);
-        System.out.println("Opened " + " database " + dbName);
+        if (bookedFlights == null) {
+            bookedFlights = new ArrayList<BookedFlight>();
+            ArrayList<Traveller> travellers = TravellerTable.getTravellers();
+            ArrayList<Flight> flights = FlightTable.getFlights();
+            bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(0)));
+            bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(1)));
+            bookedFlights.add(new BookedFlight(travellers.get(1), flights.get(2)));
+            bookedFlights.add(new BookedFlight(travellers.get(2), flights.get(3)));
+        }
     }
 
     public static ArrayList<BookedFlight> getBookedFlights() {

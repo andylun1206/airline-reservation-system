@@ -1,11 +1,9 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
-import java.util.List;
-
-import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
-import ca.umanitoba.cs.comp3350.saveonflight.application.Services;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccessStub;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTable;
+
+import java.util.List;
 
 /**
  * AccessTravellersImpl.java
@@ -16,29 +14,32 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccessStub;
  */
 
 public class AccessTravellersImpl implements AccessTravellers {
-    private DataAccessStub dataAccess;
+    private TravellerTable travellerDB;
 
     public AccessTravellersImpl() {
-        dataAccess = Services.getDataAccess(Main.DB_NAME);
+        if (travellerDB == null) {
+            travellerDB = new TravellerTable();
+            travellerDB.initialize();
+        }
     }
 
     @Override
     public List<Traveller> getTravellers() {
-        return dataAccess.getTravellers();
+        return TravellerTable.getTravellers();
     }
 
     @Override
     public boolean insertTraveller(Traveller traveller) {
-        return dataAccess.insertTraveller(traveller);
+        return travellerDB.add(traveller);
     }
 
     @Override
-    public boolean updateTraveller(Traveller traveller, int newID, String newName) {
-        return dataAccess.updateTraveller(traveller, newID, newName);
+    public boolean updateTraveller(Traveller traveller) {
+        return travellerDB.update(traveller);
     }
 
     @Override
     public boolean deleteTraveller(Traveller traveller) {
-        return dataAccess.deleteTraveller(traveller);
+        return travellerDB.remove(traveller);
     }
 }
