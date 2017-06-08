@@ -1,5 +1,13 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
+/**
+ * Traveller.java
+ * <p>
+ * Object mapped to the Traveller table in the database.
+ *
+ * @author Kenny Zhang
+ */
+
 public class Traveller {
     private int travellerID;
     private String name;

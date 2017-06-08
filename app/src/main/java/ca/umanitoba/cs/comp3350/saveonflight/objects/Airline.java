@@ -1,8 +1,8 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
-/*
+/**
  * Airline.java
- *
+ * <p>
  * Object mapped to the airline table DB
  *
  * @author Andy Lun
@@ -28,13 +28,9 @@ public class Airline implements Parcelable, Comparable  {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public int getIcon() {
         return icon;
-    }
-    
-    public void setIcon(int icon) {
-        this.icon = icon;
     }
 
     public String toString() {
@@ -53,28 +49,29 @@ public class Airline implements Parcelable, Comparable  {
 
         return result;
     }
-    
+
     @Override
     public int describeContents() {
         return 0;
     }
+
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(name);
     }
-    
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         @Override
         public Airline[] newArray(int size) {
             return new Airline[size];
         }
-        
+
         @Override
         public Airline createFromParcel(Parcel in) {
             return new Airline(in);
         }
     };
-    
+
     private Airline(Parcel in) {
         name = in.readString();
     }

@@ -2,7 +2,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 /**
  * SearchFragment.java
- *
+ * <p>
  * Fragment for the search page of the application.
  *
  * @author Andy Lun
@@ -21,18 +21,17 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.business.FindFlightsImpl;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListView;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListViewEntry;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SearchFragment extends ListFragment {
 	private SearchCriteriaArrayAdapter criteriaAdapter;
-	private ArrayList<SearchCriteriaListView> mandatoryCriteriaList;
-	private ArrayList<SearchCriteriaListView> optionalCriteriaList;
+	private ArrayList<SearchCriteriaListViewEntry> mandatoryCriteriaList;
+	private ArrayList<SearchCriteriaListViewEntry> optionalCriteriaList;
 	
 	ViewFlightsListener viewFlightsListener;
 	public interface ViewFlightsListener {
@@ -112,35 +111,44 @@ public class SearchFragment extends ListFragment {
 			@Override
 			public void onClick(View view) {
 				if (criteriaAdapter.verifyCriteria(getActivity())) {
-					ArrayList<Flight> flightList = new FindFlightsImpl().search(SearchCriteriaArrayAdapter.getCriteria());
+					ArrayList<Flight> flightList = new AccessFlightsImpl().search(SearchCriteriaArrayAdapter.getCriteria());
 					if (flightList != null && !flightList.isEmpty()) {
 						viewFlightsListener.viewFlights(flightList);
 					} else {
-						ToastActivity.toastNoResults(getActivity());
+						ToastHandler.toastNoResults(getActivity());
 					}
 				}
 			}
 		});
 	}
 	
+	/**
+	 * Sets all on screen criteria to represent return trips.
+	 */
 	private void setReturnCriterias() {
 		if (mandatoryCriteriaList.size() == 0) {
 			setOneWayCriterias();
 		}
-		mandatoryCriteriaList.add(3, new SearchCriteriaListView(R.drawable.ic_clock, getString(R.string.search_return_date)));
+		mandatoryCriteriaList.add(3, new SearchCriteriaListViewEntry(R.drawable.ic_clock, getString(R.string.search_return_date)));
 	}
 	
+	/**
+	 * Sets all on screen criteria to represent one way trips.
+	 */
 	private void setOneWayCriterias() {
 		if (mandatoryCriteriaList.size() == 0) {
-			mandatoryCriteriaList.add(new SearchCriteriaListView(R.drawable.ic_takeoff, getString(R.string.search_origin)));
-			mandatoryCriteriaList.add(new SearchCriteriaListView(R.drawable.ic_landing, getString(R.string.search_destination)));
-			mandatoryCriteriaList.add(new SearchCriteriaListView(R.drawable.ic_clock, getString(R.string.search_departure_date)));
-			mandatoryCriteriaList.add(new SearchCriteriaListView(R.drawable.ic_person, getString(R.string.search_num_travellers)));
+			mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_takeoff, getString(R.string.search_origin)));
+			mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_landing, getString(R.string.search_destination)));
+			mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_clock, getString(R.string.search_departure_date)));
+			mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_person, getString(R.string.search_num_travellers)));
 		} else {
 			mandatoryCriteriaList.remove(3);
 		}
 	}
 	
+	/**
+	 * Toggles advance options to on screen criterias.
+	 */
 	private void setAdvancedCriterias() {
 		View checkboxes = getView().findViewById(R.id.search_advanced_settings_checkboxes);
 		boolean isVisible = (checkboxes.getVisibility() == View.VISIBLE);
@@ -149,9 +157,9 @@ public class SearchFragment extends ListFragment {
 			checkboxes.setVisibility(View.GONE);
 		} else {
 			if (optionalCriteriaList.size() == 0) {
-				optionalCriteriaList.add(new SearchCriteriaListView(R.drawable.ic_dollar_sign, getString(R.string.search_max_price)));
-				optionalCriteriaList.add(new SearchCriteriaListView(R.drawable.ic_plane, getString(R.string.search_airlines)));
-				optionalCriteriaList.add(new SearchCriteriaListView(R.drawable.ic_seat, getString(R.string.search_class)));
+				optionalCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_dollar_sign, getString(R.string.search_max_price)));
+				optionalCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_plane, getString(R.string.search_airlines)));
+				optionalCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_seat, getString(R.string.search_class)));
 			}
 			checkboxes.setVisibility(View.VISIBLE);
 		}

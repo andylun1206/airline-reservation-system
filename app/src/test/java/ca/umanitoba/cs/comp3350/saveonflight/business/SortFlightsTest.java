@@ -22,7 +22,7 @@ public class SortFlightsTest {
 
     @Before
     public void setUp() {
-        sortFlights = new SortFlights();
+        sortFlights = new SortFlightsImpl();
         flights = new ArrayList<>();
 
         String flightID1 = "WJ101";
@@ -40,20 +40,20 @@ public class SortFlightsTest {
         Date d5 = null;
         Date a5 = null;
         try {
-            d1 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 06, 54");
+            d1 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 06, 54"); // 3 hours
             a1 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 09, 54");
 
-            d2 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 08, 07, 30");
+            d2 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 08, 07, 30"); // 4 hours 24 min
             a2 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 08, 11, 54");
 
-            d3 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 09, 08, 24");
+            d3 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 09, 08, 24"); // 4 hours 30 min
             a3 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 09, 12, 54");
 
-            d4 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 09, 01, 13, 00");
+            d4 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 09, 01, 13, 00"); // 2 hours 54 min
             a4 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 15, 54");
 
-            d5 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 06, 55");
-            a5 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 09, 55");
+            d5 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 06, 55"); // 3 hours 1 min
+            a5 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 09, 56");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -66,7 +66,7 @@ public class SortFlightsTest {
 
         Airport ywg = new Airport("YWG");
         Airport yvr = new Airport("YVR");
-        Airport yyc = new Airport ("YYC");
+        Airport yyc = new Airport("YYC");
 
         f1 = new Flight(flightID1, d1, a1, westJet, ywg, yvr, 100.0, 100, 100);
         f2 = new Flight(flightID1, d2, a2, fake, yvr, ywg, 200.0, 101, 100);
@@ -90,6 +90,69 @@ public class SortFlightsTest {
         f3 = null;
         f4 = null;
         f5 = null;
+    }
+
+    @Test
+    public void testNullList() {
+        try {
+            // Nothing should happen if we pass null instead of an ArrayList of Flights
+            sortFlights.sortFlightsBy(null, SortFlights.SortParameter.AIRLINE);
+        } catch (NullPointerException e) {
+            fail();
+        }
+
+    }
+
+    @Test
+    public void testEmptyList() {
+        // Nothing should happen
+        ArrayList<Flight> emptyList = new ArrayList<>();
+        sortFlights.sortFlightsBy(emptyList, SortFlights.SortParameter.SEATS_AVAILABLE);
+        assertTrue(emptyList.isEmpty()); // List should still be empty
+    }
+
+    @Test
+    public void testNullElements() {
+        // Try sorting an ArrayList where all elements are null
+        ArrayList<Flight> nullFlights = new ArrayList<>();
+        nullFlights.add(null);
+        nullFlights.add(null);
+        sortFlights.sortFlightsBy(nullFlights, SortFlights.SortParameter.DATE);
+        for (Flight f : nullFlights) {
+            // All elements should still just be null
+            assertNull(f);
+        }
+    }
+
+    @Test
+    public void testSomeValid() {
+        // Some elements are valid, while some are null
+        ArrayList<Flight> someNull = new ArrayList<>();
+        someNull.add(null);
+        someNull.add(null);
+        someNull.add(f1);
+
+        // The null elements should be put at the end of the list
+        sortFlights.sortFlightsBy(someNull, SortFlights.SortParameter.DATE);
+        assertNotNull(someNull.get(0));
+        assertEquals(f1, someNull.get(0));
+        assertNull(someNull.get(1));
+        assertNull(someNull.get(2));
+    }
+
+    @Test
+    public void testInvalidField() {
+        ArrayList<Flight> someInvalidFields = new ArrayList<>();
+        someInvalidFields.add(f1);
+        f2.setDepartureTime(null);
+        someInvalidFields.add(f2);
+        someInvalidFields.add(f3);
+        sortFlights.sortFlightsBy(someInvalidFields, SortFlights.SortParameter.DATE);
+
+        // Flights with invalid fields should be put at the end of the
+        assertEquals(f1, someInvalidFields.get(0));
+        assertEquals(f3, someInvalidFields.get(1));
+        assertEquals(f2, someInvalidFields.get(2));
     }
 
     @Test
@@ -164,6 +227,21 @@ public class SortFlightsTest {
         sortFlights.sortFlightsBy(flights, SortFlights.SortParameter.SEATS_AVAILABLE);
         for (int i = 0; i < flights.size(); i++) {
             assertEquals(flightsBySeatsAvailable.get(i), flights.get(i));
+        }
+    }
+
+    @Test
+    public void testSortByDuration() {
+        ArrayList<Flight> flightsByDuration = new ArrayList<>();
+        flightsByDuration.add(f4);
+        flightsByDuration.add(f1);
+        flightsByDuration.add(f5);
+        flightsByDuration.add(f2);
+        flightsByDuration.add(f3);
+
+        sortFlights.sortFlightsBy(flights, SortFlights.SortParameter.DURATION);
+        for (int i = 0; i < flights.size(); i++) {
+            assertEquals(flightsByDuration.get(i), flights.get(i));
         }
     }
 }
