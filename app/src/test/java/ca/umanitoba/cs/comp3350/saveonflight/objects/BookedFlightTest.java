@@ -31,8 +31,8 @@ public class BookedFlightTest {
                 new Airport("TRT"), new Airport("WPG"), 300.00, 150, 0, FlightClassEnum.BUSINESS);
         booked1 = new BookedFlight(JULIA, flight1);
         booked2 = new BookedFlight(JENNIE, flight2);
-        booked3 = new BookedFlight(JULIA,flight2);
-        booked4 = new BookedFlight(JULIA,flight1);
+        booked3 = new BookedFlight(JULIA, flight2);
+        booked4 = new BookedFlight(JULIA, flight1);
         assertNotNull(booked1);
         assertNotNull(booked2);
         assertNotNull(booked3);
@@ -49,10 +49,10 @@ public class BookedFlightTest {
     }
 
     @Test
-    public void testGetTraveller(){
+    public void testGetTraveller() {
         assertEquals(booked1.getTraveller(), JULIA);
         assertFalse(JENNIE.equals(booked1.getTraveller()));
-        assertEquals(booked1.getTraveller().getName(),"Julia Stoyko");
+        assertEquals(booked1.getTraveller().getName(), "Julia Stoyko");
     }
 
     @Test
@@ -65,24 +65,26 @@ public class BookedFlightTest {
         //error cases
         assertFalse(booked1.equals(null));
     }
+
     @Test
-    public void testSetTravellerMethod(){
+    public void testSetTravellerMethod() {
         booked2.setTraveller(JULIA);
-        assertEquals(booked2,booked3);
+        assertEquals(booked2, booked3);
         booked3.setTraveller(JENNIE);
         assertFalse(booked3.equals(booked2));
     }
 
     @Test
-    public void testGetFlight(){
+    public void testGetFlight() {
         assertFalse(flight1.equals(booked2.getFlight()));
         assertEquals(flight1, booked1.getFlight());
-        assertEquals(booked1.getFlight(),booked4.getFlight());
+        assertEquals(booked1.getFlight(), booked4.getFlight());
     }
+
     @Test
-    public void testSetFlight(){
+    public void testSetFlight() {
         booked1.setFlight(flight2);
-        assertEquals(booked1,booked3);
+        assertEquals(booked1, booked3);
         booked3.setFlight(flight1);
         assertFalse(booked1.equals(booked3));
     }

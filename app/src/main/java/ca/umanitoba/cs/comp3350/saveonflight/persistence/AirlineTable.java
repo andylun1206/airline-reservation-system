@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author Long Yu
  */
 
-public class AirlineTable implements DataAccessStub<Airline> {
+public class AirlineTable implements DataAccess<Airline> {
     private static ArrayList<Airline> airlines = null;
 
     public AirlineTable() {
@@ -62,22 +62,24 @@ public class AirlineTable implements DataAccessStub<Airline> {
 
     public boolean update(Airline airline) {
         boolean isUpdated = false;
-        String name = airline.getName();
-        int icon = airline.getIcon();
-        int index = 0;
-        int changes = 0;
-        Airline temp;
-        for (int i = 0; i < airlines.size(); i++) {
-            temp = airlines.get(i);
-            if (temp.getName().equals(name)) {
-                changes++;
-                index = i;
+        if(airline != null){
+            String name = airline.getName();
+            int icon = airline.getIcon();
+            int index = 0;
+            int changes = 0;
+            Airline temp;
+            for (int i = 0; i < airlines.size(); i++) {
+                temp = airlines.get(i);
+                if (temp.getName().equals(name)) {
+                    changes++;
+                    index = i;
+                }
             }
-        }
-        if (changes != 0) {
-            airlines.get(index).setIcon(icon);
-            isUpdated = true;
+            if (changes != 0) {
+                airlines.get(index).setIcon(icon);
+                isUpdated = true;
 
+            }
         }
         return isUpdated;
     }

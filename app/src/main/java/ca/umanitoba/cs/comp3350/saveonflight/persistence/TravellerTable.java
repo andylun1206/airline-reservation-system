@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Long Yu
  */
 
-public class TravellerTable implements DataAccessStub<Traveller> {
+public class TravellerTable implements DataAccess<Traveller> {
     private static ArrayList<Traveller> travellers = null;
 
     public TravellerTable() {
@@ -49,21 +49,23 @@ public class TravellerTable implements DataAccessStub<Traveller> {
 
     public boolean update(Traveller traveller) {
         boolean isUpdated = false;
-        int id = traveller.getTravellerID();
-        String name = traveller.getName();
-        int index = 0;
-        int changes = 0;
-        Traveller temp;
-        for (int i = 0; i < travellers.size(); i++) {
-            temp = travellers.get(i);
-            if (temp.getTravellerID() == id) {
-                changes++;
-                index = i;
+        if(traveller != null) {
+            int id = traveller.getTravellerID();
+            String name = traveller.getName();
+            int index = 0;
+            int changes = 0;
+            Traveller temp;
+            for (int i = 0; i < travellers.size(); i++) {
+                temp = travellers.get(i);
+                if (temp.getTravellerID() == id) {
+                    changes++;
+                    index = i;
+                }
             }
-        }
-        if (changes != 0) {
-            travellers.get(index).setName(name);
-            isUpdated = true;
+            if (changes != 0) {
+                travellers.get(index).setName(name);
+                isUpdated = true;
+            }
         }
         return isUpdated;
     }

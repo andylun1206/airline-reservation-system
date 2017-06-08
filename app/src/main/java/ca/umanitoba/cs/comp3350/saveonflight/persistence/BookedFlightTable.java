@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Long Yu
  */
 
-public class BookedFlightTable implements DataAccessStub<BookedFlight> {
+public class BookedFlightTable implements DataAccess<BookedFlight> {
     private static ArrayList<BookedFlight> bookedFlights = null;
 
     public BookedFlightTable() {
@@ -53,22 +53,24 @@ public class BookedFlightTable implements DataAccessStub<BookedFlight> {
 
     public boolean update(BookedFlight bookedFlight) {
         boolean isUpdated = false;
-        int travelId = bookedFlight.getTraveller().getTravellerID();
-        String flightId = bookedFlight.getFlight().getFlightID();
-        int changes = 0;
-        int index = 0;
-        BookedFlight temp;
-        for (int i = 0; i < bookedFlights.size(); i++) {
-            temp = bookedFlights.get(i);
-            if (temp.getFlight().getFlightID().equals(flightId) && temp.getTraveller().getTravellerID() == travelId) {
-                changes++;
-                index = i;
+        if(bookedFlight != null) {
+            int travelId = bookedFlight.getTraveller().getTravellerID();
+            String flightId = bookedFlight.getFlight().getFlightID();
+            int changes = 0;
+            int index = 0;
+            BookedFlight temp;
+            for (int i = 0; i < bookedFlights.size(); i++) {
+                temp = bookedFlights.get(i);
+                if (temp.getFlight().getFlightID().equals(flightId) && temp.getTraveller().getTravellerID() == travelId) {
+                    changes++;
+                    index = i;
+                }
             }
-        }
-        if (changes != 0) {
-            bookedFlights.get(index).setFlight(bookedFlight.getFlight());
-            bookedFlights.get(index).setTraveller(bookedFlight.getTraveller());
-            isUpdated = true;
+            if (changes != 0) {
+                bookedFlights.get(index).setFlight(bookedFlight.getFlight());
+                bookedFlights.get(index).setTraveller(bookedFlight.getTraveller());
+                isUpdated = true;
+            }
         }
         return isUpdated;
     }
