@@ -1,15 +1,18 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
 
+/*
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
+*/
 
+import java.util.ArrayList;
 
-import ca.umanitoba.cs.comp3350.saveonflight.R;
+/*import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
@@ -17,10 +20,30 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;*/
 
-public class DataAccessStub implements DataAccess {
-    private String dbName;
+/**
+ * DataAccessStub.java
+ * <p>
+ * Database Access Stub
+ *
+ * @author Long Yu
+ * @author Zhengyu Gu
+ * @author Kenny Zhang
+ */
+
+interface DataAccessStub<E> {
+
+    public void initialize();
+
+    public boolean update(E e);
+
+    public boolean add(E e);
+
+    public boolean remove(E e);
+
+
+    /*private String dbName;
     private String dbType = "stub";
     private AirlineTable airlineTable;
     private AirportTable airportTable;
@@ -53,21 +76,12 @@ public class DataAccessStub implements DataAccess {
     public void close() {
         System.out.println("Closed " + dbType + " database ");
     }
-
-    public void initialize(){}
-
-    public boolean update(Object... o){return false;}
-
-    public boolean insert(Object o){return false;}
-
-    public boolean remove(Object o){return false;}
-
-    //abstract void find(Object o);//add, update, remove, find
+*/
 
     // AIRLINE TABLE METHODS
-    public ArrayList<Airline> getAirlines() {
+    /*public ArrayList<Airline> getAirlines() {
         return airlineTable.getAirlines();
-    }
+    }*/
 
     /*public boolean insertAirline(Airline airline) {}
 
@@ -77,9 +91,9 @@ public class DataAccessStub implements DataAccess {
 */
 
     // AIRPORT TABLE METHODS
-    public ArrayList<Airport> getAirports() {
+    /*public ArrayList<Airport> getAirports() {
         return airportTable.getAirports();
-    }
+    }*/
 
     /*public boolean insertAirport(Airport airport) {}
 
@@ -89,9 +103,9 @@ public class DataAccessStub implements DataAccess {
 */
 
     // BOOKEDFLIGHTS TABLE METHODS
-    public ArrayList<BookedFlight> getBookedFlights() {
+    /*public ArrayList<BookedFlight> getBookedFlights() {
         return bookedFlightTable.getBookedFlights();
-    }
+    }*/
 
     /*public boolean insertBookedFlight(BookedFlight bookedFlight) {}
 
@@ -99,7 +113,7 @@ public class DataAccessStub implements DataAccess {
 
     public boolean deleteBookedFlight(BookedFlight bookedFlight) {}
 */
-    public ArrayList<BookedFlight> getTravellersBookedFlights(Traveller traveller) {
+    /*public ArrayList<BookedFlight> getTravellersBookedFlights(Traveller traveller) {
         ArrayList<BookedFlight> result = new ArrayList<BookedFlight>();
 
         for (int i = 0; i < bookedFlightTable.getBookedFlights().size(); i++) {
@@ -122,11 +136,11 @@ public class DataAccessStub implements DataAccess {
         }
         return result;
     }
-
+*/
     // FLIGHTS TABLE METHODS
-    public ArrayList<Flight> getFlights() {
+    /*public ArrayList<Flight> getFlights() {
         return flightTable.getFlights();
-    }
+    }*/
 
     /*public boolean insertFlight(Flight flight) {}
 
@@ -135,7 +149,7 @@ public class DataAccessStub implements DataAccess {
 
     public boolean deleteFlight(Flight flight) {}
 */
-    public ArrayList<Flight> searchByCriteria(SearchCriteria criteria) {
+    /*public ArrayList<Flight> searchByCriteria(SearchCriteria criteria) {
         ArrayList<Flight> table;
         table = createTableByOriginAndDestination(new ArrayList<Flight>(), criteria.getOrigin(), criteria.getDestination());
         table = removeByDepartureDate(table, criteria.getDepartureDate());
@@ -154,16 +168,16 @@ public class DataAccessStub implements DataAccess {
 
 
     // TRAVELLERS TABLE METHODS
-    public ArrayList<Traveller> getTravellers() {
+    *//*public ArrayList<Traveller> getTravellers() {
         return travellerTable.getTravellers();
-    }
+    }*//*
 
-    /*public boolean insertTraveller(Traveller traveller) {}
+    *//*public boolean insertTraveller(Traveller traveller) {}
 
     public boolean updateTraveller(Traveller traveller, int newID, String newName) {}
 
     public boolean deleteTraveller(Traveller traveller) {}
-*/
+*//*
     private ArrayList<Flight> createTableByOriginAndDestination(ArrayList<Flight> table, Airport origin, Airport destination) {
         Flight temp;
         for (int i = 0; i < flightTable.getFlights().size(); i++) {
@@ -255,18 +269,19 @@ public class DataAccessStub implements DataAccess {
     }
 
     private ArrayList<Flight> removeByNonstop(ArrayList<Flight> table) {
-        /*if (table.isEmpty())
+        *//*if (table.isEmpty())
             return null;
-         */
+         *//*
         // Adding more stuff later
         return table;
     }
 
     private ArrayList<Flight> removeByRefundable(ArrayList<Flight> table) {
-        /*if (table.isEmpty())
+        *//*if (table.isEmpty())
             return null;
-         */
+         *//*
         // Adding more stuff later
         return table;
     }
+*/
 }

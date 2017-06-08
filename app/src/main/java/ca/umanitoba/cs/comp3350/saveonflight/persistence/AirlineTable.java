@@ -6,13 +6,17 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 /**
- * Created by longyu on 2017-06-06.
+ * AirlineTable.java
+ * <p>
+ * Database table for Airline.
+ *
+ * @author Long Yu
  */
 
-public class AirlineTable extends DataAccessStub {
+public class AirlineTable implements DataAccessStub<Airline> {
     private String dbName;
-    private ArrayList<Airline> airlines;
-    private Airline westJet, airCanada, winnipegAir;
+    private static ArrayList<Airline> airlines;
+    private Airline westJet, airCanada;
 
     public AirlineTable(String dbName) {
         this.dbName = dbName;
@@ -25,46 +29,44 @@ public class AirlineTable extends DataAccessStub {
         airlines.add(westJet);
         airCanada = new Airline("Air Canada", R.mipmap.ic_aircanada);
         airlines.add(airCanada);
-        winnipegAir = new Airline("Winnipeg Air", 0);
-        airlines.add(winnipegAir);
 
         System.out.println("Opened " + " database " + dbName);
     }
 
-    @Override
-    public ArrayList<Airline> getAirlines() {
-        ArrayList<Airline> result = new ArrayList<>();
-        result.addAll(airlines);
-        return result;
+    public static ArrayList<Airline> getAirlines() {
+        return airlines;
     }
 
-    public void setAirlines(ArrayList<Airline> airlines) {
-        this.airlines = airlines;
-    }
+    public boolean add(Airline airline) {
 
-    public boolean insertAirline(Airline airline) {
         return airlines.add(airline);
     }
 
-    public boolean insert(Object o) {
-
-        return airlines.add((Airline) o);
-    }
-
-    public boolean update(Object... o) {
-        int index;
-
-        index = airlines.indexOf((Airline) o[0]);
-        if (index >= 0) {
-            airlines.get(index).setName((String) o[1]);
-            return true;
+    public boolean update(Airline airline) {
+        boolean isUpdated = false;
+        String name = airline.getName();
+        int icon = airline.getIcon();
+        int index = 0;
+        int changes = 0;
+        Airline temp;
+        for (int i = 0; i < airlines.size(); i++) {
+            temp = airlines.get(i);
+            if (temp.getName().equals(name)) {
+                changes++;
+                index = i;
+            }
         }
-        return false;
+        if (changes != 0) {
+            airlines.get(index).setIcon(icon);
+            isUpdated = true;
+
+        }
+        return isUpdated;
     }
 
-    public boolean remove(Object o) {
+    public boolean remove(Airline airline) {
         int index;
-        index = airlines.indexOf((Airline) o);
+        index = airlines.indexOf(airline);
         if (index >= 0) {
             airlines.remove(index);
             return true;
@@ -72,7 +74,4 @@ public class AirlineTable extends DataAccessStub {
         return false;
     }
 
-    /*public void find(Object o) {
-
-    }*/
 }

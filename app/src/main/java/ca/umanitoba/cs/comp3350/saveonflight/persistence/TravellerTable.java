@@ -5,12 +5,16 @@ import java.util.ArrayList;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
 /**
- * Created by longyu on 2017-06-06.
+ * TravellerTable.java
+ * <p>
+ * Database table for TravellerTable
+ *
+ * @author Long Yu
  */
 
-public class TravellerTable extends DataAccessStub {
+public class TravellerTable implements DataAccessStub<Traveller> {
     private String dbName;
-    private ArrayList<Traveller> travellers;
+    private static ArrayList<Traveller> travellers = null;
 
     public TravellerTable(String dbName) {
         this.dbName = dbName;
@@ -28,34 +32,38 @@ public class TravellerTable extends DataAccessStub {
         System.out.println("Opened " + " database " + dbName);
     }
 
-    @Override
-    public ArrayList<Traveller> getTravellers() {
-        ArrayList<Traveller> result = new ArrayList<>();
-        result.addAll(travellers);
-        return result;
+    public static ArrayList<Traveller> getTravellers() {
+        return travellers;
     }
 
-    public boolean insert(Object o) {
-        return travellers.add((Traveller) o);
+    public boolean add(Traveller traveller) {
+        return travellers.add(traveller);
     }
 
-    public boolean update(Object... o) {
-        boolean result = false;
-
-        int index = travellers.indexOf((Traveller) o[0]);
-        if (index >= 0) {
-            Traveller toUpdate = travellers.get(index);
-            toUpdate.setTravellerID((int) o[1]);
-            toUpdate.setName((String) o[2]);
-            result = true;
+    public boolean update(Traveller traveller) {
+        boolean isUpdated = false;
+        int id = traveller.getTravellerID();
+        String name = traveller.getName();
+        int index = 0;
+        int changes = 0;
+        Traveller temp;
+        for (int i = 0; i < travellers.size(); i++) {
+            temp = travellers.get(i);
+            if (temp.getTravellerID() == id) {
+                changes++;
+                index = i;
+            }
         }
-
-        return result;
+        if (changes != 0) {
+            travellers.get(index).setName(name);
+            isUpdated = true;
+        }
+        return isUpdated;
     }
 
-    public boolean remove(Object o) {
+    public boolean remove(Traveller traveller) {
         int index;
-        index = travellers.indexOf((Traveller) o);
+        index = travellers.indexOf(traveller);
         if (index >= 0) {
             travellers.remove(index);
             return true;
@@ -63,7 +71,4 @@ public class TravellerTable extends DataAccessStub {
         return false;
     }
 
-    /*public void find(Object o) {
-
-    }*/
 }

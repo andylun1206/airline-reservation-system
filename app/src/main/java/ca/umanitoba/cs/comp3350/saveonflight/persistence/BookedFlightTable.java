@@ -7,13 +7,17 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
 /**
- * Created by longyu on 2017-06-06.
+ * BookedFlightTable.java
+ * <p>
+ * Database table for BookedFlight.
+ *
+ * @author Long Yu
  */
 
-public class BookedFlightTable extends DataAccessStub {
+public class BookedFlightTable implements DataAccessStub<BookedFlight> {
     private String dbName;
     private BookedFlight bookedFlight;
-    private ArrayList<BookedFlight> bookedFlights;
+    private static ArrayList<BookedFlight> bookedFlights = null;
 
     public BookedFlightTable(String dbName) {
         this.dbName = dbName;
@@ -21,8 +25,8 @@ public class BookedFlightTable extends DataAccessStub {
 
     public void initialize() {
         bookedFlights = new ArrayList<BookedFlight>();
-        ArrayList<Traveller> travellers = super.getTravellers();
-        ArrayList<Flight> flights = super.getFlights();
+        ArrayList<Traveller> travellers = TravellerTable.getTravellers();
+        ArrayList<Flight> flights = FlightTable.getFlights();
         bookedFlight = new BookedFlight(travellers.get(0), flights.get(0));
         bookedFlights.add(bookedFlight);
         bookedFlight = new BookedFlight(travellers.get(0), flights.get(1));
@@ -34,34 +38,39 @@ public class BookedFlightTable extends DataAccessStub {
         System.out.println("Opened " + " database " + dbName);
     }
 
-    @Override
-    public ArrayList<BookedFlight> getBookedFlights() {
-        ArrayList<BookedFlight> result = new ArrayList<>();
-        result.addAll(bookedFlights);
-        return result;
+    public static ArrayList<BookedFlight> getBookedFlights() {
+        return bookedFlights;
     }
 
-    public boolean insert(Object o) {
-        return bookedFlights.add((BookedFlight) o);
+    public boolean add(BookedFlight bookedFlight) {
+        return bookedFlights.add(bookedFlight);
     }
 
-    public boolean update(Object... o) {
-        int index;
-
-        index = bookedFlights.indexOf((BookedFlight) o[0]);
-        if (index >= 0) {
-            BookedFlight temp = bookedFlights.get(index);
-            temp.setTraveller((Traveller) o[1]);
-            temp.setFlight((Flight) o[2]);
-            return true;
+    public boolean update(BookedFlight bookedFlight) {
+        boolean isUpdated = false;
+        int travelId = bookedFlight.getTraveller().getTravellerID();
+        String flightId = bookedFlight.getFlight().getFlightID();
+        int changes = 0;
+        int index = 0;
+        BookedFlight temp;
+        for (int i = 0; i < bookedFlights.size(); i++) {
+            temp = bookedFlights.get(i);
+            if (temp.getFlight().getFlightID().equals(flightId) && temp.getTraveller().getTravellerID() == travelId) {
+                changes++;
+                index = i;
+            }
         }
-
-        return false;
+        if (changes != 0) {
+            bookedFlights.get(index).setFlight(bookedFlight.getFlight());
+            bookedFlights.get(index).setTraveller(bookedFlight.getTraveller());
+            isUpdated = true;
+        }
+        return isUpdated;
     }
 
-    public boolean remove(Object o) {
+    public boolean remove(BookedFlight bookedFlight) {
         int index;
-        index = bookedFlights.indexOf((BookedFlight) o);
+        index = bookedFlights.indexOf(bookedFlight);
         if (index >= 0) {
             bookedFlights.remove(index);
             return true;
@@ -70,7 +79,4 @@ public class BookedFlightTable extends DataAccessStub {
 
     }
 
-    /*public void find(Object o) {
-
-    }*/
 }
