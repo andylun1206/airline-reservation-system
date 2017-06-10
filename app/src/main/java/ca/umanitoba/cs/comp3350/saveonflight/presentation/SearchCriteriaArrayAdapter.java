@@ -179,7 +179,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
         } else if (criteria.getDepartureDate() == null || criteria.getDepartureDate().toString().trim().isEmpty()) {
             isValid = missingRequiredField(activity, R.string.search_departure_date);
         } else if (criteria.getNumTravellers() == 0) {
-            isValid = missingRequiredField(activity, R.string.search_num_travellers);
+            isValid = missingRequiredField(activity, R.string.search_num_passengers);
         }
 
         return isValid;

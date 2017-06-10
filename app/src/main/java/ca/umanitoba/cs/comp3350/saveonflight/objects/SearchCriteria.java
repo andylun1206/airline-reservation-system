@@ -18,6 +18,7 @@ import java.util.Locale;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 public class SearchCriteria {
+    private boolean returnTrip;
     private Airport origin;
     private Airport destination;
     private Date departureDate;
@@ -129,7 +130,7 @@ public class SearchCriteria {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-        } else if (row.getResources().getString(R.string.search_num_travellers).equals(title)) {
+        } else if (row.getResources().getString(R.string.search_num_passengers).equals(title)) {
             setNumTravellers(Integer.parseInt(inputText));
         } else if (row.getResources().getString(R.string.search_max_price).equals(title)) {
             setMaxPrice(Double.parseDouble(inputText));
@@ -138,5 +139,13 @@ public class SearchCriteria {
         } else if (row.getResources().getString(R.string.search_class).equals(title)) {
             setPreferredClass(FlightClassEnum.FIRST_CLASS);
         }
+    }
+
+    public boolean isReturnTrip() {
+        return this.returnTrip;
+    }
+
+    public void setReturnTrip(boolean isReturnTrip) {
+        this.returnTrip = isReturnTrip;
     }
 }

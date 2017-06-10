@@ -161,9 +161,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void viewFlights(ArrayList<Flight> flights) {
         Fragment viewFragment = new ViewFlightsFragment();
-        Bundle args = new Bundle();
-        args.putParcelableArrayList("flights", flights);
-        viewFragment.setArguments(args);
+//        Bundle args = new Bundle();
+//        args.putParcelableArrayList("flights", flights);
+//        viewFragment.setArguments(args);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_frame, viewFragment)

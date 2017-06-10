@@ -68,17 +68,21 @@ public class SearchFragment extends ListFragment {
         ((Spinner) view.findViewById(R.id.spinner_trip_type)).setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                SearchCriteria newCriteria = new SearchCriteria();
+
                 switch (parent.getItemAtPosition(position).toString()) {
                     case "Return":
                         setReturnCriterias();
+                        newCriteria.setReturnTrip(true);
                         break;
                     case "One Way":
                         setOneWayCriterias();
+                        newCriteria.setReturnTrip(false);
                         break;
                 }
                 criteriaAdapter.notifyDataSetChanged(false);
                 getView().findViewById(R.id.search_advanced_settings_checkboxes).setVisibility(View.GONE);
-                SearchCriteriaArrayAdapter.setCriteria(new SearchCriteria());
+                SearchCriteriaArrayAdapter.setCriteria(newCriteria);
             }
 
             @Override
@@ -144,7 +148,7 @@ public class SearchFragment extends ListFragment {
             mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_takeoff, getString(R.string.search_origin)));
             mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_landing, getString(R.string.search_destination)));
             mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_clock, getString(R.string.search_departure_date)));
-            mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_person, getString(R.string.search_num_travellers)));
+            mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_person, getString(R.string.search_num_passengers)));
         } else {
             mandatoryCriteriaList.remove(3);
         }
