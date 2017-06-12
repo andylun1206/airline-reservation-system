@@ -4,6 +4,117 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    
+    <RadioButton
+        android:id="@+id/radioButton_credit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Credit Card/Via Debit" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:text="Card Details"
+        android:textColor="#000"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/editText_card_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:hint="CARD NUMBER"
+        android:inputType="number" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_weight="25"
+            android:gravity="center_vertical"
+            android:text="EXPIRATION DATE"
+            android:textColor="#444"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editText_month"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="37.5"
+            android:inputType="number"
+            android:text="Month"
+            android:textColorHint="#999" />
+
+        <EditText
+            android:id="@+id/editText_year"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="37.5"
+            android:inputType="number"
+            android:text="Year"
+            android:textColorHint="#999" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editText_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:hint="FULL NAME"
+        android:inputType="number" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_weight="25"
+            android:gravity="center_vertical"
+            android:text="PHONE NUMBER"
+            android:textColor="#444"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editText_country_code"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            android:inputType="phone"
+            android:text="Country Code"
+            android:textColorHint="#999" />
+
+        <EditText
+            android:id="@+id/editText_area_code"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            android:inputType="phone"
+            android:text="Area Code"
+            android:textColorHint="#999" />
+
+        <EditText
+            android:id="@+id/editText_phone_number"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            android:inputType="phone"
+            android:text="Phone Number"
+            android:textColorHint="#999" />
+    </LinearLayout>
+
 
 </LinearLayout>
