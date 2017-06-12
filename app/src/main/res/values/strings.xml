@@ -50,4 +50,24 @@
     <string name="view_flight_sort_price">Price</string>
     <string name="view_flight_sort_time">Time</string>
     <string name="view_flight_sort_duration">Duration</string>
+
+    <!-- Payment Screen -->
+    <string-array name="countries">
+        <item>Canada</item>
+    </string-array>
+    <string-array name="provinces">
+        <item>Alberta</item>
+        <item>British Columbia</item>
+        <item>Manitoba</item>
+        <item>New Brunswick</item>
+        <item>Newfoundland</item>
+        <item>Nova Scotia</item>
+        <item>Ontario</item>
+        <item>Prince Edward Island</item>
+        <item>Quebec</item>
+        <item>Saskatchewan</item>
+        <item>Northwest Territories</item>
+        <item>Nunavut</item>
+        <item>Yukon</item>
+    </string-array>
 </resources>

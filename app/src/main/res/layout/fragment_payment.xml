@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:checked="true"
-        android:text="Credit Card/Via Debit" />
+        android:text="Credit Card/Visa Debit" />
 
     <TextView
         android:layout_width="match_parent"
@@ -116,5 +116,93 @@
             android:textColorHint="#999" />
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:text="Address"
+        android:textColor="#000"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/editText_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:hint="ADDRESS LINE" />
+
+    <EditText
+        android:id="@+id/editText_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:hint="CITY" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_weight="25"
+            android:gravity="center_vertical"
+            android:text="PROVINCE"
+            android:textColor="#444"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinner_province"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            android:entries="@array/provinces" />
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_weight="25"
+            android:gravity="center_vertical"
+            android:text="COUNTRY"
+            android:textColor="#444"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <!-- Spinner contents filled programmatically-->
+        <Spinner
+            android:id="@+id/spinner_country"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            android:entries="@array/countries" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editText_postal_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:hint="POSTAL CODE" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity=""
+            android:text="Purchase" />
+    </LinearLayout>
 
 </LinearLayout>
