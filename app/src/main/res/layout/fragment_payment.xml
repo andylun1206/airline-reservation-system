@@ -50,8 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="37.5"
             android:inputType="number"
-            android:text="Month"
-            android:textColorHint="#999" />
+            android:hint="Month" />
 
         <EditText
             android:id="@+id/editText_year"
@@ -59,8 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="37.5"
             android:inputType="number"
-            android:text="Year"
-            android:textColorHint="#999" />
+            android:hint="Year" />
     </LinearLayout>
 
     <EditText
@@ -94,8 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="25"
             android:inputType="phone"
-            android:text="Country Code"
-            android:textColorHint="#999" />
+            android:hint="Country Code" />
 
         <EditText
             android:id="@+id/editText_area_code"
@@ -103,8 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="25"
             android:inputType="phone"
-            android:text="Area Code"
-            android:textColorHint="#999" />
+            android:hint="Area Code" />
 
         <EditText
             android:id="@+id/editText_phone_number"
@@ -112,8 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="25"
             android:inputType="phone"
-            android:text="Phone Number"
-            android:textColorHint="#999" />
+            android:hint="Phone Number" />
     </LinearLayout>
 
     <TextView
