@@ -4,13 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RadioButton
-        android:id="@+id/radioButton_credit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="Credit Card/Visa Debit" />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -168,7 +161,6 @@
             android:textSize="17sp"
             android:textStyle="bold" />
 
-        <!-- Spinner contents filled programmatically-->
         <Spinner
             android:id="@+id/spinner_country"
             android:layout_width="0sp"

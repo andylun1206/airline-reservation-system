@@ -132,6 +132,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_search:
                 fragment = new SearchFragment();
                 break;
+            case R.layout.fragment_payment: // temp
+                fragment = new PaymentFragment();
+                break;
         }
 
         if (fragment != null) {
