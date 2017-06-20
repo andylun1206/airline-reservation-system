@@ -14,6 +14,7 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -63,7 +64,6 @@ public class ViewFlightsFragment extends ListFragment {
         view.findViewById(R.id.button_view_flight_sort_duration).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //ToastHandler.toastComingSoon(getActivity(), "Sort by duration");
                 new SortFlightsImpl().sortFlightsBy(flights, SortFlights.SortParameter.DURATION);
                 updateFlightList();
             }

@@ -28,6 +28,15 @@ and more time efficient than trying to come up with our own.
 - 1 database access class for each table in the data base.
 
 
+## Iteration 2:
+### Contributions
+
+
+#### You Tian Zhang
+- Problem: Payment Screen (GitHub issue #70)
+    - Need screen that allows users to input their payment and personal info
+    - Initially implemented with a bunch of EditTexts 
+
 ## Iteration 1:
 ### Contributions
 

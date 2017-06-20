@@ -80,7 +80,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
     private Bundle putInfoInBundle() {
         Bundle bundle = new Bundle();
 
-        
+
 
 
 
