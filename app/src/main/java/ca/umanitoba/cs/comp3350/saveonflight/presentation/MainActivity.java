@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -93,6 +93,8 @@ public class MainActivity extends AppCompatActivity
                 displaySelectedScreen(R.id.nav_search);
             } else if (f instanceof SearchFragment) {
                 displaySelectedScreen(R.id.nav_home);
+            } else if (f instanceof PaymentFragment) {
+                displaySelectedScreen(R.id.nav_home); // TODO: change this to go back to the view flights screen (after it is fully implemented)
             } else {
                 super.onBackPressed();
             }

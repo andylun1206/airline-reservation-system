@@ -57,7 +57,6 @@
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_right_arrow"
                 android:background="@android:color/transparent"
-                android:id="@+id/imageButton_view_flight_next"
-                android:onClick=""/>
+                android:id="@+id/imageButton_view_flight_next" />
     </RelativeLayout>
 </LinearLayout>
