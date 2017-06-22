@@ -153,7 +153,7 @@ public class SortFlightsTest {
         someInvalidFields.add(f3);
         sortFlights.sortFlightsBy(someInvalidFields, SortFlights.SortParameter.DATE);
 
-        // Flights with invalid fields should be put at the end of the
+        // Flights with invalid fields should be put at the end of the list
         assertEquals(f1, someInvalidFields.get(0));
         assertEquals(f3, someInvalidFields.get(1));
         assertEquals(f2, someInvalidFields.get(2));

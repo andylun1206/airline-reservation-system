@@ -20,7 +20,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 public class SortFlightsImpl implements SortFlights {
 
     /**
-     * Sorts the list of Flights passed in based on the specified SortParameter. List elements will
+     * Sorts the list of Flights passed in based on the specified SortParameter. List elements with
      * invalid fields and null elements are placed at the end of the list.
      *
      * @param flights List of Flights to sort
