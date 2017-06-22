@@ -16,11 +16,14 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 public interface SortFlights {
 
     /**
-     * Sorts the list of Flights passed in based on the specified SortParameter. List elements will
-     * invalid fields and null elements are placed at the end of the list.
+     * Sorts the list of Flights passed in based on the specified SortParameter.
      *
      * @param flights List of Flights to sort
-     * @param comparator Comparator to be used for sorting the list of Flights
+     * @param sortBy  Field to sort Flights by
      */
-    void sortFlightsBy(ArrayList<Flight> flights, Comparator<Flight> comparator);
+    void sortFlightsBy(ArrayList<Flight> flights, SortParameter sortBy);
+
+    enum SortParameter {
+        TIME, PRICE, DURATION
+    }
 }

@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.business.comparators.DepartureTimeComparator;
-import ca.umanitoba.cs.comp3350.saveonflight.business.comparators.DurationComparator;
-import ca.umanitoba.cs.comp3350.saveonflight.business.comparators.PriceComparator;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
@@ -103,7 +100,7 @@ public class SortFlightsTest {
     public void testNullList() {
         try {
             // Nothing should happen if we pass null instead of an ArrayList of Flights
-            sortFlights.sortFlightsBy(null, new DepartureTimeComparator());
+            sortFlights.sortFlightsBy(null, SortFlights.SortParameter.TIME);
         } catch (NullPointerException e) {
             fail();
         }
@@ -114,7 +111,7 @@ public class SortFlightsTest {
     public void testEmptyList() {
         // Nothing should happen
         ArrayList<Flight> emptyList = new ArrayList<>();
-        sortFlights.sortFlightsBy(emptyList, new DepartureTimeComparator());
+        sortFlights.sortFlightsBy(emptyList, SortFlights.SortParameter.TIME);
         assertTrue(emptyList.isEmpty()); // List should still be empty
     }
 
@@ -124,7 +121,7 @@ public class SortFlightsTest {
         ArrayList<Flight> nullFlights = new ArrayList<>();
         nullFlights.add(null);
         nullFlights.add(null);
-        sortFlights.sortFlightsBy(nullFlights, new DepartureTimeComparator());
+        sortFlights.sortFlightsBy(nullFlights, SortFlights.SortParameter.TIME);
         for (Flight f : nullFlights) {
             // All elements should still just be null
             assertNull(f);
@@ -140,7 +137,7 @@ public class SortFlightsTest {
         someNull.add(f1);
 
         // The null elements should be put at the end of the list
-        sortFlights.sortFlightsBy(someNull, new DepartureTimeComparator());
+        sortFlights.sortFlightsBy(someNull, SortFlights.SortParameter.TIME);
         assertNotNull(someNull.get(0));
         assertEquals(f1, someNull.get(0));
         assertNull(someNull.get(1));
@@ -154,7 +151,7 @@ public class SortFlightsTest {
         f2.setDepartureTime(null);
         someInvalidFields.add(f2);
         someInvalidFields.add(f3);
-        sortFlights.sortFlightsBy(someInvalidFields, new DepartureTimeComparator());
+        sortFlights.sortFlightsBy(someInvalidFields, SortFlights.SortParameter.TIME);
 
         // Flights with invalid fields should be put at the end of the
         assertEquals(f1, someInvalidFields.get(0));
@@ -171,7 +168,7 @@ public class SortFlightsTest {
         flightsByDepartureTime.add(f3);
         flightsByDepartureTime.add(f4);
 
-        sortFlights.sortFlightsBy(flights, new DepartureTimeComparator());
+        sortFlights.sortFlightsBy(flights, SortFlights.SortParameter.TIME);
         for (int i = 0; i < flights.size(); i++) {
             assertEquals(flightsByDepartureTime.get(i), flights.get(i));
         }
@@ -186,7 +183,7 @@ public class SortFlightsTest {
         flightsByPrice.add(f4);
         flightsByPrice.add(f5);
 
-        sortFlights.sortFlightsBy(flights, new PriceComparator());
+        sortFlights.sortFlightsBy(flights, SortFlights.SortParameter.PRICE);
         for (int i = 0; i < flights.size(); i++) {
             assertEquals(flightsByPrice.get(i), flights.get(i));
         }
@@ -201,7 +198,7 @@ public class SortFlightsTest {
         flightsByDuration.add(f2);
         flightsByDuration.add(f3);
 
-        sortFlights.sortFlightsBy(flights, new DurationComparator());
+        sortFlights.sortFlightsBy(flights, SortFlights.SortParameter.DURATION);
         for (int i = 0; i < flights.size(); i++) {
             assertEquals(flightsByDuration.get(i), flights.get(i));
         }
