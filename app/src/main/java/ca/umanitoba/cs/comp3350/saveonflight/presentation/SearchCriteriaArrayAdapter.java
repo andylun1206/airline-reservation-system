@@ -25,6 +25,7 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
@@ -40,6 +41,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
     private static SearchCriteria criteria;
 
     private EditText activeDateDisplay;
+    private Calendar minDate;
 
     public SearchCriteriaArrayAdapter(Context context, int layoutResourceId,
                                       ArrayList<SearchCriteriaListViewEntry> mandatoryCriteriaList,
@@ -50,6 +52,8 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
         this.mandatoryCriteriaList = mandatoryCriteriaList;
         this.optionalCriteriaList = optionalCriteriaList;
         this.fullCriteriaList = new ArrayList<>();
+
+        minDate = new GregorianCalendar();
 
         criteria = new SearchCriteria();
     }
@@ -87,13 +91,24 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
             case R.drawable.ic_clock:
                 input.setInputType(InputType.TYPE_CLASS_DATETIME);
                 input.setFocusable(false);
-                input.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        activeDateDisplay = input;
-                        showDatePickerDialog();
-                    }
-                });
+                if (input.getHint().toString().equals("Departure Date")) {
+                    input.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            activeDateDisplay = input;
+                            showDatePickerDialog();
+                        }
+                    });
+                } else {
+                    input.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            activeDateDisplay = input;
+                            showDatePickerDialog(minDate);
+                        }
+                    });
+                }
+
                 break;
             case R.drawable.ic_person:
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -136,6 +151,12 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         this.activeDateDisplay.setText(String.format(Locale.CANADA, "%04d-%02d-%02d", year, month + 1, dayOfMonth));
+
+        // Make sure users can only pick return dates that are after the departure date
+        if (this.activeDateDisplay.getHint().toString().equals("Departure Date")) {
+            minDate.set(year, month, dayOfMonth);
+        }
+
         this.activeDateDisplay = null;
     }
 
@@ -146,6 +167,16 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog dialog = new DatePickerDialog(this.getContext(), this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        dialog.show();
+    }
+
+    /**
+     * Initializes a date picker to the current date
+     */
+    private void showDatePickerDialog(Calendar minDate) {
+        Calendar calendar = Calendar.getInstance();
+        DatePickerDialog dialog = new DatePickerDialog(this.getContext(), this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        dialog.getDatePicker().setMinDate(minDate.getTimeInMillis());
         dialog.show();
     }
 
