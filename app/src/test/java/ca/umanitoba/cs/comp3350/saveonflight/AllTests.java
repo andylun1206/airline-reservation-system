@@ -8,6 +8,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.AirlineTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.AirportTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlightTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightTest;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.PaymentInfoTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListViewEntryTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.TravellerTest;
@@ -34,7 +35,8 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTableTest;
         AirportTableTest.class,
         TravellerTableTest.class,
         BookedFlightTableTest.class,
-        FlightTableTest.class
+        FlightTableTest.class,
+        PaymentInfoTest.class
 })
 
 public class AllTests {

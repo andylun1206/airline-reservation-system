@@ -46,7 +46,6 @@ public class ViewFlightsArrayAdapter extends ArrayAdapter<ViewFlightsListViewEnt
         ((TextView) view.findViewById(R.id.textView_view_flight_flightid)).setText(row.getFlightId());
         ((TextView) view.findViewById(R.id.textView_view_flight_duration)).setText(row.getDuration());
 
-
         return view;
     }
 }
