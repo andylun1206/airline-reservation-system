@@ -85,20 +85,26 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
             case R.id.button_payment:
                 //PaymentInfo info = createPaymentInfo();
                 Card card = createCard();
-                ProcessPayment processPayment = new ProcessPaymentImpl();
-                boolean paymentSuccess = processPayment.process(card, getContext());
 
-                if (paymentSuccess) {
-                    // Put BookedFlight into database
-                    AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl();
-                    // TODO: Add the BookedFlight object
-                    //accessBookedFlights.addBookedFlight();
+                if (card != null) {
+                    ProcessPayment processPayment = new ProcessPaymentImpl();
+                    boolean paymentSuccess = processPayment.process(card, getContext());
+
+                    if (paymentSuccess) {
+                        // Put BookedFlight into database
+                        AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl();
+                        // TODO: Add the BookedFlight object (Received form previous screen - view flights)
+                        //accessBookedFlights.addBookedFlight();
+                    } else {
+                        // Make a Toast
+                        Toast.makeText(getContext(), "Payment failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                    // TODO: go to confirmation screen
                 } else {
-                    // Make a Toast
-                    Toast.makeText(getContext(), "Payment failed", Toast.LENGTH_SHORT).show();
+                    ToastHandler.toastInvalidCardInfo(getActivity());
                 }
 
-                // TODO: go to confirmation screen
                 break;
         }
     }
@@ -106,10 +112,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
     private Card createCard() {
         Card cardToSave = mCardInputWidget.getCard();
 
-        if (cardToSave == null) {
-            Toast.makeText(getActivity(), "Invalid Card Data", Toast.LENGTH_SHORT).show();
-            ToastHandler.toastInvalidCardInfo(getActivity());
-        } else {
+        if (cardToSave != null) {
             cardToSave.setName(etName.getText().toString());
             cardToSave.setAddressCity(etCity.getText().toString());
             cardToSave.setAddressCountry(spinnerCountry.getSelectedItem().toString());

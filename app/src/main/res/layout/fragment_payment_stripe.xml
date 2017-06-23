@@ -4,6 +4,7 @@
     style="@android:style/TextAppearance.DeviceDefault.Small"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     android:orientation="vertical">
 
     <TextView
@@ -20,9 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10sp"
-        stripe:cardTint="@android:color/holo_purple"
         stripe:cardTextErrorColor="@android:color/holo_orange_dark"
-        />
+        stripe:cardTint="@android:color/holo_purple" />
 
     <EditText
         android:id="@+id/editText_name"
