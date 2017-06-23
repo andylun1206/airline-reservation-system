@@ -14,5 +14,11 @@ import com.stripe.android.model.Card;
  */
 
 public interface ProcessPayment {
-    boolean process(Card card, Context context);
+
+    interface ProcessPaymentListener {
+        void paymentSuccess();
+        void paymentFailure();
+    }
+
+    void process(Card card, Context context);
 }

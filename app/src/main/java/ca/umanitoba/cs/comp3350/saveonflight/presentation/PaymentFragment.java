@@ -30,7 +30,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.PaymentInfo;
  */
 
 
-public class PaymentFragment extends Fragment implements View.OnClickListener {
+public class PaymentFragment extends Fragment implements View.OnClickListener, ProcessPayment.ProcessPaymentListener {
     // Payment info
     //private EditText etCardNum;
     //private EditText etExpMonth;
@@ -87,26 +87,32 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
                 Card card = createCard();
 
                 if (card != null) {
-                    ProcessPayment processPayment = new ProcessPaymentImpl();
-                    boolean paymentSuccess = processPayment.process(card, getContext());
-
-                    if (paymentSuccess) {
-                        // Put BookedFlight into database
-                        AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl();
-                        // TODO: Add the BookedFlight object (Received form previous screen - view flights)
-                        //accessBookedFlights.addBookedFlight();
-                    } else {
-                        // Make a Toast
-                        Toast.makeText(getContext(), "Payment failed", Toast.LENGTH_SHORT).show();
-                    }
-
-                    // TODO: go to confirmation screen
+                    ProcessPayment processPayment = new ProcessPaymentImpl(this);
+                    processPayment.process(card, getContext());
                 } else {
                     ToastHandler.toastInvalidCardInfo(getActivity());
                 }
 
                 break;
         }
+    }
+
+    @Override
+    public void paymentSuccess() {
+        Toast.makeText(getContext(), "Payment succeeded", Toast.LENGTH_SHORT).show();
+        // Since we're not actually processing any payments... just add the BookedFlight to the database
+        
+        AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl();
+        // TODO: Add the BookedFlight object (Received form previous screen - view flights)
+        //accessBookedFlights.addBookedFlight();
+
+
+        // TODO: go to confirmation screen
+    }
+
+    @Override
+    public void paymentFailure() {
+        Toast.makeText(getContext(), "Payment failed", Toast.LENGTH_SHORT).show();
     }
 
     private Card createCard() {
@@ -143,4 +149,6 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         return builder.build();*/
         return null;
     }
+
+
 }

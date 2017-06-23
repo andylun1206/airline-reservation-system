@@ -17,19 +17,21 @@ import com.stripe.android.model.Token;
  */
 
 public class ProcessPaymentImpl implements ProcessPayment {
+    private ProcessPaymentListener listener;
+
+    public ProcessPaymentImpl(ProcessPaymentListener listener) {
+        this.listener = listener;
+    }
+
     @Override
-    public boolean process(Card card, final Context context) {
-        /*
+    public void process(Card card, final Context context) {
         Stripe stripe = new Stripe(context, "pk_test_kweQjhDjrpBrs8KcOho48gxE");
         stripe.createToken(
                 card,
                 new TokenCallback() {
                     public void onSuccess(Token token) {
-                        // Would send token to server if we had one
-                        Toast.makeText(context,
-                                "Token created successfully",
-                                Toast.LENGTH_LONG
-                        ).show();
+                        // Would send token to server if we had one... but we don't
+                        listener.paymentSuccess();
                     }
 
                     public void onError(Exception error) {
@@ -37,11 +39,9 @@ public class ProcessPaymentImpl implements ProcessPayment {
                                 error.getLocalizedMessage(),
                                 Toast.LENGTH_LONG
                         ).show();
+                        listener.paymentFailure();
                     }
                 }
-        );*/
-
-        // Just pretend that the payment processing was successful...
-        return true;
+        );
     }
 }
