@@ -57,6 +57,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, P
             container.removeAllViews();
         }
         View view = inflater.inflate(R.layout.fragment_payment_stripe, container, false);
+        getActivity().setTitle("Payment");
 
         //etCardNum = (EditText) view.findViewById(R.id.editText_card_number);
         //etExpMonth = (EditText) view.findViewById(R.id.editText_month);
@@ -101,7 +102,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, P
     public void paymentSuccess() {
         Toast.makeText(getContext(), "Payment succeeded", Toast.LENGTH_SHORT).show();
         // Since we're not actually processing any payments... just add the BookedFlight to the database
-        
+
         AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl();
         // TODO: Add the BookedFlight object (Received form previous screen - view flights)
         //accessBookedFlights.addBookedFlight();

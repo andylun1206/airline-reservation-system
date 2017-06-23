@@ -31,6 +31,7 @@ public class ProcessPaymentImpl implements ProcessPayment {
                 new TokenCallback() {
                     public void onSuccess(Token token) {
                         // Would send token to server if we had one... but we don't
+                        // So, just alert the listener (UI) that processing of the payment is done
                         listener.paymentSuccess();
                     }
 
