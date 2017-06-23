@@ -50,6 +50,14 @@
     <string name="view_flight_sort_price">Price</string>
     <string name="view_flight_sort_time">Time</string>
     <string name="view_flight_sort_duration">Duration</string>
+    <string name="address_line">ADDRESS LINE</string>
+    <string name="address">Address</string>
+    <string name="city">CITY</string>
+    <string name="country">COUNTRY</string>
+    <string name="card_details">Card Details</string>
+    <string name="full_name">FULL NAME</string>
+    <string name="postal_code">POSTAL CODE</string>
+    <string name="purchase">Purchase</string>
 
     <!-- Payment Screen -->
     <string-array name="countries">

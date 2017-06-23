@@ -3,7 +3,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
 /**
  * PaymentInfo.java
  * <p>
- * Interface for the business logic of sorting Flights.
+ * Model object representing a user's payment info.
  *
  * @author Kenny Zhang
  */
@@ -18,6 +18,38 @@ public class PaymentInfo {
     private String country;
     private String postalCode;
 
+    public String getCardNum() {
+        return cardNum;
+    }
+
+    public String getExpiryDate() {
+        return expiryDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getFullPhoneNum() {
+        return fullPhoneNum;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
     private PaymentInfo(String cardNum, String expiryDate, String name, String fullPhoneNum, String address,
                         String province, String country, String postalCode) {
         this.cardNum = cardNum;
@@ -27,6 +59,7 @@ public class PaymentInfo {
         this.address = address;
         this.province = province;
         this.country = country;
+
         this.postalCode = postalCode;
     }
 
