@@ -1,12 +1,12 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
-import android.support.annotation.NonNull;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.concurrent.TimeUnit;
 
+import ca.umanitoba.cs.comp3350.saveonflight.business.comparators.DepartureTimeComparator;
+import ca.umanitoba.cs.comp3350.saveonflight.business.comparators.DurationComparator;
+import ca.umanitoba.cs.comp3350.saveonflight.business.comparators.PriceComparator;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 
 /**
@@ -20,19 +20,32 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 public class SortFlightsImpl implements SortFlights {
 
     /**
-     * Sorts the list of Flights passed in based on the specified SortParameter. List elements will
-     * invalid fields and null elements are placed at the end of the list.
+     * Sorts the list of Flights passed in based on the specified SortParameter. List elements with
+     * invalid fields will be placed at the end of the list.
      *
      * @param flights List of Flights to sort
-     * @param comparator Comparator to be used for sorting the list of Flights
+     * @param sortBy  Field to sort Flights by
      */
-    @Override
-    public void sortFlightsBy(ArrayList<Flight> flights, Comparator<Flight> comparator) {
+    public void sortFlightsBy(ArrayList<Flight> flights, SortParameter sortBy) {
         if (flights == null) {
             return;
         }
         // Remove any null objects from the list prior to sorting
         int numNull = validateInput(flights);
+
+        Comparator<Flight> comparator = null;
+
+        switch (sortBy) {
+            case TIME:
+                comparator = new DepartureTimeComparator();
+                break;
+            case DURATION:
+                comparator = new DurationComparator();
+                break;
+            case PRICE:
+                comparator = new PriceComparator();
+                break;
+        }
 
         Collections.sort(flights, comparator);
         // Re-add the null elements to the end of the list
@@ -65,10 +78,4 @@ public class SortFlightsImpl implements SortFlights {
         return count;
     }
 
-    private class DurationComparator implements Comparator<Flight> {
-        @Override
-        public int compare(@NonNull Flight f1, @NonNull Flight f2) {
-            return (int) (f1.getDateDiff(TimeUnit.MINUTES) - f2.getDateDiff(TimeUnit.MINUTES));
-        }
-    }
 }

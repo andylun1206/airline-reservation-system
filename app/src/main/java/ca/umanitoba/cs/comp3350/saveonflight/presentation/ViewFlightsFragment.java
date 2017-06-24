@@ -20,9 +20,6 @@ import java.util.ArrayList;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlightsImpl;
-import ca.umanitoba.cs.comp3350.saveonflight.business.comparators.DepartureTimeComparator;
-import ca.umanitoba.cs.comp3350.saveonflight.business.comparators.DurationComparator;
-import ca.umanitoba.cs.comp3350.saveonflight.business.comparators.PriceComparator;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListViewEntry;
 
@@ -67,7 +64,7 @@ public class ViewFlightsFragment extends ListFragment {
             @Override
             public void onClick(View view) {
                 //ToastHandler.toastComingSoon(getActivity(), "Sort by duration");
-                new SortFlightsImpl().sortFlightsBy(flights, new DurationComparator());
+                new SortFlightsImpl().sortFlightsBy(flights, SortFlights.SortParameter.DURATION);
                 updateFlightList();
             }
         });
@@ -75,7 +72,7 @@ public class ViewFlightsFragment extends ListFragment {
         view.findViewById(R.id.button_view_flight_sort_price).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new SortFlightsImpl().sortFlightsBy(flights, new PriceComparator());
+                new SortFlightsImpl().sortFlightsBy(flights, SortFlights.SortParameter.PRICE);
                 updateFlightList();
             }
         });
@@ -83,7 +80,7 @@ public class ViewFlightsFragment extends ListFragment {
         view.findViewById(R.id.button_view_flight_sort_time).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new SortFlightsImpl().sortFlightsBy(flights, new DepartureTimeComparator());
+                new SortFlightsImpl().sortFlightsBy(flights, SortFlights.SortParameter.TIME);
                 updateFlightList();
             }
         });
