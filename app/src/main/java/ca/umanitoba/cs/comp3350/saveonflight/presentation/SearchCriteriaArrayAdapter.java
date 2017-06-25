@@ -108,13 +108,23 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
                 case R.drawable.ic_clock:
                     input.setInputType(InputType.TYPE_CLASS_DATETIME);
                     input.setFocusable(false);
-                    input.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            activeDateDisplay = input;
-                            showDatePickerDialog();
-                        }
-                    });
+                    if (input.getHint().toString().equals("Departure Date")) {
+                        input.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                activeDateDisplay = input;
+                                showDatePickerDialog(System.currentTimeMillis() - 1000);
+                            }
+                        });
+                    } else {
+                        input.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                activeDateDisplay = input;
+                                showDatePickerDialog(minDate.getTimeInMillis());
+                            }
+                        });
+                    }
                     break;
                 case R.drawable.ic_dollar_sign:
                     input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -168,7 +178,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
      * Initializes a date picker to the date passed in. If no date passed in, sets the minimum date to
      * the current date.
      */
-    private void showDatePickerDialog(Calendar date) {
+    private void showDatePickerDialog(long date) {
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog dialog = new DatePickerDialog(this.getContext(), this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         dialog.getDatePicker().setMinDate(date);
