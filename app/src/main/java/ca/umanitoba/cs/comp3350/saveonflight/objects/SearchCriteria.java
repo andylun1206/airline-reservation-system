@@ -10,12 +10,12 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
 import android.view.View;
 
-import ca.umanitoba.cs.comp3350.saveonflight.R;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 public class SearchCriteria {
     private Airport origin;
@@ -129,13 +129,6 @@ public class SearchCriteria {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-        /*}else if (row.getResources().getString(R.string.search_return_date).equals(title)) {
-			try {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
-				setReturnDate(sdf.parse(inputText));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}*/
         } else if (row.getResources().getString(R.string.search_num_travellers).equals(title)) {
             setNumTravellers(Integer.parseInt(inputText));
         } else if (row.getResources().getString(R.string.search_max_price).equals(title)) {

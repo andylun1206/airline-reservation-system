@@ -1,5 +1,13 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
+/**
+ * ViewFlightsListViewEntry.java
+ * <p>
+ * Object representing an entry in the ListView on the view flights page.
+ *
+ * @author Andy Lun
+ */
+
 public class ViewFlightsListViewEntry {
     private String time;
     private double price;
@@ -19,16 +27,8 @@ public class ViewFlightsListViewEntry {
         return time;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
-
     public double getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public int getAirline() {
@@ -43,15 +43,7 @@ public class ViewFlightsListViewEntry {
         return flightId;
     }
 
-    public void setFlightId(String flightId) {
-        this.flightId = flightId;
-    }
-
     public String getDuration() {
         return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
     }
 }

@@ -21,47 +21,47 @@ import android.widget.TextView;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 public class HomeFragment extends Fragment {
-	
-	@Nullable
-	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-	                         @Nullable Bundle saveInstanceState) {
-		if (container != null) {
-			container.removeAllViews();
-		}
-		return inflater.inflate(R.layout.fragment_home, container, false);
-	}
-	
-	@Override
-	public void onViewCreated(View view, @Nullable Bundle saveInstanceState) {
-		super.onViewCreated(view, saveInstanceState);
-		getActivity().setTitle(getString(R.string.app_name));
-		((NavigationView) getActivity().findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_home);
-		
-		((TextView) view.findViewById(R.id.textView_home_greeting)).setText(getString(R.string.home_greeting, "Guest"));
-		view.findViewById(R.id.button_home_account_info).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				ToastHandler.toastComingSoon(getActivity(), "Account");
-			}
-		});
-		
-		view.findViewById(R.id.button_home_search).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				FragmentTransaction ft = getFragmentManager().beginTransaction();
-				ft.replace(R.id.content_frame, new SearchFragment());
-				ft.commit();
-        
-				((NavigationView) getActivity().findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_search);
-			}
-		});
-		
-		view.findViewById(R.id.button_home_checkin).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				ToastHandler.toastComingSoon(getActivity(), getString(R.string.title_activity_checkin));
-			}
-		});
-	}
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle saveInstanceState) {
+        if (container != null) {
+            container.removeAllViews();
+        }
+        return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle saveInstanceState) {
+        super.onViewCreated(view, saveInstanceState);
+        getActivity().setTitle(getString(R.string.app_name));
+        ((NavigationView) getActivity().findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_home);
+
+        ((TextView) view.findViewById(R.id.textView_home_greeting)).setText(getString(R.string.home_greeting, "Guest"));
+        view.findViewById(R.id.button_home_account_info).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastHandler.toastComingSoon(getActivity(), "Account");
+            }
+        });
+
+        view.findViewById(R.id.button_home_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, new SearchFragment());
+                ft.commit();
+
+                ((NavigationView) getActivity().findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_search);
+            }
+        });
+
+        view.findViewById(R.id.button_home_checkin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastHandler.toastComingSoon(getActivity(), getString(R.string.title_activity_checkin));
+            }
+        });
+    }
 }

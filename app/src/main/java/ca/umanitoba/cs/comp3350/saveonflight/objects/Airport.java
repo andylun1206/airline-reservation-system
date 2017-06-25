@@ -22,6 +22,10 @@ public class Airport implements Parcelable {
         return airportCode;
     }
 
+    public void setAirportCode(String airportCode) {
+        this.airportCode = airportCode;
+    }
+
     public String toString() {
         return airportCode;
     }
@@ -44,7 +48,7 @@ public class Airport implements Parcelable {
 
         if (object instanceof Airport) {
             Airport airport = (Airport) object;
-            if (airportCode.contains(airport.getAirportCode())) {
+            if (airportCode.toLowerCase().contains(airport.getAirportCode().toLowerCase())) {
                 result = true;
             }
         }

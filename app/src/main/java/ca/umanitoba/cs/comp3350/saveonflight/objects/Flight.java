@@ -70,8 +70,6 @@ public class Flight implements Parcelable {
         if (numSold >= 0 && getSeatsRemaining() >= numSold) {
             seatsTaken += numSold;
             result = true;
-        } else {
-            System.out.println("Trying to sell more seats than are available");
         }
 
         return result;
@@ -186,7 +184,7 @@ public class Flight implements Parcelable {
         return Integer.toString(hours) + "h " + Integer.toString(minutes) + "m";
     }
 
-    private long getDateDiff(TimeUnit timeUnit) {
+    public long getDateDiff(TimeUnit timeUnit) {
         long diffInMillis = arrivalTime.getTime() - departureTime.getTime();
         return timeUnit.convert(diffInMillis, TimeUnit.MILLISECONDS);
     }
@@ -239,4 +237,5 @@ public class Flight implements Parcelable {
         seatsTaken = in.readInt();
         flightClass = (FlightClassEnum) in.readSerializable();
     }
+
 }

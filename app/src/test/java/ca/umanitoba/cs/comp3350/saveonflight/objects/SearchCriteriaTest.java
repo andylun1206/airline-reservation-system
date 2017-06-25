@@ -8,7 +8,10 @@ import java.util.Date;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
 
 public class SearchCriteriaTest {
     private SearchCriteria searchCriteria;
@@ -19,18 +22,18 @@ public class SearchCriteriaTest {
 
     private final Airport ORIGIN = new Airport("YWG");
     private final Airport DEST = new Airport("YVR");
-    private final Date DEPARTURE_DATE = new Date(117,5,6,14,40);
+    private final Date DEPARTURE_DATE = new Date(117, 5, 6, 14, 40);
     private final int NUM_TRAVELLERS = 3;
-    private final double  MAX = 1000.00;
+    private final double MAX = 1000.00;
     private final Airline AIRLINE = new Airline("WestJet", R.mipmap.ic_westjet);
     private final FlightClassEnum PREFERRED_CLASS = FlightClassEnum.FIRST_CLASS;
 
 
     @Before
     public void setUp() {
-        searchCriteria = new SearchCriteria(ORIGIN,DEST,DEPARTURE_DATE,NUM_TRAVELLERS,MAX,AIRLINE,PREFERRED_CLASS,true,true);
-        searchCriteriaTest1 = new SearchCriteria(new Airport("YWG"),new Airport("YVR"),new Date(117,5,6,14,40),3,1000,new Airline("WestJet", R.mipmap.ic_westjet),FlightClassEnum.FIRST_CLASS,true,true);
-        searchCriteriaTest2 = new SearchCriteria(null,null,null,0,0,null,null,false,false);
+        searchCriteria = new SearchCriteria(ORIGIN, DEST, DEPARTURE_DATE, NUM_TRAVELLERS, MAX, AIRLINE, PREFERRED_CLASS, true, true);
+        searchCriteriaTest1 = new SearchCriteria(new Airport("YWG"), new Airport("YVR"), new Date(117, 5, 6, 14, 40), 3, 1000, new Airline("WestJet", R.mipmap.ic_westjet), FlightClassEnum.FIRST_CLASS, true, true);
+        searchCriteriaTest2 = new SearchCriteria(null, null, null, 0, 0, null, null, false, false);
         searchCriteriaTest3 = null;
 
     }
@@ -43,8 +46,6 @@ public class SearchCriteriaTest {
 
     @Test
     public void testMatches() {
-        System.out.println("\nStarting test searchCriteria");
-
         assertNotNull(searchCriteriaTest1);
         assertTrue(ORIGIN.equals(searchCriteriaTest1.getOrigin()));
         assertTrue(DEST.equals(searchCriteriaTest1.getDestination()));
@@ -55,14 +56,11 @@ public class SearchCriteriaTest {
         assertTrue(PREFERRED_CLASS.equals(searchCriteriaTest1.getPreferredClass()));
         assertTrue(searchCriteriaTest1.isNonstop());
         assertTrue(searchCriteriaTest1.isRefundable());
-
         assertFalse(searchCriteria.equals(searchCriteriaTest1));//same condition but different search
-
-
     }
+
     @Test
     public void testEmpty() {
-        System.out.println("\nStarting test Empty searchCriteria");
         assertNotNull(searchCriteriaTest2);
         assertNull(searchCriteriaTest2.getOrigin());
         assertNull(searchCriteriaTest2.getDestination());
@@ -74,8 +72,7 @@ public class SearchCriteriaTest {
     }
 
     @Test
-    public void testNullData(){
-        System.out.println("\nStarting test null");
+    public void testNullData() {
         assertNull(searchCriteriaTest3);
     }
 

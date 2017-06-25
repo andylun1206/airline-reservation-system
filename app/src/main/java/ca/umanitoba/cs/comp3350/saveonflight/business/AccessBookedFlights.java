@@ -3,67 +3,28 @@ package ca.umanitoba.cs.comp3350.saveonflight.business;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
-import ca.umanitoba.cs.comp3350.saveonflight.application.Services;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccessStub;
 
-public class AccessBookedFlights {
-    private DataAccessStub dataAccess;
-    private List<BookedFlight> bookedFlights;
+/**
+ * AccessBookedFlights.java
+ * <p>
+ * Interface for the database access object for the BookedFlights table.
+ *
+ * @author Kenny Zhang
+ */
 
-    // For iterating through all BookedFlights
-    private BookedFlight currentBf;
-    private int currentIndex;
+public interface AccessBookedFlights {
+    List<BookedFlight> getFlights();
 
-    public AccessBookedFlights() {
-        dataAccess = Services.getDataAccess(Main.DB_NAME);
-        bookedFlights = null;
-        currentBf = null;
-        currentIndex = 0;
-    }
+    boolean addBookedFlight(BookedFlight bf);
 
-    public List<BookedFlight> getFlights() {
-        return dataAccess.getBookedFlights();
-    }
+    boolean updateBookedFlight(BookedFlight bf);
 
-    public BookedFlight getNext() {
-        if (bookedFlights == null) {
-            bookedFlights = dataAccess.getBookedFlights();
-            currentIndex = 0;
-        }
+    boolean deleteFlight(BookedFlight bf);
 
-        if (currentIndex < bookedFlights.size()) {
-            currentBf = bookedFlights.get(currentIndex++);
-        } else {
-            bookedFlights = null;
-            currentBf = null;
-            currentIndex = 0;
-        }
+    ArrayList<BookedFlight> getBookedFlightsOf(Traveller t);
 
-        return currentBf;
-    }
-
-    public boolean addBookedFlight(BookedFlight bf) {
-        return dataAccess.insertBookedFlight(bf);
-    }
-
-    public boolean updateBookedFlight(BookedFlight bf, Traveller t, Flight f) {
-        return dataAccess.updateBookedFlight(bf, t, f);
-    }
-
-    public boolean deleteFlight(BookedFlight bf) {
-        return dataAccess.deleteBookedFlight(bf);
-    }
-
-    public ArrayList<BookedFlight> getBookedFlightsOf(Traveller t) {
-        return dataAccess.getTravellersBookedFlights(t);
-    }
-
-    public ArrayList<BookedFlight> getTravellersOnFlight(Flight f) {
-        return dataAccess.getTravellersOnFlight(f);
-    }
-
+    ArrayList<BookedFlight> getTravellersOnFlight(Flight f);
 }

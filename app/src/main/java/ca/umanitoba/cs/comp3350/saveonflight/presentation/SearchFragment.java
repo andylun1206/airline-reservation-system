@@ -21,13 +21,13 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+
 import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlights;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListViewEntry;
-
-import java.util.ArrayList;
 
 public class SearchFragment extends ListFragment {
     private SearchCriteriaArrayAdapter criteriaAdapter;
@@ -115,7 +115,7 @@ public class SearchFragment extends ListFragment {
             @Override
             public void onClick(View view) {
                 if (criteriaAdapter.verifyCriteria(getActivity())) {
-                    ArrayList<Flight> flightList = new AccessFlights().search(SearchCriteriaArrayAdapter.getCriteria());
+                    ArrayList<Flight> flightList = new AccessFlightsImpl().search(SearchCriteriaArrayAdapter.getCriteria());
                     if (flightList != null && !flightList.isEmpty()) {
                         viewFlightsListener.viewFlights(flightList);
                     } else {
@@ -126,6 +126,9 @@ public class SearchFragment extends ListFragment {
         });
     }
 
+    /**
+     * Sets all on screen criteria to represent return trips.
+     */
     private void setReturnCriterias() {
         if (mandatoryCriteriaList.size() == 0) {
             setOneWayCriterias();
@@ -133,6 +136,9 @@ public class SearchFragment extends ListFragment {
         mandatoryCriteriaList.add(3, new SearchCriteriaListViewEntry(R.drawable.ic_clock, getString(R.string.search_return_date)));
     }
 
+    /**
+     * Sets all on screen criteria to represent one way trips.
+     */
     private void setOneWayCriterias() {
         if (mandatoryCriteriaList.size() == 0) {
             mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_takeoff, getString(R.string.search_origin)));
@@ -144,6 +150,9 @@ public class SearchFragment extends ListFragment {
         }
     }
 
+    /**
+     * Toggles advance options to on screen criterias.
+     */
     private void setAdvancedCriterias() {
         View checkboxes = getView().findViewById(R.id.search_advanced_settings_checkboxes);
         boolean isVisible = (checkboxes.getVisibility() == View.VISIBLE);
