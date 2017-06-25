@@ -76,6 +76,11 @@ public class FlightTable implements FlightAccess {
                 flights.add(new Flight("WJ 490", sdf.parse("2017-11-11 18:15"), sdf.parse("2017-11-11 21:35"), westJet,
                         AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 547.67, 200, 0, FlightClassEnum.ECONOMY));
 
+                flights.add(new Flight("AC 100", sdf.parse("2017-12-11 08:00"), sdf.parse("2017-12-11 11:21"), airCanada,
+                        AirportTable.findAirport("YYZ"), AirportTable.findAirport("YWG"), 420.12, 200, 0, FlightClassEnum.ECONOMY));
+                flights.add(new Flight("AC 101", sdf.parse("2017-12-11 21:00"), sdf.parse("2017-12-12 00:21"), airCanada,
+                        AirportTable.findAirport("YYZ"), AirportTable.findAirport("YWG"), 420.12, 200, 0, FlightClassEnum.ECONOMY));
+
 
             } catch (ParseException e) {
                 e.printStackTrace();

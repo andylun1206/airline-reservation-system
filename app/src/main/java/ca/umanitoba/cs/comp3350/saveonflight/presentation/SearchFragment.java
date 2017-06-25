@@ -8,18 +8,18 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
  * @author Andy Lun
  */
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.*;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -34,11 +34,6 @@ public class SearchFragment extends ListFragment {
     private ArrayList<SearchCriteriaListViewEntry> mandatoryCriteriaList;
     private ArrayList<SearchCriteriaListViewEntry> optionalCriteriaList;
 
-    ViewFlightsListener viewFlightsListener;
-
-    public interface ViewFlightsListener {
-        void viewFlights(ArrayList<Flight> flights);
-    }
 
     @Nullable
     @Override
@@ -51,11 +46,20 @@ public class SearchFragment extends ListFragment {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         mandatoryCriteriaList = new ArrayList<>();
         optionalCriteriaList = new ArrayList<>();
-        criteriaAdapter = new SearchCriteriaArrayAdapter(getActivity(), R.layout.list_item_search_criteria,
+        criteriaAdapter = new SearchCriteriaArrayAdapter(getActivity(), R.layout.list_item_search_criteria_text,
                 mandatoryCriteriaList, optionalCriteriaList);
         setListAdapter(criteriaAdapter);
 
-        viewFlightsListener = (ViewFlightsListener) getActivity();
+        if (! (view instanceof EditText)) {
+            view.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
 
         return view;
     }
@@ -68,17 +72,21 @@ public class SearchFragment extends ListFragment {
         ((Spinner) view.findViewById(R.id.spinner_trip_type)).setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                SearchCriteria newCriteria = new SearchCriteria();
+
                 switch (parent.getItemAtPosition(position).toString()) {
                     case "Return":
                         setReturnCriterias();
+                        newCriteria.setReturnTrip(true);
                         break;
                     case "One Way":
                         setOneWayCriterias();
+                        newCriteria.setReturnTrip(false);
                         break;
                 }
                 criteriaAdapter.notifyDataSetChanged(false);
                 getView().findViewById(R.id.search_advanced_settings_checkboxes).setVisibility(View.GONE);
-                SearchCriteriaArrayAdapter.setCriteria(new SearchCriteria());
+                SearchCriteriaArrayAdapter.setCriteria(newCriteria);
             }
 
             @Override
@@ -117,7 +125,7 @@ public class SearchFragment extends ListFragment {
                 if (criteriaAdapter.verifyCriteria(getActivity())) {
                     ArrayList<Flight> flightList = new AccessFlightsImpl().search(SearchCriteriaArrayAdapter.getCriteria());
                     if (flightList != null && !flightList.isEmpty()) {
-                        viewFlightsListener.viewFlights(flightList);
+                        FragmentNavigation.viewFlights();
                     } else {
                         ToastHandler.toastNoResults(getActivity());
                     }
@@ -144,7 +152,7 @@ public class SearchFragment extends ListFragment {
             mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_takeoff, getString(R.string.search_origin)));
             mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_landing, getString(R.string.search_destination)));
             mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_clock, getString(R.string.search_departure_date)));
-            mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_person, getString(R.string.search_num_travellers)));
+            mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_person, getString(R.string.search_num_passengers)));
         } else {
             mandatoryCriteriaList.remove(3);
         }
