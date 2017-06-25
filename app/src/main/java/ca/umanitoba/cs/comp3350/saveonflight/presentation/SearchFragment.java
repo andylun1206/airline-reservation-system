@@ -11,7 +11,6 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -47,7 +46,7 @@ public class SearchFragment extends ListFragment {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         mandatoryCriteriaList = new ArrayList<>();
         optionalCriteriaList = new ArrayList<>();
-        criteriaAdapter = new SearchCriteriaArrayAdapter(getActivity(), R.layout.list_item_search_criteria,
+        criteriaAdapter = new SearchCriteriaArrayAdapter(getActivity(), R.layout.list_item_search_criteria_text,
                 mandatoryCriteriaList, optionalCriteriaList);
         setListAdapter(criteriaAdapter);
 

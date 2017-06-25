@@ -18,10 +18,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,7 +30,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListViewEntry
 
 public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListViewEntry> implements OnDateSetListener {
     private final Context context;
-    private final int layoutResourceId;
     private ArrayList<SearchCriteriaListViewEntry> mandatoryCriteriaList;
     private ArrayList<SearchCriteriaListViewEntry> optionalCriteriaList;
     private ArrayList<SearchCriteriaListViewEntry> fullCriteriaList;
@@ -46,7 +42,6 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
                                       ArrayList<SearchCriteriaListViewEntry> optionalCriteriaList) {
         super(context, layoutResourceId, mandatoryCriteriaList);
         this.context = context;
-        this.layoutResourceId = layoutResourceId;
         this.mandatoryCriteriaList = mandatoryCriteriaList;
         this.optionalCriteriaList = optionalCriteriaList;
         this.fullCriteriaList = new ArrayList<>();
@@ -57,52 +52,73 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
     @Override
     public View getView(final int position, final View convertView, final ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        int layoutResourceId;
+
+        if ((criteria.isReturnTrip() && position == 4) ||
+                (!criteria.isReturnTrip() && position == 3)) {
+            layoutResourceId = R.layout.list_item_search_criteria_drop_down;
+        } else {
+            layoutResourceId = R.layout.list_item_search_criteria_text;
+
+        }
+
         final View view = inflater.inflate(layoutResourceId, parent, false);
         final SearchCriteriaListViewEntry row = fullCriteriaList.get(position);
 
         ((ImageView) view.findViewById(R.id.imageView_search_criteria_icon)).setImageResource(row.getIcon());
-        final EditText input = (EditText) view.findViewById(R.id.editText_search_criteria_input);
-        input.setHint(row.getTitle());
 
-        input.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String inputText = input.getText().toString().trim();
-                if (!inputText.isEmpty()) {
-                    criteria.setField(view, inputText, row.getTitle());
+        if (layoutResourceId == R.layout.list_item_search_criteria_drop_down) {
+            ((Spinner) view.findViewById(R.id.spinner_search_criteria_input)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    criteria.setField(view, Integer.toString(position + 1), row.getTitle());
                 }
-            }
-        });
 
-        switch (row.getIcon()) {
-            case R.drawable.ic_clock:
-                input.setInputType(InputType.TYPE_CLASS_DATETIME);
-                input.setFocusable(false);
-                input.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        activeDateDisplay = input;
-                        showDatePickerDialog();
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } else if (layoutResourceId == R.layout.list_item_search_criteria_text) {
+            final EditText input = (EditText) view.findViewById(R.id.editText_search_criteria_input);
+            input.setHint(row.getTitle());
+
+            input.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    String inputText = input.getText().toString().trim();
+                    if (!inputText.isEmpty()) {
+                        criteria.setField(view, inputText, row.getTitle());
                     }
-                });
-                break;
-            case R.drawable.ic_person:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                break;
-            case R.drawable.ic_dollar_sign:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-                break;
-            default:
-                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
-                break;
+                }
+            });
+
+            switch (row.getIcon()) {
+                case R.drawable.ic_clock:
+                    input.setInputType(InputType.TYPE_CLASS_DATETIME);
+                    input.setFocusable(false);
+                    input.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            activeDateDisplay = input;
+                            showDatePickerDialog();
+                        }
+                    });
+                    break;
+                case R.drawable.ic_dollar_sign:
+                    input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                    break;
+                default:
+                    input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
+                    break;
+            }
         }
 
         return view;
