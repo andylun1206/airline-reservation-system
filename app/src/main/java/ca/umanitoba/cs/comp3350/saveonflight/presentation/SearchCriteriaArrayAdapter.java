@@ -96,7 +96,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
                         @Override
                         public void onClick(View view) {
                             activeDateDisplay = input;
-                            showDatePickerDialog();
+                            showDatePickerDialog(null);
                         }
                     });
                 } else {
@@ -161,22 +161,17 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
     }
 
     /**
-     * Initializes a date picker to the current date
-     */
-    private void showDatePickerDialog() {
-        Calendar calendar = Calendar.getInstance();
-        DatePickerDialog dialog = new DatePickerDialog(this.getContext(), this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-        dialog.show();
-    }
-
-    /**
-     * Initializes a date picker to the date passed in 
+     * Initializes a date picker to the date passed in. If no date passed in, sets the minimum date to
+     * the current date.
      */
     private void showDatePickerDialog(Calendar minDate) {
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog dialog = new DatePickerDialog(this.getContext(), this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        dialog.getDatePicker().setMinDate(minDate.getTimeInMillis());
+        if (minDate == null) {
+            dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        } else {
+            dialog.getDatePicker().setMinDate(minDate.getTimeInMillis());
+        }
         dialog.show();
     }
 
