@@ -97,6 +97,10 @@ public class Flight implements Parcelable {
         return origin;
     }
 
+    public String getDepartAirportCode(){ return origin.getAirportCode(); }
+
+    public String getArrivalAirportCode(){ return destination.getAirportCode(); }
+
     public void setOrigin(Airport origin) {
         this.origin = origin;
     }
