@@ -175,8 +175,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
     }
 
     /**
-     * Initializes a date picker to the date passed in. If no date passed in, sets the minimum date to
-     * the current date.
+     * Initializes a date picker to the date passed in. 
      */
     private void showDatePickerDialog(long date) {
         Calendar calendar = Calendar.getInstance();
