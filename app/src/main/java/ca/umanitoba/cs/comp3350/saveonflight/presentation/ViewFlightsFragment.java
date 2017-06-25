@@ -88,7 +88,7 @@ public class ViewFlightsFragment extends ListFragment {
         view.findViewById(R.id.button_view_flight_sort_time).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new SortFlightsImpl().sortFlightsBy(flights, SortFlights.SortParameter.DATE);
+                new SortFlightsImpl().sortFlightsBy(flights, SortFlights.SortParameter.TIME);
                 updateFlightList();
             }
         });

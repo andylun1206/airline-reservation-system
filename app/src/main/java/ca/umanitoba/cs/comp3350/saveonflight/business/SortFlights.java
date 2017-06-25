@@ -1,6 +1,7 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 
@@ -23,6 +24,6 @@ public interface SortFlights {
     void sortFlightsBy(ArrayList<Flight> flights, SortParameter sortBy);
 
     enum SortParameter {
-        DATE, AIRLINE, PRICE, CAPACITY, SEATS_AVAILABLE, DURATION
+        TIME, PRICE, DURATION
     }
 }
