@@ -22,16 +22,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import ca.umanitoba.cs.comp3350.saveonflight.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
-import ca.umanitoba.cs.comp3350.saveonflight.presentation.SearchFragment.ViewFlightsListener;
-
-public class MainActivity extends AppCompatActivity
-        implements OnNavigationItemSelectedListener, ViewFlightsListener {
+public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +48,8 @@ public class MainActivity extends AppCompatActivity
         };
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        FragmentNavigation.setFragmentManager(getFragmentManager());
 
         final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -151,22 +148,5 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         displaySelectedScreen(item.getItemId());
         return true;
-    }
-
-    /**
-     * Switch context from searching to viewing flights
-     *
-     * @param flights result of search
-     */
-    @Override
-    public void viewFlights(ArrayList<Flight> flights) {
-        Fragment viewFragment = new ViewFlightsFragment();
-//        Bundle args = new Bundle();
-//        args.putParcelableArrayList("flights", flights);
-//        viewFragment.setArguments(args);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.content_frame, viewFragment)
-                .commit();
     }
 }

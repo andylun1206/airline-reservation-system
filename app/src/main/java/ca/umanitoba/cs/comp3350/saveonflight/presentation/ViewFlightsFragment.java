@@ -33,7 +33,7 @@ public class ViewFlightsFragment extends ListFragment {
     private static ArrayList<ViewFlightsListViewEntry> flightList;
     private static ArrayList<Flight> flights;
     private static SearchCriteria searchCriteria;
-    private static String[] chosenFlights = new String[2];
+    private static ArrayList<Flight> chosenFlights = new ArrayList<>();
 
     private static String title;
 
@@ -113,15 +113,11 @@ public class ViewFlightsFragment extends ListFragment {
      */
 
     public static void addChosenFlight(String flightId) {
-        int index;
-
-        if (searchCriteria.isReturnTrip()) {
-            index = (chosenFlights[0] == null || chosenFlights[0].isEmpty()) ? 0 : 1;
-        } else {
-            index = 0;
+        for (Flight flight : flights) {
+            if (flight.getFlightID().equals(flightId)) {
+                chosenFlights.add(flight);
+            }
         }
-
-        chosenFlights[index] = flightId;
     }
 
     /**
@@ -132,17 +128,16 @@ public class ViewFlightsFragment extends ListFragment {
      */
 
     public static void navgiateNextStep() {
-        if (searchCriteria.isReturnTrip() && chosenFlights[0] != null && !chosenFlights[0].isEmpty() && chosenFlights[1] == null) {
+        if (searchCriteria.isReturnTrip() && chosenFlights.size() == 1) {
             searchCriteria.reverseFlightDirection();
             flights = new AccessFlightsImpl().search(searchCriteria);
-
 
             if (flights != null && !flights.isEmpty()) {
                 updateFlightList();
                 setTitle(flights.get(0).getOrigin().toString(), flights.get(0).getDestination().toString());
             }
-        } else if (!searchCriteria.isReturnTrip() || (searchCriteria.isReturnTrip() && chosenFlights[1] != null && !chosenFlights[1].isEmpty())) {
-            ToastHandler.toastComingSoon(((MainActivity) view.getContext()), "Flight Summary");
+        } else if (!searchCriteria.isReturnTrip() || (searchCriteria.isReturnTrip() && chosenFlights.size() == 2)) {
+            FragmentNavigation.flightSummary(chosenFlights);
         }
     }
 

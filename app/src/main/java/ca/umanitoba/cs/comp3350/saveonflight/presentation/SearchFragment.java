@@ -10,6 +10,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,11 +35,6 @@ public class SearchFragment extends ListFragment {
     private ArrayList<SearchCriteriaListViewEntry> mandatoryCriteriaList;
     private ArrayList<SearchCriteriaListViewEntry> optionalCriteriaList;
 
-    ViewFlightsListener viewFlightsListener;
-
-    public interface ViewFlightsListener {
-        void viewFlights(ArrayList<Flight> flights);
-    }
 
     @Nullable
     @Override
@@ -54,8 +50,6 @@ public class SearchFragment extends ListFragment {
         criteriaAdapter = new SearchCriteriaArrayAdapter(getActivity(), R.layout.list_item_search_criteria,
                 mandatoryCriteriaList, optionalCriteriaList);
         setListAdapter(criteriaAdapter);
-
-        viewFlightsListener = (ViewFlightsListener) getActivity();
 
         return view;
     }
@@ -121,7 +115,7 @@ public class SearchFragment extends ListFragment {
                 if (criteriaAdapter.verifyCriteria(getActivity())) {
                     ArrayList<Flight> flightList = new AccessFlightsImpl().search(SearchCriteriaArrayAdapter.getCriteria());
                     if (flightList != null && !flightList.isEmpty()) {
-                        viewFlightsListener.viewFlights(flightList);
+                        FragmentNavigation.viewFlights();
                     } else {
                         ToastHandler.toastNoResults(getActivity());
                     }
