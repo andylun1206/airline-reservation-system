@@ -8,19 +8,19 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
  * @author Andy Lun
  */
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.*;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -50,6 +50,17 @@ public class SearchFragment extends ListFragment {
         criteriaAdapter = new SearchCriteriaArrayAdapter(getActivity(), R.layout.list_item_search_criteria,
                 mandatoryCriteriaList, optionalCriteriaList);
         setListAdapter(criteriaAdapter);
+
+        if (! (view instanceof EditText)) {
+            view.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
 
         return view;
     }
