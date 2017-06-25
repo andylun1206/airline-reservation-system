@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        FragmentNavigation.setFragmentManager(getFragmentManager());
+        FragmentNavigation.setFragmentManager(getSupportFragmentManager());
 
         final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
