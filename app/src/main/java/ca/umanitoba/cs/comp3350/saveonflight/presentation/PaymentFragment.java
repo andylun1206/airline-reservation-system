@@ -31,17 +31,8 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.PaymentInfo;
 
 
 public class PaymentFragment extends Fragment implements View.OnClickListener, ProcessPayment.ProcessPaymentListener {
-    // Payment info
-    //private EditText etCardNum;
-    //private EditText etExpMonth;
-    //private EditText etExpYear;
     private CardInputWidget mCardInputWidget;
     private EditText etName;
-    //private EditText etCountryCode;
-    //private EditText etAreaCode;
-    //private EditText etPhoneNum;
-
-    // Personal Info
     private EditText etAddress;
     private EditText etCity;
     private Spinner spinnerProvince;
@@ -59,15 +50,8 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, P
         View view = inflater.inflate(R.layout.fragment_payment_stripe, container, false);
         getActivity().setTitle("Payment");
 
-        //etCardNum = (EditText) view.findViewById(R.id.editText_card_number);
-        //etExpMonth = (EditText) view.findViewById(R.id.editText_month);
-        //etExpYear = (EditText) view.findViewById(R.id.editText_year);
         mCardInputWidget = (CardInputWidget) view.findViewById(R.id.card_input_widget);
         etName = (EditText) view.findViewById(R.id.editText_name);
-        //etCountryCode = (EditText) view.findViewById(R.id.editText_country_code);
-        //etAreaCode = (EditText) view.findViewById(R.id.editText_area_code);
-        //etPhoneNum = (EditText) view.findViewById(R.id.editText_phone_number);
-
         etAddress = (EditText) view.findViewById(R.id.editText_address);
         etCity = (EditText) view.findViewById(R.id.editText_city);
         spinnerProvince = (Spinner) view.findViewById(R.id.spinner_province);
@@ -76,6 +60,8 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, P
 
         buttonPurchase = (Button) view.findViewById(R.id.button_payment);
         buttonPurchase.setOnClickListener(this);
+
+        // TODO: receive BookedFlight from previous screen
 
         return view;
     }
@@ -107,7 +93,6 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, P
         // TODO: Add the BookedFlight object (Received form previous screen - view flights)
         //accessBookedFlights.addBookedFlight();
 
-
         // TODO: go to confirmation screen
     }
 
@@ -121,35 +106,14 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, P
 
         if (cardToSave != null) {
             cardToSave.setName(etName.getText().toString());
+            cardToSave.setAddressLine1(etAddress.getText().toString());
             cardToSave.setAddressCity(etCity.getText().toString());
+            cardToSave.setAddressState(spinnerProvince.getSelectedItem().toString());
             cardToSave.setAddressCountry(spinnerCountry.getSelectedItem().toString());
             cardToSave.setAddressZip(etPostalCode.getText().toString());
         }
 
         return cardToSave;
     }
-
-    /**
-     * Creates a PaymentInfo object from the values input into the EditTexts on the screen.
-     *
-     * @return the PaymentInfo object created.
-     */
-    private PaymentInfo createPaymentInfo() {
-        /*
-        String cardNum = etCardNum.getText().toString();
-        String expiryDate = etExpMonth.getText().toString() + "/" + etExpYear.getText().toString();
-
-        PaymentInfo.PaymentInfoBuilder builder = new PaymentInfo.PaymentInfoBuilder(cardNum, expiryDate);
-        builder.setName(etName.getText().toString())
-                .setPhoneNumber(etCountryCode.getText().toString() + etAreaCode.getText().toString() + etPhoneNum.getText().toString())
-                .setAddress(etAddress.getText().toString())
-                .setProvince(spinnerProvince.getSelectedItem().toString())
-                .setCountry(spinnerCountry.getSelectedItem().toString())
-                .setPostalCode(etPostalCode.getText().toString());
-
-        return builder.build();*/
-        return null;
-    }
-
 
 }
