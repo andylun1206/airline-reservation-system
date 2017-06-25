@@ -8,15 +8,13 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
  * @author Andy Lun
  */
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.util.ArrayList;
-
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlights;
@@ -25,13 +23,19 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListViewEntry;
 
+import java.util.ArrayList;
+
 public class ViewFlightsFragment extends ListFragment {
+    private static Activity activity;
     private static View view;
+
     private static ViewFlightsArrayAdapter flightAdapter;
     private static ArrayList<ViewFlightsListViewEntry> flightList;
     private static ArrayList<Flight> flights;
     private static SearchCriteria searchCriteria;
     private static String[] chosenFlights = new String[2];
+
+    private static String title;
 
     @Nullable
     @Override
@@ -41,7 +45,9 @@ public class ViewFlightsFragment extends ListFragment {
             container.removeAllViews();
         }
 
+        activity = getActivity();
         view = inflater.inflate(R.layout.fragment_view_flights, container, false);
+
         flightList = new ArrayList<>();
         flightAdapter = new ViewFlightsArrayAdapter(getActivity(), R.layout.list_item_view_flights, flightList);
         setListAdapter(flightAdapter);
@@ -49,22 +55,19 @@ public class ViewFlightsFragment extends ListFragment {
         searchCriteria = SearchCriteriaArrayAdapter.getCriteria();
         flights = new AccessFlightsImpl().search(searchCriteria);
 
+        title = getString(R.string.view_flights_flight_path, "$0", "$1");
+
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle saveInstanceState) {
         super.onViewCreated(view, saveInstanceState);
-        String title = getString(R.string.title_activity_view_flights);
 
         if (flights != null && flights.size() != 0) {
-            title = getString(R.string.view_flights_flight_path, flights.get(0).getOrigin().toString(),
-                    flights.get(0).getDestination().toString());
-
             updateFlightList();
+            setTitle(flights.get(0).getOrigin().toString(), flights.get(0).getDestination().toString());
         }
-
-        getActivity().setTitle(title);
 
         view.findViewById(R.id.button_view_flight_sort_duration).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,10 +133,20 @@ public class ViewFlightsFragment extends ListFragment {
 
     public static void navgiateNextStep() {
         if (searchCriteria.isReturnTrip() && chosenFlights[0] != null && !chosenFlights[0].isEmpty() && chosenFlights[1] == null) {
+            searchCriteria.reverseFlightDirection();
             flights = new AccessFlightsImpl().search(searchCriteria);
-            updateFlightList();
+
+
+            if (flights != null && !flights.isEmpty()) {
+                updateFlightList();
+                setTitle(flights.get(0).getOrigin().toString(), flights.get(0).getDestination().toString());
+            }
         } else if (!searchCriteria.isReturnTrip() || (searchCriteria.isReturnTrip() && chosenFlights[1] != null && !chosenFlights[1].isEmpty())) {
             ToastHandler.toastComingSoon(((MainActivity) view.getContext()), "Flight Summary");
         }
+    }
+
+    private static void setTitle(String origin, String destination) {
+        activity.setTitle(title.replace("$0", origin).replace("$1", destination));
     }
 }

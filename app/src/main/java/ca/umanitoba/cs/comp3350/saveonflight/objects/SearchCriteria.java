@@ -22,6 +22,7 @@ public class SearchCriteria {
     private Airport origin;
     private Airport destination;
     private Date departureDate;
+    private Date returnDate;
     private int numTravellers;
     private double maxPrice;
     private Airline preferredAirlines;
@@ -68,6 +69,14 @@ public class SearchCriteria {
 
     public void setDepartureDate(Date departureDate) {
         this.departureDate = departureDate;
+    }
+
+    public Date getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
     }
 
     public int getNumTravellers() {
@@ -118,18 +127,23 @@ public class SearchCriteria {
         this.refundable = refundable;
     }
 
+    public boolean isReturnTrip() {
+        return this.returnTrip;
+    }
+
+    public void setReturnTrip(boolean isReturnTrip) {
+        this.returnTrip = isReturnTrip;
+    }
+
     public void setField(View row, String inputText, String title) {
         if (row.getResources().getString(R.string.search_origin).equals(title)) {
             setOrigin(new Airport(inputText));
         } else if (row.getResources().getString(R.string.search_destination).equals(title)) {
             setDestination(new Airport(inputText));
         } else if (row.getResources().getString(R.string.search_departure_date).equals(title)) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
-                setDepartureDate(sdf.parse(inputText));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            setDepartureDate(parseDate(inputText));
+        } else if (row.getResources().getString(R.string.search_return_date).equals(title)) {
+            setReturnDate(parseDate(inputText));
         } else if (row.getResources().getString(R.string.search_num_passengers).equals(title)) {
             setNumTravellers(Integer.parseInt(inputText));
         } else if (row.getResources().getString(R.string.search_max_price).equals(title)) {
@@ -141,11 +155,24 @@ public class SearchCriteria {
         }
     }
 
-    public boolean isReturnTrip() {
-        return this.returnTrip;
+    public void reverseFlightDirection() {
+        Airport temp = getOrigin();
+        setOrigin(getDestination());
+        setDestination(temp);
+
+        setDepartureDate(getReturnDate());
     }
 
-    public void setReturnTrip(boolean isReturnTrip) {
-        this.returnTrip = isReturnTrip;
+    private Date parseDate(String date) {
+        Date parsedDate = null;
+
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
+            parsedDate = sdf.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return parsedDate;
     }
 }
