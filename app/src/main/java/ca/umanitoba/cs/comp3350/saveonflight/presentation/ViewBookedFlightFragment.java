@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,13 +22,15 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListViewEntry;
 
-public class ViewBookedFlightFragment extends ListFragment {
-    private TextView tvPassenger;
-    private int passengerId;
+public class ViewBookedFlightFragment extends ListFragment implements View.OnClickListener {
+    private EditText etPassengerId;
+    private Button buttonFindFlights;
 
     private ArrayList<Flight> flights;
     private ArrayList<ViewFlightsListViewEntry> flightList;
     private ViewBookedFlightArrayAdapter flightAdapter;
+
+    private AccessBookedFlights accessBookedFlights;
 
     @Nullable
     @Override
@@ -36,28 +40,39 @@ public class ViewBookedFlightFragment extends ListFragment {
         }
 
         View view = inflater.inflate(R.layout.fragment_view_bookedflight, container, false);
-        tvPassenger = (TextView) view.findViewById(R.id.textView_passenger_id);
-        // TODO: get passenger id and update the textview
-        final int PASSENGER_ID = 0;
-        // TODO: get all booked flights associated with this passenger
-        AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl();
+        etPassengerId = (EditText) view.findViewById(R.id.editText_passenger_id);
+        buttonFindFlights = (Button) view.findViewById(R.id.button_find_booked_flights);
+        buttonFindFlights.setOnClickListener(this);
 
-        // TODO: get all flights
-        ArrayList<BookedFlight> bfs = accessBookedFlights.searchByTraveller(new Traveller(PASSENGER_ID, null));
+        accessBookedFlights = new AccessBookedFlightsImpl();
+
         flights = new ArrayList<>();
-        for (BookedFlight bf : bfs) {
-            flights.add(bf.getFlight());
-        }
-
         flightList = new ArrayList<>();
-        for (Flight f : flights) {
-            flightList.add(new ViewFlightsListViewEntry(f.getFlightTime(), f.getPrice(), f.getAirline().getIcon(), f.getFlightID(), f.getFlightDuration()));
-        }
-
         flightAdapter = new ViewBookedFlightArrayAdapter(getActivity(), R.layout.list_item_bookedflight, flightList);
         setListAdapter(flightAdapter);
 
         return view;
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button_find_booked_flights:
+                final int PASSENGER_ID = Integer.parseInt(etPassengerId.getText().toString());
+                ArrayList<BookedFlight> bfs = accessBookedFlights.searchByTraveller(new Traveller(PASSENGER_ID, null));
+
+                flights.clear();
+                for (BookedFlight bf : bfs) {
+                    flights.add(bf.getFlight());
+                }
+
+                flightList.clear();
+                for (Flight f : flights) {
+                    flightList.add(new ViewFlightsListViewEntry(f.getFlightTime(), f.getPrice(), f.getAirline().getIcon(), f.getFlightID(), f.getFlightDuration()));
+                }
+
+                flightAdapter.notifyDataSetChanged();
+                break;
+        }
+    }
 }

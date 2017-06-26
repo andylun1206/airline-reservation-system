@@ -13,11 +13,24 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:text="@string/passenger_id" />
+            android:gravity="center_vertical"
+            android:text="@string/passenger_id"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
         <EditText
+            android:id="@+id/editText_passenger_id"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.25"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/button_find_booked_flights"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:text="GO" />
 
     </LinearLayout>
 
