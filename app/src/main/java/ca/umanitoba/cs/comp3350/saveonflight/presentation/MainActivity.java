@@ -23,6 +23,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessTravellersImpl;
 
 import java.util.List;
 
@@ -31,7 +33,10 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
+        // TODO: remove this later
+        new AccessTravellersImpl();
+        new AccessFlightsImpl();
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -91,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             } else if (f instanceof SearchFragment) {
                 displaySelectedScreen(R.id.nav_home);
             } else {
-                super.onBackPressed();
+                displaySelectedScreen(R.id.nav_home);
             }
         }
     }

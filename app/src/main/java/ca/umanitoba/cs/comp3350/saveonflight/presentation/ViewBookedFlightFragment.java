@@ -18,11 +18,15 @@ import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListViewEntry;
 
 public class ViewBookedFlightFragment extends ListFragment {
     private TextView tvPassenger;
+    private int passengerId;
 
     private ArrayList<Flight> flights;
+    private ArrayList<ViewFlightsListViewEntry> flightList;
+    private ViewBookedFlightArrayAdapter flightAdapter;
 
     @Nullable
     @Override
@@ -34,7 +38,7 @@ public class ViewBookedFlightFragment extends ListFragment {
         View view = inflater.inflate(R.layout.fragment_view_bookedflight, container, false);
         tvPassenger = (TextView) view.findViewById(R.id.textView_passenger_id);
         // TODO: get passenger id and update the textview
-        final int PASSENGER_ID = 1;
+        final int PASSENGER_ID = 0;
         // TODO: get all booked flights associated with this passenger
         AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl();
 
@@ -44,6 +48,14 @@ public class ViewBookedFlightFragment extends ListFragment {
         for (BookedFlight bf : bfs) {
             flights.add(bf.getFlight());
         }
+
+        flightList = new ArrayList<>();
+        for (Flight f : flights) {
+            flightList.add(new ViewFlightsListViewEntry(f.getFlightTime(), f.getPrice(), f.getAirline().getIcon(), f.getFlightID(), f.getFlightDuration()));
+        }
+
+        flightAdapter = new ViewBookedFlightArrayAdapter(getActivity(), R.layout.list_item_bookedflight, flightList);
+        setListAdapter(flightAdapter);
 
         return view;
     }
