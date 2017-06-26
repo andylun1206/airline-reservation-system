@@ -38,6 +38,7 @@ public class ViewBookedFlightFragment extends ListFragment implements View.OnCli
         if (container != null) {
             container.removeAllViews();
         }
+        getActivity().setTitle("View Booked Flights");
 
         View view = inflater.inflate(R.layout.fragment_view_bookedflight, container, false);
         etPassengerId = (EditText) view.findViewById(R.id.editText_passenger_id);
