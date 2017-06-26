@@ -19,7 +19,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.business.ProcessPayment;
 import ca.umanitoba.cs.comp3350.saveonflight.business.ProcessPaymentImpl;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.PaymentInfo;
 
 /**
  * Payment.java
