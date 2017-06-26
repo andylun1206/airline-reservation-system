@@ -40,11 +40,11 @@ public class FlightTableTest {
         new AirlineTable().initialize();
 
         try {
-            emptyNameCase = new Flight("",sdf.parse("2017-11-11 05:30"), sdf.parse("2017-11-11 08:51"), AirlineTable.findAirline("westjet"),AirportTable.findAirport("YYZ"),
-                   AirportTable.findAirport("YWG"), 350.52, 200);
-            vaildCase = new Flight("WJ 009",sdf.parse("2017-11-11 05:30"), sdf.parse("2017-11-11 08:51"), AirlineTable.findAirline("westjet"),AirportTable.findAirport("YYZ"),
+            emptyNameCase = new Flight("", sdf.parse("2017-11-11 05:30"), sdf.parse("2017-11-11 08:51"), AirlineTable.findAirline("westjet"), AirportTable.findAirport("YYZ"),
                     AirportTable.findAirport("YWG"), 350.52, 200);
-        }catch (ParseException e) {
+            vaildCase = new Flight("WJ 009", sdf.parse("2017-11-11 05:30"), sdf.parse("2017-11-11 08:51"), AirlineTable.findAirline("westjet"), AirportTable.findAirport("YYZ"),
+                    AirportTable.findAirport("YWG"), 350.52, 200);
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }
@@ -74,10 +74,11 @@ public class FlightTableTest {
     @Test
     public void testAddValid() {
 
-        assertTrue("Failed to add Cathay Pacific to airlineTable.",flightTable.add(vaildCase));
+        assertTrue("Failed to add Cathay Pacific to airlineTable.", flightTable.add(vaildCase));
 
         flightTable.remove(vaildCase);
     }
+
     @Test
     public void testAddDuplicate() {
 
@@ -86,6 +87,7 @@ public class FlightTableTest {
 
         flightTable.remove(vaildCase);
     }
+
     @Test
     public void testRemoveNull() {
         assertFalse("removed null?", flightTable.remove(null));
@@ -103,20 +105,20 @@ public class FlightTableTest {
     }
 
     @Test
-    public void testUpdateNull(){
+    public void testUpdateNull() {
         assertFalse("update to null?", flightTable.update(null));
     }
 
     @Test
-    public void testUpdateEmptyNameFlight(){
+    public void testUpdateEmptyNameFlight() {
         assertFalse("should update a EmptyName object", flightTable.update(emptyNameCase));
     }
 
     @Test
-    public void testUpdateValid() throws Exception{
+    public void testUpdateValid() throws Exception {
         flightTable.add(vaildCase);
 
-        Flight update=new Flight("WJ 009",sdf.parse("2017-11-11 05:30"), sdf.parse("2017-11-11 08:51"), AirlineTable.findAirline("westjet"),AirportTable.findAirport("YYZ"),
+        Flight update = new Flight("WJ 009", sdf.parse("2017-11-11 05:30"), sdf.parse("2017-11-11 08:51"), AirlineTable.findAirline("westjet"), AirportTable.findAirport("YYZ"),
                 AirportTable.findAirport("YWG"), 575.21, 500);
         assertTrue("should update a EmptyName object", flightTable.update(update));
 

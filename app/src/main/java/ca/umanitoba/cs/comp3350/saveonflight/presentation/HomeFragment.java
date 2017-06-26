@@ -60,7 +60,9 @@ public class HomeFragment extends Fragment {
         view.findViewById(R.id.button_home_view_bookedflight).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: change fragment to view booked flights fragment
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, new ViewBookedFlightFragment());
+                ft.commit();
             }
         });
 

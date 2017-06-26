@@ -14,7 +14,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  * @author Long Yu
  */
 
-public class BookedFlightTable implements DataAccess<BookedFlight> {
+public class BookedFlightTable implements BookedFlightAccess {
     private static ArrayList<BookedFlight> bookedFlights = null;
 
     public BookedFlightTable() {
@@ -87,4 +87,25 @@ public class BookedFlightTable implements DataAccess<BookedFlight> {
 
     }
 
+    @Override
+    public ArrayList<BookedFlight> searchByTraveller(Traveller t) {
+        ArrayList<BookedFlight> matches = new ArrayList<>();
+        for (BookedFlight bf : bookedFlights) {
+            if (bf.getTraveller().equals(t)) {
+                matches.add(bf);
+            }
+        }
+        return matches;
+    }
+
+    @Override
+    public ArrayList<BookedFlight> searchByFlight(Flight f) {
+        ArrayList<BookedFlight> matches = new ArrayList<>();
+        for (BookedFlight bf : bookedFlights) {
+            if (bf.getFlight().equals(f)) {
+                matches.add(bf);
+            }
+        }
+        return matches;
+    }
 }
