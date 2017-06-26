@@ -20,6 +20,7 @@
     <string name="toast_coming_soon">%1$s feature coming soon!</string>
     <string name="toast_mandatory_field">%1$s is required!</string>
     <string name="toast_no_result">No flights were found with these criterias!</string>
+    <string name="toast_flight_picked">Flight %1$s chosen.</string>
 
     <!-- Home Activity -->
     <string name="home_greeting">Welcome %1$s!</string>
@@ -30,11 +31,22 @@
         <item>Return</item>
         <item>One Way</item>
     </string-array>
+    <string-array name="passenger_count">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
     <string name="search_origin">Origin</string>
     <string name="search_destination">Destination</string>
     <string name="search_departure_date">Departure Date</string>
     <string name="search_return_date">Return Date</string>
-    <string name="search_num_travellers">Number of Travellers</string>
+    <string name="search_num_passengers">Number of Passengers</string>
     <string name="search_max_price">Maximum Price</string>
     <string name="search_airlines">Preferred Airlines</string>
     <string name="search_class">Preferred Class</string>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="5dp"
+              android:layout_marginEnd="5dp">
+    <ImageView
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="5dp"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/imageView_search_criteria_icon"/>
+    <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_search_criteria_input"
+            android:layout_gravity="center_vertical"
+            android:entries="@array/passenger_count"/>
+</LinearLayout>
