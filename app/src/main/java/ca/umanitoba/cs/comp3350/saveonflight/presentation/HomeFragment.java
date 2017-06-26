@@ -57,6 +57,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        view.findViewById(R.id.button_home_view_bookedflight).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: change fragment to view booked flights fragment
+            }
+        });
+
         view.findViewById(R.id.button_home_checkin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
