@@ -38,14 +38,6 @@ public class HomeFragment extends Fragment {
         getActivity().setTitle(getString(R.string.app_name));
         ((NavigationView) getActivity().findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_home);
 
-        ((TextView) view.findViewById(R.id.textView_home_greeting)).setText(getString(R.string.home_greeting, "Guest"));
-        view.findViewById(R.id.button_home_account_info).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ToastHandler.toastComingSoon(getActivity(), "Account");
-            }
-        });
-
         view.findViewById(R.id.button_home_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,18 +55,6 @@ public class HomeFragment extends Fragment {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.content_frame, new ViewBookedFlightFragment());
                 ft.commit();
-            }
-        });
-
-        view.findViewById(R.id.button_home_checkin).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TO TEST PAYMENT FRAGMENT
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.content_frame, new PaymentFragment());
-                ft.commit();
-
-                //ToastHandler.toastComingSoon(getActivity(), getString(R.string.title_activity_checkin));
             }
         });
     }

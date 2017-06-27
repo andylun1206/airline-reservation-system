@@ -13,17 +13,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.R;
  * @author Andy Lun
  */
 public class ToastHandler {
-
-    /**
-     * Toast handler for features coming soon
-     *
-     * @param activity current activity
-     * @param feature  feature name
-     */
-    public static void toastComingSoon(Activity activity, String feature) {
-        toastShowShortText(activity, activity.getString(R.string.toast_coming_soon, feature));
-    }
-
     /**
      * Toast handler for missing mandatory fields
      *
