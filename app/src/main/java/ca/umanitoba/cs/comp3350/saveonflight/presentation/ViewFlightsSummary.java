@@ -2,10 +2,12 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,7 +39,7 @@ public class ViewFlightsSummary extends Fragment implements View.OnClickListener
         flights = getArguments().getParcelableArrayList("chosen_flights");
         depFlight = flights.get(0);
 
-        total = depFlight.getPrice()+ retFlight.getPrice();
+        total = depFlight.getPrice();
 
 //        if(flights.size() == 1) {
             //departure flight
@@ -50,15 +52,15 @@ public class ViewFlightsSummary extends Fragment implements View.OnClickListener
             ((ImageView) view.findViewById(R.id.imageview_tripSummary1)).setImageResource(depFlight.getAirline().getIcon());
         if(flights.size() == 2) {
             retFlight = flights.get(1);
+            total = depFlight.getPrice()+ retFlight.getPrice();
             //return flight
-            ((TextView) view.findViewById(R.id.departurePrice)).setText(String.format("$%.2f",retFlight.getPrice()));
+            ((TextView) view.findViewById(R.id.retPrice)).setText(String.format("$%.2f",retFlight.getPrice()));
             ((TextView) view.findViewById(R.id.trip_summary_from2)).setText(retFlight.getDepartAirportCode());
             ((TextView) view.findViewById(R.id.trip_summary_to2)).setText(retFlight.getArrivalAirportCode());
             ((TextView) view.findViewById(R.id.trip_summary_dateDep2)).setText(DATE.format(retFlight.getDepartureTime()));
             ((TextView) view.findViewById(R.id.trip_summary_dateArrive2)).setText(DATE.format(retFlight.getArrivalTime()));
             ((TextView) view.findViewById(R.id.trip_summary_retDuration)).setText(retFlight.getFlightDuration());
             ((ImageView) view.findViewById(R.id.imageview_tripSummary2)).setImageResource(retFlight.getAirline().getIcon());
-            ((TextView) view.findViewById(R.id.view_trip_price)).setText(String.format("$%.2f", total));
         }
         else{
             ((TextView)view.findViewById(R.id.returnFlight)).setVisibility(View.GONE);
@@ -69,9 +71,11 @@ public class ViewFlightsSummary extends Fragment implements View.OnClickListener
             ((TextView) view.findViewById(R.id.trip_summary_dateArrive2)).setVisibility(View.GONE);
             ((TextView) view.findViewById(R.id.trip_summary_retDuration)).setVisibility(View.GONE);
             ((ImageView) view.findViewById(R.id.imageview_tripSummary2)).setVisibility(View.GONE);
-            ((TextView) view.findViewById(R.id.view_trip_price)).setText(String.format("$%.2f", depFlight.getPrice()));
-        }
+            ((TextView)view.findViewById(R.id.retText1)).setVisibility(View.GONE);
+            ((TextView)view.findViewById(R.id.retText2)).setVisibility(View.GONE);
 
+        }
+        ((TextView) view.findViewById(R.id.view_trip_price)).setText(String.format("$%.2f", total));
         ((Button) view.findViewById(R.id.button_go_payment)).setOnClickListener(this);
         ((Button) view.findViewById(R.id.button_modify_search)).setOnClickListener(this);
 
