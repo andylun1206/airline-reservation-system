@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.Assert.*;
 
 public class FlightBuilderTest {
@@ -24,12 +26,16 @@ public class FlightBuilderTest {
     }
 
     @Test
-    public void testBuilder() {
+    public void testBuild() {
         Flight f = builder.build();
         assertEquals(FLIGHT_ID, f.getFlightID());
         assertEquals(ORIGIN, f.getOrigin());
         assertEquals(DEST, f.getDestination());
         assertSame(null, f.getAirline());
+        assertSame(null, f.getDepartureTime());
+        assertSame(null, f.getArrivalTime());
+        assertEquals(Long.MIN_VALUE, f.getDateDiff(TimeUnit.MILLISECONDS));
+        assertEquals
     }
 
 }

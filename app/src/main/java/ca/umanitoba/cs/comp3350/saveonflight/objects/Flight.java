@@ -173,8 +173,14 @@ public class Flight implements Parcelable {
     }
 
     public long getDateDiff(TimeUnit timeUnit) {
-        long diffInMillis = arrivalTime.getTime() - departureTime.getTime();
-        return timeUnit.convert(diffInMillis, TimeUnit.MILLISECONDS);
+        if (arrivalTime == null) {
+            return Long.MIN_VALUE;
+        } else if (departureTime == null) {
+            return Long.MAX_VALUE;
+        } else {
+            long diffInMillis = arrivalTime.getTime() - departureTime.getTime();
+            return timeUnit.convert(diffInMillis, TimeUnit.MILLISECONDS);
+        }
     }
 
     public String getFlightTime() {
