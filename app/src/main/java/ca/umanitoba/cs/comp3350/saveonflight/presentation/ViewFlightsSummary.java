@@ -2,6 +2,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
  * Created by Shenyun Wang on 2017-06-24.
  */
 
-public class ViewFlightsSummary extends ListFragment{
+public class ViewFlightsSummary extends Fragment {
     private ArrayList<Flight> flights;
     private Flight depFlight;
     private Flight retFlight;
@@ -31,8 +32,8 @@ public class ViewFlightsSummary extends ListFragment{
         if (container != null) {
             container.removeAllViews();
         }
-        View view = inflater.inflate(R.layout.list_item_view_trip, container, false);
-        flights = getArguments().getParcelableArrayList("flights");
+        View view = inflater.inflate(R.layout.fragment_trip_summary, container, false);
+        flights = getArguments().getParcelableArrayList("chosen_flights");
         depFlight = flights.get(0);
         retFlight = flights.get(1);
         total = depFlight.getPrice()+ retFlight.getPrice();

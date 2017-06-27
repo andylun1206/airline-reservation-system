@@ -10,7 +10,9 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 
@@ -39,6 +41,12 @@ public class FragmentNavigation {
     public static void flightSummary(ArrayList<Flight> flights) {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("chosen_flights", flights);
+
+        Fragment viewFlights = new ViewFlightsSummary();
+        viewFlights.setArguments(bundle);
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, viewFlights)
+                .commit();
     }
 
 }
