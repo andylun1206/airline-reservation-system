@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -59,20 +60,24 @@ public class ViewBookedFlightFragment extends ListFragment implements View.OnCli
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_find_booked_flights:
+                // Get all BookedFlights associated with the given passenger ID
                 final int PASSENGER_ID = Integer.parseInt(etPassengerId.getText().toString());
                 ArrayList<BookedFlight> bfs = accessBookedFlights.searchByTraveller(new Traveller(PASSENGER_ID, null));
 
+                // Update the list
                 flights.clear();
                 for (BookedFlight bf : bfs) {
                     flights.add(bf.getFlight());
                 }
-
                 flightList.clear();
                 for (Flight f : flights) {
                     flightList.add(new ViewFlightsListViewEntry(f.getFlightTime(), f.getPrice(), f.getAirline().getIcon(), f.getFlightID(), f.getFlightDuration()));
                 }
-
                 flightAdapter.notifyDataSetChanged();
+
+                if (flightList.isEmpty()) {
+                    Toast.makeText(getContext(), "No booked flights were found for this passenger", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }

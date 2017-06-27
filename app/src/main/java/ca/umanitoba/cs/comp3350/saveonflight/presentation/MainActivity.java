@@ -134,6 +134,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             case R.id.nav_search:
                 fragment = new SearchFragment();
                 break;
+            case R.id.nav_bookedflights:
+                fragment = new ViewBookedFlightFragment();
+                break;
         }
 
         if (fragment != null) {
