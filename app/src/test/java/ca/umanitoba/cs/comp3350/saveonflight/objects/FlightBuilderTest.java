@@ -83,6 +83,24 @@ public class FlightBuilderTest {
     }
 
     @Test
+    public void testSetCapacity() {
+        assertEquals(-1, builder.build().getCapacity());
+        assertEquals(500, builder.setCapacity(500).build().getCapacity());
+    }
+
+    @Test
+    public void testSetSeatsTaken() {
+        assertEquals(0, builder.build().getSeatsTaken());
+        assertEquals(15, builder.setSeatsTaken(15).build().getSeatsTaken());
+    }
+
+    @Test
+    public void testSetFlightClass() {
+        assertEquals(FlightClassEnum.ECONOMY, builder.build().getFlightClass());
+        assertEquals(FlightClassEnum.BUSINESS, builder.setFlightClass(FlightClassEnum.BUSINESS).build().getFlightClass());
+    }
+
+    @Test
     public void testBuild() {
         Flight f = builder.build();
         assertEquals(FLIGHT_ID, f.getFlightID());
