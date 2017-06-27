@@ -21,8 +21,8 @@ import static junit.framework.Assert.assertTrue;
 public class AirportTableTest {
     private static ArrayList<Airport> original;
     private static AirportTable airportTable;
-    private Airport emptyNameCase = new Airport("");
-    private Airport vaildCase = new Airport("myAirport MAT");
+    private Airport emptyNameCase = new Airport("","");
+    private Airport vaildCase = new Airport("MAT","myAirport");
     @BeforeClass
     public static void setUp() {
         airportTable = new AirportTable();
@@ -97,7 +97,7 @@ public class AirportTableTest {
     public void testUpdateValid(){
         airportTable.add(vaildCase);
         // well done it at next teration
-        assertFalse("should update a EmptyName object",airportTable.update(new Airport("America UMA")));
+        assertFalse("should update a EmptyName object",airportTable.update(new Airport("UMA","America")));
 
         airportTable.remove(vaildCase);
     }

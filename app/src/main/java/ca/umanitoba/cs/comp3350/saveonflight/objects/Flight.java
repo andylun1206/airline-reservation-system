@@ -82,6 +82,9 @@ public class Flight implements Parcelable {
     public Airline getAirline() {
         return airline;
     }
+    public String getAirlineString() {
+        return airline.getName();
+    }
 
     public void setAirline(String airline) {
         this.airline.setName(airline);
@@ -134,6 +137,7 @@ public class Flight implements Parcelable {
     public FlightClassEnum getFlightClass() {
         return flightClass;
     }
+    public int getFlightClassInt() {return flightClass.ordinal();}
 
     public void setFlightClass(FlightClassEnum flightClass) {
         this.flightClass = flightClass;

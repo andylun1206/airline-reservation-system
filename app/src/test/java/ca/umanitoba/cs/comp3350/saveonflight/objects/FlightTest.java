@@ -17,8 +17,8 @@ public class FlightTest {
     private Flight flight;
     private final String FLIGHT_ID = "WJ 101";
     private final Airline AIRLINE = new Airline("WestJet", R.mipmap.ic_westjet);
-    private final Airport ORIGIN = new Airport("YWG");
-    private final Airport DEST = new Airport("YVR");
+    private final Airport ORIGIN = new Airport("YWG", "");
+    private final Airport DEST = new Airport("YVR", "");
     private final double PRICE = 300.00;
     private final int CAP = 500;
     private final FlightClassEnum FLIGHT_CLASS = FlightClassEnum.BUSINESS;
@@ -116,7 +116,7 @@ public class FlightTest {
 
     @Test
     public void testOrigin() {
-        final Airport NEW_ORIGIN = new Airport("Flin Flon International YYY");
+        final Airport NEW_ORIGIN = new Airport("YYY", "Flin Flon International");
         assertEquals(ORIGIN, flight.getOrigin());
         assertFalse(flight.getOrigin().equals(NEW_ORIGIN));
         flight.setOrigin(NEW_ORIGIN);
@@ -125,7 +125,7 @@ public class FlightTest {
 
     @Test
     public void testDestination() {
-        final Airport NEW_DEST = new Airport("The Moon");
+        final Airport NEW_DEST = new Airport("", "The Moon");
         assertEquals(DEST, flight.getDestination());
         assertFalse(flight.getDestination().equals(NEW_DEST));
         flight.setDestination(NEW_DEST);
