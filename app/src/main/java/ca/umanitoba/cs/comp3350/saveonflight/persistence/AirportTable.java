@@ -21,13 +21,13 @@ public class AirportTable implements DataAccess<Airport> {
     public void initialize() {
         if (airports == null) {
             airports = new ArrayList<Airport>();
-            airports.add(new Airport("Vancouver YVR"));
-            airports.add(new Airport("Winnipeg YWG"));
-            airports.add(new Airport("Calgary YYC"));
-            airports.add(new Airport("Toronto YYZ"));
-            airports.add(new Airport("Montréal YUL"));
-            airports.add(new Airport("Ottawa YOW"));
-            airports.add(new Airport("Québec YQB"));
+            airports.add(new Airport("YVR","Vancouver"));
+            airports.add(new Airport("YWG", "Winnipeg"));
+            airports.add(new Airport("YYC","Calgary"));
+            airports.add(new Airport("YYZ","Toronto"));
+            airports.add(new Airport("YUL","Montréal"));
+            airports.add(new Airport("YOW","Ottawa"));
+            airports.add(new Airport("YQB","Québec"));
         }
     }
 
@@ -38,7 +38,7 @@ public class AirportTable implements DataAccess<Airport> {
     public static Airport findAirport(String city) {
         Airport result = null;
         for (Airport airport : airports) {
-            if (airport.getAirportCode().toLowerCase().contains(city.toLowerCase())) {
+            if (airport.getCode().toLowerCase().contains(city.toLowerCase())) {
                 result = airport;
             }
         }
@@ -47,7 +47,7 @@ public class AirportTable implements DataAccess<Airport> {
 
     public boolean add(Airport airport) {
         boolean result = true;
-        if (airport != null && !airport.getAirportCode().isEmpty()) {
+        if (airport != null && !airport.getCode().isEmpty()) {
             for (Airport airport1 : airports) {
                 if (airport.equals(airport1))
                     result = false;
@@ -63,19 +63,19 @@ public class AirportTable implements DataAccess<Airport> {
     public boolean update(Airport airport) {
         boolean isUpdated = false;
         if(airport!=null) {
-            String code = airport.getAirportCode();
+            String code = airport.getCode();
             int index = 0;
             int changes = 0;
             Airport temp;
             for (int i = 0; i < airports.size(); i++) {
                 temp = airports.get(i);
-                if (temp.getAirportCode().equals(code)) {
+                if (temp.getCode().equals(code)) {
                     changes++;
                     index = i;
                 }
             }
             if (changes != 0) {
-                airports.get(index).setAirportCode(code);
+                airports.get(index).setCode(code);
                 isUpdated = true;
             }
         }

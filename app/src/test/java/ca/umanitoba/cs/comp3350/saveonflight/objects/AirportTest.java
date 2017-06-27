@@ -15,16 +15,18 @@ import static org.mockito.Mockito.when;
 
 public class AirportTest {
     private final String CODE1 = "WPG01";
+    private final String CITY1 = "Winnipeg01";
     private final String CODE2 = "WPG02";
-    private final Airport AIRPORT1 = new Airport(CODE1);
+    private final String CITY2 = "Winnipeg02";
+    private final Airport AIRPORT1 = new Airport(CODE1, CITY1);
     private Airport airport2;
     private Airport airport3;
 
 
     @Before
     public void setUp() {
-        airport2 = new Airport(CODE2);
-        airport3 = new Airport(CODE1);
+        airport2 = new Airport(CODE2, CITY2);
+        airport3 = new Airport(CODE1, CITY1);
         assertNotNull(airport3);
         assertNotNull(airport2);
         assertNotNull(AIRPORT1);
@@ -47,20 +49,20 @@ public class AirportTest {
     }
 
     @Test
-    public void testGetAirportCode() {
-        assertEquals(AIRPORT1.getAirportCode(), CODE1);
-        assertEquals(AIRPORT1.getAirportCode(), airport3.getAirportCode());
+    public void testgetCode() {
+        assertEquals(AIRPORT1.getCode(), CODE1);
+        assertEquals(AIRPORT1.getCode(), airport3.getCode());
         //error cases
-        assertFalse((AIRPORT1.getAirportCode()).equals(airport2.getAirportCode()));
-        assertFalse((AIRPORT1.getAirportCode()).equals("wpg01"));
-        assertFalse((AIRPORT1.getAirportCode()).equals(""));
+        assertFalse((AIRPORT1.getCode()).equals(airport2.getCode()));
+        assertFalse((AIRPORT1.getCode()).equals("wpg01"));
+        assertFalse((AIRPORT1.getCode()).equals(""));
     }
 
     @Test
-    public void testSetAirportCode() {
-        airport2.setAirportCode("hello");
-        assertEquals(airport2.getAirportCode(), "hello");
-        airport3.setAirportCode("happy");
+    public void testsetCode() {
+        airport2.setCode("hello");
+        assertEquals(airport2.getCode(), "hello");
+        airport3.setCode("happy");
         assertFalse(airport3.equals(AIRPORT1));
     }
 
@@ -69,16 +71,16 @@ public class AirportTest {
         assertFalse(AIRPORT1.contains(null));
         assertFalse(AIRPORT1.contains("ASDJIASJ"));
         assertFalse(AIRPORT1.contains(airport2));
-        Airport match = new Airport(CODE1);
+        Airport match = new Airport(CODE1, CITY1);
         assertTrue(AIRPORT1.contains(match));                // Exact match should return true
-        Airport subset = new Airport(CODE1.substring(0, 2));
+        Airport subset = new Airport(CODE1.substring(0, 2), CITY1.substring(0, 7));
         assertTrue(AIRPORT1.contains(subset));               // Subset match should return true
     }
 
     @Test
     public void testParcelable() {
         Parcel parcel = mock(Parcel.class);
-        when(parcel.readString()).thenReturn(AIRPORT1.getAirportCode());
+        when(parcel.readString()).thenReturn(AIRPORT1.getCode());
         assertNotNull(parcel);
         AIRPORT1.writeToParcel(parcel, 0);
         parcel.setDataPosition(0);

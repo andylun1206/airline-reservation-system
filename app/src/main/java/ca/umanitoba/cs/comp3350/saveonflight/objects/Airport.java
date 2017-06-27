@@ -12,22 +12,32 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Airport implements Parcelable {
-    private String airportCode;
+    private String code;
+    private String city;
 
-    public Airport(String airportCode) {
-        this.airportCode = airportCode;
+    public Airport(String code, String city) {
+        this.code = code;
+        this.city = city;
     }
 
-    public String getAirportCode() {
-        return airportCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setAirportCode(String airportCode) {
-        this.airportCode = airportCode;
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String toString() {
-        return airportCode;
+        return code;
     }
 
     public boolean equals(Object object) {
@@ -35,7 +45,7 @@ public class Airport implements Parcelable {
 
         if (object instanceof Airport) {
             Airport other = (Airport) object;
-            if (other.airportCode.equals(airportCode)) {
+            if (other.code.equals(code)) {
                 result = true;
             }
         }
@@ -48,7 +58,7 @@ public class Airport implements Parcelable {
 
         if (object instanceof Airport) {
             Airport airport = (Airport) object;
-            if (airportCode.toLowerCase().contains(airport.getAirportCode().toLowerCase())) {
+            if (code.toLowerCase().contains(airport.getCode().toLowerCase())) {
                 result = true;
             }
         }
@@ -62,7 +72,7 @@ public class Airport implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
-        parcel.writeString(airportCode);
+        parcel.writeString(code);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -78,7 +88,7 @@ public class Airport implements Parcelable {
     };
 
     private Airport(Parcel in) {
-        airportCode = in.readString();
+        code = in.readString();
     }
 
 }
