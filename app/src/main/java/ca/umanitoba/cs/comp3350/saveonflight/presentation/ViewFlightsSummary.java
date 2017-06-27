@@ -7,6 +7,7 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +22,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
  * Created by Shenyun Wang on 2017-06-24.
  */
 
-public class ViewFlightsSummary extends Fragment {
+public class ViewFlightsSummary extends Fragment implements View.OnClickListener {
     private ArrayList<Flight> flights;
     private Flight depFlight;
     private Flight retFlight;
@@ -55,6 +56,22 @@ public class ViewFlightsSummary extends Fragment {
         ((TextView)view.findViewById(R.id.trip_summary_retDuration)).setText(retFlight.getFlightDuration());
         ((ImageView)view.findViewById(R.id.imageview_tripSummary2)).setImageResource(retFlight.getAirline().getIcon());
         ((TextView)view.findViewById(R.id.view_trip_price)).setText(String.format("$%.2f",total));
+
+        ((Button) view.findViewById(R.id.button_go_payment)).setOnClickListener(this);
+        ((Button) view.findViewById(R.id.button_modify_search)).setOnClickListener(this);
+
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_go_payment:
+                FragmentNavigation.viewPayment(flights);
+                break;
+            case R.id.button_modify_search:
+                FragmentNavigation.flightSearch();
+                break;
+        }
     }
 }

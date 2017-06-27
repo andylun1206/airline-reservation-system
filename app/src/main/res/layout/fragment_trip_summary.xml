@@ -6,7 +6,7 @@
     android:weightSum="1">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_modify_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Modify Search" />
@@ -260,7 +260,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_payment"
+        android:id="@+id/button_go_payment"
         android:layout_width="match_parent"
         android:layout_height="37dp"
         android:text="Go to payment" />

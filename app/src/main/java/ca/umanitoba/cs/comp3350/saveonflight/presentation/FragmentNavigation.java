@@ -26,6 +26,15 @@ public class FragmentNavigation {
     }
 
     /**
+     * Switch context to viewing the search fragment
+     */
+    public static void flightSearch() {
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, new SearchFragment())
+                .commit();
+    }
+
+    /**
      * Switch context to viewing flights fragment
      */
     public static void viewFlights() {
@@ -46,6 +55,20 @@ public class FragmentNavigation {
         viewFlights.setArguments(bundle);
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, viewFlights)
+                .commit();
+    }
+
+    /**
+     * Switch context to payment fragment.
+     */
+    public static void viewPayment(ArrayList<Flight> flights) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("flights_to_book", flights);
+
+        Fragment payment = new PaymentFragment();
+        payment.setArguments(bundle);
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, payment)
                 .commit();
     }
 
