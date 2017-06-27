@@ -25,7 +25,7 @@ public class ViewFlightsSummary extends ListFragment{
     private Flight depFlight;
     private Flight retFlight;
     private static DateFormat DATE = new SimpleDateFormat("MM/dd/yyy HH:mm");
-
+    private static double total;
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle saveInstanceState){
         if (container != null) {
@@ -35,7 +35,7 @@ public class ViewFlightsSummary extends ListFragment{
         flights = getArguments().getParcelableArrayList("flights");
         depFlight = flights.get(0);
         retFlight = flights.get(1);
-
+        total = depFlight.getPrice()+ retFlight.getPrice();
         //departure flight
         ((TextView)view.findViewById(R.id.departurePrice)).setText(Double.toString(depFlight.getPrice()));
         ((TextView)view.findViewById(R.id.trip_summary_from1)).setText(depFlight.getDepartAirportCode());
@@ -53,6 +53,7 @@ public class ViewFlightsSummary extends ListFragment{
         ((TextView)view.findViewById(R.id.trip_summary_dateArrive2)).setText(DATE.format(retFlight.getArrivalTime()));
         ((TextView)view.findViewById(R.id.trip_summary_retDuration)).setText(retFlight.getFlightDuration());
         ((ImageView)view.findViewById(R.id.imageview_tripSummary2)).setImageResource(retFlight.getAirline().getIcon());
+        ((TextView)view.findViewById(R.id.view_trip_price)).setText(String.format("$%.2f",total));
         return view;
     }
 }

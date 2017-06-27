@@ -237,7 +237,33 @@
             android:text="Duration" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="196dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Total: " />
+
+        <EditText
+            android:id="@+id/view_trip_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="price" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_payment"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:text="Go to payment" />
 
 
 </LinearLayout>
