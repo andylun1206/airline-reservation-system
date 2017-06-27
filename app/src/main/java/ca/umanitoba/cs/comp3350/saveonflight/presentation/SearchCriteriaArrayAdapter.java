@@ -13,6 +13,7 @@ import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -83,8 +84,9 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
                 }
             });
         } else if (layoutResourceId == R.layout.list_item_search_criteria_text) {
-            final EditText input = (EditText) view.findViewById(R.id.editText_search_criteria_input);
+            final AutoCompleteTextView input = (AutoCompleteTextView) view.findViewById(R.id.editText_search_criteria_input);
             input.setHint(row.getTitle());
+            input.setThreshold(1);
 
             input.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -128,8 +130,19 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
                     break;
                 case R.drawable.ic_dollar_sign:
                     input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                    input.setFilters(new InputFilter[] {new InputFilter.LengthFilter(8)});
                     break;
-                default:
+                case R.drawable.ic_takeoff:
+                case R.drawable.ic_landing:
+                    input.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, view.getResources().getStringArray(R.array.airport_list)));
+                    input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
+                    break;
+                case R.drawable.ic_plane:
+                    input.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, view.getResources().getStringArray(R.array.airline_list)));
+                    input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
+                    break;
+                case R.drawable.ic_seat:
+                    input.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, view.getResources().getStringArray(R.array.class_list)));
                     input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
                     break;
             }

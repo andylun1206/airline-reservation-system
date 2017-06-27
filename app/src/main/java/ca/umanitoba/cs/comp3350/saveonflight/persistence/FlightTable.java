@@ -44,44 +44,97 @@ public class FlightTable implements FlightAccess {
             try {
                 Airline airCanada = AirlineTable.findAirline("Air Canada");
                 Airline westJet = AirlineTable.findAirline("WestJet");
+                Airport wpg = AirportTable.findAirport("YWG");
+                Airport tor = AirportTable.findAirport("YYZ");
 
-                //AC
-                flights.add(new Flight("AC 256", sdf.parse("2017-11-11 05:30"), sdf.parse("2017-11-11 08:51"), airCanada,
-                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 350.52, 200, 0, FlightClassEnum.ECONOMY));
-                flights.add(new Flight("AC 260", sdf.parse("2017-11-11 07:30"), sdf.parse("2017-11-11 10:52"), airCanada,
-                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 325.82, 200, 0, FlightClassEnum.ECONOMY));
-                flights.add(new Flight("AC 264", sdf.parse("2017-11-11 10:50"), sdf.parse("2017-11-11 14:10"), airCanada,
-                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 403.20, 200, 0, FlightClassEnum.ECONOMY));
-                flights.add(new Flight("AC 266", sdf.parse("2017-11-11 12:20"), sdf.parse("2017-11-11 15:41"), airCanada,
-                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 467.29, 200, 0, FlightClassEnum.ECONOMY));
-                flights.add(new Flight("AC 268", sdf.parse("2017-11-11 14:35"), sdf.parse("2017-11-11 17:56"), airCanada,
-                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 210.87, 200, 0, FlightClassEnum.ECONOMY));
-                flights.add(new Flight("AC 270", sdf.parse("2017-11-11 16:45"), sdf.parse("2017-11-11 20:06"), airCanada,
-                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 629.05, 200, 0, FlightClassEnum.ECONOMY));
-                flights.add(new Flight("AC 272", sdf.parse("2017-11-11 18:45"), sdf.parse("2017-11-11 22:07"), airCanada,
-                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 320.49, 200, 0, FlightClassEnum.ECONOMY));
-                flights.add(new Flight("AC 274", sdf.parse("2017-11-11 21:00"), sdf.parse("2017-11-12 00:21"), airCanada,
-                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 420.12, 200, 0, FlightClassEnum.ECONOMY));
-                //WJ
-                flights.add(new Flight("WJ 520", sdf.parse("2017-11-11 05:10"), sdf.parse("2017-11-11 08:30"), westJet,
-                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 342.10, 200, 0, FlightClassEnum.ECONOMY));
-                flights.add(new Flight("WJ 534", sdf.parse("2017-11-11 09:00"), sdf.parse("2017-11-11 12:20"), westJet,
-                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 562.23, 200, 0, FlightClassEnum.ECONOMY));
-                flights.add(new Flight("WJ 546", sdf.parse("2017-11-11 11:20"), sdf.parse("2017-11-11 14:40"), westJet,
-                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 178.23, 200, 0, FlightClassEnum.ECONOMY));
-                flights.add(new Flight("WJ 258", sdf.parse("2017-11-11 16:00"), sdf.parse("2017-11-11 19:20"), westJet,
-                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 297.23, 200, 0, FlightClassEnum.ECONOMY));
-                flights.add(new Flight("WJ 562", sdf.parse("2017-11-11 17:15"), sdf.parse("2017-11-11 20:35"), westJet,
-                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 344.25, 200, 0, FlightClassEnum.ECONOMY));
-                flights.add(new Flight("WJ 490", sdf.parse("2017-11-11 18:15"), sdf.parse("2017-11-11 21:35"), westJet,
-                        AirportTable.findAirport("YWG"), AirportTable.findAirport("YYZ"), 547.67, 200, 0, FlightClassEnum.ECONOMY));
+                Flight.FlightBuilder builder = new Flight.FlightBuilder("AC 256", wpg, tor);
 
-                flights.add(new Flight("AC 100", sdf.parse("2017-12-11 08:00"), sdf.parse("2017-12-11 11:21"), airCanada,
-                        AirportTable.findAirport("YYZ"), AirportTable.findAirport("YWG"), 420.12, 200, 0, FlightClassEnum.ECONOMY));
-                flights.add(new Flight("AC 101", sdf.parse("2017-12-11 21:00"), sdf.parse("2017-12-12 00:21"), airCanada,
-                        AirportTable.findAirport("YYZ"), AirportTable.findAirport("YWG"), 420.12, 200, 0, FlightClassEnum.ECONOMY));
+                // Create the Flights using a FlightBuilder
+                flights.add(builder.setAirline(airCanada)
+                        .setDepartureTime(sdf.parse("2017-11-11 05:30"))
+                        .setArrivalTime(sdf.parse("2017-11-11 08:51"))
+                        .setPrice(350.52)
+                        .setCapacity(200)
+                        .build());
+                flights.add(builder.setFlightId("AC 260")
+                        .setDepartureTime(sdf.parse("2017-11-11 07:30"))
+                        .setArrivalTime(sdf.parse("2017-11-11 10:52"))
+                        .setPrice(325.82)
+                        .build());
+                flights.add(builder.setFlightId("AC 264")
+                        .setDepartureTime(sdf.parse("2017-11-11 10:50"))
+                        .setArrivalTime(sdf.parse("2017-11-11 14:10"))
+                        .setPrice(403.20)
+                        .build());
+                flights.add(builder.setFlightId("AC 266")
+                        .setDepartureTime(sdf.parse("2017-11-11 12:20"))
+                        .setArrivalTime(sdf.parse("2017-11-11 15:41"))
+                        .setPrice(467.29)
+                        .build());
+                flights.add(builder.setFlightId("AC 268")
+                        .setDepartureTime(sdf.parse("2017-11-11 14:35"))
+                        .setArrivalTime(sdf.parse("2017-11-11 17:56"))
+                        .setPrice(210.87)
+                        .build());
+                flights.add(builder.setFlightId("AC 270")
+                        .setDepartureTime(sdf.parse("2017-11-11 16:45"))
+                        .setArrivalTime(sdf.parse("2017-11-11 20:06"))
+                        .setPrice(629.05)
+                        .build());
+                flights.add(builder.setFlightId("AC 272")
+                        .setDepartureTime(sdf.parse("2017-11-11 18:45"))
+                        .setArrivalTime(sdf.parse("2017-11-11 22:07"))
+                        .setPrice(320.49)
+                        .build());
+                flights.add(builder.setFlightId("AC 274")
+                        .setDepartureTime(sdf.parse("2017-11-11 21:00"))
+                        .setArrivalTime(sdf.parse("2017-11-12 00:21"))
+                        .setPrice(420.12)
+                        .build());
 
+                flights.add(builder.setAirline(westJet)
+                        .setFlightId("WJ 520")
+                        .setDepartureTime(sdf.parse("2017-11-11 05:10"))
+                        .setArrivalTime(sdf.parse("2017-11-11 08:30"))
+                        .setPrice(342.10)
+                        .build());
+                flights.add(builder.setFlightId("WJ 534")
+                        .setDepartureTime(sdf.parse("2017-11-11 09:00"))
+                        .setArrivalTime(sdf.parse("2017-11-11 12:20"))
+                        .setPrice(562.23)
+                        .build());
+                flights.add(builder.setFlightId("WJ 546")
+                        .setDepartureTime(sdf.parse("2017-11-11 11:20"))
+                        .setArrivalTime(sdf.parse("2017-11-11 14:40"))
+                        .setPrice(178.23)
+                        .build());
+                flights.add(builder.setFlightId("WJ 258")
+                        .setDepartureTime(sdf.parse("2017-11-11 16:00"))
+                        .setArrivalTime(sdf.parse("2017-11-11 19:20"))
+                        .setPrice(297.23)
+                        .build());
+                flights.add(builder.setFlightId("WJ 562")
+                        .setDepartureTime(sdf.parse("2017-11-11 17:15"))
+                        .setArrivalTime(sdf.parse("2017-11-11 20:35"))
+                        .setPrice(344.25)
+                        .build());
+                flights.add(builder.setFlightId("WJ 490")
+                        .setDepartureTime(sdf.parse("2017-11-11 18:15"))
+                        .setArrivalTime(sdf.parse("2017-11-11 21:35"))
+                        .setPrice(547.67)
+                        .build());
 
+                flights.add(builder.setFlightId("AC 100")
+                        .setDepartureTime(sdf.parse("2017-12-11 08:00"))
+                        .setArrivalTime(sdf.parse("2017-12-11 11:21"))
+                        .setAirline(airCanada)
+                        .setOrigin(tor).setDestination(wpg)
+                        .setPrice(420.12)
+                        .build());
+                flights.add(builder.setFlightId("AC 101")
+                        .setDepartureTime(sdf.parse("2017-12-11 21:00"))
+                        .setArrivalTime(sdf.parse("2017-12-12 00:21"))
+                        .build());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -110,7 +163,7 @@ public class FlightTable implements FlightAccess {
 
     public boolean update(Flight flight) {
         boolean isUpdated = false;
-        if(flight != null) {
+        if (flight != null) {
             Date departureTime = flight.getDepartureTime();
             String flightId = flight.getFlightID();
             int changes = 0;

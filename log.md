@@ -27,6 +27,34 @@ and more time efficient than trying to come up with our own.
 - 1 model object for each table in the database.
 - 1 database access class for each table in the data base.
 
+### June 10, 2017
+Decided to change the way we assign developer tasks. Instead of assigning all of them upfront, just assign one or two. Then, when we finish our assigned tasks, we can pick any free issue on GitHub to work on.
+
+
+## Iteration 2:
+### Contributions
+
+
+#### You Tian Zhang
+- Problem: GUI - create layout for payment (GitHub issue #70)
+    - Created layout in xml
+    - Initially, created PaymentInfo class + builder to model the user's card info
+    - Later, switched to just using the Card model object from the Stripe API as well as using their CardInputWidget
+        - Takes care of validating card info for us
+- Problem: GUI - display booked flight info (GitHub issue #71)
+    - Created input field for user's to input their passenger ID
+    - All flights that are booked for that passenger ID are shown in a ListView
+- Problem: Business - validate payment info (GitHub issue #72)
+    - Taken care of in issue #70 by using Stripe's CardInputWidget
+- Problem: don't let users pick return dates before the departure date (GitHub isse #75)
+    - Handled by calling the setMinDate() method with the appropriate parameter
+        - Pass in the current date if it is the departure date datepicker
+        - Pass in the date on the departure date datepicker if it is the return date datepicker
+- Problem: Extract comparators to outside of the SortFlightsImpl class (GitHub issue #81)
+    - Placed comparators in a new comparators package in the business package
+    - Each as their own class
+- 
+
 
 ## Iteration 2:
 ### Contributions
