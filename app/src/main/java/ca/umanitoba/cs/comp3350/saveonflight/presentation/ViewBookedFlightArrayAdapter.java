@@ -16,6 +16,14 @@ import java.util.Locale;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListViewEntry;
 
+/**
+ * ViewBookedFlightArrayAdapter.java
+ * <p>
+ * ArrayAdapter for ViewBookedFlights used to populate the ListView.
+ *
+ * @author Kenny Zhang
+ */
+
 public class ViewBookedFlightArrayAdapter extends ArrayAdapter<ViewFlightsListViewEntry> {
     private final Context context;
     private final int layoutResourceId;
@@ -29,7 +37,7 @@ public class ViewBookedFlightArrayAdapter extends ArrayAdapter<ViewFlightsListVi
     }
 
     @Override
-    public View getView(final int position, final View convertView, final ViewGroup parent) {
+    public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(layoutResourceId, parent, false);
         final ViewFlightsListViewEntry row = flightList.get(position);
