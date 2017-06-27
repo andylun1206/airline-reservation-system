@@ -2,6 +2,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,12 +21,14 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
  * Created by Shenyun Wang on 2017-06-24.
  */
 
-public class ViewFlightsSummary extends ListFragment{
+public class ViewFlightsSummary extends Fragment {
     private ArrayList<Flight> flights;
     private Flight depFlight;
     private Flight retFlight;
     private static DateFormat DATE = new SimpleDateFormat("MM/dd/yyy HH:mm");
     private static double total;
+
+    @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle saveInstanceState){
         if (container != null) {
@@ -39,7 +42,7 @@ public class ViewFlightsSummary extends ListFragment{
 
 //        if(flights.size() == 1) {
             //departure flight
-            ((TextView) view.findViewById(R.id.departurePrice)).setText(Double.toString(depFlight.getPrice()));
+            ((TextView) view.findViewById(R.id.departurePrice)).setText(String.format("$%.2f",depFlight.getPrice()));
             ((TextView) view.findViewById(R.id.trip_summary_from1)).setText(depFlight.getDepartAirportCode());
             ((TextView) view.findViewById(R.id.trip_summary_to1)).setText(depFlight.getArrivalAirportCode());
             ((TextView) view.findViewById(R.id.trip_summary_dateDep1)).setText(DATE.format(depFlight.getDepartureTime()));
@@ -49,7 +52,7 @@ public class ViewFlightsSummary extends ListFragment{
         if(flights.size() == 2) {
             retFlight = flights.get(1);
             //return flight
-            ((TextView) view.findViewById(R.id.retPrice)).setText(Double.toString(retFlight.getPrice()));
+            ((TextView) view.findViewById(R.id.departurePrice)).setText(String.format("$%.2f",retFlight.getPrice()));
             ((TextView) view.findViewById(R.id.trip_summary_from2)).setText(retFlight.getDepartAirportCode());
             ((TextView) view.findViewById(R.id.trip_summary_to2)).setText(retFlight.getArrivalAirportCode());
             ((TextView) view.findViewById(R.id.trip_summary_dateDep2)).setText(DATE.format(retFlight.getDepartureTime()));

@@ -14,22 +14,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_weight="0.21">
 
-        <EditText
+        <TextView
             android:id="@+id/editText"
             android:layout_width="293dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Departure Flight" />
+            android:layout_height="match_parent"
+            android:ems="15"
+            android:text=" Departure Flight"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="30sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/departurePrice"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:ems="10"
-            android:inputType="numberDecimal" />
+            android:gravity="right"
+            android:text="hi"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="30sp" />
 
     </LinearLayout>
 
@@ -37,23 +42,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_weight="0.28">
 
-        <EditText
+        <TextView
             android:id="@+id/trip_summary_from1"
             android:layout_width="194dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="From" />
+            android:text="From"
+            android:textSize="25sp"
+            android:textAppearance="@style/TextAppearance.AppCompat" />
 
-        <EditText
+        <TextView
             android:id="@+id/trip_summary_to1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="To" />
+            android:textSize="25sp"
+            android:text="To"
+            android:textAppearance="@style/TextAppearance.AppCompat" />
     </LinearLayout>
 
     <LinearLayout
@@ -79,33 +87,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_weight="0.21">
 
-        <EditText
+        <TextView
             android:id="@+id/trip_summary_dateDep1"
             android:layout_width="191dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="depart" />
+            android:text="depart"
+            android:textSize="25sp"
+            android:textAppearance="@style/TextAppearance.AppCompat"/>
 
-        <EditText
+        <TextView
             android:id="@+id/trip_summary_dateArrive1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:textSize="25sp"
+            android:textAppearance="@style/TextAppearance.AppCompat"
             android:text="arrive" />
     </LinearLayout>
-
-
-
-
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="59dp"
+        android:layout_weight="0.28"
         android:orientation="horizontal">
 
         <ImageView
@@ -114,37 +122,43 @@
             android:layout_height="58dp"
             app:srcCompat="@mipmap/ic_aircanada" />
 
-        <EditText
+        <TextView
             android:id="@+id/trip_summary_depDuration"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="61dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Duration" />
+            android:gravity="center_vertical"
+            android:text="Duration"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="25sp" />
     </LinearLayout>
 
-     <!--return flight-->
+    <!--return flight-->
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_weight="0.28">
 
-        <EditText
+        <TextView
             android:id="@+id/returnFlight"
             android:layout_width="294dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Return Flight" />
+            android:text="Return Flight"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="30sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/retPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="numberDecimal" />
+            android:gravity="right"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="30sp" />
     </LinearLayout>
 
     <Space
@@ -154,22 +168,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_weight="0.04">
 
-        <EditText
+        <TextView
             android:id="@+id/trip_summary_from2"
             android:layout_width="194dp"
-            android:layout_height="wrap_content"
+            android:layout_height="41dp"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="25sp"
             android:text="From" />
 
-        <EditText
+        <TextView
             android:id="@+id/trip_summary_to2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="43dp"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="25sp"
             android:text="To" />
     </LinearLayout>
 
@@ -198,21 +215,23 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
+        <TextView
             android:id="@+id/trip_summary_dateDep2"
             android:layout_width="191dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="25sp"
             android:text="depart" />
 
-        <EditText
+        <TextView
             android:id="@+id/trip_summary_dateArrive2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="arrive" />
+            android:text="arrive"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="25sp" />
     </LinearLayout>
 
 
@@ -228,12 +247,13 @@
             android:layout_height="58dp"
             app:srcCompat="@mipmap/ic_aircanada" />
 
-        <EditText
+        <TextView
             android:id="@+id/trip_summary_retDuration"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="25sp"
             android:text="Duration" />
     </LinearLayout>
 
@@ -242,20 +262,23 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
+        <TextView
             android:id="@+id/editText2"
             android:layout_width="196dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="30sp"
             android:text="Total: " />
 
-        <EditText
+        <TextView
             android:id="@+id/view_trip_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="30sp"
+            android:gravity="right"
             android:text="price" />
     </LinearLayout>
 
