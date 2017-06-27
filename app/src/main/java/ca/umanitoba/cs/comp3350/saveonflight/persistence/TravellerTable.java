@@ -13,6 +13,8 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  */
 
 public class TravellerTable implements DataAccess<Traveller> {
+    public static int nextId = 3;
+
     private static ArrayList<Traveller> travellers = null;
 
     public TravellerTable() {

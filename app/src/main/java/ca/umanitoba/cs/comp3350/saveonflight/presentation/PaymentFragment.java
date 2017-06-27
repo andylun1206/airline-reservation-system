@@ -14,11 +14,17 @@ import android.widget.Toast;
 import com.stripe.android.model.Card;
 import com.stripe.android.view.CardInputWidget;
 
+import java.util.ArrayList;
+
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.business.ProcessPayment;
 import ca.umanitoba.cs.comp3350.saveonflight.business.ProcessPaymentImpl;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTable;
 
 /**
  * Payment.java
@@ -37,8 +43,10 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, P
     private Spinner spinnerProvince;
     private Spinner spinnerCountry;
     private EditText etPostalCode;
-
     private Button buttonPurchase;
+
+    private ArrayList<Flight> flights;
+
 
     @Nullable
     @Override
@@ -60,7 +68,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, P
         buttonPurchase = (Button) view.findViewById(R.id.button_payment);
         buttonPurchase.setOnClickListener(this);
 
-        // TODO: receive BookedFlight from previous screen
+        flights = getArguments().getParcelableArrayList("flights_to_book");
 
         return view;
     }
@@ -89,10 +97,25 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, P
         // Since we're not actually processing any payments... just add the BookedFlight to the database
 
         AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl();
-        // TODO: Add the BookedFlight object (Received form previous screen - view flights)
-        //accessBookedFlights.addBookedFlight();
 
-        // TODO: go to confirmation screen
+        // First, create a new Traveller
+        int id = TravellerTable.nextId++;
+        Traveller traveller = new Traveller(id, etName.getText().toString());
+
+        // Then, create the BookedFlight(s) objects
+        ArrayList<BookedFlight> bfs = new ArrayList<>();
+        for (Flight f : flights) {
+            bfs.add(new BookedFlight(traveller, f));
+        }
+
+        // Finally, add all the BookedFlight(s) to the database
+        for (BookedFlight bf : bfs) {
+            accessBookedFlights.addBookedFlight(bf);
+        }
+
+        FragmentNavigation.bookingConfirmation(id);
+        // TODO: go to confirmation screen (include their passenger id so that they can view their booked flights)
+
     }
 
     @Override

@@ -72,4 +72,14 @@ public class FragmentNavigation {
                 .commit();
     }
 
+    /**
+     * Switch context to confirmation fragment.
+     */
+    public static void bookingConfirmation(int passengerId) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("passenger_id", passengerId);
+
+        // TODO: go to confirmation fragment
+    }
+
 }
