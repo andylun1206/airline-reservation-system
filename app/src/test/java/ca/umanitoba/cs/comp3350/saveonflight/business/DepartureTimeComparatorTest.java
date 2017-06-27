@@ -17,17 +17,20 @@ import static org.junit.Assert.*;
 public class DepartureTimeComparatorTest {
     private DepartureTimeComparator comparator;
     private Flight.FlightBuilder builder;
+    private Calendar cal;
 
     @Before
     public void setUp() {
         comparator = new DepartureTimeComparator();
         builder = new Flight.FlightBuilder("WJ 101", new Airport("YWG Winnipeg"), new Airport("YYZ Toronto"));
+        cal = new GregorianCalendar();
     }
 
     @After
     public void tearDown() {
         comparator = null;
         builder = null;
+        cal = null;
     }
 
     @Test
@@ -40,10 +43,21 @@ public class DepartureTimeComparatorTest {
 
     @Test
     public void testEqualDates() {
-        Calendar cal = new GregorianCalendar();
-        
-
+        cal.set(2019, 2, 2);
+        Flight f1 = builder.setDepartureTime(cal.getTime()).build();
+        Flight f2 = builder.setDepartureTime(cal.getTime()).build();
+        assertEquals(0, comparator.compare(f1, f1));
+        assertEquals(0, comparator.compare(f2, f1));
     }
 
+    @Test
+    public void testDifferentDates() {
+        cal.set(2019, 2, 2);
+        Flight f1 = builder.setDepartureTime(cal.getTime()).build();
+        cal.set(2019, 2, 3);
+        Flight f2 = builder.setDepartureTime(cal.getTime()).build();
+        assertTrue(comparator.compare(f1, f2) < 0);
+        assertTrue(comparator.compare(f2, f1) > 0);
+    }
 
 }

@@ -6,9 +6,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by Kenny on 2017-06-26.
- */
 public class FlightBuilderTest {
     private Flight.FlightBuilder builder;
 
