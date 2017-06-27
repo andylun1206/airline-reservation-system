@@ -62,4 +62,6 @@
     <string name="view_flight_sort_price">Price</string>
     <string name="view_flight_sort_time">Time</string>
     <string name="view_flight_sort_duration">Duration</string>
+    <string name="passenger_id">Passenger ID:</string>
+    <string name="booked_flights">Booked Flights</string>
 </resources>

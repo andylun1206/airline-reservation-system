@@ -51,7 +51,6 @@ public class BookedFlightTableTest {
         assertEquals("Add null but actually add something", original, BookedFlightTable.getBookedFlights());
     }
 
-
     @Test
     public void testAddValid() {
         bookedFlightTable.add(validCase);
