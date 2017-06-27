@@ -29,6 +29,7 @@ public class FlightBuilderTest {
         assertEquals(FLIGHT_ID, f.getFlightID());
         assertEquals(ORIGIN, f.getOrigin());
         assertEquals(DEST, f.getDestination());
+        assertSame(null, f.getAirline());
     }
 
 }
