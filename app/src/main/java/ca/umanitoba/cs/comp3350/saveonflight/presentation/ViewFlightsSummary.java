@@ -32,7 +32,7 @@ public class ViewFlightsSummary extends ListFragment{
             container.removeAllViews();
         }
         View view = inflater.inflate(R.layout.list_item_view_trip, container, false);
-        flights = getArguments().getParcelableArrayList("flights");
+        flights = getArguments().getParcelableArrayList("chosen_flights");
         depFlight = flights.get(0);
         retFlight = flights.get(1);
         total = depFlight.getPrice()+ retFlight.getPrice();
