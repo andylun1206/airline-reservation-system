@@ -4,13 +4,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 public class FlightTest {
     private Flight flight;

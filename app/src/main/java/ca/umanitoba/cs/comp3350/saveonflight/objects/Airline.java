@@ -12,7 +12,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-public class Airline implements Parcelable, Comparable {
+public class Airline implements Parcelable, Comparable  {
     private String name;
     private int icon;
 
@@ -32,6 +32,8 @@ public class Airline implements Parcelable, Comparable {
     public int getIcon() {
         return icon;
     }
+
+    public void setIcon(int icon) { this.icon = icon; }
 
     public String toString() {
         return "Airline: " + name;

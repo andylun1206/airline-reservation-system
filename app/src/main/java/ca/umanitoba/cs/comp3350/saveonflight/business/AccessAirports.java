@@ -16,7 +16,7 @@ public interface AccessAirports {
 
     boolean addAirport(Airport a);
 
-    boolean updateAirport(Airport a, String airportCode);
+    boolean updateAirport(Airport a);
 
     boolean deleteAirport(Airport a);
 }

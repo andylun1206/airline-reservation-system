@@ -12,7 +12,11 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListViewEntry
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.TravellerTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListViewEntryTest;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccessStubTest;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTableTest;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTableTest;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTableTest;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTableTest;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTableTest;
 
 
 @RunWith(Suite.class)
@@ -21,13 +25,16 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccessStubTest;
         AirportTest.class,
         BookedFlightTest.class,
         FlightTest.class,
-        SearchCriteriaListViewEntryTest.class,
         SearchCriteriaTest.class,
         TravellerTest.class,
         SortFlightsTest.class,
-        DataAccessStubTest.class,
         SearchCriteriaListViewEntryTest.class,
-        ViewFlightsListViewEntryTest.class
+        ViewFlightsListViewEntryTest.class,
+        AirlineTableTest.class,
+        AirportTableTest.class,
+        TravellerTableTest.class,
+        BookedFlightTableTest.class,
+        FlightTableTest.class
 })
 
 public class AllTests {

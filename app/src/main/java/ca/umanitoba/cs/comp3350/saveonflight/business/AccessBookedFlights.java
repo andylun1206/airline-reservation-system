@@ -20,11 +20,11 @@ public interface AccessBookedFlights {
 
     boolean addBookedFlight(BookedFlight bf);
 
-    boolean updateBookedFlight(BookedFlight bf, Traveller t, Flight f);
+    boolean updateBookedFlight(BookedFlight bf);
 
     boolean deleteFlight(BookedFlight bf);
 
-    ArrayList<BookedFlight> getBookedFlightsOf(Traveller t);
+    ArrayList<BookedFlight> searchByTraveller(Traveller t);
 
-    ArrayList<BookedFlight> getTravellersOnFlight(Flight f);
+    ArrayList<BookedFlight> searchByFlight(Flight f);
 }

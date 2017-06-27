@@ -17,7 +17,7 @@ public interface AccessTravellers {
 
     boolean insertTraveller(Traveller traveller);
 
-    boolean updateTraveller(Traveller traveller, int newID, String newName);
+    boolean updateTraveller(Traveller traveller);
 
     boolean deleteTraveller(Traveller traveller);
 }

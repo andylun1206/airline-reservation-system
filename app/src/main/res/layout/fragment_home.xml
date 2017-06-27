@@ -56,6 +56,17 @@
             android:background="@color/colorSecondaryTransparent"
             android:id="@+id/button_home_search"/>
     <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_gravity="right"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="BOOKED FLIGHTS"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:background="@color/colorSecondaryTransparent"
+        android:id="@+id/button_home_view_bookedflight"/>
+    <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -66,4 +77,5 @@
             android:textColor="@android:color/white"
             android:background="@color/colorSecondaryTransparent"
             android:id="@+id/button_home_checkin"/>
+
 </LinearLayout>

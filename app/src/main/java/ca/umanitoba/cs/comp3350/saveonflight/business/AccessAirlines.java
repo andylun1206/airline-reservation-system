@@ -17,7 +17,7 @@ public interface AccessAirlines {
 
     boolean insertAirline(Airline airline);
 
-    boolean updateAirline(Airline airline, String name);
+    boolean updateAirline(Airline airline);
 
     boolean deleteAirline(Airline airline);
 }

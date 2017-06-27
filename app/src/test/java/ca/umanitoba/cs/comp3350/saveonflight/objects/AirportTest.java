@@ -6,7 +6,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class AirportTest {
     private final String CODE1 = "WPG01";
@@ -32,7 +37,7 @@ public class AirportTest {
     }
 
     @Test
-    public void testEqualsMethod(){
+    public void testEqualsMethod() {
         //normal cases
         assertFalse(AIRPORT1.equals(airport2)); //WPG01 != WPG02
         assertTrue(AIRPORT1.equals(airport3)); //WPG01 = WPG01
@@ -42,9 +47,9 @@ public class AirportTest {
     }
 
     @Test
-    public void testGetAirportCode(){
+    public void testGetAirportCode() {
         assertEquals(AIRPORT1.getAirportCode(), CODE1);
-        assertEquals(AIRPORT1.getAirportCode(),airport3.getAirportCode());
+        assertEquals(AIRPORT1.getAirportCode(), airport3.getAirportCode());
         //error cases
         assertFalse((AIRPORT1.getAirportCode()).equals(airport2.getAirportCode()));
         assertFalse((AIRPORT1.getAirportCode()).equals("wpg01"));
@@ -52,13 +57,14 @@ public class AirportTest {
     }
 
     @Test
-    public void testSetAirportCode(){
+    public void testSetAirportCode() {
         airport2.setAirportCode("hello");
         assertEquals(airport2.getAirportCode(), "hello");
         airport3.setAirportCode("happy");
         assertFalse(airport3.equals(AIRPORT1));
     }
 
+    @Test
     public void testContains() {
         assertFalse(AIRPORT1.contains(null));
         assertFalse(AIRPORT1.contains("ASDJIASJ"));
@@ -69,4 +75,15 @@ public class AirportTest {
         assertTrue(AIRPORT1.contains(subset));               // Subset match should return true
     }
 
+    @Test
+    public void testParcelable() {
+        Parcel parcel = mock(Parcel.class);
+        when(parcel.readString()).thenReturn(AIRPORT1.getAirportCode());
+        assertNotNull(parcel);
+        AIRPORT1.writeToParcel(parcel, 0);
+        parcel.setDataPosition(0);
+        Airport parceledAirport = (Airport) Airport.CREATOR.createFromParcel(parcel);
+        assertEquals(parceledAirport, AIRPORT1);
+        parcel.recycle();
+    }
 }

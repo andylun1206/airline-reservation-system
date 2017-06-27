@@ -8,7 +8,10 @@ import java.util.Date;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
 
 public class SearchCriteriaTest {
     private SearchCriteria searchCriteria;
@@ -53,10 +56,7 @@ public class SearchCriteriaTest {
         assertTrue(PREFERRED_CLASS.equals(searchCriteriaTest1.getPreferredClass()));
         assertTrue(searchCriteriaTest1.isNonstop());
         assertTrue(searchCriteriaTest1.isRefundable());
-
         assertFalse(searchCriteria.equals(searchCriteriaTest1));//same condition but different search
-
-
     }
 
     @Test
