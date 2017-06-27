@@ -10,7 +10,9 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 
@@ -21,6 +23,15 @@ public class FragmentNavigation {
 
     public static void setFragmentManager(FragmentManager newFragmentManager) {
         fragmentManager = newFragmentManager;
+    }
+
+    /**
+     * Switch context to viewing the search fragment
+     */
+    public static void flightSearch() {
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, new SearchFragment())
+                .commit();
     }
 
     /**
@@ -39,6 +50,36 @@ public class FragmentNavigation {
     public static void flightSummary(ArrayList<Flight> flights) {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("chosen_flights", flights);
+
+        Fragment viewFlights = new ViewFlightsSummary();
+        viewFlights.setArguments(bundle);
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, viewFlights)
+                .commit();
+    }
+
+    /**
+     * Switch context to payment fragment.
+     */
+    public static void viewPayment(ArrayList<Flight> flights) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("flights_to_book", flights);
+
+        Fragment payment = new PaymentFragment();
+        payment.setArguments(bundle);
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, payment)
+                .commit();
+    }
+
+    /**
+     * Switch context to confirmation fragment.
+     */
+    public static void bookingConfirmation(int passengerId) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("passenger_id", passengerId);
+
+        // TODO: go to confirmation fragment
     }
 
 }

@@ -56,6 +56,15 @@ Decided to change the way we assign developer tasks. Instead of assigning all of
 - 
 
 
+## Iteration 2:
+### Contributions
+
+
+#### You Tian Zhang
+- Problem: Payment Screen (GitHub issue #70)
+    - Need screen that allows users to input their payment and personal info
+    - Initially implemented with a bunch of EditTexts 
+
 ## Iteration 1:
 ### Contributions
 

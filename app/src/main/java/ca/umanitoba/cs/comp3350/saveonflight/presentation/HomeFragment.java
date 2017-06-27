@@ -69,7 +69,12 @@ public class HomeFragment extends Fragment {
         view.findViewById(R.id.button_home_checkin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToastHandler.toastComingSoon(getActivity(), getString(R.string.title_activity_checkin));
+                // TO TEST PAYMENT FRAGMENT
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, new PaymentFragment());
+                ft.commit();
+
+                //ToastHandler.toastComingSoon(getActivity(), getString(R.string.title_activity_checkin));
             }
         });
     }

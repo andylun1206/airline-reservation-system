@@ -53,4 +53,7 @@ public class ToastHandler {
         Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
     }
 
+    public static void toastInvalidCardInfo(Activity activity) {
+        Toast.makeText(activity, "Invalid Card Data", Toast.LENGTH_SHORT).show();
+    }
 }
