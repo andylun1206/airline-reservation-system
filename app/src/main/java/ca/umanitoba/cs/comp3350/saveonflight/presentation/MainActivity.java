@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             } else if (f instanceof PaymentFragment) {
                 displaySelectedScreen(R.id.nav_home); // TODO: change this to go back to the view flights screen (after it is fully implemented)
             } else {
-                super.onBackPressed();
+                displaySelectedScreen(R.id.nav_home);
             }
         }
     }
@@ -132,8 +132,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             case R.id.nav_search:
                 fragment = new SearchFragment();
                 break;
-            default:
-                fragment = new HomeFragment();
+            case R.id.nav_bookedflights:
+                fragment = new ViewBookedFlightFragment();
                 break;
         }
 

@@ -90,4 +90,6 @@
         <item>Nunavut</item>
         <item>Yukon</item>
     </string-array>
+    <string name="passenger_id">Passenger ID:</string>
+    <string name="booked_flights">Booked Flights</string>
 </resources>

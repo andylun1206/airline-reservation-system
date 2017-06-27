@@ -57,6 +57,15 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        view.findViewById(R.id.button_home_view_bookedflight).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, new ViewBookedFlightFragment());
+                ft.commit();
+            }
+        });
+
         view.findViewById(R.id.button_home_checkin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

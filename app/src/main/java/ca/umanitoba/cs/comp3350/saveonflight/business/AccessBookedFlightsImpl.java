@@ -6,6 +6,7 @@ import java.util.List;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
 
@@ -18,7 +19,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
  */
 
 public class AccessBookedFlightsImpl implements AccessBookedFlights {
-    private static DataAccess<BookedFlight> bookedFlightsDB;
+    private static BookedFlightAccess bookedFlightsDB;
 
     public AccessBookedFlightsImpl() {
         if (bookedFlightsDB == null) {
@@ -47,16 +48,13 @@ public class AccessBookedFlightsImpl implements AccessBookedFlights {
         return bookedFlightsDB.remove(bf);
     }
 
-    @Override
-    public ArrayList<BookedFlight> getBookedFlightsOf(Traveller t) {
-//        return bookedFlightsDB.getTravellersBookedFlights(t);
-        return null;
+    public ArrayList<BookedFlight> searchByTraveller(Traveller t) {
+        return bookedFlightsDB.searchByTraveller(t);
     }
 
     @Override
-    public ArrayList<BookedFlight> getTravellersOnFlight(Flight f) {
-//        return bookedFlightsDB.getTravellersOnFlight(f);
-        return null;
+    public ArrayList<BookedFlight> searchByFlight(Flight f) {
+        return bookedFlightsDB.searchByFlight(f);
     }
 
 }

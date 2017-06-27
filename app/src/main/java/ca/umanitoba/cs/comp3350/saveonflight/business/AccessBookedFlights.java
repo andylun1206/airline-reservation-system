@@ -24,7 +24,7 @@ public interface AccessBookedFlights {
 
     boolean deleteFlight(BookedFlight bf);
 
-    ArrayList<BookedFlight> getBookedFlightsOf(Traveller t);
+    ArrayList<BookedFlight> searchByTraveller(Traveller t);
 
-    ArrayList<BookedFlight> getTravellersOnFlight(Flight f);
+    ArrayList<BookedFlight> searchByFlight(Flight f);
 }
