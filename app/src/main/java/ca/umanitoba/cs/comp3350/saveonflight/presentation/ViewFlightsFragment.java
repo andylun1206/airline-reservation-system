@@ -138,6 +138,7 @@ public class ViewFlightsFragment extends ListFragment {
             }
         } else if (!searchCriteria.isReturnTrip() || (searchCriteria.isReturnTrip() && chosenFlights.size() == 2)) {
             FragmentNavigation.flightSummary(chosenFlights);
+            chosenFlights = new ArrayList<>();
         }
     }
 
