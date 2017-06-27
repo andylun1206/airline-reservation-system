@@ -38,7 +38,7 @@ public class ViewFlightsSummary extends Fragment {
         flights = getArguments().getParcelableArrayList("chosen_flights");
         depFlight = flights.get(0);
 
-        total = depFlight.getPrice()+ retFlight.getPrice();
+        total = depFlight.getPrice();
 
 //        if(flights.size() == 1) {
             //departure flight
@@ -51,6 +51,7 @@ public class ViewFlightsSummary extends Fragment {
             ((ImageView) view.findViewById(R.id.imageview_tripSummary1)).setImageResource(depFlight.getAirline().getIcon());
         if(flights.size() == 2) {
             retFlight = flights.get(1);
+            total = depFlight.getPrice()+ retFlight.getPrice();
             //return flight
             ((TextView) view.findViewById(R.id.departurePrice)).setText(String.format("$%.2f",retFlight.getPrice()));
             ((TextView) view.findViewById(R.id.trip_summary_from2)).setText(retFlight.getDepartAirportCode());
@@ -70,7 +71,7 @@ public class ViewFlightsSummary extends Fragment {
             ((TextView) view.findViewById(R.id.trip_summary_dateArrive2)).setVisibility(View.GONE);
             ((TextView) view.findViewById(R.id.trip_summary_retDuration)).setVisibility(View.GONE);
             ((ImageView) view.findViewById(R.id.imageview_tripSummary2)).setVisibility(View.GONE);
-            ((TextView) view.findViewById(R.id.view_trip_price)).setText(String.format("$%.2f", depFlight.getPrice()));
+            ((TextView) view.findViewById(R.id.view_trip_price)).setText(String.format("$%.2f", total));
         }
         return view;
     }
