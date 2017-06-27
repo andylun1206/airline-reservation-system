@@ -27,6 +27,8 @@ public class FlightTest {
     private Date arrivalTime;
     private GregorianCalendar cal = new GregorianCalendar();
 
+    private Flight.FlightBuilder builder;
+
     @Before
     public void setUp() {
         cal = new GregorianCalendar();
@@ -35,7 +37,16 @@ public class FlightTest {
         cal.set(2017, 1, 1, 15, 0);
         arrivalTime = cal.getTime();
 
-        flight = new Flight(FLIGHT_ID, departureTime, arrivalTime, AIRLINE, ORIGIN, DEST, PRICE, CAP, 0, FLIGHT_CLASS);
+        builder = new Flight.FlightBuilder(FLIGHT_ID, ORIGIN, DEST);
+        flight = builder.setDepartureTime(departureTime)
+                .setArrivalTime(arrivalTime)
+                .setAirline(AIRLINE)
+                .setPrice(PRICE)
+                .setCapacity(CAP)
+                .setFlightClass(FLIGHT_CLASS)
+                .build();
+
+        // TODO remove flight = new Flight(FLIGHT_ID, departureTime, arrivalTime, AIRLINE, ORIGIN, DEST, PRICE, CAP, 0, FLIGHT_CLASS);
     }
 
     @After
@@ -85,7 +96,12 @@ public class FlightTest {
         final Date DEPART = cal.getTime();
         cal.set(2017, 1, 1, 15, 1);
         final Date ARRIVE = cal.getTime();
-        Flight otherFlight = new Flight("AC101", DEPART, ARRIVE, AC, ORIGIN, DEST, PRICE, CAP, 0, FLIGHT_CLASS);
+
+
+        Flight otherFlight = builder.setFlightId("AC101")
+                .setDepartureTime(DEPART)
+                .setArrivalTime(ARRIVE)
+                .build();
 
         assertFalse(null == flight);              // null
         assertFalse(flight.equals(FLIGHT_ID));    // Not same class
