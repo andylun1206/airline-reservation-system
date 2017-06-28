@@ -27,7 +27,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListViewEntry;
 
 public class SearchFragment extends ListFragment {
     private SearchCriteriaArrayAdapter criteriaAdapter;
@@ -178,4 +177,5 @@ public class SearchFragment extends ListFragment {
 
         criteriaAdapter.notifyDataSetChanged(!isVisible);
     }
+
 }
