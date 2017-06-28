@@ -1,8 +1,10 @@
 package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,8 @@ import java.util.ArrayList;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlightsImpl;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessTravellers;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessTravellersImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.business.ProcessPayment;
 import ca.umanitoba.cs.comp3350.saveonflight.business.ProcessPaymentImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
@@ -98,9 +102,11 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, P
 
         AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl();
 
-        // First, create a new Traveller
+        // First, create a new Traveller and store it in the database
         int id = TravellerTable.nextId++;
         Traveller traveller = new Traveller(id, etName.getText().toString());
+        AccessTravellers accessTravellers = new AccessTravellersImpl();
+        accessTravellers.insertTraveller(traveller);
 
         // Then, create the BookedFlight(s) objects
         ArrayList<BookedFlight> bfs = new ArrayList<>();
@@ -113,9 +119,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, P
             accessBookedFlights.addBookedFlight(bf);
         }
 
-        FragmentNavigation.bookingConfirmation(id);
-        // TODO: go to confirmation screen (include their passenger id so that they can view their booked flights)
-
+        showConfirmationDialog(id);
     }
 
     @Override
@@ -136,6 +140,31 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, P
         }
 
         return cardToSave;
+    }
+
+    /**
+     * Creates a Dialog that tells the passenger their ID. Gives them the option
+     * of going to the view booked flights screen or returning to the homepage.
+     *
+     * @param passengerID the passenger's ID
+     */
+    private void showConfirmationDialog(int passengerID) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Payment Successful")
+                .setMessage("Your passenger ID is " + passengerID + ".\nUse this ID to view your booked flights.");
+        builder.setPositiveButton("View Booked Flights", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                FragmentNavigation.viewBookedFlights();
+            }
+        });
+        builder.setNegativeButton("Return to Homepage", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                FragmentNavigation.homepage();
+            }
+        });
+        builder.create().show();
     }
 
 }
