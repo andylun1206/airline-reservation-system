@@ -20,7 +20,7 @@ import static junit.framework.Assert.assertTrue;
 
 public class AirlineTableTest {
     private static ArrayList<Airline> original;
-    private static AirlineTable airlineTable;
+    private static DataAccess<Airline> airlineTable;
 
     @BeforeClass
     public static void setUp() {
@@ -61,7 +61,7 @@ public class AirlineTableTest {
     public void testAddValid() {
         Airline cathayPacific = new Airline("Cathay Pacific", R.drawable.ic_plane);
         airlineTable.add(cathayPacific);
-        assertEquals("Failed to add Cathay Pacific to airlineTable.", cathayPacific, airlineTable.findAirline("Cathay Pacific"));
+        assertEquals("Failed to add Cathay Pacific to airlineTable.", cathayPacific, AirlineTable.findAirline("Cathay Pacific"));
 
         airlineTable.remove(cathayPacific);
     }
