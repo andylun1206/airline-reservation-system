@@ -38,6 +38,8 @@ public class HomeFragment extends Fragment {
         getActivity().setTitle(getString(R.string.app_name));
         ((NavigationView) getActivity().findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_home);
 
+        ((TextView) view.findViewById(R.id.textView_home_greeting)).setText(getString(R.string.home_greeting, "Guest"));
+
         view.findViewById(R.id.button_home_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
