@@ -33,20 +33,6 @@ public class SearchCriteria {
     public SearchCriteria() {
     }
 
-    public SearchCriteria(Airport origin, Airport destination, Date departureDate,
-                          int numTravellers, double maxPrice, Airline preferredAirlines,
-                          FlightClassEnum preferredClass, boolean nonstop, boolean refundable) {
-        this.origin = origin;
-        this.destination = destination;
-        this.departureDate = departureDate;
-        this.numTravellers = numTravellers;
-        this.maxPrice = maxPrice;
-        this.preferredAirlines = preferredAirlines;
-        this.preferredClass = preferredClass;
-        this.nonstop = nonstop;
-        this.refundable = refundable;
-    }
-
     public Airport getOrigin() {
         return origin;
     }

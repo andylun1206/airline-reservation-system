@@ -15,7 +15,6 @@ import static junit.framework.Assert.assertTrue;
 
 public class SearchCriteriaTest {
     private SearchCriteria searchCriteria;
-
     private SearchCriteria searchCriteriaTest1;
     private SearchCriteria searchCriteriaTest2;
     private SearchCriteria searchCriteriaTest3;
@@ -31,11 +30,40 @@ public class SearchCriteriaTest {
 
     @Before
     public void setUp() {
-        searchCriteria = new SearchCriteria(ORIGIN, DEST, DEPARTURE_DATE, NUM_TRAVELLERS, MAX, AIRLINE, PREFERRED_CLASS, true, true);
-        searchCriteriaTest1 = new SearchCriteria(new Airport("YWG"), new Airport("YVR"), new Date(117, 5, 6, 14, 40), 3, 1000, new Airline("WestJet", R.mipmap.ic_westjet), FlightClassEnum.FIRST_CLASS, true, true);
-        searchCriteriaTest2 = new SearchCriteria(null, null, null, 0, 0, null, null, false, false);
-        searchCriteriaTest3 = null;
+        searchCriteria = new SearchCriteria();
+        searchCriteria.setOrigin(ORIGIN);
+        searchCriteria.setDestination(DEST);
+        searchCriteria.setDepartureDate(DEPARTURE_DATE);
+        searchCriteria.setNumTravellers(NUM_TRAVELLERS);
+        searchCriteria.setMaxPrice(MAX);
+        searchCriteria.setPreferredAirlines(AIRLINE);
+        searchCriteria.setPreferredClass(PREFERRED_CLASS);
+        searchCriteria.setRefundable(true);
+        searchCriteria.setNonstop(true);
 
+        searchCriteriaTest1 = new SearchCriteria();
+        searchCriteriaTest1.setOrigin(new Airport("YWG"));
+        searchCriteriaTest1.setDestination(new Airport("YVR"));
+        searchCriteriaTest1.setDepartureDate(new Date(117, 5, 6, 14, 40));
+        searchCriteriaTest1.setNumTravellers(3);
+        searchCriteriaTest1.setMaxPrice(1000);
+        searchCriteriaTest1.setPreferredAirlines(new Airline("WestJet", R.mipmap.ic_westjet));
+        searchCriteriaTest1.setPreferredClass(FlightClassEnum.FIRST_CLASS);
+        searchCriteriaTest1.setRefundable(true);
+        searchCriteriaTest1.setNonstop(true);
+
+        searchCriteriaTest2 = new SearchCriteria();
+        searchCriteriaTest2.setOrigin(null);
+        searchCriteriaTest2.setDestination(null);
+        searchCriteriaTest2.setDepartureDate(null);
+        searchCriteriaTest2.setNumTravellers(0);
+        searchCriteriaTest2.setMaxPrice(0);
+        searchCriteriaTest2.setPreferredAirlines(null);
+        searchCriteriaTest2.setPreferredClass(null);
+        searchCriteriaTest2.setRefundable(false);
+        searchCriteriaTest2.setNonstop(false);
+
+        searchCriteriaTest3 = null;
     }
 
     @After
