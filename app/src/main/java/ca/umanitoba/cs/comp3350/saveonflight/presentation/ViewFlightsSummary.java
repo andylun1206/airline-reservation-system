@@ -63,17 +63,7 @@ public class ViewFlightsSummary extends Fragment implements View.OnClickListener
             ((ImageView) view.findViewById(R.id.imageview_tripSummary2)).setImageResource(retFlight.getAirline().getIcon());
         }
         else{
-            ((TextView)view.findViewById(R.id.returnFlight)).setVisibility(View.GONE);
-            ((TextView) view.findViewById(R.id.retPrice)).setVisibility(View.GONE);
-            ((TextView) view.findViewById(R.id.trip_summary_from2)).setVisibility(View.GONE);
-            ((TextView) view.findViewById(R.id.trip_summary_to2)).setVisibility(View.GONE);
-            ((TextView) view.findViewById(R.id.trip_summary_dateDep2)).setVisibility(View.GONE);
-            ((TextView) view.findViewById(R.id.trip_summary_dateArrive2)).setVisibility(View.GONE);
-            ((TextView) view.findViewById(R.id.trip_summary_retDuration)).setVisibility(View.GONE);
-            ((ImageView) view.findViewById(R.id.imageview_tripSummary2)).setVisibility(View.GONE);
-            ((TextView)view.findViewById(R.id.retText1)).setVisibility(View.GONE);
-            ((TextView)view.findViewById(R.id.retText2)).setVisibility(View.GONE);
-
+            (view.findViewById(R.id.trip_summary_retFlight)).setVisibility(View.GONE);
         }
         ((TextView) view.findViewById(R.id.view_trip_price)).setText(String.format("$%.2f", total));
         ((Button) view.findViewById(R.id.button_go_payment)).setOnClickListener(this);
