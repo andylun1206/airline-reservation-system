@@ -28,7 +28,6 @@ import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListViewEntry;
 
 public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListViewEntry> implements OnDateSetListener {
     private final Context context;

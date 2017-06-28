@@ -2,15 +2,12 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,7 +18,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListViewEntry;
 
 /**
  * ViewBookedFlightFragment.java

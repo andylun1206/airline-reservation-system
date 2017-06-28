@@ -21,7 +21,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListViewEntry;
 
 import java.util.ArrayList;
 
@@ -145,4 +144,5 @@ public class ViewFlightsFragment extends ListFragment {
     private static void setTitle(String origin, String destination) {
         activity.setTitle(title.replace("$0", origin).replace("$1", destination));
     }
+
 }

@@ -22,7 +22,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
  * Created by Shenyun Wang on 2017-06-24.
  */
 
-public class ViewFlightsSummary extends Fragment implements View.OnClickListener {
+public class ViewFlightsSummaryFragment extends Fragment implements View.OnClickListener {
     private ArrayList<Flight> flights;
     private Flight depFlight;
     private Flight retFlight;

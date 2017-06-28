@@ -22,6 +22,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.application.Services;
 
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         } else {
             Fragment f = getVisibleFragment();
 
-            if (f instanceof ViewFlightsFragment || f instanceof PaymentFragment) {
+            if (f instanceof ViewFlightsFragment || f instanceof PaymentFragment || f instanceof ViewFlightsSummaryFragment) {
                 displaySelectedScreen(R.id.nav_search);
             } else if (f instanceof SearchFragment || f instanceof ViewBookedFlightFragment) {
                 displaySelectedScreen(R.id.nav_home);
