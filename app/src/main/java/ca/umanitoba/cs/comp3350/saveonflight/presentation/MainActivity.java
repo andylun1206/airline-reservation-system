@@ -71,14 +71,12 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         } else {
             Fragment f = getVisibleFragment();
 
-            if (f instanceof ViewFlightsFragment) {
+            if (f instanceof ViewFlightsFragment || f instanceof PaymentFragment) {
                 displaySelectedScreen(R.id.nav_search);
-            } else if (f instanceof SearchFragment) {
+            } else if (f instanceof SearchFragment || f instanceof ViewBookedFlightFragment) {
                 displaySelectedScreen(R.id.nav_home);
-            } else if (f instanceof PaymentFragment) {
-                displaySelectedScreen(R.id.nav_home); // TODO: change this to go back to the view flights screen (after it is fully implemented)
             } else {
-                displaySelectedScreen(R.id.nav_home);
+                super.onBackPressed();
             }
         }
     }
