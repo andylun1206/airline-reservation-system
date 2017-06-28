@@ -32,22 +32,20 @@ This iteration, we finished the big user story “searching for flights”. The 
 - Destination: Toronto YYZ
 - Departure Date: 2017-11-11 (November 11, 2017)
 - Return Date: 2017-12-11 (December 11, 2017)
-- Number of Travellers: 1 
+- Number of Travellers: 1
 
 An autocomplete feature was also added to the ‘Origin’ and ‘Destination’ EditTexts for big airports in Canada (e.g. Winnipeg YWG and Toronto YYZ). 
 
-The feature of comparing flights, found in the view flights screen, was also updated to accommodate return trips. 
-
-After a user selects their flight(s) on the view flights screen, they are taken to a newly implemented trip summary page. Here, they can see detailed information about their flights. It gives the user the option to either go back and modify their search or to proceed to the payment screen.
+The feature of comparing flights, found in the view flights screen, was also updated to accommodate return trips. After a user selects their flight(s) on the view flights screen, they are taken to a newly implemented trip summary page. Here, they can see detailed information about their flights. It gives the user the option to either go back and modify their search or to proceed to the payment screen.
 
 The payment screen provides input fields for the user’s credit card information and personal information. We used Stripe’s CardInputWidget for inputting credit card information which also handles validation. One combination of credit card number, expiry date, and security code which passes validation is:
 - Credit Card Number: 4242 4242 4242 4242
 - Expiry Date: 8/18
 - Security Code: 850
 
-Upon payment, the new booked flights are added to the database.
+Upon payment success, the new booked flights are added to the database and a popup dialog alerts the user of their passenger ID. Also, two buttons let the user go to either the view booked flights page or the homepage.
 
-Booked flights can be viewed by clicking the button “BOOKED FLIGHTS” from the homepage or selecting it from the navigation drawer. In the view booked flights page, there is an input field for passenger ID. Pressing the “VIEW FLIGHTS” button will update the screen to show a list of all flights that the passenger with the specified ID has booked. 
+Users can also get to the view booked flights page by clicking the button “BOOKED FLIGHTS” from the homepage or selecting it from the navigation drawer. In the view booked flights page, there is an input field for passenger ID. Pressing the “VIEW FLIGHTS” button will update the screen to show a list of all flights that the passenger with the specified ID has booked. 
 
 Additionally, various improvements and bug fixes from the first iteration were completed. This includes:
 - Applied builder pattern to the Flight class
@@ -57,6 +55,7 @@ Additionally, various improvements and bug fixes from the first iteration were c
 - Set appropriate input types for EditTexts
 
 Moreover, we ported our stub database to a HSQL database. The stub database was kept for testing purposes and dependency injection was used to switch between the two.
+
 
 
 
