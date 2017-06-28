@@ -8,6 +8,11 @@
               android:paddingTop="@dimen/activity_vertical_margin"
               android:paddingBottom="@dimen/activity_vertical_margin"
               android:weightSum="1">
+    <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_trip_type"
+            android:entries="@array/trip_type"/>
 
     <ListView
         android:id="@android:id/list"
@@ -16,12 +21,6 @@
         android:layout_weight="0.1"
         android:scrollbars="vertical"
         android:smoothScrollbar="true" />
-
-    <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner_trip_type"
-            android:entries="@array/trip_type"/>
 
     <LinearLayout
             android:layout_width="match_parent"
