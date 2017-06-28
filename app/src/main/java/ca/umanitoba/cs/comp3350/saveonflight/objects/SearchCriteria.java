@@ -27,15 +27,14 @@ public class SearchCriteria {
     private double maxPrice;
     private Airline preferredAirlines;
     private FlightClassEnum preferredClass;
-    private boolean nonstop;
-    private boolean refundable;
+
 
     public SearchCriteria() {
     }
 
     public SearchCriteria(Airport origin, Airport destination, Date departureDate,
                           int numTravellers, double maxPrice, Airline preferredAirlines,
-                          FlightClassEnum preferredClass, boolean nonstop, boolean refundable) {
+                          FlightClassEnum preferredClass) {
         this.origin = origin;
         this.destination = destination;
         this.departureDate = departureDate;
@@ -43,8 +42,7 @@ public class SearchCriteria {
         this.maxPrice = maxPrice;
         this.preferredAirlines = preferredAirlines;
         this.preferredClass = preferredClass;
-        this.nonstop = nonstop;
-        this.refundable = refundable;
+
     }
 
     public Airport getOrigin() {
@@ -111,21 +109,6 @@ public class SearchCriteria {
         this.preferredClass = preferredClass;
     }
 
-    public boolean isNonstop() {
-        return nonstop;
-    }
-
-    public void setNonstop(boolean nonstop) {
-        this.nonstop = nonstop;
-    }
-
-    public boolean isRefundable() {
-        return refundable;
-    }
-
-    public void setRefundable(boolean refundable) {
-        this.refundable = refundable;
-    }
 
     public boolean isReturnTrip() {
         return this.returnTrip;

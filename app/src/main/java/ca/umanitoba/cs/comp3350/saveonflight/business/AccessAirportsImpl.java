@@ -6,6 +6,8 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
 
+import static ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTable.findAirport;
+
 /**
  * AccessAirportsImpl.java
  * <p>
@@ -43,5 +45,14 @@ public class AccessAirportsImpl implements AccessAirports {
     @Override
     public boolean deleteAirport(Airport a) {
         return airportDB.remove(a);
+    }
+
+    public boolean airportExists(String s){
+        Airport a = null;
+        boolean found = false;
+        a = findAirport(s);
+        if(a != null)
+            found = true;
+        return found;
     }
 }
