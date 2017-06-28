@@ -20,7 +20,7 @@ import static junit.framework.Assert.assertTrue;
 
 public class AirportTableTest {
     private static ArrayList<Airport> original;
-    private static AirportTable airportTable;
+    private static DataAccess<Airport> airportTable;
     private Airport emptyNameCase = new Airport("");
     private Airport vaildCase = new Airport("myAirport MAT");
     @BeforeClass
