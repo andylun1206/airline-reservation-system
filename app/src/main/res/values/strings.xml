@@ -32,13 +32,13 @@
         <item>One Way</item>
     </string-array>
     <string-array name="airport_list">
-        <item>Calgary (YYC)</item>
-        <item>Montréal (YUL)</item>
-        <item>Ottawa (YOW)</item>
-        <item>Québec (YQB)</item>
-        <item>Toronto (YYZ)</item>
-        <item>Vancouver (YVC)</item>
-        <item>Winnipeg (YWG)</item>
+        <item>Calgary YYC</item>
+        <item>Montréal YUL</item>
+        <item>Ottawa YOW</item>
+        <item>Québec YQB</item>
+        <item>Toronto YYZ</item>
+        <item>Vancouver YVC</item>
+        <item>Winnipeg YWG</item>
     </string-array>
     <string-array name="airline_list">
         <item>Air Canada</item>

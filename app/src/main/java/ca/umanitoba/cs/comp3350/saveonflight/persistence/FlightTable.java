@@ -44,8 +44,8 @@ public class FlightTable implements FlightAccess {
             try {
                 Airline airCanada = AirlineTable.findAirline("Air Canada");
                 Airline westJet = AirlineTable.findAirline("WestJet");
-                Airport wpg = AirportTable.findAirport("YWG");
-                Airport tor = AirportTable.findAirport("YYZ");
+                Airport wpg = AirportTable.findAirport("Winnipeg YWG");
+                Airport tor = AirportTable.findAirport("Toronto YYZ");
 
                 Flight.FlightBuilder builder = new Flight.FlightBuilder("AC 256", wpg, tor);
 
