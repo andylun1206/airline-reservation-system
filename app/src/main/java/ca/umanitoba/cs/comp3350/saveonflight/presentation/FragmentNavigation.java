@@ -26,6 +26,15 @@ public class FragmentNavigation {
     }
 
     /**
+     * Switch context to the homepage fragment
+     */
+    public static void homepage() {
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, new HomeFragment())
+                .commit();
+    }
+
+    /**
      * Switch context to viewing the search fragment
      */
     public static void flightSearch() {
@@ -59,7 +68,7 @@ public class FragmentNavigation {
     }
 
     /**
-     * Switch context to payment fragment.
+     * Switch context to payment fragment
      */
     public static void viewPayment(ArrayList<Flight> flights) {
         Bundle bundle = new Bundle();
@@ -73,13 +82,12 @@ public class FragmentNavigation {
     }
 
     /**
-     * Switch context to confirmation fragment.
+     * Switch context to view booked flights fragment
      */
-    public static void bookingConfirmation(int passengerId) {
-        Bundle bundle = new Bundle();
-        bundle.putInt("passenger_id", passengerId);
-
-        // TODO: go to confirmation fragment
+    public static void viewBookedFlights() {
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, new ViewBookedFlightFragment())
+                .commit();
     }
 
 }
