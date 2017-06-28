@@ -126,6 +126,12 @@ Decided to change the way we assign developer tasks. Instead of assigning all of
     - Each as their own class
     
 #### Andy Chi Fung Lun
+- Problem: GUI - Return flights screen (GitHub issue #64, #65)
+    - Needed a screen to display flights for return trip if round trip is selected
+    - Screen is similar to the first set of flights, should not duplicate code
+        - Found way to reuse screen by updating the ListView
+    - Requires message passing to other fragments
+        - Implemented FragmentNavigation to handle all navigation between fragments
 - Problem: Bug fixes from previous iteration (GitHub issue #73, #74, #77, #78, #92, #96)
     - \#73: Keyboard was not losing focus when needed, keyboard will now be hidden if tapped on whitespace
     - \#74: All input fields were EditText, it is now possible to swap to other components
@@ -133,11 +139,7 @@ Decided to change the way we assign developer tasks. Instead of assigning all of
     - \#78: Fixed through issue #74
     - \#92: Chosen flights were not reset properly after going to view flights screen, fixed by reinitializing
     - \#96: Deleting useless buttons and removing dead code
-- Problem: GUI - Return flights screen (GitHub issue #64, #65)
-    - Needed a screen to display flights for return trip if round trip is selected
-    - Screen is similar to the first set of flights, should not duplicate code
-        - Found way to reuse screen by updating the ListView
-    - Requires message passing to other fragments
-        - Implemented FragmentNavigation to handle all navigation between fragments
-
+- Problem: Fixing 'dat constructor' in search criteria (GitHub issue #80)
+    - Initially thought to use builder class to replace constructor
+    - Ultimately removed constructor since it was only used in testing
     
