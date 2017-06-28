@@ -60,7 +60,7 @@ public class FragmentNavigation {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("chosen_flights", flights);
 
-        Fragment viewFlights = new ViewFlightsSummary();
+        Fragment viewFlights = new ViewFlightsSummaryFragment();
         viewFlights.setArguments(bundle);
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, viewFlights)
