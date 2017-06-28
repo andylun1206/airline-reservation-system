@@ -47,10 +47,10 @@ public class AccessAirportsImpl implements AccessAirports {
         return airportDB.remove(a);
     }
 
-    public boolean airportExists(String s){
-        Airport a = null;
+    public static boolean airportExists(Airport a){
+        String code = a.getAirportCode();
         boolean found = false;
-        a = findAirport(s);
+        a = findAirport(code);
         if(a != null)
             found = true;
         return found;

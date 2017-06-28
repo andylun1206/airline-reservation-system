@@ -2,6 +2,8 @@ package ca.umanitoba.cs.comp3350.saveonflight.business;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 
+import static ca.umanitoba.cs.comp3350.saveonflight.business.AccessAirportsImpl.airportExists;
+
 /**
  * Created by HCI_Lab on 2017-06-27.
  */
@@ -21,7 +23,10 @@ public class ValidateSearchImpl implements ValidateSearch {
 
     public boolean oneWay(SearchCriteria s){
         boolean check = false;
-        if(s.)
+        if(airportExists(s.getOrigin())){
+            check = true;
+
+        }
 
 
         return check;

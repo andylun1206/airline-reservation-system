@@ -16,6 +16,9 @@ import java.util.Date;
 import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessAirportsImpl;
+
+import static ca.umanitoba.cs.comp3350.saveonflight.business.AccessAirportsImpl.airportExists;
 
 public class SearchCriteria {
     private boolean returnTrip;
