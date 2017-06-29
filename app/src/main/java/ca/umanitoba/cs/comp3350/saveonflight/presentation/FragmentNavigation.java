@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlight.SearchFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights.ViewFlightsFragment;
 
 import java.util.ArrayList;
 

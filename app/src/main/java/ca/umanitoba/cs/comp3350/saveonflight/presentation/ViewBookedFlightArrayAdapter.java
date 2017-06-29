@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights.ViewFlightsListViewEntry;
 
 /**
  * ViewBookedFlightArrayAdapter.java

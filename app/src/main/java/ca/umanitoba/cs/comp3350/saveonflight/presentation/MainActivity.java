@@ -26,6 +26,7 @@ import android.view.inputmethod.InputMethodManager;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.application.Services;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlight.SearchFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights.ViewFlightsFragment;
 
 import java.util.List;
 
