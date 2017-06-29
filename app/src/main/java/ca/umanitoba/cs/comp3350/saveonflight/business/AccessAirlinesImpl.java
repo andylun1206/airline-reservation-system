@@ -29,4 +29,9 @@ public class AccessAirlinesImpl implements AccessAirlines {
     public List<Airline> getAirlines() {
         return AirlineTable.getAirlines();
     }
+
+    @Override
+    public Airline getAirlineByName(String airline) {
+        return AirlineTable.findAirline(airline);
+    }
 }

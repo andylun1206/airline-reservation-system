@@ -1,5 +1,6 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 
@@ -13,8 +14,19 @@ import java.util.Locale;
  */
 
 public class SearchCriteriaHandler {
-    public static boolean validate(SearchCriteria criteria){
-        return true;
+    public static boolean validate(SearchCriteria criteria) {
+        boolean valid = false;
+
+        if (validateAirport(criteria.getOrigin())
+                && validateAirport(criteria.getDestination())
+                && validateTripDate(criteria.getDepartureDate(), criteria.getReturnDate())
+                && validatePassengers(criteria.getNumTravellers())
+                && validateAirline(criteria.getPreferredAirline())
+                && validatePrice(criteria.getMaxPrice())) {
+            valid = true;
+        }
+
+        return valid;
     }
 
     public static SearchCriteria reverseFlightDirection(SearchCriteria criteria) {
@@ -38,5 +50,39 @@ public class SearchCriteriaHandler {
         }
 
         return parsedDate;
+    }
+
+    private static boolean validateAirport(Airport airport) {
+        boolean valid = false;
+
+        if (airport != null && !airport.getAirportCode().trim().isEmpty()
+                && new AccessAirportsImpl().findAirportByName(airport.getAirportCode()) != null) {
+            valid = true;
+        }
+
+        return valid;
+    }
+
+    private static boolean validateTripDate(Date departureDate, Date returnDate) {
+        return (departureDate != null && (returnDate == null || departureDate.compareTo(returnDate) <= 0));
+    }
+
+    private static boolean validatePassengers(int numPassengers) {
+        return numPassengers > 0;
+    }
+
+    private static boolean validateAirline(Airline airline) {
+        boolean valid = false;
+
+        if (airline != null && !airline.getName().trim().isEmpty()
+                && new AccessAirlinesImpl().getAirlineByName(airline.getName()) != null) {
+            valid = true;
+        }
+
+        return valid;
+    }
+
+    private static boolean validatePrice(double price) {
+        return price > 0;
     }
 }
