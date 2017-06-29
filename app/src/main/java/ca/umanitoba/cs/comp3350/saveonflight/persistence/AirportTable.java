@@ -18,7 +18,7 @@ public class AirportTable implements DataAccess<Airport> {
     public AirportTable() {
     }
 
-    public void initialize() {
+    public void initialize(String dbPath) {
         if (airports == null) {
             airports = new ArrayList<Airport>();
             airports.add(new Airport("Vancouver YVR"));
@@ -44,4 +44,9 @@ public class AirportTable implements DataAccess<Airport> {
         }
         return result;
     }
+    public void close()
+    {
+        System.out.println("Closed  database " );
+    }
+
 }

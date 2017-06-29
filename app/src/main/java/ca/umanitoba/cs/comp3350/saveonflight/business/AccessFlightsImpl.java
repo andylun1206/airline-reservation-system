@@ -2,6 +2,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.business;
 
 import java.util.ArrayList;
 
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightAccess;
@@ -21,7 +22,7 @@ public class AccessFlightsImpl implements AccessFlights {
     public AccessFlightsImpl() {
         if (flightsDB == null) {
             flightsDB = new FlightTable();
-            flightsDB.initialize();
+            flightsDB.initialize(Main.getDBPathName());
         }
     }
 

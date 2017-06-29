@@ -24,6 +24,10 @@ public class SearchCriteria {
     public SearchCriteria() {
     }
 
+    public int getPreferredClassInt() {
+        return preferredClass.ordinal();
+    }
+
     public Airport getOrigin() {
         return origin;
     }

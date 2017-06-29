@@ -19,7 +19,7 @@ public class AirlineTable implements DataAccess<Airline> {
     public AirlineTable() {
     }
 
-    public void initialize() {
+    public void initialize(String dbPath) {
         if (airlines == null) {
             airlines = new ArrayList<Airline>();
             airlines.add(new Airline("WestJet"));
@@ -42,4 +42,9 @@ public class AirlineTable implements DataAccess<Airline> {
 
         return result;
     }
+    public void close()
+    {
+        System.out.println("Closed  database " );
+    }
+
 }

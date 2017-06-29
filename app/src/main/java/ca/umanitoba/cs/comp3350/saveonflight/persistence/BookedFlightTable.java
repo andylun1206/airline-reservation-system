@@ -20,17 +20,17 @@ public class BookedFlightTable implements BookedFlightAccess {
     public BookedFlightTable() {
     }
 
-    public void initialize() {
+    public void initialize(String dbPath) {
         if (bookedFlights == null) {
             bookedFlights = new ArrayList<BookedFlight>();
 
             if (TravellerTable.getTravellers() == null) {
-                new TravellerTable().initialize();
+                new TravellerTable().initialize("");
             }
             ArrayList<Traveller> travellers = TravellerTable.getTravellers();
 
             if (FlightTable.getFlights() == null) {
-                new FlightTable().initialize();
+                new FlightTable().initialize("");
             }
             ArrayList<Flight> flights = FlightTable.getFlights();
             bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(0)));
@@ -91,4 +91,9 @@ public class BookedFlightTable implements BookedFlightAccess {
         }
         return matches;
     }
+    public void close()
+    {
+        System.out.println("Closed  database " );
+    }
+
 }

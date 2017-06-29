@@ -3,6 +3,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.business;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
@@ -24,7 +25,7 @@ public class AccessBookedFlightsImpl implements AccessBookedFlights {
     public AccessBookedFlightsImpl() {
         if (bookedFlightsDB == null) {
             bookedFlightsDB = new BookedFlightTable();
-            bookedFlightsDB.initialize();
+            bookedFlightsDB.initialize(Main.getDBPathName());
         }
     }
 

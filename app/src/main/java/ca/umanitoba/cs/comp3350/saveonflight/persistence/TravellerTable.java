@@ -20,7 +20,7 @@ public class TravellerTable implements TravellerAccess {
     public TravellerTable() {
     }
 
-    public void initialize() {
+    public void initialize(String dbPath) {
         if (travellers == null) {
             travellers = new ArrayList<Traveller>();
             travellers.add(new Traveller(0, "Jack"));
@@ -48,4 +48,9 @@ public class TravellerTable implements TravellerAccess {
         }
         return result;
     }
+    public void close()
+    {
+        System.out.println("Closed  database " );
+    }
+
 }

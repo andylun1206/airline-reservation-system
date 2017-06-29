@@ -7,12 +7,13 @@ import ca.umanitoba.cs.comp3350.saveonflight.business.AccessAirportsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessTravellersImpl;
-
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
 /**
  * Created by Kenny on 2017-06-23.
  */
 
 public class Services {
+    private static DataAccess dataAccessService = null;
 
     public static void openDatabase() {
         new AccessAirlinesImpl();
@@ -21,4 +22,24 @@ public class Services {
         new AccessTravellersImpl();
         new AccessBookedFlightsImpl();
     }
+    public static DataAccess createFlightAccess(String dbName)
+    {
+        if (dataAccessService == null)
+        {
+            //dataAccessService = new FlightTableSql();
+            dataAccessService.initialize(Main.getDBPathName());
+            //(Main.getDBPathName());
+        }
+        return dataAccessService;
+    }
+
+    public static void closeFlightAccess()
+    {
+        if (dataAccessService != null)
+        {
+            dataAccessService.close();
+        }
+        dataAccessService = null;
+    }
+
 }

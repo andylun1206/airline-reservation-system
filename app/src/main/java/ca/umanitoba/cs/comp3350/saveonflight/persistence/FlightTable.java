@@ -28,17 +28,17 @@ public class FlightTable implements FlightAccess {
     public FlightTable() {
     }
 
-    public void initialize() {
+    public void initialize(String dbPath) {
         if (flights == null) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CANADA);
             flights = new ArrayList<Flight>();
 
             if (AirlineTable.getAirlines() == null) {
-                new AirlineTable().initialize();
+                new AirlineTable().initialize("");
             }
 
             if (AirportTable.getAirports() == null) {
-                new AirportTable().initialize();
+                new AirportTable().initialize("");
             }
 
             try {
@@ -260,6 +260,10 @@ public class FlightTable implements FlightAccess {
             }
         }
         return table;
+    }
+    public void close()
+    {
+        System.out.println("Closed  database " );
     }
 
 }
