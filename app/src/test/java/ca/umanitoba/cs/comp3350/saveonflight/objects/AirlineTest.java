@@ -1,19 +1,11 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
-import android.os.Parcel;
-
+import ca.umanitoba.cs.comp3350.saveonflight.R;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ca.umanitoba.cs.comp3350.saveonflight.R;
-
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static junit.framework.Assert.*;
 
 public class AirlineTest {
     private final String AC = "Air Canada";
@@ -66,17 +58,5 @@ public class AirlineTest {
         assertTrue(airline2.compareTo(AIRLINE) > 0);
         assertTrue(AIRLINE.compareTo(wrongObject) == 0);
         assertTrue(AIRLINE.compareTo(null) == 0);
-    }
-
-    @Test
-    public void testParcelable() {
-        Parcel parcel = mock(Parcel.class);
-        when(parcel.readString()).thenReturn(AIRLINE.getName());
-        assertNotNull(parcel);
-        AIRLINE.writeToParcel(parcel, 0);
-        parcel.setDataPosition(0);
-        Airline parceledAirline = (Airline) Airline.CREATOR.createFromParcel(parcel);
-        assertEquals(parceledAirline, AIRLINE);
-        parcel.recycle();
     }
 }
