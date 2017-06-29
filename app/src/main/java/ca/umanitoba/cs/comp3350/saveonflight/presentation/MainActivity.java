@@ -46,10 +46,10 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
         super.onCreate(savedInstanceState);
 
-        //copyDatabaseToDevice();
-       // Main.startUp();
+        copyDatabaseToDevice();
+        Main.startUp();
 
-        Services.openDatabase();
+        //Services.openDatabase();
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

@@ -107,7 +107,7 @@ public class SearchFragment extends ListFragment {
             public void onClick(View view) {
                 if (SearchCriteriaHandler.validate(getActivity(), SearchCriteriaArrayAdapter.getCriteria())) {
                     //ArrayList<Flight> flightList = new AccessFlightsImpl().search(SearchCriteriaArrayAdapter.getCriteria());
-                    ArrayList<Flight> flightList = new AccessFlightsImpl().search(SearchCriteriaArrayAdapter.getCriteria());
+                    ArrayList<Flight> flightList = new AccessFlightsImpl().getFlights();
                     if (flightList != null && !flightList.isEmpty()) {
                         FragmentNavigation.viewFlights();
                     } else {

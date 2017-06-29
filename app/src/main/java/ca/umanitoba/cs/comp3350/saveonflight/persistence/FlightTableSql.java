@@ -85,6 +85,30 @@ public class FlightTableSql implements FlightAccess {
         return flights;
     }
 
+    public Flight findByFlightCode(String flightCode) {
+        Flight flight = null;
+        String values, flightId, departureTime;
+        ;
+        int id;
+        result = null;
+        try {
+            cmdString = "Select * from Flight where FLIGHTID = '" + flightCode + "'";
+            updateCount = st1.executeUpdate(cmdString);
+            result = checkWarning(st1, updateCount);
+        } catch (Exception e) {
+            result = processSQLError(e);
+        }
+        try {
+            while (rs8.next()) {
+                flight = creatFlightFromResultSet(rs1);
+            }
+            rs8.close();
+        } catch (Exception e) {
+            result = processSQLError(e);
+        }
+        return flight;
+    }
+
     private Flight creatFlightFromResultSet(ResultSet rs) throws SQLException, ParseException {
         Flight flight;
         String flightID, departureDate, arrivalDate, airline, origin, destination;

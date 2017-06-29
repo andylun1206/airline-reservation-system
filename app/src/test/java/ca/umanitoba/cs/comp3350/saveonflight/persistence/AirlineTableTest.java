@@ -25,7 +25,7 @@ public class AirlineTableTest {
     @BeforeClass
     public static void setUp() {
         airlineTable = new AirlineTable();
-        airlineTable.initialize();
+        airlineTable.initialize("");
         original = AirlineTable.getAirlines();
     }
 

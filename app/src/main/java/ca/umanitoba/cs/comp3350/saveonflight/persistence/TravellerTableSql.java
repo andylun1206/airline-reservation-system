@@ -8,15 +8,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
-
-/**
+ /**
  * Created by zhengyugu on 2017-06-28.
  */
 
 public class TravellerTableSql implements DataAccess<Traveller> {
     private Statement st1;
     private Connection c1;
-    private ResultSet rs1,rs2;
+    private ResultSet rs1,rs2,rs3;
     private String cmdString;
     private int updateCount;
     private String result;
@@ -69,16 +68,20 @@ public class TravellerTableSql implements DataAccess<Traveller> {
     }
     public boolean add(Traveller traveller) {
         String values;
-
+        Boolean results = false;
         result = null;
-        try{
+        try {
             values = traveller.getTravellerID()
-            +",'" + traveller.getName()+"'";
-        }catch (Exception e)
-        {
+                    + ",'" + traveller.getName() + "'";
+            cmdString = "Insert into Traveller " + " Values(" + values + ")";
+            updateCount = st1.executeUpdate(cmdString);
+            result = checkWarning(st1, updateCount);
+            results = true;
+
+        } catch (Exception e) {
             result = processSQLError(e);
         }
-        return false;
+        return results;
     }
     public boolean update(Traveller traveller) {
 
