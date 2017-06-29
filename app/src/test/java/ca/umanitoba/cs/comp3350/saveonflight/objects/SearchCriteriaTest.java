@@ -80,7 +80,7 @@ public class SearchCriteriaTest {
         assertTrue(DEPARTURE_DATE.equals(searchCriteriaTest1.getDepartureDate()));
         assertTrue(NUM_TRAVELLERS == searchCriteriaTest1.getNumTravellers());
         assertTrue(MAX == searchCriteriaTest1.getMaxPrice());
-        assertTrue(AIRLINE.equals(searchCriteriaTest1.getPreferredAirlines()));
+        assertTrue(AIRLINE.equals(searchCriteriaTest1.getPreferredAirline()));
         assertTrue(PREFERRED_CLASS.equals(searchCriteriaTest1.getPreferredClass()));
         assertTrue(searchCriteriaTest1.isNonstop());
         assertTrue(searchCriteriaTest1.isRefundable());
@@ -93,7 +93,7 @@ public class SearchCriteriaTest {
         assertNull(searchCriteriaTest2.getOrigin());
         assertNull(searchCriteriaTest2.getDestination());
         assertNull(searchCriteriaTest2.getDepartureDate());
-        assertNull(searchCriteriaTest2.getPreferredAirlines());
+        assertNull(searchCriteriaTest2.getPreferredAirline());
         assertNull(searchCriteriaTest2.getPreferredClass());
         assertFalse(searchCriteriaTest2.isNonstop());
         assertFalse(searchCriteriaTest2.isRefundable());

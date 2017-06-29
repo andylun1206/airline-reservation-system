@@ -81,7 +81,7 @@ public class SearchCriteria {
         this.maxPrice = maxPrice;
     }
 
-    public Airline getPreferredAirlines() {
+    public Airline getPreferredAirline() {
         return preferredAirlines;
     }
 
