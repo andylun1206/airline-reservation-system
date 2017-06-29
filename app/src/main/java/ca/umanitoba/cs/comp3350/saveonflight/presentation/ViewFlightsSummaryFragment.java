@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlights;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 
 import java.text.DateFormat;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
  */
 
 public class ViewFlightsSummaryFragment extends Fragment implements View.OnClickListener {
-    private ArrayList<Flight> flights;
+    private ArrayList<String> flights;
     private Flight depFlight;
     private Flight retFlight;
     private static DateFormat DATE = new SimpleDateFormat("MM/dd/yyy HH:mm");
@@ -34,8 +36,9 @@ public class ViewFlightsSummaryFragment extends Fragment implements View.OnClick
             container.removeAllViews();
         }
         View view = inflater.inflate(R.layout.fragment_trip_summary, container, false);
-        flights = getArguments().getParcelableArrayList("chosen_flights");
-        depFlight = flights.get(0);
+        flights = getArguments().getStringArrayList("chosen_flights");
+        AccessFlightsImpl flightAccess = new AccessFlightsImpl();
+        depFlight = flightAccess.getFlightByCode(flights.get(0));
 
         total = depFlight.getPrice();
 
@@ -49,7 +52,7 @@ public class ViewFlightsSummaryFragment extends Fragment implements View.OnClick
         ((TextView) view.findViewById(R.id.trip_summary_depDuration)).setText(depFlight.getFlightDuration());
         ((ImageView) view.findViewById(R.id.imageview_tripSummary1)).setImageResource(depFlight.getAirline().getIcon());
         if (flights.size() == 2) {
-            retFlight = flights.get(1);
+            retFlight = flightAccess.getFlightByCode(flights.get(1));
             total = depFlight.getPrice() + retFlight.getPrice();
             //return flight
             ((TextView) view.findViewById(R.id.retPrice)).setText(String.format("$%.2f", retFlight.getPrice()));

@@ -141,6 +141,18 @@ public class FlightTable implements FlightAccess {
         }
     }
 
+    public Flight findByFlightCode(String flightCode) {
+        Flight flight = null;
+
+        for (Flight f : flights) {
+            if (f.getFlightID().equalsIgnoreCase(flightCode)) {
+                flight = f;
+            }
+        }
+
+        return flight;
+    }
+
     public static ArrayList<Flight> getFlights() {
         return flights;
     }

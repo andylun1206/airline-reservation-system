@@ -32,7 +32,7 @@ public class ViewFlightsFragment extends ListFragment {
     private static ArrayList<ViewFlightsListViewEntry> flightList;
     private static ArrayList<Flight> flights;
     private static SearchCriteria searchCriteria;
-    private static ArrayList<Flight> chosenFlights = new ArrayList<>();
+    private static ArrayList<String> chosenFlights = new ArrayList<>();
 
     private static String title;
 
@@ -114,7 +114,7 @@ public class ViewFlightsFragment extends ListFragment {
     public static void addChosenFlight(String flightId) {
         for (Flight flight : flights) {
             if (flight.getFlightID().equals(flightId)) {
-                chosenFlights.add(flight);
+                chosenFlights.add(flight.getFlightID());
             }
         }
     }

@@ -56,9 +56,9 @@ public class FragmentNavigation {
     /**
      * Switch context to flight summary fragment
      */
-    public static void flightSummary(ArrayList<Flight> flights) {
+    public static void flightSummary(ArrayList<String> flights) {
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("chosen_flights", flights);
+        bundle.putStringArrayList("chosen_flights", flights);
 
         Fragment viewFlights = new ViewFlightsSummaryFragment();
         viewFlights.setArguments(bundle);
@@ -70,9 +70,9 @@ public class FragmentNavigation {
     /**
      * Switch context to payment fragment
      */
-    public static void viewPayment(ArrayList<Flight> flights) {
+    public static void viewPayment(ArrayList<String> flights) {
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("flights_to_book", flights);
+        bundle.putStringArrayList("flights_to_book", flights);
 
         Fragment payment = new PaymentFragment();
         payment.setArguments(bundle);

@@ -8,15 +8,12 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
  * @author Andy Lun
  */
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-public class Flight implements Parcelable {
+public class Flight {
     public static SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy, MM, dd, HH, mm", Locale.CANADA);
     private String flightID;
     private Airline airline;
@@ -190,50 +187,6 @@ public class Flight implements Parcelable {
     public String getFlightTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.CANADA);
         return sdf.format(departureTime) + " - " + sdf.format(arrivalTime);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        @Override
-        public Flight[] newArray(int size) {
-            return new Flight[size];
-        }
-
-        @Override
-        public Flight createFromParcel(Parcel in) {
-            return new Flight(in);
-        }
-    };
-
-    @Override
-    public void writeToParcel(Parcel parcel, int flags) {
-        parcel.writeString(flightID);
-        parcel.writeParcelable(airline, flags);
-        parcel.writeSerializable(departureTime);
-        parcel.writeSerializable(arrivalTime);
-        parcel.writeParcelable(origin, flags);
-        parcel.writeParcelable(destination, flags);
-        parcel.writeDouble(price);
-        parcel.writeInt(capacity);
-        parcel.writeInt(seatsTaken);
-        parcel.writeSerializable(flightClass);
-    }
-
-    public Flight(Parcel in) {
-        flightID = in.readString();
-        airline = in.readParcelable(Airline.class.getClassLoader());
-        departureTime = (Date) in.readSerializable();
-        arrivalTime = (Date) in.readSerializable();
-        origin = in.readParcelable(Airport.class.getClassLoader());
-        destination = in.readParcelable(Airport.class.getClassLoader());
-        price = in.readDouble();
-        capacity = in.readInt();
-        seatsTaken = in.readInt();
-        flightClass = (FlightClassEnum) in.readSerializable();
     }
 
     public static final class FlightBuilder {
