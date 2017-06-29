@@ -6,6 +6,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
+
 /**
  * BookedFlightTable.java
  * <p>
@@ -28,11 +29,12 @@ public class BookedFlightTable implements BookedFlightAccess {
                 new TravellerTable().initialize("");
             }
             ArrayList<Traveller> travellers = TravellerTable.getTravellers();
-
-            if (FlightTable.getFlights() == null) {
+            FlightTable flightTable=new FlightTable();
+            ArrayList<Flight> flights=flightTable.getFlights();
+            if (flights == null) {
                 new FlightTable().initialize("");
             }
-            ArrayList<Flight> flights = FlightTable.getFlights();
+            flights = flightTable.getFlights();
             bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(0)));
             bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(1)));
             bookedFlights.add(new BookedFlight(travellers.get(1), flights.get(2)));

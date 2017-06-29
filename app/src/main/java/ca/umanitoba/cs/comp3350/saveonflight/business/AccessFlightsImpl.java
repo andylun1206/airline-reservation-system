@@ -30,7 +30,7 @@ public class AccessFlightsImpl implements AccessFlights {
 
     @Override
     public ArrayList<Flight> getFlights() {
-        return FlightTable.getFlights();
+        return flightsDB.getFlights();
     }
 
     @Override

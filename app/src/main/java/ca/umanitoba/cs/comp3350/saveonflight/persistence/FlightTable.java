@@ -153,7 +153,7 @@ public class FlightTable implements FlightAccess {
         return flight;
     }
 
-    public static ArrayList<Flight> getFlights() {
+    public ArrayList<Flight> getFlights() {
         return flights;
     }
 
