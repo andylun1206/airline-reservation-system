@@ -148,10 +148,6 @@ public class Flight {
         this.arrivalTime = arrivalTime;
     }
 
-    public String toString() {
-        return "Flight: " + flightID + " " + departureTime + " " + arrivalTime + " " + airline + " " + "from " + origin + " to " + destination;
-    }
-
     public boolean equals(Object object) {
         boolean result = false;
 

@@ -35,10 +35,6 @@ public class Airline implements Parcelable, Comparable  {
 
     public void setIcon(int icon) { this.icon = icon; }
 
-    public String toString() {
-        return "Airline: " + name;
-    }
-
     public boolean equals(Object object) {
         boolean result = false;
 

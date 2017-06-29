@@ -26,10 +26,6 @@ public class Airport implements Parcelable {
         this.airportCode = airportCode;
     }
 
-    public String toString() {
-        return airportCode;
-    }
-
     public boolean equals(Object object) {
         boolean result = false;
 
