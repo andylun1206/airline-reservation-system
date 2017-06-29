@@ -36,22 +36,6 @@ public class AccessFlightsImpl implements AccessFlights {
     }
 
     @Override
-    public boolean insertFlight(Flight flight) {
-        return flightsDB.add(flight);
-    }
-
-    @Override
-    public boolean updateFlight(Flight flight) {
-        return flightsDB.update(flight);
-
-    }
-
-    @Override
-    public boolean deleteFlight(Flight flight) {
-        return flightsDB.remove(flight);
-    }
-
-    @Override
     public ArrayList<Flight> search(SearchCriteria searchCriteria) {
         return flightsDB.findBySearchCriteria(searchCriteria);
     }

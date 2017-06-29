@@ -33,14 +33,4 @@ public class AccessTravellersImpl implements AccessTravellers {
     public boolean insertTraveller(Traveller traveller) {
         return travellerDB.add(traveller);
     }
-
-    @Override
-    public boolean updateTraveller(Traveller traveller) {
-        return travellerDB.update(traveller);
-    }
-
-    @Override
-    public boolean deleteTraveller(Traveller traveller) {
-        return travellerDB.remove(traveller);
-    }
 }

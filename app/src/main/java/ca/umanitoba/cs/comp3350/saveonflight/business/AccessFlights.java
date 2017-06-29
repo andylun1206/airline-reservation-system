@@ -18,11 +18,5 @@ public interface AccessFlights {
 
     Flight getFlightByCode(String flightCode);
 
-    boolean insertFlight(Flight flight);
-
-    boolean updateFlight(Flight flight);
-
-    boolean deleteFlight(Flight flight);
-
     ArrayList<Flight> search(SearchCriteria searchCriteria);
 }
