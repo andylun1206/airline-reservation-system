@@ -62,8 +62,6 @@ public class SearchCriteriaTest {
         searchCriteriaTest2.setPreferredClass(null);
         searchCriteriaTest2.setRefundable(false);
         searchCriteriaTest2.setNonstop(false);
-
-        searchCriteriaTest3 = null;
     }
 
     @After
@@ -100,8 +98,11 @@ public class SearchCriteriaTest {
     }
 
     @Test
-    public void testNullData() {
-        assertNull(searchCriteriaTest3);
+    public void testReturnTrip() {
+        searchCriteria.setReturnTrip(true);
+        assertTrue(searchCriteria.isReturnTrip());
+        searchCriteria.setReturnTrip(false);
+        assertFalse(searchCriteria.isReturnTrip());
     }
 
 }
