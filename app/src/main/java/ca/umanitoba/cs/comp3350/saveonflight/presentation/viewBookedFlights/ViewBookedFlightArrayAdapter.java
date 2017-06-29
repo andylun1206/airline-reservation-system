@@ -1,4 +1,4 @@
-package ca.umanitoba.cs.comp3350.saveonflight.presentation;
+package ca.umanitoba.cs.comp3350.saveonflight.presentation.viewBookedFlights;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;

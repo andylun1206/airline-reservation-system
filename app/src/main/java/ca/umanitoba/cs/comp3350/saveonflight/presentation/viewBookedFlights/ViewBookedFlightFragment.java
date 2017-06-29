@@ -1,4 +1,4 @@
-package ca.umanitoba.cs.comp3350.saveonflight.presentation;
+package ca.umanitoba.cs.comp3350.saveonflight.presentation.viewBookedFlights;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
