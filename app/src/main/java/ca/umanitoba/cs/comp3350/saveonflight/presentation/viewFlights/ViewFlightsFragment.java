@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
-import ca.umanitoba.cs.comp3350.saveonflight.business.SearchCriteriaHandler;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchCriteriaHandler;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;

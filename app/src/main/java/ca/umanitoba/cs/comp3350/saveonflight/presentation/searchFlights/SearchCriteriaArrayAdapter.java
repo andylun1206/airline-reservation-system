@@ -8,7 +8,6 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights;
  * @author Andy Lun
  */
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
@@ -20,19 +19,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
-
-import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.business.SearchCriteriaHandler;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
-import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
 
 public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListViewEntry> implements OnDateSetListener {
     private final Context context;
@@ -215,38 +211,6 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
      */
     public static void setCriteria(SearchCriteria newCriteria) {
         criteria = newCriteria;
-    }
-
-    /**
-     * Verifies that the set of criterias match the set requirements
-     * @param activity current activity
-     * @return True if the requirements are met, else false
-     */
-    public boolean verifyCriteria(Activity activity) {
-        boolean isValid = true;
-
-        if (criteria.getOrigin() == null || criteria.getOrigin().toString().trim().isEmpty()) {
-            isValid = missingRequiredField(activity, R.string.search_origin);
-        } else if (criteria.getDestination() == null || criteria.getDestination().toString().trim().isEmpty()) {
-            isValid = missingRequiredField(activity, R.string.search_destination);
-        } else if (criteria.getDepartureDate() == null || criteria.getDepartureDate().toString().trim().isEmpty()) {
-            isValid = missingRequiredField(activity, R.string.search_departure_date);
-        } else if (criteria.getNumTravellers() == 0) {
-            isValid = missingRequiredField(activity, R.string.search_num_passengers);
-        }
-
-        return isValid;
-    }
-
-    /**
-     * Generates a toast message to notify the user that a field is mandatory
-     * @param activity current activity
-     * @param field field name
-     * @return false
-     */
-    private boolean missingRequiredField(Activity activity, int field) {
-        ToastHandler.toastMandatoryField(activity, activity.getString(field));
-        return false;
     }
 
     /**
