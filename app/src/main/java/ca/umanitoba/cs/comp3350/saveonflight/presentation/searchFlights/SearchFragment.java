@@ -1,4 +1,4 @@
-package ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlight;
+package ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights;
 
 /**
  * SearchFragment.java

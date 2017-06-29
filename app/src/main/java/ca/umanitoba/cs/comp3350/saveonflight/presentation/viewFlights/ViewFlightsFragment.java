@@ -22,7 +22,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
-import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlight.SearchCriteriaArrayAdapter;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchCriteriaArrayAdapter;
 
 import java.util.ArrayList;
 

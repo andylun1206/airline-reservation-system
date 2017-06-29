@@ -16,7 +16,7 @@ import android.support.v4.app.FragmentManager;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.flightSummary.ViewFlightsSummaryFragment;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.payment.PaymentFragment;
-import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlight.SearchFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchFragment;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewBookedFlights.ViewBookedFlightFragment;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights.ViewFlightsFragment;
 
