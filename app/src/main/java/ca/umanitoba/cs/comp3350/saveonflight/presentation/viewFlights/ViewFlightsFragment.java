@@ -102,7 +102,7 @@ public class ViewFlightsFragment extends ListFragment {
         flightList.clear();
 
         for (Flight f : flights) {
-            flightList.add(new ViewFlightsListViewEntry(f.getFlightTime(), f.getPrice(), f.getAirline().getIcon(), f.getFlightID(), f.getFlightDuration()));
+            flightList.add(new ViewFlightsListViewEntry(f.getFlightTime(), f.getPrice(), f.getAirline().getIcon(), f.getFlightCode(), f.getFlightDuration()));
         }
 
         flightAdapter.notifyDataSetChanged();
@@ -115,8 +115,8 @@ public class ViewFlightsFragment extends ListFragment {
 
     public static void addChosenFlight(String flightId) {
         for (Flight flight : flights) {
-            if (flight.getFlightID().equals(flightId)) {
-                chosenFlights.add(flight.getFlightID());
+            if (flight.getFlightCode().equals(flightId)) {
+                chosenFlights.add(flight.getFlightCode());
             }
         }
     }

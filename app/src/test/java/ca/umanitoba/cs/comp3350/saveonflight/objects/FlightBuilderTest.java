@@ -32,9 +32,9 @@ public class FlightBuilderTest {
 
     @Test
     public void testSetFlightId() {
-        assertEquals(FLIGHT_ID, builder.build().getFlightID());
+        assertEquals(FLIGHT_ID, builder.build().getFlightCode());
         Flight f = builder.setFlightId("ABC").build();
-        assertEquals("ABC", f.getFlightID());
+        assertEquals("ABC", f.getFlightCode());
     }
 
     @Test
@@ -103,7 +103,7 @@ public class FlightBuilderTest {
     @Test
     public void testBuild() {
         Flight f = builder.build();
-        assertEquals(FLIGHT_ID, f.getFlightID());
+        assertEquals(FLIGHT_ID, f.getFlightCode());
         assertEquals(ORIGIN, f.getOrigin());
         assertEquals(DEST, f.getDestination());
         assertSame(null, f.getAirline());

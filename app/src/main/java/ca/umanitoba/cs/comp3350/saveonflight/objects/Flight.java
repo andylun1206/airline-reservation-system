@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Flight {
     public static SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy, MM, dd, HH, mm", Locale.CANADA);
-    private String flightID;
+    private String flightCode;
     private Airline airline;
     private Date departureTime;
     private Date arrivalTime;
@@ -26,10 +26,10 @@ public class Flight {
     private int seatsTaken;
     private FlightClassEnum flightClass;
 
-    private Flight(String flightID, Date departureTime, Date arrivalTime,
+    private Flight(String flightCode, Date departureTime, Date arrivalTime,
                    Airline airline, Airport origin, Airport destination,
                    double price, int capacity, int seatsTaken, FlightClassEnum flightClass) {
-        this.flightID = flightID;
+        this.flightCode = flightCode;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
         this.airline = airline;
@@ -60,8 +60,8 @@ public class Flight {
         return result;
     }
 
-    public void setFlightID(String flightID) {
-        this.flightID = flightID;
+    public void setFlightCode(String flightCode) {
+        this.flightCode = flightCode;
     }
 
     public Airline getAirline() {
@@ -128,8 +128,8 @@ public class Flight {
         this.flightClass = flightClass;
     }
 
-    public String getFlightID() {
-        return flightID;
+    public String getFlightCode() {
+        return flightCode;
     }
 
     public Date getDepartureTime() {
@@ -153,7 +153,7 @@ public class Flight {
 
         if (object instanceof Flight) {
             Flight other = (Flight) object;
-            if (other.flightID.equals(flightID)) {
+            if (other.flightCode.equals(flightCode)) {
                 result = true;
             }
         }

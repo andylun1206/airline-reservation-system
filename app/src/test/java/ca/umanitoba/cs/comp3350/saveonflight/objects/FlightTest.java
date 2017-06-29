@@ -107,7 +107,7 @@ public class FlightTest {
         assertFalse(flight.equals(FLIGHT_ID));    // Not same class
         assertFalse(otherFlight.equals(flight));  // Same class, but not same Flight
 
-        otherFlight.setFlightID(FLIGHT_ID);
+        otherFlight.setFlightCode(FLIGHT_ID);
         assertEquals(otherFlight, flight);        // Same Flight
     }
 
@@ -115,10 +115,10 @@ public class FlightTest {
     @Test
     public void testFlightId() {
         final String NEW_ID = "ABCDEFG";
-        assertEquals(FLIGHT_ID, flight.getFlightID());
-        assertFalse(flight.getFlightID().equals(NEW_ID));
-        flight.setFlightID(NEW_ID);
-        assertEquals(NEW_ID, flight.getFlightID());
+        assertEquals(FLIGHT_ID, flight.getFlightCode());
+        assertFalse(flight.getFlightCode().equals(NEW_ID));
+        flight.setFlightCode(NEW_ID);
+        assertEquals(NEW_ID, flight.getFlightCode());
     }
 
     @Test

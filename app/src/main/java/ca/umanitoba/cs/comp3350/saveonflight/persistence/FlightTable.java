@@ -145,7 +145,7 @@ public class FlightTable implements FlightAccess {
         Flight flight = null;
 
         for (Flight f : flights) {
-            if (f.getFlightID().equalsIgnoreCase(flightCode)) {
+            if (f.getFlightCode().equalsIgnoreCase(flightCode)) {
                 flight = f;
             }
         }
@@ -159,7 +159,7 @@ public class FlightTable implements FlightAccess {
 
     public boolean add(Flight flight) {
         boolean result = true;
-        if (flight != null && (!flight.getFlightID().isEmpty() && !flight.getDepartureTime().equals(null))) {
+        if (flight != null && (!flight.getFlightCode().isEmpty() && !flight.getDepartureTime().equals(null))) {
 
             for (Flight flight1 : flights) {
                 if (flight.equals(flight1))
@@ -177,13 +177,13 @@ public class FlightTable implements FlightAccess {
         boolean isUpdated = false;
         if (flight != null) {
             Date departureTime = flight.getDepartureTime();
-            String flightId = flight.getFlightID();
+            String flightId = flight.getFlightCode();
             int changes = 0;
             int index = 0;
             Flight temp;
             for (int i = 0; i < flights.size(); i++) {
                 temp = flights.get(i);
-                if (temp.getDepartureTime().equals(departureTime) && temp.getFlightID().equals(flightId)) {
+                if (temp.getDepartureTime().equals(departureTime) && temp.getFlightCode().equals(flightId)) {
                     changes++;
                     index = i;
                 }
