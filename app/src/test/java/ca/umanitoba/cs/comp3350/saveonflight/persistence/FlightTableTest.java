@@ -10,11 +10,15 @@ import org.junit.Test;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -23,15 +27,13 @@ import static junit.framework.Assert.assertTrue;
 
 public class FlightTableTest {
     private static ArrayList<Flight> original;
-
-    private static FlightTable flightTable;
+    private static FlightAccess flightTable;
 
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CANADA);
     private static Flight emptyNameCase;
     private static Flight validCase;
 
     private static Flight.FlightBuilder builder;
-
 
     @BeforeClass
     public static void setUp() {
@@ -54,11 +56,6 @@ public class FlightTableTest {
                     .setCapacity(200)
                     .build();
             validCase = builder.setFlightId("WJ 009").build();
-
-            //emptyNameCase = new Flight("", sdf.parse("2017-11-11 05:30"), sdf.parse("2017-11-11 08:51"), AirlineTable.findAirline("westjet"), AirportTable.findAirport("YYZ"),
-             //       AirportTable.findAirport("YWG"), 350.52, 200);
-            //validCase = new Flight("WJ 009", sdf.parse("2017-11-11 05:30"), sdf.parse("2017-11-11 08:51"), AirlineTable.findAirline("westjet"), AirportTable.findAirport("YYZ"),
-             //       AirportTable.findAirport("YWG"), 350.52, 200);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -132,13 +129,37 @@ public class FlightTableTest {
     @Test
     public void testUpdateValid() throws Exception {
         flightTable.add(validCase);
-
         Flight update = builder.setPrice(575.21).setCapacity(500).build();
-
-                //new Flight("WJ 009", sdf.parse("2017-11-11 05:30"), sdf.parse("2017-11-11 08:51"), AirlineTable.findAirline("westjet"), AirportTable.findAirport("YYZ"),
-                //AirportTable.findAirport("YWG"), 575.21, 500);
         assertTrue("should update a EmptyName object", flightTable.update(update));
-
         flightTable.remove(update);
+    }
+
+    @Test
+    public void testSearchBySearchCriteria() {
+        SearchCriteria searchCriteria = new SearchCriteria();
+        Airport ywg = new Airport("Winnipeg YWG");
+        Airport yyz = new Airport("Toronto YYZ");
+        searchCriteria.setOrigin(ywg);
+        searchCriteria.setDestination(yyz);
+
+        Calendar cal = new GregorianCalendar();
+        cal.set(2017, 11, 11);
+        Date departureDate = cal.getTime();
+        searchCriteria.setDepartureDate(departureDate);
+
+        cal.set(2017, 12, 11);
+        Date returnDate = cal.getTime();
+        searchCriteria.setReturnDate(returnDate);
+
+        searchCriteria.setNumTravellers(1);
+        ArrayList<Flight> flights = flightTable.findBySearchCriteria(searchCriteria);
+
+        assertNotNull(flights);
+        for (Flight f : flights) {
+            assertEquals(ywg, f.getOrigin());
+            assertEquals(yyz, f.getDestination());
+            assertEquals(departureDate, f.getDepartureTime());
+            assertTrue(f.getSeatsRemaining() >= 1);
+        }
     }
 }
