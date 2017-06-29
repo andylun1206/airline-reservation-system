@@ -103,7 +103,7 @@ public class ViewFlightsFragment extends ListFragment {
         flightList.clear();
 
         for (Flight f : flights) {
-            flightList.add(new ViewFlightsListViewEntry(f.getFlightTime(), f.getPrice(), f.getAirline().getIcon(), f.getFlightCode(), f.getFlightDuration()));
+            flightList.add(new ViewFlightsListViewEntry(f.getFlightTime(), f.getPrice(), f.getAirline(), f.getFlightCode(), f.getFlightDuration()));
         }
 
         flightAdapter.notifyDataSetChanged();

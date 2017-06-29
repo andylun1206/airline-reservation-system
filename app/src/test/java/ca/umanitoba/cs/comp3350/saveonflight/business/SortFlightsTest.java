@@ -62,11 +62,11 @@ public class SortFlightsTest {
             e.printStackTrace();
         }
 
-        Airline airCanada = new Airline("Air Canada", R.mipmap.ic_aircanada);
-        Airline fake = new Airline("Fake", R.mipmap.ic_launcher);
-        Airline fake2 = new Airline("Fake2", R.mipmap.ic_launcher);
-        Airline gordAirlines = new Airline("Gord Airlines", R.mipmap.ic_launcher);
-        Airline westJet = new Airline("WestJet", R.mipmap.ic_westjet);
+        Airline airCanada = new Airline("Air Canada");
+        Airline fake = new Airline("Fake");
+        Airline fake2 = new Airline("Fake2");
+        Airline gordAirlines = new Airline("Gord Airlines");
+        Airline westJet = new Airline("WestJet");
 
         Airport ywg = new Airport("YWG");
         Airport yvr = new Airport("YVR");

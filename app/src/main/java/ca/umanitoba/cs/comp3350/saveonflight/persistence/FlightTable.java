@@ -157,63 +157,6 @@ public class FlightTable implements FlightAccess {
         return flights;
     }
 
-    public boolean add(Flight flight) {
-        boolean result = true;
-        if (flight != null && (!flight.getFlightCode().isEmpty() && !flight.getDepartureTime().equals(null))) {
-
-            for (Flight flight1 : flights) {
-                if (flight.equals(flight1))
-                    result = false;
-            }
-            if (result)
-                result = flights.add(flight);
-        } else {
-            result = false;
-        }
-        return result;
-    }
-
-    public boolean update(Flight flight) {
-        boolean isUpdated = false;
-        if (flight != null) {
-            Date departureTime = flight.getDepartureTime();
-            String flightId = flight.getFlightCode();
-            int changes = 0;
-            int index = 0;
-            Flight temp;
-            for (int i = 0; i < flights.size(); i++) {
-                temp = flights.get(i);
-                if (temp.getDepartureTime().equals(departureTime) && temp.getFlightCode().equals(flightId)) {
-                    changes++;
-                    index = i;
-                }
-            }
-            if (changes != 0) {
-                isUpdated = true;
-                flights.get(index).setAirline(flight.getAirline());
-                flights.get(index).setArrivalTime(flight.getArrivalTime());
-                flights.get(index).setOrigin(flight.getOrigin());
-                flights.get(index).setDestination(flight.getDestination());
-                flights.get(index).setPrice(flight.getPrice());
-                flights.get(index).setCapacity(flight.getCapacity());
-                flights.get(index).setSeatsTaken(flight.getSeatsTaken());
-                flights.get(index).setFlightClass(flight.getFlightClass());
-            }
-        }
-        return isUpdated;
-    }
-
-    public boolean remove(Flight flight) {
-        boolean result = false;
-        int index;
-        index = flights.indexOf(flight);
-        if (index >= 0) {
-            flights.remove(index);
-            result = true;
-        }
-        return result;
-    }
-
     public ArrayList<Flight> findBySearchCriteria(SearchCriteria criteria) {
         ArrayList<Flight> table;
         table = createTableByOriginAndDestination(new ArrayList<Flight>(), criteria.getOrigin(), criteria.getDestination());

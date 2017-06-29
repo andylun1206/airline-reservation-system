@@ -1,5 +1,7 @@
 package ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights;
 
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
+
 /**
  * ViewFlightsListViewEntry.java
  * <p>
@@ -11,11 +13,11 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights;
 public class ViewFlightsListViewEntry {
     private String time;
     private double price;
-    private int airline;
+    private Airline airline;
     private String flightId;
     private String duration;
 
-    public ViewFlightsListViewEntry(String time, double price, int airline, String flightId, String duration) {
+    public ViewFlightsListViewEntry(String time, double price, Airline airline, String flightId, String duration) {
         this.time = time;
         this.price = price;
         this.airline = airline;
@@ -31,11 +33,11 @@ public class ViewFlightsListViewEntry {
         return price;
     }
 
-    public int getAirline() {
+    public Airline getAirline() {
         return airline;
     }
 
-    public void setAirline(int airline) {
+    public void setAirline(Airline airline) {
         this.airline = airline;
     }
 

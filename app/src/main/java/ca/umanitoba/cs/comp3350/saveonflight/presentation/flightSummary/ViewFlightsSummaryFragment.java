@@ -12,6 +12,7 @@ import android.widget.TextView;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.AirlinePresentationUtils;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
 
 import java.text.DateFormat;
@@ -50,7 +51,7 @@ public class ViewFlightsSummaryFragment extends Fragment implements View.OnClick
         ((TextView) view.findViewById(R.id.trip_summary_dateDep1)).setText(DATE.format(depFlight.getDepartureTime()));
         ((TextView) view.findViewById(R.id.trip_summary_dateArrive1)).setText(DATE.format(depFlight.getArrivalTime()));
         ((TextView) view.findViewById(R.id.trip_summary_depDuration)).setText(depFlight.getFlightDuration());
-        ((ImageView) view.findViewById(R.id.imageview_tripSummary1)).setImageResource(depFlight.getAirline().getIcon());
+        ((ImageView) view.findViewById(R.id.imageview_tripSummary1)).setImageResource(AirlinePresentationUtils.getUiIconCode(depFlight.getAirline()));
         if (flights.size() == 2) {
             retFlight = flightAccess.getFlightByCode(flights.get(1));
             total = depFlight.getPrice() + retFlight.getPrice();
@@ -61,7 +62,7 @@ public class ViewFlightsSummaryFragment extends Fragment implements View.OnClick
             ((TextView) view.findViewById(R.id.trip_summary_dateDep2)).setText(DATE.format(retFlight.getDepartureTime()));
             ((TextView) view.findViewById(R.id.trip_summary_dateArrive2)).setText(DATE.format(retFlight.getArrivalTime()));
             ((TextView) view.findViewById(R.id.trip_summary_retDuration)).setText(retFlight.getFlightDuration());
-            ((ImageView) view.findViewById(R.id.imageview_tripSummary2)).setImageResource(retFlight.getAirline().getIcon());
+            ((ImageView) view.findViewById(R.id.imageview_tripSummary2)).setImageResource(AirlinePresentationUtils.getUiIconCode(retFlight.getAirline()));
         } else {
             (view.findViewById(R.id.trip_summary_retFlight)).setVisibility(View.GONE);
         }
