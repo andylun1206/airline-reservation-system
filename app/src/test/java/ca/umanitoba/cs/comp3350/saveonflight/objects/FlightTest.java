@@ -16,7 +16,7 @@ import static junit.framework.Assert.assertTrue;
 public class FlightTest {
     private Flight flight;
     private final String FLIGHT_ID = "WJ 101";
-    private final Airline AIRLINE = new Airline("WestJet", R.mipmap.ic_westjet);
+    private final Airline AIRLINE = new Airline("WestJet");
     private final Airport ORIGIN = new Airport("YWG");
     private final Airport DEST = new Airport("YVR");
     private final double PRICE = 300.00;
@@ -119,7 +119,7 @@ public class FlightTest {
 
     @Test
     public void testAirline() {
-        final Airline NEW_AIRLINE = new Airline("Air Spain", R.mipmap.ic_launcher);
+        final Airline NEW_AIRLINE = new Airline("Air Spain");
         assertEquals(AIRLINE, flight.getAirline());
         assertFalse(flight.getAirline().equals(NEW_AIRLINE));
         flight.setAirline(NEW_AIRLINE);

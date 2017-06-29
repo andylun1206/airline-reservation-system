@@ -24,7 +24,7 @@ public class SearchCriteriaTest {
     private final Date DEPARTURE_DATE = new Date(117, 5, 6, 14, 40);
     private final int NUM_TRAVELLERS = 3;
     private final double MAX = 1000.00;
-    private final Airline AIRLINE = new Airline("WestJet", R.mipmap.ic_westjet);
+    private final Airline AIRLINE = new Airline("WestJet");
     private final FlightClassEnum PREFERRED_CLASS = FlightClassEnum.FIRST_CLASS;
 
 
@@ -47,7 +47,7 @@ public class SearchCriteriaTest {
         searchCriteriaTest1.setDepartureDate(new Date(117, 5, 6, 14, 40));
         searchCriteriaTest1.setNumTravellers(3);
         searchCriteriaTest1.setMaxPrice(1000);
-        searchCriteriaTest1.setPreferredAirlines(new Airline("WestJet", R.mipmap.ic_westjet));
+        searchCriteriaTest1.setPreferredAirlines(new Airline("WestJet"));
         searchCriteriaTest1.setPreferredClass(FlightClassEnum.FIRST_CLASS);
         searchCriteriaTest1.setRefundable(true);
         searchCriteriaTest1.setNonstop(true);

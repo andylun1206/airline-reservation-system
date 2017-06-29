@@ -59,23 +59,6 @@ public class BookedFlightTable implements BookedFlightAccess {
         return result;
     }
 
-    public boolean update(BookedFlight bookedFlight) {
-        boolean isUpdated = false;
-        if (bookedFlight != null) {
-            int travelId = bookedFlight.getTraveller().getTravellerID();
-            String flightId = bookedFlight.getFlight().getFlightCode();
-            BookedFlight temp;
-            for (int i = 0; i < bookedFlights.size(); i++) {
-                temp = bookedFlights.get(i);
-                if (temp.getFlight().getFlightCode().equals(flightId) && temp.getTraveller().getTravellerID() == travelId) {
-                    bookedFlights.set(i, bookedFlight);
-                    isUpdated = true;
-                }
-            }
-        }
-        return isUpdated;
-    }
-
     public boolean remove(BookedFlight bookedFlight) {
         boolean result = false;
         int index;
@@ -85,7 +68,6 @@ public class BookedFlightTable implements BookedFlightAccess {
             result = true;
         }
         return result;
-
     }
 
     @Override

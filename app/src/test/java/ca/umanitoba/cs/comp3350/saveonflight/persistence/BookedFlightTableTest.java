@@ -4,6 +4,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
  * Created by zhengyugu on 2017-06-08.
  */
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -54,39 +55,13 @@ public class BookedFlightTableTest {
     public void testAddValid() {
         bookedFlightTable.add(validCase);
         assertFalse("Failed to add validCase to BookedFlightTable.", bookedFlightTable.add(validCase));
-        bookedFlightTable.remove(validCase);
     }
 
     @Test
     public void testAddDuplicate() {
-        assertTrue("Failed to add unique airline 'dup'", bookedFlightTable.add(validCase));
-        assertFalse("Succeeded adding a duplicate.", bookedFlightTable.add(validCase));
-        bookedFlightTable.remove(validCase);
-    }
-
-    @Test
-    public void testRemoveNull() {
-        assertFalse("removed null?", bookedFlightTable.remove(null));
-    }
-
-
-    @Test
-    public void testRemoveValid() {
-        bookedFlightTable.add(validCase);
-        assertTrue("fail to remove Valid object", bookedFlightTable.remove(validCase));
-    }
-
-    @Test
-    public void testUpdateNull() {
-        assertFalse("update to null?", bookedFlightTable.update(null));
-    }
-
-
-    @Test
-    public void testUpdateValid() {
-        bookedFlightTable.add(validCase);
-        assertTrue("should update the booked flight", bookedFlightTable.update(validCase));
-        bookedFlightTable.remove(validCase);
+        BookedFlight bf = new BookedFlight(travellers.get(2), flights.get(8));
+        assertTrue("Failed to add unique airline 'dup'", bookedFlightTable.add(bf));
+        assertFalse("Succeeded adding a duplicate.", bookedFlightTable.add(bf));
     }
 
     @Test
