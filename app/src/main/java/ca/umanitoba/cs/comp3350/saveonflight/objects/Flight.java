@@ -76,9 +76,13 @@ public class Flight {
         return origin;
     }
 
-    public String getOriginAirportCode(){ return origin.getAirportCode(); }
+    public String getOriginAirportCode() {
+        return origin.getAirportCode();
+    }
 
-    public String getDestinationAirportCode(){ return destination.getAirportCode(); }
+    public String getDestinationAirportCode() {
+        return destination.getAirportCode();
+    }
 
     public void setOrigin(Airport origin) {
         this.origin = origin;

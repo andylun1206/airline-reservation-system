@@ -17,7 +17,6 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 
-
 public class AirportTableTest {
     private static ArrayList<Airport> original;
     private static DataAccess<Airport> airportTable;
@@ -31,7 +30,7 @@ public class AirportTableTest {
 
     @Test
     public void testExistence() {
-        assertNotNull("Initialize is not work",airportTable);
+        assertNotNull("Initialize is not work", airportTable);
     }
 
     @Test

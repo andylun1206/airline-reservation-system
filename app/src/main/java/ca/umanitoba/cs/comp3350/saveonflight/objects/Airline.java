@@ -8,7 +8,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
  * @author Andy Lun
  */
 
-public class Airline implements Comparable  {
+public class Airline implements Comparable {
     private String name;
 
     public Airline(String name) {

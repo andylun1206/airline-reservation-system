@@ -1,6 +1,7 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

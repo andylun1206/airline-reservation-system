@@ -109,7 +109,6 @@ public class FlightTableTest {
             assertEquals(FlightClassEnum.ECONOMY, f.getFlightClass());
         }
 
-        searchCriteria.reverseFlightDirection();
         ArrayList<Flight> returnFlights = flightTable.findBySearchCriteria(searchCriteria);
         assertNotNull(returnFlights);
         for (Flight f : flights) {
