@@ -1,4 +1,4 @@
-package ca.umanitoba.cs.comp3350.saveonflight.presentation;
+package ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlight;
 
 /**
  * SearchCriteriaArrayAdapter.java
@@ -28,6 +28,7 @@ import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
 
 public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListViewEntry> implements OnDateSetListener {
     private final Context context;
