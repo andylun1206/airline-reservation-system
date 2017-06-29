@@ -7,12 +7,16 @@ import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessTravellersImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTable;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightAccess;
 
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTableSql;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTableSql;
+
 /**
  * Created by Kenny on 2017-06-23.
  */
@@ -39,6 +43,37 @@ public class Services {
             //(Main.getDBPathName());
         }
         return flightAccessService;
+    }
+    public static DataAccess<Airport> createAirportAccess(String dbName)
+    {
+        if (airportAccessService == null)
+        {
+            airportAccessService = new AirportTable();
+            airportAccessService.initialize(Main.getDBPathName());
+            //(Main.getDBPathName());
+        }
+        return  airportAccessService;
+    }
+    public static DataAccess<Airline> createAirlineAccess(String dbName)
+    {
+        if (airlineAccessService == null)
+        {
+            airlineAccessService = new AirlineTable();
+            airlineAccessService.initialize(Main.getDBPathName());
+            //(Main.getDBPathName());
+        }
+        return  airlineAccessService;
+    }
+
+    public static TravellerAccess createTravellerAccess(String dbName)
+    {
+        if (travellerAccessService == null)
+        {
+            //travellerAccessService = new ();
+            travellerAccessService.initialize(Main.getDBPathName());
+            //(Main.getDBPathName());
+        }
+        return travellerAccessService;
     }
 
     public static void closeFlightAccess()

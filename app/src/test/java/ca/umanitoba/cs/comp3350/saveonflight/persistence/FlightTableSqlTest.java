@@ -1,10 +1,5 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
-/**
- * Created by zhengyugu on 2017-06-08.
- */
-
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -16,7 +11,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
@@ -24,11 +19,14 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
-public class FlightTableTest {
+/**
+ * Created by longyu on 2017-06-29.
+ */
+
+public class FlightTableSqlTest {
     private static ArrayList<Flight> original;
     private static FlightAccess flightTable;
 
@@ -40,11 +38,13 @@ public class FlightTableTest {
 
     @BeforeClass
     public static void setUp() {
-        flightTable = new FlightTable();
-        flightTable.initialize("");
+        flightTable = new FlightTableSql();
+        flightTable.initialize(Main.getDBPathName());
         original = flightTable.getFlights();
-        new AirportTable().initialize("");
-        new AirlineTable().initialize("");
+        AirlineTableSql airlineTableSql = new AirlineTableSql();
+        airlineTableSql.initialize(Main.getDBPathName());
+        AirportTableSql airportTableSql = new AirportTableSql();
+        airportTableSql.initialize(Main.getDBPathName());
 
         Airline westJet = AirlineTable.findAirline("westjet");
         Airport yyz = AirportTable.findAirport("YYZ");

@@ -75,13 +75,13 @@ public class AirlineTableSql implements DataAccess<Airline>{
     }
     public Airline findAirline(String airlineName) {
         Airline result = null;
-
-        for (Airline airline : airlines) {
-            if (airline.getName().toLowerCase().contains(airlineName.toLowerCase())) {
-                result = airline;
+        if(airlineName!=null) {
+            for (Airline airline : airlines) {
+                if (airline.getName().toLowerCase().contains(airlineName.toLowerCase())) {
+                    result = airline;
+                }
             }
         }
-
         return result;
     }
     private Airline creatAirlineFromResultSet(ResultSet rs) throws SQLException, ParseException {

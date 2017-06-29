@@ -1,15 +1,13 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
-/**
- * Created by zhengyugu on 2017-06-08.
- */
-
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
@@ -19,21 +17,28 @@ import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
-public class BookedFlightTableTest {
-    private static ArrayList<BookedFlight> original;
-    private static BookedFlightAccess bookedFlightTable;
+/**
+ * Created by longyu on 2017-06-29.
+ */
+
+public class BookedFlightTableSqlTest {
+    private static List<BookedFlight> original;
+    private static BookedFlightTableSql bookedFlightTable;
     ArrayList<Traveller> travellers = TravellerTable.getTravellers();
-    FlightTable flightTable=new FlightTable();
+    FlightTableSql flightTable = new FlightTableSql();
     ArrayList<Flight> flights = flightTable.getFlights();
     private BookedFlight validCase = new BookedFlight(travellers.get(2), flights.get(7));
 
     @BeforeClass
     public static void setUp() {
-        bookedFlightTable = new BookedFlightTable();
-        new TravellerTable().initialize("");
-        new FlightTable().initialize("");
-        bookedFlightTable.initialize("");
-        original = BookedFlightTable.getBookedFlights();
+        bookedFlightTable = new BookedFlightTableSql();
+        TravellerTableSql travellerTableSql = new TravellerTableSql();
+        travellerTableSql.initialize(Main.getDBPathName());
+        FlightTableSql flightTableSql = new FlightTableSql();
+        flightTableSql.initialize(Main.getDBPathName());
+        bookedFlightTable.initialize(Main.getDBPathName());
+        original = bookedFlightTable.gets();
+
     }
 
     @Test
@@ -58,12 +63,6 @@ public class BookedFlightTableTest {
         assertFalse("Failed to add validCase to BookedFlightTable.", bookedFlightTable.add(validCase));
     }
 
-    @Test
-    public void testAddDuplicate() {
-        BookedFlight bf = new BookedFlight(travellers.get(2), flights.get(8));
-        assertTrue("Failed to add unique airline 'dup'", bookedFlightTable.add(bf));
-        assertFalse("Succeeded adding a duplicate.", bookedFlightTable.add(bf));
-    }
 
     @Test
     public void testSearchByTraveller() {
