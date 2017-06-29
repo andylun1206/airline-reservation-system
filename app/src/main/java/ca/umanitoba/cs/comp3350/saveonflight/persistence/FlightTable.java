@@ -225,8 +225,6 @@ public class FlightTable implements FlightAccess {
             table = removeByPreferredAirlines(table, criteria.getPreferredAirlines());
         if (!(criteria.getPreferredClass() == null))
             table = removeByPreferredClass(table, criteria.getPreferredClass());
-        table = removeByNonstop(table);
-        table = removeByRefundable(table);
 
         return table;
     }
@@ -321,19 +319,4 @@ public class FlightTable implements FlightAccess {
         return table;
     }
 
-    private ArrayList<Flight> removeByNonstop(ArrayList<Flight> table) {
-        /*if (table.isEmpty())
-            return null;
-         */
-        // Adding more stuff later
-        return table;
-    }
-
-    private ArrayList<Flight> removeByRefundable(ArrayList<Flight> table) {
-        /*if (table.isEmpty())
-            return null;
-         */
-        // Adding more stuff later
-        return table;
-    }
 }

@@ -20,10 +20,9 @@ import static junit.framework.Assert.assertTrue;
 
 public class BookedFlightTableTest {
     private static ArrayList<BookedFlight> original;
-    private static BookedFlightTable bookedFlightTable;
+    private static BookedFlightAccess bookedFlightTable;
     ArrayList<Traveller> travellers = TravellerTable.getTravellers();
     ArrayList<Flight> flights = FlightTable.getFlights();
-    private BookedFlight nullCase = new BookedFlight(null, null);
     private BookedFlight validCase = new BookedFlight(travellers.get(2), flights.get(7));
 
     @BeforeClass
@@ -86,9 +85,27 @@ public class BookedFlightTableTest {
     @Test
     public void testUpdateValid() {
         bookedFlightTable.add(validCase);
-        // well done it at next teration
-        assertFalse("should update a null object", bookedFlightTable.update(null));
-
+        assertTrue("should update the booked flight", bookedFlightTable.update(validCase));
         bookedFlightTable.remove(validCase);
+    }
+
+    @Test
+    public void testSearchByTraveller() {
+        Traveller t = BookedFlightTable.getBookedFlights().get(0).getTraveller();
+        ArrayList<BookedFlight> bfs = bookedFlightTable.searchByTraveller(t);
+        assertNotNull(bfs);
+        for (BookedFlight bf : bfs) {
+            assertEquals(t, bf.getTraveller());
+        }
+    }
+
+    @Test
+    public void testSearchByFlight() {
+        Flight f = BookedFlightTable.getBookedFlights().get(0).getFlight();
+        ArrayList<BookedFlight> bfs = bookedFlightTable.searchByFlight(f);
+        assertNotNull(bfs);
+        for (BookedFlight bf : bfs) {
+            assertEquals(f, bf.getFlight());
+        }
     }
 }

@@ -18,9 +18,9 @@ import static junit.framework.Assert.assertTrue;
 
 public class TravellerTableTest {
     private static ArrayList<Traveller> original;
-    private static TravellerTable travellerTable;
+    private static DataAccess<Traveller> travellerTable;
     private Traveller emptyNameCase = new Traveller(0,"");
-    private Traveller vaildCase = new Traveller(10,"Amir");
+    private Traveller validCase = new Traveller(10,"Amir");
     @BeforeClass
     public static void setUp() {
         travellerTable = new TravellerTable();
@@ -53,17 +53,17 @@ public class TravellerTableTest {
     @Test
     public void testAddValid() {
 
-        assertTrue("Failed to add Cathay Pacific to airlineTable.", travellerTable.add(vaildCase) );
+        assertTrue("Failed to add Cathay Pacific to airlineTable.", travellerTable.add(validCase) );
 
-        travellerTable.remove(vaildCase);
+        travellerTable.remove(validCase);
     }
     @Test
     public void testAddDuplicate() {
 
-        assertTrue("Failed to add unique airline 'dup'", travellerTable.add(vaildCase));
-        assertFalse("Succeeded adding a duplicate.", travellerTable.add(vaildCase));
+        assertTrue("Failed to add unique airline 'dup'", travellerTable.add(validCase));
+        assertFalse("Succeeded adding a duplicate.", travellerTable.add(validCase));
 
-        travellerTable.remove(vaildCase);
+        travellerTable.remove(validCase);
     }
     @Test
     public void testRemoveNull() {
@@ -73,8 +73,8 @@ public class TravellerTableTest {
 
     @Test
     public void testRemoveValid() {
-        travellerTable.add(vaildCase);
-        assertTrue("fail to remove Valid object", travellerTable.remove(vaildCase));
+        travellerTable.add(validCase);
+        assertTrue("fail to remove Valid object", travellerTable.remove(validCase));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class TravellerTableTest {
 
     @Test
     public void testUpdateValid(){
-        travellerTable.add(vaildCase);
+        travellerTable.add(validCase);
         assertTrue("should update a EmptyName object", travellerTable.update(new Traveller(10,"Jack")));
 
         travellerTable.remove(new Traveller(10,"Jack"));

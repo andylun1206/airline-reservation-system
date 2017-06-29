@@ -12,20 +12,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import ca.umanitoba.cs.comp3350.saveonflight.business.*;
-import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
-import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
-import com.stripe.android.model.Card;
-import com.stripe.android.view.CardInputWidget;
-
-import java.util.ArrayList;
-
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.business.*;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTable;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
+import com.stripe.android.model.Card;
+import com.stripe.android.view.CardInputWidget;
+
+import java.util.ArrayList;
 
 /**
  * Payment.java
@@ -36,7 +33,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTable;
  */
 
 
-public class PaymentFragment extends Fragment implements View.OnClickListener, ProcessPayment.ProcessPaymentListener {
+public class PaymentFragment extends Fragment implements View.OnClickListener {
     private CardInputWidget mCardInputWidget;
     private EditText etName;
     private EditText etAddress;
@@ -47,7 +44,6 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, P
     private Button buttonPurchase;
 
     private ArrayList<Flight> flights;
-
 
     @Nullable
     @Override
@@ -82,25 +78,20 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, P
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_payment:
-                //PaymentInfo info = createPaymentInfo();
                 Card card = createCard();
 
                 if (card != null) {
-                    ProcessPayment processPayment = new ProcessPaymentImpl(this);
-                    processPayment.process(card, getContext());
+                    paymentSuccess();
                 } else {
-                    ToastHandler.toastInvalidCardInfo(getActivity());
+                    paymentFailure();
                 }
 
                 break;
         }
     }
 
-    @Override
     public void paymentSuccess() {
-        Toast.makeText(getContext(), "Payment succeeded", Toast.LENGTH_SHORT).show();
-        // Since we're not actually processing any payments... just add the BookedFlight to the database
-
+        // Since we're not actually processing any payments... just add the BookedFlight(s) to the database
         AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl();
 
         // First, create a new Traveller and store it in the database
@@ -123,9 +114,8 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, P
         showConfirmationDialog(id);
     }
 
-    @Override
     public void paymentFailure() {
-        Toast.makeText(getContext(), "Payment failed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Invalid card data", Toast.LENGTH_SHORT).show();
     }
 
     private Card createCard() {

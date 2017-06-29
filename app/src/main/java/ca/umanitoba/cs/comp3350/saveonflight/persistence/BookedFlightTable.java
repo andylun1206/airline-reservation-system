@@ -23,7 +23,15 @@ public class BookedFlightTable implements BookedFlightAccess {
     public void initialize() {
         if (bookedFlights == null) {
             bookedFlights = new ArrayList<BookedFlight>();
+
+            if (TravellerTable.getTravellers() == null) {
+                new TravellerTable().initialize();
+            }
             ArrayList<Traveller> travellers = TravellerTable.getTravellers();
+
+            if (FlightTable.getFlights() == null) {
+                new FlightTable().initialize();
+            }
             ArrayList<Flight> flights = FlightTable.getFlights();
             bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(0)));
             bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(1)));
@@ -53,23 +61,16 @@ public class BookedFlightTable implements BookedFlightAccess {
 
     public boolean update(BookedFlight bookedFlight) {
         boolean isUpdated = false;
-        if(bookedFlight != null) {
+        if (bookedFlight != null) {
             int travelId = bookedFlight.getTraveller().getTravellerID();
             String flightId = bookedFlight.getFlight().getFlightCode();
-            int changes = 0;
-            int index = 0;
             BookedFlight temp;
             for (int i = 0; i < bookedFlights.size(); i++) {
                 temp = bookedFlights.get(i);
                 if (temp.getFlight().getFlightCode().equals(flightId) && temp.getTraveller().getTravellerID() == travelId) {
-                    changes++;
-                    index = i;
+                    bookedFlights.set(i, bookedFlight);
+                    isUpdated = true;
                 }
-            }
-            if (changes != 0) {
-                bookedFlights.get(index).setFlight(bookedFlight.getFlight());
-                bookedFlights.get(index).setTraveller(bookedFlight.getTraveller());
-                isUpdated = true;
             }
         }
         return isUpdated;
