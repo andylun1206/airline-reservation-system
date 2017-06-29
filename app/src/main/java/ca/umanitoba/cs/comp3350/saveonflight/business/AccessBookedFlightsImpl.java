@@ -9,6 +9,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTable;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTableSql;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
 
 /**
@@ -24,14 +25,14 @@ public class AccessBookedFlightsImpl implements AccessBookedFlights {
 
     public AccessBookedFlightsImpl() {
         if (bookedFlightsDB == null) {
-            bookedFlightsDB = new BookedFlightTable();
+            bookedFlightsDB = new BookedFlightTableSql();
             bookedFlightsDB.initialize(Main.getDBPathName());
         }
     }
 
     @Override
     public List<BookedFlight> getFlights() {
-        return BookedFlightTable.getBookedFlights();
+        return bookedFlightsDB.gets();
     }
 
     @Override

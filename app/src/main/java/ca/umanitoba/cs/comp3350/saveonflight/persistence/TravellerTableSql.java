@@ -12,7 +12,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  * Created by zhengyugu on 2017-06-28.
  */
 
-public class TravellerTableSql implements DataAccess<Traveller> {
+public class TravellerTableSql implements TravellerAccess {
     private Statement st1;
     private Connection c1;
     private ResultSet rs1,rs2,rs3;

@@ -15,7 +15,12 @@ public class Main {
 
     public static void startUp()
     {
+
         Services.createFlightAccess(dbName);
+        Services.createAirlineAccess(dbName);
+        Services.createAirportAccess(dbName);
+        Services.createBookedFlightAccess(dbName);
+        Services.createTravellerAccess(dbName);
     }
 
     public static void shutDown()

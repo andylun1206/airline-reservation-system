@@ -4,7 +4,9 @@ import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTable;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTableSql;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
 
 /**
@@ -17,22 +19,22 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
  */
 
 public class AccessAirportsImpl implements AccessAirports {
-    private static DataAccess<Airport> airportDB;
+    private static AirportAccess airportDB;
 
     public AccessAirportsImpl() {
         if (airportDB == null) {
-            airportDB = new AirportTable();
+            airportDB = new AirportTableSql();
             airportDB.initialize(Main.getDBPathName());
         }
     }
 
     @Override
     public List<Airport> getAirports() {
-        return AirportTable.getAirports();
+        return airportDB.getAirports();
     }
 
     @Override
     public Airport findAirportByName(String airport) {
-        return AirportTable.findAirport(airport);
+        return  airportDB.findAirport(airport);
     }
 }

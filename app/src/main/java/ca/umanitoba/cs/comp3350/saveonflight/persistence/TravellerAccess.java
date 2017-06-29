@@ -1,5 +1,7 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
+import java.util.ArrayList;
+
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
 /**
@@ -7,5 +9,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  */
 
 public interface TravellerAccess extends DataAccess<Traveller> {
+    public ArrayList<Traveller> getTravellers();
     boolean add(Traveller t);
 }

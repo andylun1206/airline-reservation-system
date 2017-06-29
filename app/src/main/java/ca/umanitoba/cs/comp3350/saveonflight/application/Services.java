@@ -7,8 +7,13 @@ import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessTravellersImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTable;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTableSql;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTable;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTableSql;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTableSql;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerAccess;
@@ -23,17 +28,18 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTableSql;
 
 public class Services {
     private static FlightAccess flightAccessService = null;
-    private static DataAccess<Airport> airportAccessService = null;
-    private static DataAccess<Airline> airlineAccessService = null;
+    private static AirportAccess airportAccessService = null;
+    private static AirlineAccess airlineAccessService = null;
     private static TravellerAccess travellerAccessService = null;
     private static BookedFlightAccess bookedFlightAccessService = null;
-    public static void openDatabase() {
-        new AccessAirlinesImpl();
-        new AccessAirportsImpl();
-        new AccessFlightsImpl();
-        new AccessTravellersImpl();
-        new AccessBookedFlightsImpl();
-    }
+
+//    public static void openDatabase() {
+//        new AccessAirlinesImpl();
+//        new AccessAirportsImpl();
+//        new AccessFlightsImpl();
+//        new AccessTravellersImpl();
+//        new AccessBookedFlightsImpl();
+//    }
     public static FlightAccess createFlightAccess(String dbName)
     {
         if (flightAccessService == null)
@@ -48,17 +54,17 @@ public class Services {
     {
         if (airportAccessService == null)
         {
-            airportAccessService = new AirportTable();
+            airportAccessService = new AirportTableSql();
             airportAccessService.initialize(Main.getDBPathName());
             //(Main.getDBPathName());
         }
         return  airportAccessService;
     }
-    public static DataAccess<Airline> createAirlineAccess(String dbName)
+    public static AirlineAccess createAirlineAccess(String dbName)
     {
         if (airlineAccessService == null)
         {
-            airlineAccessService = new AirlineTable();
+            airlineAccessService = new AirlineTableSql();
             airlineAccessService.initialize(Main.getDBPathName());
             //(Main.getDBPathName());
         }
@@ -69,11 +75,20 @@ public class Services {
     {
         if (travellerAccessService == null)
         {
-            //travellerAccessService = new ();
+            travellerAccessService = new TravellerTableSql();
             travellerAccessService.initialize(Main.getDBPathName());
             //(Main.getDBPathName());
         }
         return travellerAccessService;
+    }
+    public static BookedFlightAccess createBookedFlightAccess(String dbName){
+        if (bookedFlightAccessService == null)
+        {
+            bookedFlightAccessService = new BookedFlightTableSql();
+            bookedFlightAccessService.initialize(Main.getDBPathName());
+            //(Main.getDBPathName());
+        }
+        return bookedFlightAccessService;
     }
 
     public static void closeFlightAccess()

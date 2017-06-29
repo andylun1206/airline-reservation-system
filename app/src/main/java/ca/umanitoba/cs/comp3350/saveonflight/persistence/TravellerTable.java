@@ -12,7 +12,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  * @author Long Yu
  */
 
-public class TravellerTable implements TravellerAccess {
+public class TravellerTable implements DataAccess<Traveller> {
     public static int nextId = 3;
 
     private static ArrayList<Traveller> travellers = null;

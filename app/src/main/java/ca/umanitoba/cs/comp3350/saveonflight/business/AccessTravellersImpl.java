@@ -7,6 +7,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTable;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTableSql;
 
 /**
  * AccessTravellersImpl.java
@@ -21,14 +22,14 @@ public class AccessTravellersImpl implements AccessTravellers {
 
     public AccessTravellersImpl() {
         if (travellerDB == null) {
-            travellerDB = new TravellerTable();
+            travellerDB = new TravellerTableSql();
             travellerDB.initialize(Main.getDBPathName());
         }
     }
 
     @Override
     public List<Traveller> getTravellers() {
-        return TravellerTable.getTravellers();
+        return travellerDB.getTravellers();
     }
 
     @Override
