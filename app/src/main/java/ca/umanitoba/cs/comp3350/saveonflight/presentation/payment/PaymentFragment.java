@@ -1,4 +1,4 @@
-package ca.umanitoba.cs.comp3350.saveonflight.presentation;
+package ca.umanitoba.cs.comp3350.saveonflight.presentation.payment;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import ca.umanitoba.cs.comp3350.saveonflight.business.*;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
 import com.stripe.android.model.Card;
 import com.stripe.android.view.CardInputWidget;
 
