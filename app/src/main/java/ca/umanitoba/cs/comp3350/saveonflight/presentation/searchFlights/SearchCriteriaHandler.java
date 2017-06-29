@@ -2,9 +2,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights;
 
 import android.app.Activity;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.business.AccessAirlinesImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessAirportsImpl;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
@@ -20,7 +18,7 @@ import java.util.Locale;
 
 public class SearchCriteriaHandler {
     public static boolean validate(Activity activity, SearchCriteria criteria) {
-        boolean valid = false;
+        boolean valid = true;
 
         if (!validateAirport(criteria.getOrigin())) {
             valid = missingRequiredField(activity, R.string.search_origin);
@@ -32,10 +30,6 @@ public class SearchCriteriaHandler {
             valid = missingRequiredField(activity, R.string.search_return_date);
         } else if (!validatePassengers(criteria.getNumTravellers())) {
             valid = missingRequiredField(activity, R.string.search_num_passengers);
-        } else if (!validateAirline(criteria.getPreferredAirline())) {
-            valid = missingRequiredField(activity, R.string.search_airlines);
-        } else if (!validatePrice(criteria.getMaxPrice())) {
-            valid = missingRequiredField(activity, R.string.search_max_price);
         }
 
         return valid;
@@ -85,21 +79,6 @@ public class SearchCriteriaHandler {
 
     private static boolean validatePassengers(int numPassengers) {
         return numPassengers > 0;
-    }
-
-    private static boolean validateAirline(Airline airline) {
-        boolean valid = false;
-
-        if (airline != null && !airline.getName().trim().isEmpty()
-                && new AccessAirlinesImpl().getAirlineByName(airline.getName()) != null) {
-            valid = true;
-        }
-
-        return valid;
-    }
-
-    private static boolean validatePrice(double price) {
-        return price > 0;
     }
 
     /**
