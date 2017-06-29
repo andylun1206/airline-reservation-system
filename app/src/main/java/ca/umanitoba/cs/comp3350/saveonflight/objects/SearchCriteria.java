@@ -20,8 +20,6 @@ public class SearchCriteria {
     private double maxPrice;
     private Airline preferredAirlines;
     private FlightClassEnum preferredClass;
-    private boolean nonstop;
-    private boolean refundable;
 
     public SearchCriteria() {
     }
@@ -88,22 +86,6 @@ public class SearchCriteria {
 
     public void setPreferredClass(FlightClassEnum preferredClass) {
         this.preferredClass = preferredClass;
-    }
-
-    public boolean isNonstop() {
-        return nonstop;
-    }
-
-    public void setNonstop(boolean nonstop) {
-        this.nonstop = nonstop;
-    }
-
-    public boolean isRefundable() {
-        return refundable;
-    }
-
-    public void setRefundable(boolean refundable) {
-        this.refundable = refundable;
     }
 
     public boolean isReturnTrip() {
