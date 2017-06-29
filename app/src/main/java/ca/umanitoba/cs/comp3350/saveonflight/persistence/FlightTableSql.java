@@ -84,6 +84,19 @@ public class FlightTableSql implements FlightAccess {
 
         return flights;
     }
+    public Flight findFlight(String flightId, String departureTime) throws ParseException {
+        Flight result = null;
+
+        for (Flight flight : flights) {
+            if (flight.getFlightCode().toLowerCase().contains(flightId.toLowerCase())) {
+                if ((flight.getDepartureTime()).compareTo(sdf.parse(departureTime)) == 0) {
+                    result = flight;
+                }
+            }
+        }
+
+        return result;
+    }
 
     public Flight findByFlightCode(String flightCode) {
         Flight flight = null;
@@ -141,8 +154,16 @@ public class FlightTableSql implements FlightAccess {
         List<Airport> airports = airportTableSql.getAirports();
         arrive = airportTableSql.findAirport(origin);
         departure = airportTableSql.findAirport(destination);
-        flight = new Flight(flightID, sdf.parse(departureDate), sdf.parse(arrivalDate), company, arrive, departure,
-                price, capacity, seattaken, FlightClassEnum.values()[classInt]);
+
+        Flight.FlightBuilder builder = new Flight.FlightBuilder(flightID, arrive, departure);
+        flight = builder.setAirline(company)
+                .setDepartureTime(sdf.parse(departureDate))
+                .setArrivalTime(sdf.parse(arrivalDate))
+                .setPrice(price)
+                .setCapacity(capacity)
+                .build();
+//        flight = new Flight(flightID, sdf.parse(departureDate), sdf.parse(arrivalDate), company, arrive, departure,
+//                price, capacity, seattaken, FlightClassEnum.values()[classInt]);
 
 
 //        flight = new Flight(flightID, sdf.parse(departureDate), sdf.parse(arrivalDate),

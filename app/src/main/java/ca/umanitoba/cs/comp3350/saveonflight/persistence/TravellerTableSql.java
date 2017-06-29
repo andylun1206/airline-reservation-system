@@ -83,14 +83,17 @@ public class TravellerTableSql implements DataAccess<Traveller> {
         }
         return results;
     }
-    public boolean update(Traveller traveller) {
+     public Traveller findTraveller(int id) {
+         Traveller result = null;
 
-        return false;
-    }
-    public boolean remove(Traveller traveller){
+         for (Traveller traveller : travellers) {
+             if (traveller.getTravellerID() == id) {
+                 result = traveller;
+             }
+         }
 
-        return false;
-    }
+         return result;
+     }
 
     public String checkWarning(Statement st, int updateCount)
     {
