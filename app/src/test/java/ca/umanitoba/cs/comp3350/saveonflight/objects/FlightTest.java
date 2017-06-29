@@ -94,7 +94,6 @@ public class FlightTest {
         cal.set(2017, 1, 1, 15, 1);
         final Date ARRIVE = cal.getTime();
 
-
         Flight otherFlight = builder.setFlightId("AC101")
                 .setDepartureTime(DEPART)
                 .setArrivalTime(ARRIVE)
@@ -204,6 +203,12 @@ public class FlightTest {
         assertEquals(EXPECTED, flight.getFlightTime());
     }
 
-
+    @Test
+    public void testAirportCodes() {
+        assertEquals("YWG", flight.getOriginAirportCode());
+        assertFalse("YVR".equals(flight.getOriginAirportCode()));
+        assertEquals("YVR", flight.getDestinationAirportCode());
+        assertFalse("YWG".equals(flight.getDestinationAirportCode()));
+    }
 
 }

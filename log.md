@@ -143,3 +143,9 @@ Decided to change the way we assign developer tasks. Instead of assigning all of
     - Initially thought to use builder class to replace constructor
     - Ultimately removed constructor since it was only used in testing
     
+#### Shenyun Wang
+- Problem: GUI - flight summary screen (GitHub issue #63)
+	- Screen to display summary of flights chosen by user
+	- recieves message passing of flights from previous screen 
+	- hide return flight section if searching for one way trip
+    
