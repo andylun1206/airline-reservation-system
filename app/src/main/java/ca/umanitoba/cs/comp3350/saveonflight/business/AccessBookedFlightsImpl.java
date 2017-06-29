@@ -38,23 +38,7 @@ public class AccessBookedFlightsImpl implements AccessBookedFlights {
         return bookedFlightsDB.add(bf);
     }
 
-    @Override
-    public boolean updateBookedFlight(BookedFlight bf) {
-        return bookedFlightsDB.update(bf);
-    }
-
-    @Override
-    public boolean deleteFlight(BookedFlight bf) {
-        return bookedFlightsDB.remove(bf);
-    }
-
     public ArrayList<BookedFlight> searchByTraveller(Traveller t) {
         return bookedFlightsDB.searchByTraveller(t);
     }
-
-    @Override
-    public ArrayList<BookedFlight> searchByFlight(Flight f) {
-        return bookedFlightsDB.searchByFlight(f);
-    }
-
 }

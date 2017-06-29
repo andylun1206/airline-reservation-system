@@ -42,49 +42,4 @@ public class AirlineTable implements DataAccess<Airline> {
 
         return result;
     }
-
-    public boolean add(Airline airline) {
-        boolean result = true;
-        if (airline != null && !airline.getName().isEmpty()) {
-            for (Airline airline1 : airlines) {
-                if (airline.equals(airline1)) {
-                    result = false;
-                }
-            }
-            if (result) {
-                result = airlines.add(airline);
-            }
-        } else {
-            result = false;
-        }
-        return result;
-    }
-
-    public boolean update(Airline airline) {
-        boolean isUpdated = false;
-        if (airline != null) {
-            String name = airline.getName();
-            Airline temp;
-            for (int i = 0; i < airlines.size(); i++) {
-                temp = airlines.get(i);
-                if (temp.getName().equals(name)) {
-                    airlines.set(i, airline);
-                    isUpdated = true;
-                }
-            }
-        }
-        return isUpdated;
-    }
-
-    public boolean remove(Airline airline) {
-        boolean result = false;
-        int index;
-        index = airlines.indexOf(airline);
-        if (index >= 0) {
-            airlines.remove(index);
-            result = true;
-        }
-        return result;
-    }
-
 }
