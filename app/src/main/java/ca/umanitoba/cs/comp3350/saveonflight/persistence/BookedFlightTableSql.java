@@ -96,31 +96,30 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         ArrayList<BookedFlight> results = new ArrayList<BookedFlight>();
         BookedFlight bookedFlight = null;
         String values, flightId, departureTime;
-        ;
         int id;
         result = null;
         try {
-            cmdString = "Select * from BookedFlight where ID =" + t.getTravellerID();
-            updateCount = st1.executeUpdate(cmdString);
-            result = checkWarning(st1, updateCount);
+            cmdString = "Select * from BOOKEDFLIGHT WHERE ID =" + t.getTravellerID();
+            rs2 = st1.executeQuery(cmdString);
+
         } catch (Exception e) {
             result = processSQLError(e);
         }
         try {
-            while (rs8.next()) {
+            while (rs2.next()) {
                 FlightTableSql flightTableSql = new FlightTableSql();
                 flightTableSql.initialize(Main.getDBPathName());
                 flightTableSql.getFlights();
                 TravellerTableSql travellerTableSql = new TravellerTableSql();
                 travellerTableSql.initialize(Main.getDBPathName());
                 travellerTableSql.getTravellers();
-                id = rs8.getInt("ID");
-                flightId = rs1.getString("FLIGHTID");
-                departureTime = rs1.getString("DEPARTURETIME");
+                id = rs2.getInt("ID");
+                flightId = rs2.getString("FLIGHTID");
+                departureTime = rs2.getString("DEPARTURETIME");
                 bookedFlight = new BookedFlight(travellerTableSql.findTraveller(id), flightTableSql.findFlight(flightId, departureTime));
                 results.add(bookedFlight);
             }
-            rs8.close();
+            rs2.close();
         } catch (Exception e) {
             result = processSQLError(e);
         }

@@ -264,6 +264,7 @@ public class FlightTableSql implements FlightAccess {
                 if (!(criteria.getPreferredClass() == null))
                     cmdString += " AND CLASS = " + criteria.getPreferredClassInt();
                 rs3 = st1.executeQuery(cmdString);
+
             } catch (Exception e) {
                 processSQLError(e);
             }

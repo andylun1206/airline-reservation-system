@@ -3,8 +3,10 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
@@ -86,13 +88,22 @@ public class TravellerTableSql implements TravellerAccess {
      public Traveller findTraveller(int id) {
          Traveller result = null;
 
-         for (Traveller traveller : travellers) {
-             if (traveller.getTravellerID() == id) {
-                 result = traveller;
+         try {
+             cmdString = "Select * from Traveller where ID=" + id ;
+             rs1 = st1.executeQuery(cmdString);
+
+             if (rs1 != null && rs1.next()) {
+                 result = createTravellerFromResultSet(rs1);
              }
+         } catch (Exception e) {
+             processSQLError(e);
          }
 
          return result;
+
+     }
+     private Traveller createTravellerFromResultSet(ResultSet rs) throws SQLException, ParseException {
+         return new Traveller(rs.getInt("ID"),rs.getString("NAME"));
      }
 
     public String checkWarning(Statement st, int updateCount)
