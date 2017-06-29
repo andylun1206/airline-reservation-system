@@ -38,8 +38,6 @@ public class SearchCriteriaTest {
         searchCriteria.setMaxPrice(MAX);
         searchCriteria.setPreferredAirlines(AIRLINE);
         searchCriteria.setPreferredClass(PREFERRED_CLASS);
-        searchCriteria.setRefundable(true);
-        searchCriteria.setNonstop(true);
 
         searchCriteriaTest1 = new SearchCriteria();
         searchCriteriaTest1.setOrigin(new Airport("YWG"));
@@ -49,8 +47,6 @@ public class SearchCriteriaTest {
         searchCriteriaTest1.setMaxPrice(1000);
         searchCriteriaTest1.setPreferredAirlines(new Airline("WestJet"));
         searchCriteriaTest1.setPreferredClass(FlightClassEnum.FIRST_CLASS);
-        searchCriteriaTest1.setRefundable(true);
-        searchCriteriaTest1.setNonstop(true);
 
         searchCriteriaTest2 = new SearchCriteria();
         searchCriteriaTest2.setOrigin(null);
@@ -60,8 +56,6 @@ public class SearchCriteriaTest {
         searchCriteriaTest2.setMaxPrice(0);
         searchCriteriaTest2.setPreferredAirlines(null);
         searchCriteriaTest2.setPreferredClass(null);
-        searchCriteriaTest2.setRefundable(false);
-        searchCriteriaTest2.setNonstop(false);
     }
 
     @After
@@ -80,8 +74,6 @@ public class SearchCriteriaTest {
         assertTrue(MAX == searchCriteriaTest1.getMaxPrice());
         assertTrue(AIRLINE.equals(searchCriteriaTest1.getPreferredAirline()));
         assertTrue(PREFERRED_CLASS.equals(searchCriteriaTest1.getPreferredClass()));
-        assertTrue(searchCriteriaTest1.isNonstop());
-        assertTrue(searchCriteriaTest1.isRefundable());
         assertFalse(searchCriteria.equals(searchCriteriaTest1));//same condition but different search
     }
 
@@ -93,8 +85,6 @@ public class SearchCriteriaTest {
         assertNull(searchCriteriaTest2.getDepartureDate());
         assertNull(searchCriteriaTest2.getPreferredAirline());
         assertNull(searchCriteriaTest2.getPreferredClass());
-        assertFalse(searchCriteriaTest2.isNonstop());
-        assertFalse(searchCriteriaTest2.isRefundable());
     }
 
     @Test
