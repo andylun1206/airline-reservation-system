@@ -22,7 +22,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.application.Services;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.flightSummary.ViewFlightsSummaryFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.payment.PaymentFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewBookedFlights.ViewBookedFlightFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights.ViewFlightsFragment;
 
 import java.util.List;
 
@@ -31,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+        Services.openDatabase();
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -54,22 +61,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        View headerView = navigationView.getHeaderView(0);
-
-        headerView.findViewById(R.id.button_header_login).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ToastHandler.toastComingSoon(MainActivity.this, getString(R.string.common_login));
-            }
-        });
-
-        headerView.findViewById(R.id.button_header_signup).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ToastHandler.toastComingSoon(MainActivity.this, getString(R.string.common_signup));
-            }
-        });
-
         displaySelectedScreen(R.id.nav_home);
     }
 
@@ -86,9 +77,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         } else {
             Fragment f = getVisibleFragment();
 
-            if (f instanceof ViewFlightsFragment) {
+            if (f instanceof ViewFlightsFragment || f instanceof PaymentFragment || f instanceof ViewFlightsSummaryFragment) {
                 displaySelectedScreen(R.id.nav_search);
-            } else if (f instanceof SearchFragment) {
+            } else if (f instanceof SearchFragment || f instanceof ViewBookedFlightFragment) {
                 displaySelectedScreen(R.id.nav_home);
             } else {
                 super.onBackPressed();
@@ -128,6 +119,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 break;
             case R.id.nav_search:
                 fragment = new SearchFragment();
+                break;
+            case R.id.nav_bookedflights:
+                fragment = new ViewBookedFlightFragment();
                 break;
         }
 

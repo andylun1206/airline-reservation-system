@@ -1,4 +1,4 @@
-package ca.umanitoba.cs.comp3350.saveonflight.presentation;
+package ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights;
 
 /**
  * ViewFlightsArrayAdapter.java
@@ -16,7 +16,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListViewEntry;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.MainActivity;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.AirlinePresentationUtils;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -41,7 +43,7 @@ public class ViewFlightsArrayAdapter extends ArrayAdapter<ViewFlightsListViewEnt
 
         ((TextView) view.findViewById(R.id.textView_view_flight_time)).setText(row.getTime());
         ((TextView) view.findViewById(R.id.textView_view_flight_price)).setText(String.format(Locale.CANADA, "$%.2f", row.getPrice()));
-        ((ImageView) view.findViewById(R.id.imageView_view_flight_airline)).setImageResource(row.getAirline());
+        ((ImageView) view.findViewById(R.id.imageView_view_flight_airline)).setImageResource(AirlinePresentationUtils.getUiIconCode(row.getAirline()));
         ((TextView) view.findViewById(R.id.textView_view_flight_flightid)).setText(row.getFlightId());
         ((TextView) view.findViewById(R.id.textView_view_flight_duration)).setText(row.getDuration());
 
@@ -57,4 +59,5 @@ public class ViewFlightsArrayAdapter extends ArrayAdapter<ViewFlightsListViewEnt
 
         return view;
     }
+
 }

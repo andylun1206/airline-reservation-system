@@ -12,7 +12,9 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  * @author Long Yu
  */
 
-public class TravellerTable implements DataAccess<Traveller> {
+public class TravellerTable implements TravellerAccess {
+    public static int nextId = 3;
+
     private static ArrayList<Traveller> travellers = null;
 
     public TravellerTable() {
@@ -46,39 +48,4 @@ public class TravellerTable implements DataAccess<Traveller> {
         }
         return result;
     }
-
-    public boolean update(Traveller traveller) {
-        boolean isUpdated = false;
-        if(traveller != null) {
-            int id = traveller.getTravellerID();
-            String name = traveller.getName();
-            int index = 0;
-            int changes = 0;
-            Traveller temp;
-            for (int i = 0; i < travellers.size(); i++) {
-                temp = travellers.get(i);
-                if (temp.getTravellerID() == id) {
-                    changes++;
-                    index = i;
-                }
-            }
-            if (changes != 0) {
-                travellers.get(index).setName(name);
-                isUpdated = true;
-            }
-        }
-        return isUpdated;
-    }
-
-    public boolean remove(Traveller traveller) {
-        boolean result = false;
-        int index;
-        index = travellers.indexOf(traveller);
-        if (index >= 0) {
-            travellers.remove(index);
-            result = true;
-        }
-        return result;
-    }
-
 }

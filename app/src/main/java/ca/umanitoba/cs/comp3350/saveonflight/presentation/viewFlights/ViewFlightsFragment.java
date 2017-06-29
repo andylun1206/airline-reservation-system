@@ -1,4 +1,4 @@
-package ca.umanitoba.cs.comp3350.saveonflight.presentation;
+package ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights;
 
 /**
  * ViewFlightsFragment.java
@@ -15,13 +15,16 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchCriteriaHandler;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListViewEntry;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchCriteriaArrayAdapter;
 
 import java.util.ArrayList;
 
@@ -33,7 +36,7 @@ public class ViewFlightsFragment extends ListFragment {
     private static ArrayList<ViewFlightsListViewEntry> flightList;
     private static ArrayList<Flight> flights;
     private static SearchCriteria searchCriteria;
-    private static ArrayList<Flight> chosenFlights = new ArrayList<>();
+    private static ArrayList<String> chosenFlights = new ArrayList<>();
 
     private static String title;
 
@@ -56,6 +59,7 @@ public class ViewFlightsFragment extends ListFragment {
         flights = new AccessFlightsImpl().search(searchCriteria);
 
         title = getString(R.string.view_flights_flight_path, "$0", "$1");
+        setTitle(flights.get(0).getOrigin().getAirportCode(), flights.get(0).getDestination().getAirportCode());
 
         return view;
     }
@@ -101,7 +105,7 @@ public class ViewFlightsFragment extends ListFragment {
         flightList.clear();
 
         for (Flight f : flights) {
-            flightList.add(new ViewFlightsListViewEntry(f.getFlightTime(), f.getPrice(), f.getAirline().getIcon(), f.getFlightID(), f.getFlightDuration()));
+            flightList.add(new ViewFlightsListViewEntry(f.getFlightTime(), f.getPrice(), f.getAirline(), f.getFlightCode(), f.getFlightDuration()));
         }
 
         flightAdapter.notifyDataSetChanged();
@@ -109,39 +113,42 @@ public class ViewFlightsFragment extends ListFragment {
 
     /**
      * Creates a list of flights chosen by the traveller.
+     *
      * @param flightId flight identification number
      */
 
     public static void addChosenFlight(String flightId) {
         for (Flight flight : flights) {
-            if (flight.getFlightID().equals(flightId)) {
-                chosenFlights.add(flight);
+            if (flight.getFlightCode().equals(flightId)) {
+                chosenFlights.add(flight.getFlightCode());
             }
         }
     }
 
     /**
      * Navigates to the next screen
-     *
+     * <p>
      * (1) If it is a return trip and showing departure flights --> searches for return flights
      * (2) Otherwise --> go to the flight summary screen
      */
 
     public static void navgiateNextStep() {
         if (searchCriteria.isReturnTrip() && chosenFlights.size() == 1) {
-            searchCriteria.reverseFlightDirection();
+            searchCriteria = SearchCriteriaHandler.reverseFlightDirection(searchCriteria);
             flights = new AccessFlightsImpl().search(searchCriteria);
 
             if (flights != null && !flights.isEmpty()) {
                 updateFlightList();
-                setTitle(flights.get(0).getOrigin().toString(), flights.get(0).getDestination().toString());
+                setTitle(flights.get(0).getOrigin().getAirportCode(), flights.get(0).getDestination().getAirportCode());
             }
         } else if (!searchCriteria.isReturnTrip() || (searchCriteria.isReturnTrip() && chosenFlights.size() == 2)) {
             FragmentNavigation.flightSummary(chosenFlights);
+            chosenFlights = new ArrayList<>();
         }
     }
 
     private static void setTitle(String origin, String destination) {
         activity.setTitle(title.replace("$0", origin).replace("$1", destination));
     }
+
 }

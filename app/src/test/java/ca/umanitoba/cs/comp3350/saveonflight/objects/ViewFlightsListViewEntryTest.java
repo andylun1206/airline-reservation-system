@@ -4,6 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights.ViewFlightsListViewEntry;
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
@@ -15,11 +18,14 @@ import static junit.framework.Assert.assertNotNull;
 public class ViewFlightsListViewEntryTest {
     private ViewFlightsListViewEntry entry1;
     private ViewFlightsListViewEntry entry2;
+    private Airline a1;
+    private Airline a2;
 
     @Before
     public void setup() {
-        entry1 = new ViewFlightsListViewEntry("8:00am", 350.00, 1, "AC01", "3hr");
-        entry2 = new ViewFlightsListViewEntry("9:00am", 400.00, 1, "AC02", "2hr");
+        a1 = new Airline("WestJet");
+        entry1 = new ViewFlightsListViewEntry("8:00am", 350.00, a1, "AC01", "3hr");
+        entry2 = new ViewFlightsListViewEntry("9:00am", 400.00, a1, "AC02", "2hr");
         assertNotNull(entry1);
         assertNotNull(entry2);
     }
@@ -44,17 +50,18 @@ public class ViewFlightsListViewEntryTest {
 
     @Test
     public void testGetAirline() {
+        assertEquals(a1, entry1.getAirline());
+        assertEquals(a1, entry2.getAirline());
         assertEquals(entry1.getAirline(), entry2.getAirline());
-        assertFalse(entry1.getAirline() == 2);
     }
 
     @Test
     public void testSetAirline() {
-        entry1.setAirline(2);
-        assertEquals(entry1.getAirline(), 2);
-        entry2.setAirline(2);
+        entry1.setAirline(a2);
+        assertEquals(entry1.getAirline(), a2);
+        entry2.setAirline(a2);
         assertEquals(entry2.getAirline(), entry1.getAirline());
-        assertFalse(entry2.getAirline() == 1);
+        assertFalse(entry2.getAirline() == a1);
     }
 
     @Test
@@ -68,6 +75,5 @@ public class ViewFlightsListViewEntryTest {
         assertFalse((entry1.getDuration()).equals(entry2.getDuration()));
         assertEquals(entry1.getDuration(), "3hr");
     }
-
 
 }

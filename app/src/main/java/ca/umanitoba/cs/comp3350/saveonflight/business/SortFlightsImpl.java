@@ -54,8 +54,6 @@ public class SortFlightsImpl implements SortFlights {
         }
     }
 
-    // Removes and returns the number of null elements in the List
-
     /**
      * Checks each Flight in the list passed in for validity.
      *

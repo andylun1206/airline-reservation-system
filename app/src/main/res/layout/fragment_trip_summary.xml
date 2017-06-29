@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/editText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".5"
+            android:ems="15"
+            android:text="Departure Flight"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/departurePrice"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".5"
+            android:ems="10"
+            android:gravity="right"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum = "1"
+        android:layout_weight="0.02">
+        <ImageView
+            android:id="@+id/imageview_tripSummary1"
+            android:layout_width="wrap_content"
+            android:layout_height="69dp"
+            app:srcCompat="@mipmap/ic_aircanada"
+            android:layout_weight="0.1" />
+        <TextView
+            android:id="@+id/trip_summary_from1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.50"
+            android:ems="10"
+            android:text="From"
+            android:textSize="17sp"
+            android:gravity="center_vertical"
+            android:textAppearance="@style/TextAppearance.AppCompat" />
+
+        <TextView
+            android:id="@+id/trip_summary_to1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:layout_weight="0.50"
+            android:gravity="center_vertical"
+            android:textSize="17sp"
+            android:text="To"
+            android:textAppearance="@style/TextAppearance.AppCompat" />
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Departure Time:"
+            android:textSize="15sp"
+            android:layout_weight=".4"/>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Arrival Time:"
+            android:textSize="15sp"
+            android:layout_weight=".4"/>
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Duration:"
+            android:textSize="15sp"
+            android:layout_weight=".2"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="73dp"
+        android:orientation="horizontal"
+        android:weightSum = "1">
+
+        <TextView
+            android:id="@+id/trip_summary_dateDep1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:text="depart"
+            android:layout_weight=".4"
+            android:textAppearance="@style/TextAppearance.AppCompat"/>
+
+        <TextView
+            android:id="@+id/trip_summary_dateArrive1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".4"
+            android:ems="10"
+            android:text="arrive"
+            android:textAppearance="@style/TextAppearance.AppCompat"/>
+        <TextView
+            android:id="@+id/trip_summary_depDuration"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".2"
+            android:ems="10"
+            android:text="Duration"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+    <!--return flight-->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:layout_weight="0.84">
+
+    <LinearLayout
+        android:id="@+id/trip_summary_retFlight"
+        android:layout_width="match_parent"
+        android:layout_height="481dp"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/returnFlight"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:ems="10"
+                android:text="Return Flight"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/retPrice"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:ems="10"
+                android:gravity="right"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum = "1"
+            android:layout_weight="0.02">
+            <ImageView
+                android:id="@+id/imageview_tripSummary2"
+                android:layout_width="wrap_content"
+                android:layout_height="69dp"
+                app:srcCompat="@mipmap/ic_aircanada"
+                android:layout_weight="0.1"  />
+            <TextView
+                android:id="@+id/trip_summary_from2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.50"
+                android:ems="10"
+                android:text="From"
+                android:textSize="17sp"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/TextAppearance.AppCompat"  />
+
+            <TextView
+                android:id="@+id/trip_summary_to2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:layout_weight="0.50"
+                android:gravity="center_vertical"
+                android:textSize="17sp"
+                android:text="To"
+                android:textAppearance="@style/TextAppearance.AppCompat"  />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/retText1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Departure Time:"
+                android:textSize="15sp"
+                android:layout_weight=".4" />
+
+            <TextView
+                android:id="@+id/retText2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Arrival Time:"
+                android:textSize="15sp"
+                android:layout_weight=".4" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Duration:"
+                android:textSize="15sp"
+                android:layout_weight=".2"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:orientation="horizontal"
+            android:weightSum = "1">
+
+            <TextView
+                android:id="@+id/trip_summary_dateDep2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:text="depart"
+                android:layout_weight=".4"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+            <TextView
+                android:id="@+id/trip_summary_dateArrive2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".4"
+                android:ems="10"
+                android:text="arrive"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+            <TextView
+                android:id="@+id/trip_summary_retDuration"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".2"
+                android:ems="10"
+                android:text="Duration"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_weight=".05">
+
+        <TextView
+            android:id="@+id/editText2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:layout_weight=".5"
+            android:text="Total: "
+            android:textSize="17sp"/>
+
+        <TextView
+            android:id="@+id/view_trip_price"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".5"
+            android:ems="10"
+            android:gravity="right"
+            android:text="price"
+            android:textSize="17sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+             />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/button_modify_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Modify Search"
+            android:layout_weight=".5"/>
+
+        <Button
+            android:id="@+id/button_go_payment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Go to payment"
+            android:layout_weight=".5"/>
+    </LinearLayout>
+
+
+</LinearLayout>

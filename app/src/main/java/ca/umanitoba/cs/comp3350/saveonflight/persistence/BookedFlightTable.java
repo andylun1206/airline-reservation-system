@@ -14,7 +14,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  * @author Long Yu
  */
 
-public class BookedFlightTable implements DataAccess<BookedFlight> {
+public class BookedFlightTable implements BookedFlightAccess {
     private static ArrayList<BookedFlight> bookedFlights = null;
 
     public BookedFlightTable() {
@@ -23,7 +23,15 @@ public class BookedFlightTable implements DataAccess<BookedFlight> {
     public void initialize() {
         if (bookedFlights == null) {
             bookedFlights = new ArrayList<BookedFlight>();
+
+            if (TravellerTable.getTravellers() == null) {
+                new TravellerTable().initialize();
+            }
             ArrayList<Traveller> travellers = TravellerTable.getTravellers();
+
+            if (FlightTable.getFlights() == null) {
+                new FlightTable().initialize();
+            }
             ArrayList<Flight> flights = FlightTable.getFlights();
             bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(0)));
             bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(1)));
@@ -38,7 +46,7 @@ public class BookedFlightTable implements DataAccess<BookedFlight> {
 
     public boolean add(BookedFlight bookedFlight) {
         boolean result = true;
-        if (bookedFlight != null && bookedFlight.getTraveller().getTravellerID() != 0 && (!bookedFlight.getFlight().getFlightID().isEmpty() && !bookedFlight.getFlight().getDepartureTime().equals(null))) {
+        if (bookedFlight != null && bookedFlight.getTraveller().getTravellerID() != 0 && (!bookedFlight.getFlight().getFlightCode().isEmpty() && !bookedFlight.getFlight().getDepartureTime().equals(null))) {
             for (BookedFlight bookedFlight1 : bookedFlights) {
                 if (bookedFlight.equals(bookedFlight1))
                     result = false;
@@ -51,30 +59,6 @@ public class BookedFlightTable implements DataAccess<BookedFlight> {
         return result;
     }
 
-    public boolean update(BookedFlight bookedFlight) {
-        boolean isUpdated = false;
-        if(bookedFlight != null) {
-            int travelId = bookedFlight.getTraveller().getTravellerID();
-            String flightId = bookedFlight.getFlight().getFlightID();
-            int changes = 0;
-            int index = 0;
-            BookedFlight temp;
-            for (int i = 0; i < bookedFlights.size(); i++) {
-                temp = bookedFlights.get(i);
-                if (temp.getFlight().getFlightID().equals(flightId) && temp.getTraveller().getTravellerID() == travelId) {
-                    changes++;
-                    index = i;
-                }
-            }
-            if (changes != 0) {
-                bookedFlights.get(index).setFlight(bookedFlight.getFlight());
-                bookedFlights.get(index).setTraveller(bookedFlight.getTraveller());
-                isUpdated = true;
-            }
-        }
-        return isUpdated;
-    }
-
     public boolean remove(BookedFlight bookedFlight) {
         boolean result = false;
         int index;
@@ -84,7 +68,27 @@ public class BookedFlightTable implements DataAccess<BookedFlight> {
             result = true;
         }
         return result;
-
     }
 
+    @Override
+    public ArrayList<BookedFlight> searchByTraveller(Traveller t) {
+        ArrayList<BookedFlight> matches = new ArrayList<>();
+        for (BookedFlight bf : bookedFlights) {
+            if (bf.getTraveller().equals(t)) {
+                matches.add(bf);
+            }
+        }
+        return matches;
+    }
+
+    @Override
+    public ArrayList<BookedFlight> searchByFlight(Flight f) {
+        ArrayList<BookedFlight> matches = new ArrayList<>();
+        for (BookedFlight bf : bookedFlights) {
+            if (bf.getFlight().equals(f)) {
+                matches.add(bf);
+            }
+        }
+        return matches;
+    }
 }

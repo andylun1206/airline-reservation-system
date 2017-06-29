@@ -31,17 +31,7 @@ public class AccessAirlinesImpl implements AccessAirlines {
     }
 
     @Override
-    public boolean insertAirline(Airline airline) {
-        return airlineDB.add(airline);
-    }
-
-    @Override
-    public boolean updateAirline(Airline airline) {
-        return airlineDB.update(airline);
-    }
-
-    @Override
-    public boolean deleteAirline(Airline airline) {
-        return airlineDB.remove(airline);
+    public Airline getAirlineByName(String airline) {
+        return AirlineTable.findAirline(airline);
     }
 }

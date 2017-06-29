@@ -1,17 +1,10 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
-import android.os.Parcel;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static junit.framework.Assert.*;
 
 public class AirportTest {
     private final String CODE1 = "WPG01";
@@ -73,17 +66,5 @@ public class AirportTest {
         assertTrue(AIRPORT1.contains(match));                // Exact match should return true
         Airport subset = new Airport(CODE1.substring(0, 2));
         assertTrue(AIRPORT1.contains(subset));               // Subset match should return true
-    }
-
-    @Test
-    public void testParcelable() {
-        Parcel parcel = mock(Parcel.class);
-        when(parcel.readString()).thenReturn(AIRPORT1.getAirportCode());
-        assertNotNull(parcel);
-        AIRPORT1.writeToParcel(parcel, 0);
-        parcel.setDataPosition(0);
-        Airport parceledAirport = (Airport) Airport.CREATOR.createFromParcel(parcel);
-        assertEquals(parceledAirport, AIRPORT1);
-        parcel.recycle();
     }
 }

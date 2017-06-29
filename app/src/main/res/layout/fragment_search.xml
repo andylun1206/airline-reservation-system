@@ -13,39 +13,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/spinner_trip_type"
             android:entries="@array/trip_type"/>
+
     <ListView
-            android:id="@android:id/list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:smoothScrollbar="true"
-            android:scrollbars="vertical"/>
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:visibility="gone"
-            android:id="@+id/search_advanced_settings_checkboxes">
-        <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/search_nonstop"
-                android:id="@+id/checkBox_search_nonstop"
-                android:gravity="center"
-                android:layout_gravity="center_horizontal"/>
-        <Space
-                android:layout_width="10dp"
-                android:layout_height="10dp"/>
-        <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/search_refundable"
-                android:id="@+id/checkBox_search_refundable"
-                android:gravity="center"
-                android:layout_gravity="center_horizontal"/>
-    </LinearLayout>
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:scrollbars="vertical"
+        android:smoothScrollbar="true" />
+
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"

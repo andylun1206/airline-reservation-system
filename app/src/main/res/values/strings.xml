@@ -31,6 +31,24 @@
         <item>Return</item>
         <item>One Way</item>
     </string-array>
+    <string-array name="airport_list">
+        <item>Calgary YYC</item>
+        <item>Montréal YUL</item>
+        <item>Ottawa YOW</item>
+        <item>Québec YQB</item>
+        <item>Toronto YYZ</item>
+        <item>Vancouver YVC</item>
+        <item>Winnipeg YWG</item>
+    </string-array>
+    <string-array name="airline_list">
+        <item>Air Canada</item>
+        <item>West Jet</item>
+    </string-array>
+    <string-array name="class_list">
+        <item>First Class</item>
+        <item>Business Class</item>
+        <item>Economy Class</item>
+    </string-array>
     <string-array name="passenger_count">
         <item>1</item>
         <item>2</item>
@@ -62,4 +80,37 @@
     <string name="view_flight_sort_price">Price</string>
     <string name="view_flight_sort_time">Time</string>
     <string name="view_flight_sort_duration">Duration</string>
+    <string name="address_line">ADDRESS LINE</string>
+    <string name="address">Address</string>
+    <string name="city">CITY</string>
+    <string name="country">COUNTRY</string>
+    <string name="card_details">Card Details</string>
+    <string name="full_name">FULL NAME</string>
+    <string name="postal_code">POSTAL CODE</string>
+    <string name="purchase">Purchase</string>
+
+    <!-- Flight Summary Screen -->
+    <string name="flight_summary_title">Trip Summary</string>
+
+    <!-- Payment Screen -->
+    <string-array name="countries">
+        <item>Canada</item>
+    </string-array>
+    <string-array name="provinces">
+        <item>Alberta</item>
+        <item>British Columbia</item>
+        <item>Manitoba</item>
+        <item>New Brunswick</item>
+        <item>Newfoundland</item>
+        <item>Nova Scotia</item>
+        <item>Ontario</item>
+        <item>Prince Edward Island</item>
+        <item>Quebec</item>
+        <item>Saskatchewan</item>
+        <item>Northwest Territories</item>
+        <item>Nunavut</item>
+        <item>Yukon</item>
+    </string-array>
+    <string name="passenger_id">Passenger ID:</string>
+    <string name="booked_flights">Booked Flights</string>
 </resources>

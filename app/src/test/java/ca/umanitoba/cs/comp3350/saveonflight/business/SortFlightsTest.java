@@ -62,21 +62,59 @@ public class SortFlightsTest {
             e.printStackTrace();
         }
 
-        Airline airCanada = new Airline("Air Canada", R.mipmap.ic_aircanada);
-        Airline fake = new Airline("Fake", R.mipmap.ic_launcher);
-        Airline fake2 = new Airline("Fake2", R.mipmap.ic_launcher);
-        Airline gordAirlines = new Airline("Gord Airlines", R.mipmap.ic_launcher);
-        Airline westJet = new Airline("WestJet", R.mipmap.ic_westjet);
+        Airline airCanada = new Airline("Air Canada");
+        Airline fake = new Airline("Fake");
+        Airline fake2 = new Airline("Fake2");
+        Airline gordAirlines = new Airline("Gord Airlines");
+        Airline westJet = new Airline("WestJet");
 
         Airport ywg = new Airport("YWG");
         Airport yvr = new Airport("YVR");
         Airport yyc = new Airport("YYC");
 
-        f1 = new Flight(flightID1, d1, a1, westJet, ywg, yvr, 100.0, 100, 100);
-        f2 = new Flight(flightID1, d2, a2, fake, yvr, ywg, 200.0, 101, 100);
-        f3 = new Flight(flightID2, d3, a3, fake2, ywg, yyc, 300.0, 250);
-        f4 = new Flight(flightID2, d4, a4, gordAirlines, yyc, ywg, 350.0, 200);
-        f5 = new Flight(flightID3, d5, a5, airCanada, yvr, ywg, 100000.0, 5);
+        Flight.FlightBuilder builder = new Flight.FlightBuilder(flightID1, ywg, yvr);
+        f1 = builder.setDepartureTime(d1)
+                .setArrivalTime(a1)
+                .setAirline(westJet)
+                .setPrice(100.0)
+                .setCapacity(100)
+                .setSeatsTaken(100)
+                .build();
+        f2 = builder.setDepartureTime(d2)
+                .setArrivalTime(a2)
+                .setAirline(fake)
+                .setOrigin(yvr)
+                .setDestination(ywg)
+                .setPrice(200.0)
+                .setCapacity(101)
+                .build();
+        f3 = builder.setFlightId(flightID2)
+                .setDepartureTime(d3)
+                .setArrivalTime(a3)
+                .setAirline(fake2)
+                .setOrigin(ywg)
+                .setDestination(yyc)
+                .setPrice(300.0)
+                .setCapacity(250)
+                .setSeatsTaken(0)
+                .build();
+        f4 = builder.setDepartureTime(d4)
+                .setArrivalTime(a4)
+                .setAirline(gordAirlines)
+                .setOrigin(yyc)
+                .setDestination(ywg)
+                .setPrice(350.0)
+                .setCapacity(200)
+                .build();
+        f5 = builder.setFlightId(flightID3)
+                .setDepartureTime(d5)
+                .setArrivalTime(a5)
+                .setAirline(airCanada)
+                .setOrigin(yvr)
+                .setDestination(ywg)
+                .setPrice(100000.0)
+                .setCapacity(5)
+                .build();
 
         flights.add(f1);
         flights.add(f2);
@@ -153,7 +191,7 @@ public class SortFlightsTest {
         someInvalidFields.add(f3);
         sortFlights.sortFlightsBy(someInvalidFields, SortFlights.SortParameter.TIME);
 
-        // Flights with invalid fields should be put at the end of the
+        // Flights with invalid fields should be put at the end of the list
         assertEquals(f1, someInvalidFields.get(0));
         assertEquals(f3, someInvalidFields.get(1));
         assertEquals(f2, someInvalidFields.get(2));

@@ -1,4 +1,4 @@
-package ca.umanitoba.cs.comp3350.saveonflight.objects;
+package ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights;
 
 /**
  * SearchCriteriaListViewEntry.java

@@ -29,14 +29,6 @@ public class Traveller {
         return travellerID;
     }
 
-    public void setTravellerID(int travellerID) {
-        this.travellerID = travellerID;
-    }
-
-    public String toString() {
-        return "Traveller: " + travellerID + " " + name;
-    }
-
     public boolean equals(Object object) {
         boolean result = false;
 

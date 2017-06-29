@@ -13,7 +13,4 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
 public interface DataAccess<E> {
     void initialize();
-    boolean update(E e);
-    boolean add(E e);
-    boolean remove(E e);
 }

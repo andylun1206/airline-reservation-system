@@ -2,29 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group
-            android:id="@+id/nav_group_default"
-            android:checkableBehavior="single">
+        android:id="@+id/nav_group_default"
+        android:checkableBehavior="single">
         <item
-                android:id="@+id/nav_home"
-                android:icon="@drawable/ic_home"
-                android:title="@string/title_activity_home"/>
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/title_activity_home" />
         <item
-                android:id="@+id/nav_search"
-                android:icon="@drawable/ic_search"
-                android:title="@string/title_activity_search"/>
-    </group>
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_search"
+            android:title="@string/title_activity_search" />
 
-    <!--<item android:title="asdf">-->
-        <!--<menu>-->
-            <!--<group-->
-                    <!--android:id="@+id/nav_group_asdf"-->
-                    <!--android:checkableBehavior="single">-->
-                <!--<item-->
-                        <!--android:id="@+id/asdf"-->
-                        <!--android:icon="@drawable/ic_home"-->
-                        <!--android:title="@string/title_activity_home"/>-->
-            <!--</group>-->
-        <!--</menu>-->
-    <!--</item>-->
+        <item
+            android:id="@+id/nav_bookedflights"
+            android:icon="@drawable/ic_plane"
+            android:title="@string/booked_flights" />
+    </group>
 
 </menu>

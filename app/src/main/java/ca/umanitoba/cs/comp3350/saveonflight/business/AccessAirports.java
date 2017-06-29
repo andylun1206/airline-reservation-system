@@ -13,10 +13,5 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
  */
 public interface AccessAirports {
     List<Airport> getAirports();
-
-    boolean addAirport(Airport a);
-
-    boolean updateAirport(Airport a);
-
-    boolean deleteAirport(Airport a);
+    Airport findAirportByName(String aiport);
 }
