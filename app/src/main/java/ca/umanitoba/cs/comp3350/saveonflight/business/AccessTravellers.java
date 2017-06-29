@@ -16,8 +16,4 @@ public interface AccessTravellers {
     List<Traveller> getTravellers();
 
     boolean insertTraveller(Traveller traveller);
-
-    boolean updateTraveller(Traveller traveller);
-
-    boolean deleteTraveller(Traveller traveller);
 }

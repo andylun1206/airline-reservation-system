@@ -33,10 +33,6 @@ public class Traveller {
         this.travellerID = travellerID;
     }
 
-    public String toString() {
-        return "Traveller: " + travellerID + " " + name;
-    }
-
     public boolean equals(Object object) {
         boolean result = false;
 

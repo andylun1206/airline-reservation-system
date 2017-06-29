@@ -29,19 +29,4 @@ public class AccessAirportsImpl implements AccessAirports {
     public List<Airport> getAirports() {
         return AirportTable.getAirports();
     }
-
-    @Override
-    public boolean addAirport(Airport a) {
-        return airportDB.add(a);
-    }
-
-    @Override
-    public boolean updateAirport(Airport a) {
-        return airportDB.update(a);
-    }
-
-    @Override
-    public boolean deleteAirport(Airport a) {
-        return airportDB.remove(a);
-    }
 }

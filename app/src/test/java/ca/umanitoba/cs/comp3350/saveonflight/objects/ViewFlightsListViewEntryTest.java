@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ca.umanitoba.cs.comp3350.saveonflight.presentation.ViewFlightsListViewEntry;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights.ViewFlightsListViewEntry;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;

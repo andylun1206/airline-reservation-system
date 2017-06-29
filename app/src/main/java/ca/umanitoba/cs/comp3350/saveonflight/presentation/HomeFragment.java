@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewBookedFlights.ViewBookedFlightFragment;
 
 public class HomeFragment extends Fragment {
 
