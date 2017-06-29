@@ -68,10 +68,6 @@ public class Flight {
         return airline;
     }
 
-    public void setAirline(String airline) {
-        this.airline.setName(airline);
-    }
-
     public void setAirline(Airline airline) {
         this.airline = airline;
     }
@@ -80,9 +76,9 @@ public class Flight {
         return origin;
     }
 
-    public String getDepartAirportCode(){ return origin.getAirportCode(); }
+    public String getOriginAirportCode(){ return origin.getAirportCode(); }
 
-    public String getArrivalAirportCode(){ return destination.getAirportCode(); }
+    public String getDestinationAirportCode(){ return destination.getAirportCode(); }
 
     public void setOrigin(Airport origin) {
         this.origin = origin;

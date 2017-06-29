@@ -45,8 +45,6 @@ public class FlightTest {
                 .setCapacity(CAP)
                 .setFlightClass(FLIGHT_CLASS)
                 .build();
-
-        // TODO remove flight = new Flight(FLIGHT_ID, departureTime, arrivalTime, AIRLINE, ORIGIN, DEST, PRICE, CAP, 0, FLIGHT_CLASS);
     }
 
     @After
@@ -91,12 +89,10 @@ public class FlightTest {
 
     @Test
     public void testEquals() {
-        final Airline AC = new Airline("Air Canada", R.mipmap.ic_aircanada);
         cal.set(2017, 1, 1, 12, 1);
         final Date DEPART = cal.getTime();
         cal.set(2017, 1, 1, 15, 1);
         final Date ARRIVE = cal.getTime();
-
 
         Flight otherFlight = builder.setFlightId("AC101")
                 .setDepartureTime(DEPART)
@@ -205,6 +201,14 @@ public class FlightTest {
     public void testGetFlightTime() {
         final String EXPECTED = "12:00 - 15:00";
         assertEquals(EXPECTED, flight.getFlightTime());
+    }
+
+    @Test
+    public void testAirportCodes() {
+        assertEquals("YWG", flight.getOriginAirportCode());
+        assertFalse("YVR".equals(flight.getOriginAirportCode()));
+        assertEquals("YVR", flight.getDestinationAirportCode());
+        assertFalse("YWG".equals(flight.getDestinationAirportCode()));
     }
 
 }

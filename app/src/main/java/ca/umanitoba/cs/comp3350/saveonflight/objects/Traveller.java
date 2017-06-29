@@ -29,10 +29,6 @@ public class Traveller {
         return travellerID;
     }
 
-    public void setTravellerID(int travellerID) {
-        this.travellerID = travellerID;
-    }
-
     public boolean equals(Object object) {
         boolean result = false;
 

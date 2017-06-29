@@ -15,9 +15,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 
 import static junit.framework.Assert.assertEquals;
@@ -152,14 +154,33 @@ public class FlightTableTest {
         searchCriteria.setReturnDate(returnDate);
 
         searchCriteria.setNumTravellers(1);
-        ArrayList<Flight> flights = flightTable.findBySearchCriteria(searchCriteria);
+        searchCriteria.setMaxPrice(400.50);
+        Airline westJet = new Airline("WestJet", R.mipmap.ic_westjet);
+        searchCriteria.setPreferredAirlines(westJet);
+        searchCriteria.setPreferredClass(FlightClassEnum.ECONOMY);
 
+        ArrayList<Flight> flights = flightTable.findBySearchCriteria(searchCriteria);
         assertNotNull(flights);
         for (Flight f : flights) {
             assertEquals(ywg, f.getOrigin());
             assertEquals(yyz, f.getDestination());
             assertEquals(departureDate, f.getDepartureTime());
             assertTrue(f.getSeatsRemaining() >= 1);
+            assertTrue(f.getPrice() <= 400.50);
+            assertTrue(f.getAirline().equals(westJet));
+            assertEquals(FlightClassEnum.ECONOMY, f.getFlightClass());
+        }
+
+        searchCriteria.reverseFlightDirection();
+        ArrayList<Flight> returnFlights = flightTable.findBySearchCriteria(searchCriteria);
+        assertNotNull(returnFlights);
+        for (Flight f : flights) {
+            assertEquals(yyz, f.getOrigin());
+            assertEquals(ywg, f.getDestination());
+            assertTrue(f.getSeatsRemaining() >= 1);
+            assertTrue(f.getPrice() <= 400.50);
+            assertTrue(f.getAirline().equals(westJet));
+            assertEquals(FlightClassEnum.ECONOMY, f.getFlightClass());
         }
     }
 }

@@ -221,8 +221,8 @@ public class FlightTable implements FlightAccess {
         table = removeByNumTravellers(table, criteria.getNumTravellers());
         if (!(criteria.getMaxPrice() == 0.0))
             table = removeByMaxPrice(table, criteria.getMaxPrice());
-        if (!(criteria.getPreferredAirlines() == null))
-            table = removeByPreferredAirlines(table, criteria.getPreferredAirlines());
+        if (!(criteria.getPreferredAirline() == null))
+            table = removeByPreferredAirlines(table, criteria.getPreferredAirline());
         if (!(criteria.getPreferredClass() == null))
             table = removeByPreferredClass(table, criteria.getPreferredClass());
 
