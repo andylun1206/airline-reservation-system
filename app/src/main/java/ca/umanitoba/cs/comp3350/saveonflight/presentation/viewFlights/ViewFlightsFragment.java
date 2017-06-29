@@ -57,7 +57,6 @@ public class ViewFlightsFragment extends ListFragment {
 
         searchCriteria = SearchCriteriaArrayAdapter.getCriteria();
         flights = new AccessFlightsImpl().search(searchCriteria);
-
         title = getString(R.string.view_flights_flight_path, "$0", "$1");
         setTitle(flights.get(0).getOrigin().getAirportCode(), flights.get(0).getDestination().getAirportCode());
 

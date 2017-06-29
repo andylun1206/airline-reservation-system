@@ -18,7 +18,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
  * Created by longyu on 2017-06-27.
  */
 
-public class AirportTableSql {
+public class AirportTableSql implements AirportAccess{
     private Statement st1;
     private Connection c1;
     private ResultSet rs1,rs2;

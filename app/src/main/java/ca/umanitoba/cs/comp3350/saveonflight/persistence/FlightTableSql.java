@@ -253,9 +253,9 @@ public class FlightTableSql implements FlightAccess {
             table = new ArrayList<Flight>();
             try {
                 cmdString = "Select * from Flight Where AIRPORTID1='"
-                        + criteria.getOrigin() + "' AND AIRPORTID2='"
-                        + criteria.getDestination()
-                        + "' AND CAPACITY - SEATSTAKEN >= "
+                        + criteria.getOriginString() + "' AND AIRPORTID2='"
+                        + criteria.getDestinationString()
+                        + "' AND CAPACITY >= "
                         + criteria.getNumTravellers();
                 if (!(criteria.getMaxPrice() == 0.0))
                     cmdString += " AND PRICE <= " + criteria.getMaxPrice();

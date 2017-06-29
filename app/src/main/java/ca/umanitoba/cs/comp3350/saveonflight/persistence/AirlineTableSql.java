@@ -17,7 +17,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
  * Created by longyu on 2017-06-27.
  */
 
-public class AirlineTableSql implements DataAccess<Airline>{
+public class AirlineTableSql implements AirlineAccess{
     private Statement st1;
     private Connection c1;
     private ResultSet rs1, rs2, rs3, rs4, rs5, rs6, rs7, rs8;
