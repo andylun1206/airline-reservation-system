@@ -141,14 +141,6 @@ public class SearchCriteria {
         }
     }
 
-    public void reverseFlightDirection() {
-        Airport temp = getOrigin();
-        setOrigin(getDestination());
-        setDestination(temp);
-
-        setDepartureDate(getReturnDate());
-    }
-
     private Date parseDate(String date) {
         Date parsedDate = null;
 
