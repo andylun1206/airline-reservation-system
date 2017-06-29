@@ -14,4 +14,5 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 
 public interface AccessAirlines {
     List<Airline> getAirlines();
+    Airline getAirlineByName(String airline);
 }

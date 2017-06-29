@@ -13,4 +13,5 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
  */
 public interface AccessAirports {
     List<Airport> getAirports();
+    Airport findAirportByName(String aiport);
 }

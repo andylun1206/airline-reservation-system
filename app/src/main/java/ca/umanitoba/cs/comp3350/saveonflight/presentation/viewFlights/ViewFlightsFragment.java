@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchCriteriaHandler;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
@@ -130,7 +131,7 @@ public class ViewFlightsFragment extends ListFragment {
 
     public static void navgiateNextStep() {
         if (searchCriteria.isReturnTrip() && chosenFlights.size() == 1) {
-            searchCriteria.reverseFlightDirection();
+            searchCriteria = SearchCriteriaHandler.reverseFlightDirection(searchCriteria);
             flights = new AccessFlightsImpl().search(searchCriteria);
 
             if (flights != null && !flights.isEmpty()) {

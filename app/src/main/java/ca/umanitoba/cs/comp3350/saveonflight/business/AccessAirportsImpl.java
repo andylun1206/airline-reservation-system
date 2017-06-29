@@ -29,4 +29,9 @@ public class AccessAirportsImpl implements AccessAirports {
     public List<Airport> getAirports() {
         return AirportTable.getAirports();
     }
+
+    @Override
+    public Airport findAirportByName(String airport) {
+        return AirportTable.findAirport(airport);
+    }
 }

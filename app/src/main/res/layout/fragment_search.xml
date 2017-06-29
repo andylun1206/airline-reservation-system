@@ -23,32 +23,6 @@
         android:smoothScrollbar="true" />
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:visibility="gone"
-            android:id="@+id/search_advanced_settings_checkboxes">
-        <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/search_nonstop"
-                android:id="@+id/checkBox_search_nonstop"
-                android:gravity="center"
-                android:layout_gravity="center_horizontal"/>
-        <Space
-                android:layout_width="10dp"
-                android:layout_height="10dp"/>
-        <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/search_refundable"
-                android:id="@+id/checkBox_search_refundable"
-                android:gravity="center"
-                android:layout_gravity="center_horizontal"/>
-    </LinearLayout>
-    <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
