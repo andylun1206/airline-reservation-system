@@ -8,14 +8,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
  * @author Andy Lun
  */
 
-import android.view.View;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
-
-import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 public class SearchCriteria {
     private boolean returnTrip;
@@ -119,38 +112,5 @@ public class SearchCriteria {
 
     public void setReturnTrip(boolean isReturnTrip) {
         this.returnTrip = isReturnTrip;
-    }
-
-    public void setField(View row, String inputText, String title) {
-        if (row.getResources().getString(R.string.search_origin).equals(title)) {
-            setOrigin(new Airport(inputText));
-        } else if (row.getResources().getString(R.string.search_destination).equals(title)) {
-            setDestination(new Airport(inputText));
-        } else if (row.getResources().getString(R.string.search_departure_date).equals(title)) {
-            setDepartureDate(parseDate(inputText));
-        } else if (row.getResources().getString(R.string.search_return_date).equals(title)) {
-            setReturnDate(parseDate(inputText));
-        } else if (row.getResources().getString(R.string.search_num_passengers).equals(title)) {
-            setNumTravellers(Integer.parseInt(inputText));
-        } else if (row.getResources().getString(R.string.search_max_price).equals(title)) {
-            setMaxPrice(Double.parseDouble(inputText));
-        } else if (row.getResources().getString(R.string.search_airlines).equals(title)) {
-            setPreferredAirlines(new Airline(inputText, 0));
-        } else if (row.getResources().getString(R.string.search_class).equals(title)) {
-            setPreferredClass(FlightClassEnum.FIRST_CLASS);
-        }
-    }
-
-    private Date parseDate(String date) {
-        Date parsedDate = null;
-
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
-            parsedDate = sdf.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return parsedDate;
     }
 }

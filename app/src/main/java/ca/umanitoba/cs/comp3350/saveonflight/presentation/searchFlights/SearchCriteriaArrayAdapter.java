@@ -27,6 +27,10 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.business.SearchCriteriaHandler;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
 
@@ -76,7 +80,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
             ((Spinner) view.findViewById(R.id.spinner_search_criteria_input)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    criteria.setField(view, Integer.toString(position + 1), row.getTitle());
+                    setField(view, Integer.toString(position + 1), row.getTitle());
                 }
 
                 @Override
@@ -101,7 +105,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
                 public void afterTextChanged(Editable editable) {
                     String inputText = input.getText().toString().trim();
                     if (!inputText.isEmpty()) {
-                        criteria.setField(view, inputText, row.getTitle());
+                        setField(view, inputText, row.getTitle());
                     }
                 }
             });
@@ -243,5 +247,31 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
     private boolean missingRequiredField(Activity activity, int field) {
         ToastHandler.toastMandatoryField(activity, activity.getString(field));
         return false;
+    }
+
+    /**
+     * Maps the input to the correct search criteria based on row key
+     * @param row row of the search criteria
+     * @param inputText user input text
+     * @param key key to map field
+     */
+    private void setField(View row, String inputText, String key) {
+        if (row.getResources().getString(R.string.search_origin).equals(key)) {
+            criteria.setOrigin(new Airport(inputText));
+        } else if (row.getResources().getString(R.string.search_destination).equals(key)) {
+            criteria.setDestination(new Airport(inputText));
+        } else if (row.getResources().getString(R.string.search_departure_date).equals(key)) {
+            criteria.setDepartureDate(SearchCriteriaHandler.parseDate(inputText));
+        } else if (row.getResources().getString(R.string.search_return_date).equals(key)) {
+            criteria.setReturnDate(SearchCriteriaHandler.parseDate(inputText));
+        } else if (row.getResources().getString(R.string.search_num_passengers).equals(key)) {
+            criteria.setNumTravellers(Integer.parseInt(inputText));
+        } else if (row.getResources().getString(R.string.search_max_price).equals(key)) {
+            criteria.setMaxPrice(Double.parseDouble(inputText));
+        } else if (row.getResources().getString(R.string.search_airlines).equals(key)) {
+            criteria.setPreferredAirlines(new Airline(inputText, 0));
+        } else if (row.getResources().getString(R.string.search_class).equals(key)) {
+            criteria.setPreferredClass(FlightClassEnum.FIRST_CLASS);
+        }
     }
 }
