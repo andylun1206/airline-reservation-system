@@ -26,7 +26,7 @@ public class SearchCriteriaHandler {
             valid = missingRequiredField(activity, R.string.search_destination);
         } else if (!validateDepartureDate(criteria.getDepartureDate())) {
             valid = missingRequiredField(activity, R.string.search_departure_date);
-        } else if (!validateReturnDate(criteria.getDepartureDate(), criteria.getReturnDate())) {
+        } else if (criteria.isReturnTrip() && !validateReturnDate(criteria.getDepartureDate(), criteria.getReturnDate())) {
             valid = missingRequiredField(activity, R.string.search_return_date);
         } else if (!validatePassengers(criteria.getNumTravellers())) {
             valid = missingRequiredField(activity, R.string.search_num_passengers);
