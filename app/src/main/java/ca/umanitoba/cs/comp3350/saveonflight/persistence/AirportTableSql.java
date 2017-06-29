@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -59,7 +58,7 @@ public class AirportTableSql implements AirportAccess{
         }
         try {
             while (rs1.next()) {
-                airport = creatAirportFromResultSet(rs1);
+                airport = createAirportFromResultSet(rs1);
                 airports.add(airport);
             }
             rs1.close();
@@ -69,13 +68,8 @@ public class AirportTableSql implements AirportAccess{
 
         return airports;
     }
-    private Airport creatAirportFromResultSet(ResultSet rs) throws SQLException, ParseException {
-        Airport Airport;
-        String airportCode;
-        airportCode = rs.getString("AIRPORTID");
-
-        Airport = new Airport(airportCode);
-        return Airport;
+    private Airport createAirportFromResultSet(ResultSet rs) throws SQLException, ParseException {
+        return new Airport(rs.getString("AIRPORTID"));
     }
 
     public String processSQLError(Exception e) {
@@ -98,12 +92,19 @@ public class AirportTableSql implements AirportAccess{
     }
 
     public Airport findAirport(String city) {
-        Airport result = null;
-        for (Airport airport : airports) {
-            if (airport.getAirportCode().toLowerCase().contains(city.toLowerCase())) {
-                result = airport;
+        Airport airport = null;
+
+        try {
+            cmdString = "Select * from Airport where AIRPORTID='" + city + "'";
+            rs1 = st1.executeQuery(cmdString);
+
+            if (rs1 != null && rs1.next()) {
+                airport = createAirportFromResultSet(rs1);
             }
+        } catch (Exception e) {
+            processSQLError(e);
         }
-        return result;
+
+        return airport;
     }
 }
