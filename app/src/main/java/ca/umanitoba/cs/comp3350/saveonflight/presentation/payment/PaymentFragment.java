@@ -1,4 +1,4 @@
-package ca.umanitoba.cs.comp3350.saveonflight.presentation;
+package ca.umanitoba.cs.comp3350.saveonflight.presentation.payment;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -12,21 +12,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.stripe.android.model.Card;
-import com.stripe.android.view.CardInputWidget;
-
-import java.util.ArrayList;
-
 import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlights;
-import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlightsImpl;
-import ca.umanitoba.cs.comp3350.saveonflight.business.AccessTravellers;
-import ca.umanitoba.cs.comp3350.saveonflight.business.AccessTravellersImpl;
+import ca.umanitoba.cs.comp3350.saveonflight.business.*;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTable;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
+import com.stripe.android.model.Card;
+import com.stripe.android.view.CardInputWidget;
+
+import java.util.ArrayList;
 
 /**
  * Payment.java
@@ -69,7 +65,11 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         buttonPurchase = (Button) view.findViewById(R.id.button_payment);
         buttonPurchase.setOnClickListener(this);
 
-        flights = getArguments().getParcelableArrayList("flights_to_book");
+        AccessFlightsImpl flightAccess = new AccessFlightsImpl();
+        flights = new ArrayList<>();
+        for (String f : getArguments().getStringArrayList("flights_to_book")) {
+            flights.add(flightAccess.getFlightByCode(f));
+        }
 
         return view;
     }

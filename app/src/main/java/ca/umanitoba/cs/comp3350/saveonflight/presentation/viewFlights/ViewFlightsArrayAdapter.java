@@ -1,4 +1,4 @@
-package ca.umanitoba.cs.comp3350.saveonflight.presentation;
+package ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights;
 
 /**
  * ViewFlightsArrayAdapter.java
@@ -16,6 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.MainActivity;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
 
 import java.util.ArrayList;
 import java.util.Locale;

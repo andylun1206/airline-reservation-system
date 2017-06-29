@@ -1,4 +1,4 @@
-package ca.umanitoba.cs.comp3350.saveonflight.presentation;
+package ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights;
 
 /**
  * ViewFlightsFragment.java
@@ -21,6 +21,8 @@ import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchCriteriaArrayAdapter;
 
 import java.util.ArrayList;
 
@@ -32,7 +34,7 @@ public class ViewFlightsFragment extends ListFragment {
     private static ArrayList<ViewFlightsListViewEntry> flightList;
     private static ArrayList<Flight> flights;
     private static SearchCriteria searchCriteria;
-    private static ArrayList<Flight> chosenFlights = new ArrayList<>();
+    private static ArrayList<String> chosenFlights = new ArrayList<>();
 
     private static String title;
 
@@ -100,7 +102,7 @@ public class ViewFlightsFragment extends ListFragment {
         flightList.clear();
 
         for (Flight f : flights) {
-            flightList.add(new ViewFlightsListViewEntry(f.getFlightTime(), f.getPrice(), f.getAirline().getIcon(), f.getFlightID(), f.getFlightDuration()));
+            flightList.add(new ViewFlightsListViewEntry(f.getFlightTime(), f.getPrice(), f.getAirline().getIcon(), f.getFlightCode(), f.getFlightDuration()));
         }
 
         flightAdapter.notifyDataSetChanged();
@@ -113,8 +115,8 @@ public class ViewFlightsFragment extends ListFragment {
 
     public static void addChosenFlight(String flightId) {
         for (Flight flight : flights) {
-            if (flight.getFlightID().equals(flightId)) {
-                chosenFlights.add(flight);
+            if (flight.getFlightCode().equals(flightId)) {
+                chosenFlights.add(flight.getFlightCode());
             }
         }
     }

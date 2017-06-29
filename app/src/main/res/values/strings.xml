@@ -89,6 +89,9 @@
     <string name="postal_code">POSTAL CODE</string>
     <string name="purchase">Purchase</string>
 
+    <!-- Flight Summary Screen -->
+    <string name="flight_summary_title">Trip Summary</string>
+
     <!-- Payment Screen -->
     <string-array name="countries">
         <item>Canada</item>

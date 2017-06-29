@@ -46,7 +46,7 @@ public class BookedFlightTable implements BookedFlightAccess {
 
     public boolean add(BookedFlight bookedFlight) {
         boolean result = true;
-        if (bookedFlight != null && bookedFlight.getTraveller().getTravellerID() != 0 && (!bookedFlight.getFlight().getFlightID().isEmpty() && !bookedFlight.getFlight().getDepartureTime().equals(null))) {
+        if (bookedFlight != null && bookedFlight.getTraveller().getTravellerID() != 0 && (!bookedFlight.getFlight().getFlightCode().isEmpty() && !bookedFlight.getFlight().getDepartureTime().equals(null))) {
             for (BookedFlight bookedFlight1 : bookedFlights) {
                 if (bookedFlight.equals(bookedFlight1))
                     result = false;
@@ -63,11 +63,11 @@ public class BookedFlightTable implements BookedFlightAccess {
         boolean isUpdated = false;
         if (bookedFlight != null) {
             int travelId = bookedFlight.getTraveller().getTravellerID();
-            String flightId = bookedFlight.getFlight().getFlightID();
+            String flightId = bookedFlight.getFlight().getFlightCode();
             BookedFlight temp;
             for (int i = 0; i < bookedFlights.size(); i++) {
                 temp = bookedFlights.get(i);
-                if (temp.getFlight().getFlightID().equals(flightId) && temp.getTraveller().getTravellerID() == travelId) {
+                if (temp.getFlight().getFlightCode().equals(flightId) && temp.getTraveller().getTravellerID() == travelId) {
                     bookedFlights.set(i, bookedFlight);
                     isUpdated = true;
                 }

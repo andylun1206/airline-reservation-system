@@ -31,19 +31,8 @@ public class AccessFlightsImpl implements AccessFlights {
     }
 
     @Override
-    public boolean insertFlight(Flight flight) {
-        return flightsDB.add(flight);
-    }
-
-    @Override
-    public boolean updateFlight(Flight flight) {
-        return flightsDB.update(flight);
-
-    }
-
-    @Override
-    public boolean deleteFlight(Flight flight) {
-        return flightsDB.remove(flight);
+    public Flight getFlightByCode(String flightCode) {
+        return flightsDB.findByFlightCode(flightCode);
     }
 
     @Override

@@ -14,7 +14,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.flightSummary.ViewFlightsSummaryFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.payment.PaymentFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewBookedFlights.ViewBookedFlightFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights.ViewFlightsFragment;
 
 import java.util.ArrayList;
 
@@ -56,9 +60,9 @@ public class FragmentNavigation {
     /**
      * Switch context to flight summary fragment
      */
-    public static void flightSummary(ArrayList<Flight> flights) {
+    public static void flightSummary(ArrayList<String> flights) {
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("chosen_flights", flights);
+        bundle.putStringArrayList("chosen_flights", flights);
 
         Fragment viewFlights = new ViewFlightsSummaryFragment();
         viewFlights.setArguments(bundle);
@@ -70,9 +74,9 @@ public class FragmentNavigation {
     /**
      * Switch context to payment fragment
      */
-    public static void viewPayment(ArrayList<Flight> flights) {
+    public static void viewPayment(ArrayList<String> flights) {
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("flights_to_book", flights);
+        bundle.putStringArrayList("flights_to_book", flights);
 
         Fragment payment = new PaymentFragment();
         payment.setArguments(bundle);
