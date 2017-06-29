@@ -94,23 +94,6 @@ public class SearchFragment extends ListFragment {
             }
         });
 
-        ((CheckBox) view.findViewById(R.id.checkBox_search_nonstop)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                SearchCriteria criteria = SearchCriteriaArrayAdapter.getCriteria();
-                criteria.setNonstop(isChecked);
-                SearchCriteriaArrayAdapter.setCriteria(criteria);
-            }
-        });
-
-        ((CheckBox) view.findViewById(R.id.checkBox_search_refundable)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                SearchCriteria criteria = SearchCriteriaArrayAdapter.getCriteria();
-                criteria.setRefundable(isChecked);
-                SearchCriteriaArrayAdapter.setCriteria(criteria);
-            }
-        });
 
         view.findViewById(R.id.button_search_advance).setOnClickListener(new OnClickListener() {
             @Override
