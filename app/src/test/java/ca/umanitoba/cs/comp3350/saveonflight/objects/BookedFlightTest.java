@@ -26,14 +26,14 @@ public class BookedFlightTest {
     @Before
     public void setUp() {
         Flight.FlightBuilder builder = new Flight.FlightBuilder("AC01", new Airport("WPG"), new Airport("YVR"));
-        flight1 = builder.setAirline(new Airline("Air Canada", R.mipmap.ic_aircanada))
+        flight1 = builder.setAirline(new Airline("Air Canada"))
                 .setPrice(599.99)
                 .setCapacity(200)
                 .setSeatsTaken(2)
                 .setFlightClass(FlightClassEnum.FIRST_CLASS)
                 .build();
         flight2 = builder.setFlightId("WJ01")
-                .setAirline(new Airline("WestJet", R.mipmap.ic_westjet))
+                .setAirline(new Airline("WestJet"))
                 .setOrigin(new Airport("TRT"))
                 .setDestination(new Airport("WPG"))
                 .setPrice(300.00)

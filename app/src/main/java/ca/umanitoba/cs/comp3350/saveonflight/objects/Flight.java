@@ -68,10 +68,6 @@ public class Flight {
         return airline;
     }
 
-    public void setAirline(String airline) {
-        this.airline.setName(airline);
-    }
-
     public void setAirline(Airline airline) {
         this.airline = airline;
     }

@@ -40,7 +40,7 @@ public class FlightBuilderTest {
     @Test
     public void testSetAirline() {
         assertEquals(null, builder.build().getAirline());
-        Airline a = new Airline("Gord Airliens", R.mipmap.ic_launcher);
+        Airline a = new Airline("Gord Airliens");
         assertEquals(a, builder.setAirline(a).build().getAirline());
     }
 

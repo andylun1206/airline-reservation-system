@@ -10,13 +10,13 @@ import static junit.framework.Assert.*;
 public class AirlineTest {
     private final String AC = "Air Canada";
     private final String WJ = "WestJet";
-    private final Airline AIRLINE = new Airline(AC, R.mipmap.ic_aircanada);
+    private final Airline AIRLINE = new Airline(AC);
     private Airline airline2;
     private String wrongObject;
 
     @Before
     public void setUp() {
-        airline2 = new Airline(WJ, R.mipmap.ic_westjet);
+        airline2 = new Airline(WJ);
         wrongObject = "Air Canada";
     }
 
@@ -31,12 +31,6 @@ public class AirlineTest {
         assertEquals(WJ, airline2.getName());
         airline2.setName(AC);
         assertEquals(AC, airline2.getName());
-    }
-
-    @Test
-    public void testGetIcon() {
-        assertEquals(airline2.getIcon(), R.mipmap.ic_westjet);
-        assertFalse(AIRLINE.getIcon() == R.mipmap.ic_westjet);
     }
 
     @Test

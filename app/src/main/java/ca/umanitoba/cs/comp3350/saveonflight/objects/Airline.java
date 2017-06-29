@@ -8,15 +8,11 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
  * @author Andy Lun
  */
 
-import android.support.annotation.NonNull;
-
 public class Airline implements Comparable  {
     private String name;
-    private int icon;
 
-    public Airline(String name, int icon) {
+    public Airline(String name) {
         this.name = name;
-        this.icon = icon;
     }
 
     public String getName() {
@@ -26,12 +22,6 @@ public class Airline implements Comparable  {
     public void setName(String name) {
         this.name = name;
     }
-
-    public int getIcon() {
-        return icon;
-    }
-
-    public void setIcon(int icon) { this.icon = icon; }
 
     public boolean equals(Object object) {
         boolean result = false;
@@ -47,7 +37,7 @@ public class Airline implements Comparable  {
     }
 
     @Override
-    public int compareTo(@NonNull Object o) {
+    public int compareTo(Object o) {
         int result = 0;
 
         if (o instanceof Airline) {

@@ -155,7 +155,7 @@ public class FlightTableTest {
 
         searchCriteria.setNumTravellers(1);
         searchCriteria.setMaxPrice(400.50);
-        Airline westJet = new Airline("WestJet", R.mipmap.ic_westjet);
+        Airline westJet = new Airline("WestJet");
         searchCriteria.setPreferredAirlines(westJet);
         searchCriteria.setPreferredClass(FlightClassEnum.ECONOMY);
 
