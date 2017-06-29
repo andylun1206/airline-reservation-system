@@ -40,7 +40,7 @@ public class Services {
 //        new AccessTravellersImpl();
 //        new AccessBookedFlightsImpl();
 //    }
-    public static FlightAccess createFlightAccess(String dbName)
+    public static FlightAccess createFlightAccess()
     {
         if (flightAccessService == null)
         {
@@ -50,7 +50,7 @@ public class Services {
         }
         return flightAccessService;
     }
-    public static DataAccess<Airport> createAirportAccess(String dbName)
+    public static DataAccess<Airport> createAirportAccess()
     {
         if (airportAccessService == null)
         {
@@ -60,7 +60,7 @@ public class Services {
         }
         return  airportAccessService;
     }
-    public static AirlineAccess createAirlineAccess(String dbName)
+    public static AirlineAccess createAirlineAccess()
     {
         if (airlineAccessService == null)
         {
@@ -71,7 +71,7 @@ public class Services {
         return  airlineAccessService;
     }
 
-    public static TravellerAccess createTravellerAccess(String dbName)
+    public static TravellerAccess createTravellerAccess()
     {
         if (travellerAccessService == null)
         {
@@ -81,7 +81,7 @@ public class Services {
         }
         return travellerAccessService;
     }
-    public static BookedFlightAccess createBookedFlightAccess(String dbName){
+    public static BookedFlightAccess createBookedFlightAccess(){
         if (bookedFlightAccessService == null)
         {
             bookedFlightAccessService = new BookedFlightTableSql();

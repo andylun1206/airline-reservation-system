@@ -16,11 +16,11 @@ public class Main {
     public static void startUp()
     {
 
-        Services.createFlightAccess(dbName);
-        Services.createAirlineAccess(dbName);
-        Services.createAirportAccess(dbName);
-        Services.createBookedFlightAccess(dbName);
-        Services.createTravellerAccess(dbName);
+        Services.createFlightAccess();
+        Services.createAirlineAccess();
+        Services.createAirportAccess();
+        Services.createBookedFlightAccess();
+        Services.createTravellerAccess();
     }
 
     public static void shutDown()
