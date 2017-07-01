@@ -13,14 +13,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import java.util.ArrayList;
+
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.flightSummary.ViewFlightsSummaryFragment;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.payment.PaymentFragment;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchFragment;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewBookedFlights.ViewBookedFlightFragment;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights.ViewFlightsFragment;
-
-import java.util.ArrayList;
 
 public class FragmentNavigation {
     private static FragmentManager fragmentManager;

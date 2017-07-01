@@ -1,33 +1,31 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
-
-/**
- * Created by zhengyugu on 2017-06-08.
- */
-
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
+/**
+ * Created by longyu on 2017-06-29.
+ */
 
-public class TravellerTableTest {
-    private static List<Traveller> original;
-    private static TravellerAccess travellerTable;
+public class TravellerTableSqlTest {
+    private static ArrayList<Traveller> original;
+    private static TravellerTableSql travellerTable;
     private Traveller emptyNameCase = new Traveller(0, "");
     private Traveller validCase = new Traveller(10, "Amir");
 
     @BeforeClass
     public static void setUp() {
-        travellerTable = new TravellerTable();
-        travellerTable.initialize("");
+        travellerTable = new TravellerTableSql();
+        travellerTable.initialize(Main.getDBPathName());
         original = travellerTable.getTravellers();
     }
 
@@ -43,8 +41,7 @@ public class TravellerTableTest {
 
     @Test
     public void testAddNull() {
-        travellerTable.add(null);
-        assertEquals("add null but actually add something", original, travellerTable.getTravellers());
+        assertTrue("add null but actually add something", travellerTable.add(null) > 0);
     }
 
     @Test
@@ -55,13 +52,6 @@ public class TravellerTableTest {
 
     @Test
     public void testAddValid() {
-        assertTrue("Failed to add Cathay Pacific to airlineTable.", travellerTable.add(validCase));
-    }
-
-    @Test
-    public void testAddDuplicate() {
-        Traveller t = new Traveller(15, "Amir");
-        assertTrue("Failed to add unique airline 'dup'", travellerTable.add(t));
-        assertFalse("Succeeded adding a duplicate.", travellerTable.add(t));
+        assertTrue("Failed to add Cathay Pacific to airlineTable.", travellerTable.add(validCase) > 0);
     }
 }

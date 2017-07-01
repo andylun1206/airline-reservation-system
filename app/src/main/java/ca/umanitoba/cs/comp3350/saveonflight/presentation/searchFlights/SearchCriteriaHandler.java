@@ -1,16 +1,17 @@
 package ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights;
 
 import android.app.Activity;
-import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.business.AccessAirportsImpl;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
-import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessAirportsImpl;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
 
 /**
  * Created by Shenyun Wang on 2017-06-27.

@@ -12,17 +12,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.business.*;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTable;
-import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
+
 import com.stripe.android.model.Card;
 import com.stripe.android.view.CardInputWidget;
 
 import java.util.ArrayList;
+
+import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlights;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlightsImpl;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessTravellers;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessTravellersImpl;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
 
 /**
  * Payment.java
@@ -67,8 +72,14 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
 
         AccessFlightsImpl flightAccess = new AccessFlightsImpl();
         flights = new ArrayList<>();
-        for (String f : getArguments().getStringArrayList("flights_to_book")) {
-            flights.add(flightAccess.getFlightByCode(f));
+
+        ArrayList<String> flightCodes = getArguments().getStringArrayList("flights_to_book");
+        if (flightCodes != null) {
+            for (String f : flightCodes) {
+                flights.add(flightAccess.getFlightByCode(f));
+            }
+        } else {
+            Toast.makeText(getContext(), "Error: no flights to book", Toast.LENGTH_SHORT).show();
         }
 
         return view;
@@ -95,10 +106,10 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl();
 
         // First, create a new Traveller and store it in the database
-        int id = TravellerTable.nextId++;
-        Traveller traveller = new Traveller(id, etName.getText().toString());
+        Traveller traveller = new Traveller(-1, etName.getText().toString());
         AccessTravellers accessTravellers = new AccessTravellersImpl();
-        accessTravellers.insertTraveller(traveller);
+        int id = accessTravellers.insertTraveller(traveller);
+        traveller.setTravellerId(id);
 
         // Then, create the BookedFlight(s) objects
         ArrayList<BookedFlight> bfs = new ArrayList<>();

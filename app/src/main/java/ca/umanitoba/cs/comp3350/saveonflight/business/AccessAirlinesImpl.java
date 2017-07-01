@@ -2,9 +2,10 @@ package ca.umanitoba.cs.comp3350.saveonflight.business;
 
 import java.util.List;
 
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTable;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineAccess;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTableSql;
 
 /**
  * AccessAirlinesImpl.java
@@ -16,22 +17,22 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
  */
 
 public class AccessAirlinesImpl implements AccessAirlines {
-    private static DataAccess<Airline> airlineDB;
+    private static AirlineAccess airlineDB;
 
     public AccessAirlinesImpl() {
         if (airlineDB == null) {
-            airlineDB = new AirlineTable();
-            airlineDB.initialize();
+            airlineDB = new AirlineTableSql();
+            airlineDB.initialize(Main.getDBPathName());
         }
     }
 
     @Override
     public List<Airline> getAirlines() {
-        return AirlineTable.getAirlines();
+        return airlineDB.getAirlines();
     }
 
     @Override
     public Airline getAirlineByName(String airline) {
-        return AirlineTable.findAirline(airline);
+        return airlineDB.findAirline(airline);
     }
 }

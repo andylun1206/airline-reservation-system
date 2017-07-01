@@ -6,6 +6,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
+
 /**
  * BookedFlightTable.java
  * <p>
@@ -20,19 +21,21 @@ public class BookedFlightTable implements BookedFlightAccess {
     public BookedFlightTable() {
     }
 
-    public void initialize() {
+    public void initialize(String dbPath) {
         if (bookedFlights == null) {
             bookedFlights = new ArrayList<BookedFlight>();
 
-            if (TravellerTable.getTravellers() == null) {
-                new TravellerTable().initialize();
+            TravellerTable travellerTable = new TravellerTable();
+            if (travellerTable.getTravellers() == null) {
+                new TravellerTable().initialize("");
             }
-            ArrayList<Traveller> travellers = TravellerTable.getTravellers();
-
-            if (FlightTable.getFlights() == null) {
-                new FlightTable().initialize();
+            ArrayList<Traveller> travellers = travellerTable.getTravellers();
+            FlightTable flightTable = new FlightTable();
+            ArrayList<Flight> flights = flightTable.getFlights();
+            if (flights == null) {
+                new FlightTable().initialize("");
             }
-            ArrayList<Flight> flights = FlightTable.getFlights();
+            flights = flightTable.getFlights();
             bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(0)));
             bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(1)));
             bookedFlights.add(new BookedFlight(travellers.get(1), flights.get(2)));
@@ -70,7 +73,7 @@ public class BookedFlightTable implements BookedFlightAccess {
         return result;
     }
 
-    @Override
+
     public ArrayList<BookedFlight> searchByTraveller(Traveller t) {
         ArrayList<BookedFlight> matches = new ArrayList<>();
         for (BookedFlight bf : bookedFlights) {
@@ -81,7 +84,7 @@ public class BookedFlightTable implements BookedFlightAccess {
         return matches;
     }
 
-    @Override
+
     public ArrayList<BookedFlight> searchByFlight(Flight f) {
         ArrayList<BookedFlight> matches = new ArrayList<>();
         for (BookedFlight bf : bookedFlights) {
@@ -91,4 +94,9 @@ public class BookedFlightTable implements BookedFlightAccess {
         }
         return matches;
     }
+
+    public void close() {
+        System.out.println("Closed  database ");
+    }
+
 }

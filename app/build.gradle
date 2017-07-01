@@ -30,4 +30,5 @@ dependencies {
     compile 'com.android.support:support-v4:25.0.1'
     compile 'com.android.support:design:25.0.1'
     compile 'com.stripe:stripe-android:4.1.1'
+    compile files('lib/hsqldb.jar')
 }

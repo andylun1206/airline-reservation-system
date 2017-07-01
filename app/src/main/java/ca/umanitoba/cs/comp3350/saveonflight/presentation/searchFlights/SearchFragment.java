@@ -18,8 +18,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.*;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -107,6 +109,7 @@ public class SearchFragment extends ListFragment {
             public void onClick(View view) {
                 if (SearchCriteriaHandler.validate(getActivity(), SearchCriteriaArrayAdapter.getCriteria())) {
                     ArrayList<Flight> flightList = new AccessFlightsImpl().search(SearchCriteriaArrayAdapter.getCriteria());
+                    //ArrayList<Flight> flightList = new AccessFlightsImpl().getFlights();
                     if (flightList != null && !flightList.isEmpty()) {
                         FragmentNavigation.viewFlights();
                     } else {
@@ -154,5 +157,6 @@ public class SearchFragment extends ListFragment {
         criteriaAdapter.notifyDataSetChanged(!showAdvanced);
         showAdvanced = !showAdvanced;
     }
+
 
 }

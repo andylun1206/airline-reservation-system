@@ -20,7 +20,7 @@ public class TravellerTable implements TravellerAccess {
     public TravellerTable() {
     }
 
-    public void initialize() {
+    public void initialize(String dbPath) {
         if (travellers == null) {
             travellers = new ArrayList<Traveller>();
             travellers.add(new Traveller(0, "Jack"));
@@ -29,23 +29,21 @@ public class TravellerTable implements TravellerAccess {
         }
     }
 
-    public static ArrayList<Traveller> getTravellers() {
+    public ArrayList<Traveller> getTravellers() {
         return travellers;
     }
 
-    public boolean add(Traveller traveller) {
+    public int add(Traveller traveller) {
         boolean result = true;
-        if (traveller != null && traveller.getTravellerID() != 0) {
-
-            for (Traveller traveller1 : travellers) {
-                if (traveller.equals(traveller1))
-                    result = false;
-            }
-            if (result)
-                result = travellers.add(traveller);
-        } else {
-            result = false;
+        if (traveller != null) {
+            traveller.setTravellerId(nextId);
+            travellers.add(traveller);
         }
-        return result;
+        return nextId++;
     }
+    public void close()
+    {
+        System.out.println("Closed  database " );
+    }
+
 }
