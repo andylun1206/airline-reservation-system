@@ -19,11 +19,8 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTableSql;
 public class AccessBookedFlightsImpl implements AccessBookedFlights {
     private static BookedFlightAccess bookedFlightsDB;
 
-    public AccessBookedFlightsImpl() {
-        if (bookedFlightsDB == null) {
-            bookedFlightsDB = new BookedFlightTableSql();
-            bookedFlightsDB.initialize(Main.getDBPathName());
-        }
+    public AccessBookedFlightsImpl(BookedFlightAccess access) {
+        bookedFlightsDB = access;
     }
 
     @Override

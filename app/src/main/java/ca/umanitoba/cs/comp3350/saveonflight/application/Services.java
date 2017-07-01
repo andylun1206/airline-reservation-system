@@ -24,71 +24,79 @@ public class Services {
     private static TravellerAccess travellerAccessService = null;
     private static BookedFlightAccess bookedFlightAccessService = null;
 
-//    public static void openDatabase() {
-//        new AccessAirlinesImpl();
-//        new AccessAirportsImpl();
-//        new AccessFlightsImpl();
-//        new AccessTravellersImpl();
-//        new AccessBookedFlightsImpl();
-//    }
-    public static FlightAccess createFlightAccess()
-    {
-        if (flightAccessService == null)
-        {
+    public static FlightAccess createFlightAccess() {
+        if (flightAccessService == null) {
             flightAccessService = new FlightTableSql();
             flightAccessService.initialize(Main.getDBPathName());
-            //(Main.getDBPathName());
         }
         return flightAccessService;
     }
-    public static DataAccess<Airport> createAirportAccess()
-    {
-        if (airportAccessService == null)
-        {
+
+    public static AirportAccess createAirportAccess() {
+        if (airportAccessService == null) {
             airportAccessService = new AirportTableSql();
             airportAccessService.initialize(Main.getDBPathName());
-            //(Main.getDBPathName());
         }
-        return  airportAccessService;
-    }
-    public static AirlineAccess createAirlineAccess()
-    {
-        if (airlineAccessService == null)
-        {
-            airlineAccessService = new AirlineTableSql();
-            airlineAccessService.initialize(Main.getDBPathName());
-            //(Main.getDBPathName());
-        }
-        return  airlineAccessService;
+        return airportAccessService;
     }
 
-    public static TravellerAccess createTravellerAccess()
-    {
-        if (travellerAccessService == null)
-        {
+    public static AirlineAccess createAirlineAccess() {
+        if (airlineAccessService == null) {
+            airlineAccessService = new AirlineTableSql();
+            airlineAccessService.initialize(Main.getDBPathName());
+        }
+        return airlineAccessService;
+    }
+
+    public static TravellerAccess createTravellerAccess() {
+        if (travellerAccessService == null) {
             travellerAccessService = new TravellerTableSql();
             travellerAccessService.initialize(Main.getDBPathName());
-            //(Main.getDBPathName());
         }
         return travellerAccessService;
     }
-    public static BookedFlightAccess createBookedFlightAccess(){
-        if (bookedFlightAccessService == null)
-        {
+
+    public static BookedFlightAccess createBookedFlightAccess() {
+        if (bookedFlightAccessService == null) {
             bookedFlightAccessService = new BookedFlightTableSql();
             bookedFlightAccessService.initialize(Main.getDBPathName());
-            //(Main.getDBPathName());
         }
         return bookedFlightAccessService;
     }
 
-    public static void closeFlightAccess()
-    {
-        if (flightAccessService != null)
-        {
+    public static void closeFlightAccess() {
+        if (flightAccessService != null) {
             flightAccessService.close();
         }
         flightAccessService = null;
+    }
+
+    public static void closeAirportAccess() {
+        if (airportAccessService != null) {
+            airportAccessService.close();
+        }
+        airportAccessService = null;
+    }
+
+    public static void closeAirlineAccess() {
+        if (airlineAccessService != null) {
+            airlineAccessService.close();
+        }
+        airlineAccessService = null;
+    }
+
+    public static void closeTravellerAccess() {
+        if (travellerAccessService != null) {
+            travellerAccessService.close();
+        }
+        travellerAccessService = null;
+    }
+
+    public static void closeBookedFlightAccess() {
+        if (bookedFlightAccessService != null) {
+            bookedFlightAccessService.close();
+        }
+        bookedFlightAccessService = null;
     }
 
 }

@@ -25,7 +25,6 @@ public class BookedFlightTableSql implements BookedFlightAccess {
     private int updateCount;
     private String result;
     private static String EOF = "  ";
-    private List<BookedFlight> bookedFlights = null;
 
     public BookedFlightTableSql() {
     }
@@ -41,7 +40,8 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         }
     }
 
-    public List<BookedFlight> gets() {
+    public List<BookedFlight> getAll() {
+        List<BookedFlight> bfs = new ArrayList<>();
         BookedFlight bookedFlight;
         int id;
         String flightId, departureTime;
@@ -64,14 +64,14 @@ public class BookedFlightTableSql implements BookedFlightAccess {
                 flightId = rs1.getString("FLIGHTID");
                 departureTime = rs1.getString("DEPARTURETIME");
                 bookedFlight = new BookedFlight(travellerTableSql.findTraveller(id), flightTableSql.findFlight(flightId, departureTime));
-                bookedFlights.add(bookedFlight);
+                bfs.add(bookedFlight);
             }
             rs1.close();
         } catch (Exception e) {
             result = processSQLError(e);
         }
 
-        return bookedFlights;
+        return bfs;
     }
 
     public boolean add(BookedFlight bookedFlight) {

@@ -7,24 +7,27 @@ package ca.umanitoba.cs.comp3350.saveonflight.application;
 public class Main {
     public static final String dbName = "SOF";
     private static String dbPathName = "database/SOF";
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         startUp();
-        //shutDown();
+        shutDown();
         System.out.println("all done");
     }
 
-    public static void startUp()
-    {
+    public static void startUp() {
         Services.createFlightAccess();
         Services.createAirlineAccess();
         Services.createAirportAccess();
-        Services.createBookedFlightAccess();
         Services.createTravellerAccess();
+        Services.createBookedFlightAccess();
     }
 
-    public static void shutDown()
-    {
+    public static void shutDown() {
         Services.closeFlightAccess();
+        Services.closeAirlineAccess();
+        Services.closeAirportAccess();
+        Services.closeTravellerAccess();
+        Services.closeBookedFlightAccess();
     }
 
     public static String getDBPathName() {

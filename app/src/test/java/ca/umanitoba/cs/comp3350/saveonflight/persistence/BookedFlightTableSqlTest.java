@@ -1,6 +1,5 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -38,8 +37,7 @@ public class BookedFlightTableSqlTest {
         FlightTableSql flightTableSql = new FlightTableSql();
         flightTableSql.initialize(Main.getDBPathName());
         bookedFlightTable.initialize(Main.getDBPathName());
-        original = bookedFlightTable.gets();
-
+        original = bookedFlightTable.getAll();
     }
 
     @Test
