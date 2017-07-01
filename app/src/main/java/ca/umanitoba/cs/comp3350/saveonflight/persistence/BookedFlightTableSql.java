@@ -94,9 +94,8 @@ public class BookedFlightTableSql implements BookedFlightAccess {
 
     public ArrayList<BookedFlight> searchByTraveller(Traveller t) {
         ArrayList<BookedFlight> results = new ArrayList<BookedFlight>();
-        BookedFlight bookedFlight = null;
-        String values, flightId, departureTime;
-        int id;
+        BookedFlight bookedFlight;
+        String flightId, departureTime;
         result = null;
         try {
             cmdString = "Select * from BOOKEDFLIGHT WHERE ID =" + t.getTravellerID();

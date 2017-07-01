@@ -31,7 +31,6 @@ public class FlightTableSql implements FlightAccess {
     private String cmdString;
     private int updateCount;
     private String result;
-    private static String EOF = "  ";
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CANADA);
 
@@ -194,31 +193,6 @@ public class FlightTableSql implements FlightAccess {
         return true;
     }
 
-
-    public Airline getAirlineByName(String targetName) {
-        Airline airline = null;
-        String name;
-        int icon;
-        name = EOF;
-        icon = 0;
-
-        result = null;
-        try {
-            cmdString = "Select * from Airline where NAME='" + targetName + "'";
-            rs7 = st2.executeQuery(cmdString);
-        } catch (Exception e) {
-            processSQLError(e);
-        }
-        try {
-            name = rs7.getString("AIRLINENAME");
-            airline = new Airline(name);
-            rs7.close();
-        } catch (Exception e) {
-            result = processSQLError(e);
-        }
-        return airline;
-    }
-
     public ArrayList<Flight> findBySearchCriteria(SearchCriteria criteria) {
         ArrayList<Flight> table;
         Flight flight;
@@ -260,21 +234,19 @@ public class FlightTableSql implements FlightAccess {
         return null;
     }
 
-    //// TODO: 2017-06-25
     public Airport getAirportByID(String targetID) {
         Airport airport = null;
         String ID;
-        ID = EOF;
 
         result = null;
         try {
-            cmdString = "Select * from Airport where ='" + targetID + "'";
+            cmdString = "Select * from Airport where AIRPORTID='" + targetID + "'";
             rs8 = st3.executeQuery(cmdString);
         } catch (Exception e) {
             processSQLError(e);
         }
         try {
-            while (rs8.next()) {
+            if (rs8.next()) {
                 ID = rs8.getString("AIRPORTID");
                 airport = new Airport(ID);
             }
@@ -284,7 +256,6 @@ public class FlightTableSql implements FlightAccess {
         }
         return airport;
     }
-
 
     public String checkWarning(Statement st, int updateCount) {
         String result;
