@@ -68,17 +68,24 @@ public class AirlineTableSql implements AirlineAccess {
     }
 
     public Airline findAirline(String airlineName) {
-        /*
         Airline result = null;
-        if (airlineName != null) {
-            for (Airline airline : airlines) {
-                if (airline.getName().toLowerCase().contains(airlineName.toLowerCase())) {
-                    result = airline;
-                }
-            }
+
+        try {
+            cmdString = "Select * from AIRLINE where AIRLINENAME = '" + airlineName + "'";
+            rs1 = st1.executeQuery(cmdString);
+        } catch (Exception e) {
+            processSQLError(e);
         }
-        return result;*/
-        return null;
+        try {
+            if (rs1.next()) {
+                result = createAirlineFromResultSet(rs1);
+            }
+            rs1.close();
+        } catch (Exception e) {
+            processSQLError(e);
+        }
+
+        return result;
     }
 
     private Airline createAirlineFromResultSet(ResultSet rs) throws SQLException, ParseException {
@@ -99,7 +106,9 @@ public class AirlineTableSql implements AirlineAccess {
                 cmdString = "Insert into Airline " + " Values(" + values + ")";
                 updateCount = st1.executeUpdate(cmdString);
                 result = checkWarning(st1, updateCount);
-                added = true;
+                if (updateCount > 0) {
+                    added = true;
+                }
             } catch (Exception e) {
                 result = processSQLError(e);
             }

@@ -83,8 +83,10 @@ public class BookedFlightTableSql implements BookedFlightAccess {
                     + ",'" + bookedFlight.getFlight().getFlightCode() + "','" + bookedFlight.getFlight().getDepartureTimeString() + "'";
             cmdString = "Insert into BOOKEDFLIGHT " + " Values(" + values + ")";
             updateCount = st1.executeUpdate(cmdString);
-            added = true;
             result = checkWarning(st1, updateCount);
+            if (updateCount > 0) {
+                added = true;
+            }
         } catch (Exception e) {
             result = processSQLError(e);
         }

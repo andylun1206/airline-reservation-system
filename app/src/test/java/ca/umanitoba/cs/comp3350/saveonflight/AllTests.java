@@ -21,6 +21,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTableSqlTest;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTableTest;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTableSqlTest;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTableTest;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTableSqlTest;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTableTest;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTableSqlTest;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTableTest;
@@ -43,12 +44,11 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTableTest;
         DepartureTimeComparatorTest.class,
         DurationComparatorTest.class,
         PriceComparatorTest.class,
-        //AirlineTableSqlTest.class,
-        //AirportTableSqlTest.class,
-        //TravellerTableSqlTest.class,
-        //BookedFlightTableSqlTest.class,
-        //FlightTableSqlTest.class
-
+        AirlineTableSqlTest.class,
+        AirportTableSqlTest.class,
+        TravellerTableSqlTest.class,
+        BookedFlightTableSqlTest.class,
+        FlightTableSqlTest.class
 })
 
 public class AllTests {

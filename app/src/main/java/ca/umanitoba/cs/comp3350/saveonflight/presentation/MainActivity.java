@@ -42,13 +42,10 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         copyDatabaseToDevice();
         Main.startUp();
-
-        //Services.openDatabase();
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -153,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         displaySelectedScreen(item.getItemId());
         return true;
     }
+
     /*trying to connect database*/
     private void copyDatabaseToDevice() {
         final String DB_PATH = "db";
