@@ -33,7 +33,7 @@ public class AccessTravellersImpl implements AccessTravellers {
     }
 
     @Override
-    public boolean insertTraveller(Traveller traveller) {
+    public int insertTraveller(Traveller traveller) {
         return travellerDB.add(traveller);
     }
 }

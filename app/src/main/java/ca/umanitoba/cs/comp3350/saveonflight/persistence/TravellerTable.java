@@ -33,20 +33,13 @@ public class TravellerTable implements TravellerAccess {
         return travellers;
     }
 
-    public boolean add(Traveller traveller) {
+    public int add(Traveller traveller) {
         boolean result = true;
-        if (traveller != null && traveller.getTravellerID() != 0) {
-
-            for (Traveller traveller1 : travellers) {
-                if (traveller.equals(traveller1))
-                    result = false;
-            }
-            if (result)
-                result = travellers.add(traveller);
-        } else {
-            result = false;
+        if (traveller != null) {
+            traveller.setTravellerId(nextId);
+            travellers.add(traveller);
         }
-        return result;
+        return nextId++;
     }
     public void close()
     {

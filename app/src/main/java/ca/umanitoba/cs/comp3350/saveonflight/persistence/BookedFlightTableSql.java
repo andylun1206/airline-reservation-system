@@ -77,7 +77,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
 
     public boolean add(BookedFlight bookedFlight) {
         String values;
-        Boolean results = false;
+        boolean results = false;
         result = null;
         try {
             values = bookedFlight.getTraveller().getTravellerID()

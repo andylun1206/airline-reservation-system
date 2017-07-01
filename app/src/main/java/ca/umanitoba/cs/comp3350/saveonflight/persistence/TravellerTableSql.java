@@ -65,20 +65,26 @@ public class TravellerTableSql implements TravellerAccess {
         return travellers;
     }
 
-    public boolean add(Traveller traveller) {
+    public int add(Traveller traveller) {
         String values;
-        Boolean results = false;
+        int id = -1;
         result = null;
         try {
             values = "'" + traveller.getName() + "'";
             cmdString = "Insert into Traveller(NAME) " + " Values(" + values + ")";
             updateCount = st1.executeUpdate(cmdString);
             result = checkWarning(st1, updateCount);
-            results = true;
+
+            cmdString = "SELECT MAX(ID) FROM Traveller";
+            ResultSet rs = st1.executeQuery(cmdString);
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
         } catch (Exception e) {
             result = processSQLError(e);
         }
-        return results;
+
+        return id;
     }
 
     public Traveller findTraveller(int id) {

@@ -101,10 +101,10 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl();
 
         // First, create a new Traveller and store it in the database
-        int id = TravellerTable.nextId++;
-        Traveller traveller = new Traveller(id, etName.getText().toString());
+        Traveller traveller = new Traveller(-1, etName.getText().toString());
         AccessTravellers accessTravellers = new AccessTravellersImpl();
-        accessTravellers.insertTraveller(traveller);
+        int id = accessTravellers.insertTraveller(traveller);
+        traveller.setTravellerId(id);
 
         // Then, create the BookedFlight(s) objects
         ArrayList<BookedFlight> bfs = new ArrayList<>();
