@@ -2,15 +2,20 @@ package ca.umanitoba.cs.comp3350.saveonflight.application;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineAccess;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTableSql;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportAccess;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTableSql;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightAccess;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTableSql;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightAccess;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTableSql;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerAccess;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTableSql;
 
 /**
@@ -24,6 +29,22 @@ public class Services {
     private static TravellerAccess travellerAccessService = null;
     private static BookedFlightAccess bookedFlightAccessService = null;
 
+    /**
+     * Initializes the stub database
+     */
+    public static void initializeStubDatabase() {
+        new AirlineTable().initialize("");
+        new AirportTable().initialize("");
+        new FlightTable().initialize("");
+        new TravellerTable().initialize("");
+        new BookedFlightTable().initialize("");
+    }
+
+    /**
+     * Creates connection to the Flight table if it has not been created yet.
+     *
+     * @return the connection to the Flight table
+     */
     public static FlightAccess createFlightAccess() {
         if (flightAccessService == null) {
             flightAccessService = new FlightTableSql();
@@ -32,6 +53,11 @@ public class Services {
         return flightAccessService;
     }
 
+    /**
+     * Creates connection to the Airport table if it has not been created yet.
+     *
+     * @return the connection to the Airport table.
+     */
     public static AirportAccess createAirportAccess() {
         if (airportAccessService == null) {
             airportAccessService = new AirportTableSql();
@@ -40,6 +66,11 @@ public class Services {
         return airportAccessService;
     }
 
+    /**
+     * Creates the connection to the Airline table if it has not been created yet.
+     *
+     * @return the connection to the Airline Table.
+     */
     public static AirlineAccess createAirlineAccess() {
         if (airlineAccessService == null) {
             airlineAccessService = new AirlineTableSql();
@@ -48,6 +79,11 @@ public class Services {
         return airlineAccessService;
     }
 
+    /**
+     * Creates the connection to the Traveller table if it has not been created yet.
+     *
+     * @return the connection to the Traveller table.
+     */
     public static TravellerAccess createTravellerAccess() {
         if (travellerAccessService == null) {
             travellerAccessService = new TravellerTableSql();
@@ -56,6 +92,11 @@ public class Services {
         return travellerAccessService;
     }
 
+    /**
+     * Creates the connection to the BookedFlight table if it has not been created yet.
+     *
+     * @return the connection to the BookedFlight table.
+     */
     public static BookedFlightAccess createBookedFlightAccess() {
         if (bookedFlightAccessService == null) {
             bookedFlightAccessService = new BookedFlightTableSql();
@@ -64,6 +105,9 @@ public class Services {
         return bookedFlightAccessService;
     }
 
+    /**
+     * Closes the connection to the Flight table.
+     */
     public static void closeFlightAccess() {
         if (flightAccessService != null) {
             flightAccessService.close();
@@ -71,6 +115,9 @@ public class Services {
         flightAccessService = null;
     }
 
+    /**
+     * Closes the connection to the Airport table.
+     */
     public static void closeAirportAccess() {
         if (airportAccessService != null) {
             airportAccessService.close();
@@ -78,6 +125,9 @@ public class Services {
         airportAccessService = null;
     }
 
+    /**
+     * Closes the connection to the Airline table.
+     */
     public static void closeAirlineAccess() {
         if (airlineAccessService != null) {
             airlineAccessService.close();
@@ -85,6 +135,9 @@ public class Services {
         airlineAccessService = null;
     }
 
+    /**
+     * Closes the connection to the Traveller table.
+     */
     public static void closeTravellerAccess() {
         if (travellerAccessService != null) {
             travellerAccessService.close();
@@ -92,6 +145,9 @@ public class Services {
         travellerAccessService = null;
     }
 
+    /**
+     * Closes the connection to the BookedFlight table.
+     */
     public static void closeBookedFlightAccess() {
         if (bookedFlightAccessService != null) {
             bookedFlightAccessService.close();

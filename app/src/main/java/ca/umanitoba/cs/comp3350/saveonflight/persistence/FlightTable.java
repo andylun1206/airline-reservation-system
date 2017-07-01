@@ -33,19 +33,21 @@ public class FlightTable implements FlightAccess {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CANADA);
             flights = new ArrayList<Flight>();
 
-            if (AirlineTable.getAirlines() == null) {
+            AirlineTable airlineTable = new AirlineTable();
+            if (airlineTable.getAirlines() == null) {
                 new AirlineTable().initialize("");
             }
 
-            if (AirportTable.getAirports() == null) {
+            AirportTable airportTable = new AirportTable();
+            if (airportTable.getAirports() == null) {
                 new AirportTable().initialize("");
             }
 
             try {
-                Airline airCanada = AirlineTable.findAirline("Air Canada");
-                Airline westJet = AirlineTable.findAirline("WestJet");
-                Airport wpg = AirportTable.findAirport("Winnipeg YWG");
-                Airport tor = AirportTable.findAirport("Toronto YYZ");
+                Airline airCanada = airlineTable.findAirline("Air Canada");
+                Airline westJet = airlineTable.findAirline("WestJet");
+                Airport wpg = airportTable.findAirport("Winnipeg YWG");
+                Airport tor = airportTable.findAirport("Toronto YYZ");
 
                 Flight.FlightBuilder builder = new Flight.FlightBuilder("AC 256", wpg, tor);
 

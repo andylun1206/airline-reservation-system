@@ -19,6 +19,7 @@ import com.stripe.android.view.CardInputWidget;
 import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
@@ -103,7 +104,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
 
     public void paymentSuccess() {
         // Since we're not actually processing any payments... just add the BookedFlight(s) to the database
-        AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl();
+        AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl(Main.getBookedFlightAccess());
 
         // First, create a new Traveller and store it in the database
         Traveller traveller = new Traveller(-1, etName.getText().toString());

@@ -19,11 +19,8 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTableSql;
 public class AccessAirportsImpl implements AccessAirports {
     private static AirportAccess airportDB;
 
-    public AccessAirportsImpl() {
-        if (airportDB == null) {
-            airportDB = new AirportTableSql();
-            airportDB.initialize(Main.getDBPathName());
-        }
+    public AccessAirportsImpl(AirportAccess access) {
+        airportDB = access;
     }
 
     @Override

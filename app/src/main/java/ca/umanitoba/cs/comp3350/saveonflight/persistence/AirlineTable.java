@@ -12,7 +12,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
  * @author Long Yu
  */
 
-public class AirlineTable implements DataAccess<Airline> {
+public class AirlineTable implements AirlineAccess {
     private static ArrayList<Airline> airlines = null;
 
     public AirlineTable() {
@@ -26,11 +26,16 @@ public class AirlineTable implements DataAccess<Airline> {
         }
     }
 
-    public static ArrayList<Airline> getAirlines() {
+    public ArrayList<Airline> getAirlines() {
         return airlines;
     }
 
-    public static Airline findAirline(String airlineName) {
+    @Override
+    public boolean add(Airline airline) {
+        return airlines.add(airline);
+    }
+
+    public Airline findAirline(String airlineName) {
         Airline result = null;
 
         for (Airline airline : airlines) {

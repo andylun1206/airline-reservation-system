@@ -19,11 +19,8 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTableSql;
 public class AccessAirlinesImpl implements AccessAirlines {
     private static AirlineAccess airlineDB;
 
-    public AccessAirlinesImpl() {
-        if (airlineDB == null) {
-            airlineDB = new AirlineTableSql();
-            airlineDB.initialize(Main.getDBPathName());
-        }
+    public AccessAirlinesImpl(AirlineAccess access) {
+        airlineDB = access;
     }
 
     @Override

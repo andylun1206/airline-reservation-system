@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
@@ -51,7 +52,7 @@ public class ViewBookedFlightFragment extends ListFragment implements View.OnCli
         buttonFindFlights = (Button) view.findViewById(R.id.button_find_booked_flights);
         buttonFindFlights.setOnClickListener(this);
 
-        accessBookedFlights = new AccessBookedFlightsImpl();
+        accessBookedFlights = new AccessBookedFlightsImpl(Main.getBookedFlightAccess());
 
         flights = new ArrayList<>();
         flightList = new ArrayList<>();
