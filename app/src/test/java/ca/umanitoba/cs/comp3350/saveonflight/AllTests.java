@@ -43,11 +43,11 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTableTest;
         DepartureTimeComparatorTest.class,
         DurationComparatorTest.class,
         PriceComparatorTest.class,
-        AirlineTableSqlTest.class,
-        AirportTableSqlTest.class,
-        TravellerTableSqlTest.class,
+        //AirlineTableSqlTest.class,
+        //AirportTableSqlTest.class,
+        //TravellerTableSqlTest.class,
         //BookedFlightTableSqlTest.class,
-        FlightTableSqlTest.class
+        //FlightTableSqlTest.class
 
 })
 

@@ -66,6 +66,10 @@ public class TravellerTableSql implements TravellerAccess {
     }
 
     public int add(Traveller traveller) {
+        if (traveller == null) {
+            return -1;
+        }
+
         String values;
         int id = -1;
         result = null;

@@ -162,6 +162,8 @@ public class FlightTableSql implements FlightAccess {
     }
 
     public boolean add(Flight flight) {
+        boolean added = false;
+
         String values;
         String departDate;
         String arriveDate;
@@ -184,12 +186,14 @@ public class FlightTableSql implements FlightAccess {
                 cmdString = "Insert into Flight " + " Values(" + values + ")";
                 //System.out.println(cmdString);
                 updateCount = st1.executeUpdate(cmdString);
+                added = true;
                 result = checkWarning(st1, updateCount);
             } catch (Exception e) {
                 result = processSQLError(e);
             }
         }
-        return true;
+
+        return added;
     }
 
     public ArrayList<Flight> findBySearchCriteria(SearchCriteria criteria) {

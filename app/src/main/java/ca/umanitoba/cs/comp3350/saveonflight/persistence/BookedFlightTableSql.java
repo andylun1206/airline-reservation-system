@@ -76,19 +76,19 @@ public class BookedFlightTableSql implements BookedFlightAccess {
 
     public boolean add(BookedFlight bookedFlight) {
         String values;
-        boolean results = false;
+        boolean added = false;
         result = null;
         try {
             values = bookedFlight.getTraveller().getTravellerID()
                     + ",'" + bookedFlight.getFlight().getFlightCode() + "','" + bookedFlight.getFlight().getDepartureTimeString() + "'";
             cmdString = "Insert into BOOKEDFLIGHT " + " Values(" + values + ")";
             updateCount = st1.executeUpdate(cmdString);
+            added = true;
             result = checkWarning(st1, updateCount);
-            results = true;
         } catch (Exception e) {
             result = processSQLError(e);
         }
-        return results;
+        return added;
     }
 
     public ArrayList<BookedFlight> searchByTraveller(Traveller t) {
