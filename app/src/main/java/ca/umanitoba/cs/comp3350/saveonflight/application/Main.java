@@ -12,6 +12,8 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTableSql;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerAccess;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTable;
 
 import static ca.umanitoba.cs.comp3350.saveonflight.application.Main.DatabaseType.HSQL;
 import static ca.umanitoba.cs.comp3350.saveonflight.application.Main.DatabaseType.STUB;
@@ -96,6 +98,22 @@ public class Main {
                 break;
             case HSQL:
                 access = Services.createAirportAccess();
+                break;
+        }
+        return access;
+    }
+
+    /**
+     * @return the connection to the Traveller table.
+     */
+    public static TravellerAccess getTravellerAccess() {
+        TravellerAccess access = null;
+        switch (dbType) {
+            case STUB:
+                access = new TravellerTable();
+                break;
+            case HSQL:
+                access = Services.createTravellerAccess();
                 break;
         }
         return access;

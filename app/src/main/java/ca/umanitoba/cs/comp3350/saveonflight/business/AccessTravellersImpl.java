@@ -18,11 +18,8 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTableSql;
 public class AccessTravellersImpl implements AccessTravellers {
     private static TravellerAccess travellerDB;
 
-    public AccessTravellersImpl() {
-        if (travellerDB == null) {
-            travellerDB = new TravellerTableSql();
-            travellerDB.initialize(Main.getDBPathName());
-        }
+    public AccessTravellersImpl(TravellerAccess access) {
+        travellerDB = access;
     }
 
     @Override
