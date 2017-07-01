@@ -17,7 +17,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
  * Created by longyu on 2017-06-27.
  */
 
-public class AirlineTableSql implements AirlineAccess{
+public class AirlineTableSql implements AirlineAccess {
     private Statement st1;
     private Connection c1;
     private ResultSet rs1, rs2, rs3, rs4, rs5, rs6, rs7, rs8;
@@ -36,7 +36,7 @@ public class AirlineTableSql implements AirlineAccess{
 
     public void initialize(String dbPath) {
         airlines = new ArrayList<Airline>();
-        String url = "jdbc:hsqldb:file:" + dbPath;// TODO: 2017-06-24
+        String url = "jdbc:hsqldb:file:" + dbPath;
         try {
             Class.forName("org.hsqldb.jdbcDriver").newInstance();
             c1 = DriverManager.getConnection(url, "SA", "");
@@ -46,8 +46,8 @@ public class AirlineTableSql implements AirlineAccess{
         }
         System.out.println("Opened database ");
     }
-    public ArrayList<Airline> getAirlines() {
 
+    public ArrayList<Airline> getAirlines() {
         Airline airline;
         String name;
         int icon;
@@ -63,7 +63,7 @@ public class AirlineTableSql implements AirlineAccess{
         }
         try {
             while (rs1.next()) {
-                airline = creatAirlineFromResultSet(rs1);
+                airline = createAirlineFromResultSet(rs1);
                 airlines.add(airline);
             }
             rs1.close();
@@ -73,9 +73,10 @@ public class AirlineTableSql implements AirlineAccess{
 
         return airlines;
     }
+
     public Airline findAirline(String airlineName) {
         Airline result = null;
-        if(airlineName!=null) {
+        if (airlineName != null) {
             for (Airline airline : airlines) {
                 if (airline.getName().toLowerCase().contains(airlineName.toLowerCase())) {
                     result = airline;
@@ -84,7 +85,8 @@ public class AirlineTableSql implements AirlineAccess{
         }
         return result;
     }
-    private Airline creatAirlineFromResultSet(ResultSet rs) throws SQLException, ParseException {
+
+    private Airline createAirlineFromResultSet(ResultSet rs) throws SQLException, ParseException {
         Airline airline;
         String name;
         name = rs.getString("AIRLINENAME");
@@ -95,11 +97,11 @@ public class AirlineTableSql implements AirlineAccess{
     public boolean add(Airline airline) {
         String values;
         if (airline != null) {
-            if (airlines.contains(airline)){
+            if (airlines.contains(airline)) {
                 return false;
             }
             try {
-                values = "'" + airline.getName() +"'";
+                values = "'" + airline.getName() + "'";
                 cmdString = "Insert into Airline " + " Values(" + values + ")";
                 //System.out.println(cmdString);
                 updateCount = st1.executeUpdate(cmdString);
@@ -108,10 +110,9 @@ public class AirlineTableSql implements AirlineAccess{
                 result = processSQLError(e);
             }
         }
-        airlines=getAirlines();
+        airlines = getAirlines();
         return true;
     }
-
 
 
     public String checkWarning(Statement st, int updateCount) {
@@ -131,6 +132,7 @@ public class AirlineTableSql implements AirlineAccess{
         }
         return result;
     }
+
     public String processSQLError(Exception e) {
         String result = "*** SQL Error: " + e.getMessage();
 
@@ -139,6 +141,7 @@ public class AirlineTableSql implements AirlineAccess{
 
         return result;
     }
+
     public void close() {
         try {    // commit all changes to the database
             cmdString = "shutdown compact";

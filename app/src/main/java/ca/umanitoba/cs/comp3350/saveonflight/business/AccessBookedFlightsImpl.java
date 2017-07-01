@@ -31,11 +31,6 @@ public class AccessBookedFlightsImpl implements AccessBookedFlights {
     }
 
     @Override
-    public List<BookedFlight> getFlights() {
-        return bookedFlightsDB.gets();
-    }
-
-    @Override
     public boolean addBookedFlight(BookedFlight bf) {
         return bookedFlightsDB.add(bf);
     }

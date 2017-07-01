@@ -240,7 +240,6 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
     }
 
     private void setDefaults(final EditText input, String title) {
-
         if (title.equals("Origin")) {
             input.setText("Winnipeg YWG");
         } else if (title.equals("Destination")) {
@@ -248,7 +247,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
         } else if (title.equals("Departure Date")) {
             input.setText("2017-11-11");
         } else if (title.equals("Return Date")) {
-            input.setText("2017-11-11");
+            input.setText("2017-12-11");
         } else if (title.equals("Number of Travellers")) {
             input.setText("1");
         }

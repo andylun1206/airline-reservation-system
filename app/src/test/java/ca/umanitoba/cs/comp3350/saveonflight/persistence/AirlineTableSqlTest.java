@@ -48,20 +48,17 @@ public class AirlineTableSqlTest {
 
     @Test
     public void testAddNull() {
-        assertEquals("Test null fail", null, airlineTable.add(null));
-        Airline airline;
+        assertFalse("Test null fail", airlineTable.add(null));
     }
 
     @Test
     public void testAddEmpty() {
-        assertEquals("Test empty fail", null, airlineTable.add(new Airline("")));
-        Airline airline;
+        assertFalse("Test empty fail", airlineTable.add(new Airline("")));
     }
 
     @Test
     public void testAddSample() {
         assertTrue("Test sample fail", airlineTable.add(new Airline("WinnipegAirline")));
-        Airline airline;
     }
 
     @Test

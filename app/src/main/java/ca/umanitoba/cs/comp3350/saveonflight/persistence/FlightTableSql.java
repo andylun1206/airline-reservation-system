@@ -59,25 +59,23 @@ public class FlightTableSql implements FlightAccess {
     public ArrayList<Flight> getFlights() {
         flights = new ArrayList<Flight>();
         Flight flight;
-        String flightID, departureDate, arrivalDate, airline, origin, destination;
-        int capacity, seattaken, classInt;
-        double price;
-
-
         result = null;
 
+        ResultSet rs = null;
         try {
             cmdString = "Select * from FLIGHT";
-            rs1 = st1.executeQuery(cmdString);
+            rs = st1.executeQuery(cmdString);
         } catch (Exception e) {
             processSQLError(e);
         }
         try {
-            while (rs1.next()) {
-                flight = creatFlightFromResultSet(rs1);
-                flights.add(flight);
+            if (rs != null) {
+                while (rs.next()) {
+                    flight = createFlightFromResultSet(rs);
+                    flights.add(flight);
+                }
+                rs.close();
             }
-            rs1.close();
         } catch (Exception e) {
             result = processSQLError(e);
         }
@@ -100,39 +98,32 @@ public class FlightTableSql implements FlightAccess {
 
     public Flight findByFlightCode(String flightCode) {
         Flight flight = null;
-        String values, flightId, departureTime;
-        ;
-        int id;
         result = null;
         try {
             cmdString = "Select * from Flight where FLIGHTID = '" + flightCode + "'";
-            updateCount = st1.executeUpdate(cmdString);
+            rs1 = st1.executeQuery(cmdString);
             result = checkWarning(st1, updateCount);
         } catch (Exception e) {
             result = processSQLError(e);
         }
         try {
-            while (rs8.next()) {
-                flight = creatFlightFromResultSet(rs1);
+            while (rs1.next()) {
+                flight = createFlightFromResultSet(rs1);
             }
-            rs8.close();
+            rs1.close();
         } catch (Exception e) {
             result = processSQLError(e);
         }
         return flight;
     }
 
-    private Flight creatFlightFromResultSet(ResultSet rs) throws SQLException, ParseException {
+    private Flight createFlightFromResultSet(ResultSet rs) throws SQLException, ParseException {
         Flight flight;
         String flightID, departureDate, arrivalDate, airline, origin, destination;
         int capacity, seattaken, classInt;
         double price;
         Airline company;
         Airport departure,arrive;
-
-        ArrayList<Airline> airlines = new AirlineTableSql().getAirlines();
-
-        //ArrayList<Airline> airlines = airlineTableSql.getAirlines();
 
         flightID = rs.getString("FLIGHTID");
         departureDate = rs.getString("DEPARTURETIME");
@@ -156,20 +147,18 @@ public class FlightTableSql implements FlightAccess {
         departure = airportTableSql.findAirport(destination);
 
         Flight.FlightBuilder builder = new Flight.FlightBuilder(flightID, arrive, departure);
-        flight = builder.setAirline(company)
+        switch (classInt) {
+            case 0:
+
+        }
+
+        return builder.setAirline(company)
                 .setDepartureTime(sdf.parse(departureDate))
                 .setArrivalTime(sdf.parse(arrivalDate))
                 .setPrice(price)
                 .setCapacity(capacity)
+                .setSeatsTaken(seattaken)
                 .build();
-//        flight = new Flight(flightID, sdf.parse(departureDate), sdf.parse(arrivalDate), company, arrive, departure,
-//                price, capacity, seattaken, FlightClassEnum.values()[classInt]);
-
-
-//        flight = new Flight(flightID, sdf.parse(departureDate), sdf.parse(arrivalDate),
-//                getAirlineByName(airline), getAirportByID(origin), getAirportByID(destination),
-//                price, capacity, seattaken, FlightClassEnum.values()[classInt]);
-        return flight;
     }
 
 
@@ -181,7 +170,6 @@ public class FlightTableSql implements FlightAccess {
         if (flight != null) {
             departDate = sdf.format(flight.getDepartureTime());
             arriveDate = sdf.format(flight.getArrivalTime());
-
 
             try {
                 values = "'" + flight.getFlightCode()
@@ -285,7 +273,7 @@ public class FlightTableSql implements FlightAccess {
 //                    flight = new Flight(flightID, sdf.parse(departureDate), sdf.parse(arrivalDate),
 //                            getAirlineByName(airline),getAirportByID(origin),getAirportByID(destination),
 //                            price,capacity,seattaken,FlightClassEnum.values()[classInt]);
-                    flight = creatFlightFromResultSet(rs3);
+                    flight = createFlightFromResultSet(rs3);
                     table.add(flight);
                 }
                 rs2.close();

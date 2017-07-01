@@ -22,7 +22,7 @@ import static junit.framework.Assert.assertTrue;
 public class BookedFlightTableTest {
     private static ArrayList<BookedFlight> original;
     private static BookedFlightAccess bookedFlightTable;
-    ArrayList<Traveller> travellers = TravellerTable.getTravellers();
+    ArrayList<Traveller> travellers = new TravellerTable().getTravellers();
     FlightTable flightTable=new FlightTable();
     ArrayList<Flight> flights = flightTable.getFlights();
     private BookedFlight validCase = new BookedFlight(travellers.get(2), flights.get(7));

@@ -119,7 +119,6 @@ public class BookedFlightTableSql implements BookedFlightAccess {
                 bookedFlight = new BookedFlight(travellerTableSql.findTraveller(id), flightTableSql.findFlight(flightId, departureTime));
                 results.add(bookedFlight);
             }
-            rs2.close();
         } catch (Exception e) {
             result = processSQLError(e);
         }
@@ -129,8 +128,6 @@ public class BookedFlightTableSql implements BookedFlightAccess {
     public ArrayList<BookedFlight> searchByFlight(Flight f) {
         return null;
     }
-
-
 
     public String checkWarning(Statement st, int updateCount) {
         String result;

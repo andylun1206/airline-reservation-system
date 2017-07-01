@@ -24,13 +24,8 @@ public class AccessFlightsImpl implements AccessFlights {
     public AccessFlightsImpl() {
         if (flightsDB == null) {
             flightsDB = new FlightTableSql();
-            flightsDB = Services.createFlightAccess(Main.dbName);
+            flightsDB = Services.createFlightAccess();
         }
-    }
-
-    @Override
-    public ArrayList<Flight> getFlights() {
-        return flightsDB.getFlights();
     }
 
     @Override

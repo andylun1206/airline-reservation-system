@@ -9,13 +9,12 @@ public class Main {
     private static String dbPathName = "database/SOF";
     public static void main(String[] args){
         startUp();
-        shutDown();
+        //shutDown();
         System.out.println("all done");
     }
 
     public static void startUp()
     {
-
         Services.createFlightAccess();
         Services.createAirlineAccess();
         Services.createAirportAccess();

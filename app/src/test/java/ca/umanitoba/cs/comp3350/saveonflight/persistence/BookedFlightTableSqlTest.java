@@ -21,6 +21,7 @@ import static junit.framework.Assert.assertTrue;
  * Created by longyu on 2017-06-29.
  */
 
+/*
 public class BookedFlightTableSqlTest {
     private static List<BookedFlight> original;
     private static BookedFlightTableSql bookedFlightTable;
@@ -83,4 +84,4 @@ public class BookedFlightTableSqlTest {
             assertEquals(f, bf.getFlight());
         }
     }
-}
+}*/

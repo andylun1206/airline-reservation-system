@@ -15,7 +15,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  * @author Long Yu
  */
 
-public class BookedFlightTable implements DataAccess<BookedFlight>{
+public class BookedFlightTable implements BookedFlightAccess {
     private static ArrayList<BookedFlight> bookedFlights = null;
 
     public BookedFlightTable() {
@@ -25,12 +25,13 @@ public class BookedFlightTable implements DataAccess<BookedFlight>{
         if (bookedFlights == null) {
             bookedFlights = new ArrayList<BookedFlight>();
 
-            if (TravellerTable.getTravellers() == null) {
+            TravellerTable travellerTable = new TravellerTable();
+            if (travellerTable.getTravellers() == null) {
                 new TravellerTable().initialize("");
             }
-            ArrayList<Traveller> travellers = TravellerTable.getTravellers();
-            FlightTable flightTable=new FlightTable();
-            ArrayList<Flight> flights=flightTable.getFlights();
+            ArrayList<Traveller> travellers = travellerTable.getTravellers();
+            FlightTable flightTable = new FlightTable();
+            ArrayList<Flight> flights = flightTable.getFlights();
             if (flights == null) {
                 new FlightTable().initialize("");
             }
@@ -93,9 +94,9 @@ public class BookedFlightTable implements DataAccess<BookedFlight>{
         }
         return matches;
     }
-    public void close()
-    {
-        System.out.println("Closed  database " );
+
+    public void close() {
+        System.out.println("Closed  database ");
     }
 
 }

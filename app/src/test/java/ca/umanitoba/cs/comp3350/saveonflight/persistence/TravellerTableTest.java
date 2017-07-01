@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
@@ -18,7 +19,7 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 public class TravellerTableTest {
-    private static ArrayList<Traveller> original;
+    private static List<Traveller> original;
     private static TravellerAccess travellerTable;
     private Traveller emptyNameCase = new Traveller(0, "");
     private Traveller validCase = new Traveller(10, "Amir");
@@ -27,7 +28,7 @@ public class TravellerTableTest {
     public static void setUp() {
         travellerTable = new TravellerTable();
         travellerTable.initialize("");
-        original = TravellerTable.getTravellers();
+        original = travellerTable.getTravellers();
     }
 
     @Test
@@ -37,19 +38,19 @@ public class TravellerTableTest {
 
     @Test
     public void testInitialize() {
-        assertEquals("Initialize is not work", original, TravellerTable.getTravellers());
+        assertEquals("Initialize is not work", original, travellerTable.getTravellers());
     }
 
     @Test
     public void testAddNull() {
         travellerTable.add(null);
-        assertEquals("add null but actually add something", original, TravellerTable.getTravellers());
+        assertEquals("add null but actually add something", original, travellerTable.getTravellers());
     }
 
     @Test
     public void testAddEmptyName() {
         travellerTable.add(emptyNameCase);
-        assertEquals("adding none since object but it shouldn't add", original, TravellerTable.getTravellers());
+        assertEquals("adding none since object but it shouldn't add", original, travellerTable.getTravellers());
     }
 
     @Test

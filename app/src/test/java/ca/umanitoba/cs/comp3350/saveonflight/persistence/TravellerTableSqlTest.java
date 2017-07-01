@@ -47,7 +47,7 @@ public class TravellerTableSqlTest {
     @Test
     public void testAddEmptyName() {
         travellerTable.add(emptyNameCase);
-        assertEquals("adding none since object but it shouldn't add", original, TravellerTable.getTravellers());
+        assertEquals("adding none since object but it shouldn't add", original, travellerTable.getTravellers());
     }
 
     @Test

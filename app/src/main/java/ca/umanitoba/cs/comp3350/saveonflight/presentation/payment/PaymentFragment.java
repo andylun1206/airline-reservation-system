@@ -67,8 +67,14 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
 
         AccessFlightsImpl flightAccess = new AccessFlightsImpl();
         flights = new ArrayList<>();
-        for (String f : getArguments().getStringArrayList("flights_to_book")) {
-            flights.add(flightAccess.getFlightByCode(f));
+
+        ArrayList<String> flightCodes = getArguments().getStringArrayList("flights_to_book");
+        if (flightCodes != null) {
+            for (String f : flightCodes) {
+                flights.add(flightAccess.getFlightByCode(f));
+            }
+        } else {
+            Toast.makeText(getContext(), "Error: no flights to book", Toast.LENGTH_SHORT).show();
         }
 
         return view;

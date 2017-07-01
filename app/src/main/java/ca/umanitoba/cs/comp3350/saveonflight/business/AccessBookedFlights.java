@@ -16,8 +16,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  */
 
 public interface AccessBookedFlights {
-    List<BookedFlight> getFlights();
-
     boolean addBookedFlight(BookedFlight bf);
 
     ArrayList<BookedFlight> searchByTraveller(Traveller t);
