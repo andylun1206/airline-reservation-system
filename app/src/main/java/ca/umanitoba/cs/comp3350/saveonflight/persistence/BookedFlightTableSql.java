@@ -81,8 +81,8 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         result = null;
         try {
             values = bookedFlight.getTraveller().getTravellerID()
-                    + ",'" + bookedFlight.getFlight().getFlightCode() + "','" + bookedFlight.getFlight().getDepartureTime() + "'";
-            cmdString = "Insert into Users " + " Values(" + values + ")";
+                    + ",'" + bookedFlight.getFlight().getFlightCode() + "','" + bookedFlight.getFlight().getDepartureTimeString() + "'";
+            cmdString = "Insert into BOOKEDFLIGHT " + " Values(" + values + ")";
             updateCount = st1.executeUpdate(cmdString);
             result = checkWarning(st1, updateCount);
             results = true;
@@ -106,17 +106,16 @@ public class BookedFlightTableSql implements BookedFlightAccess {
             result = processSQLError(e);
         }
         try {
+            TravellerTableSql travellerTableSql = new TravellerTableSql();
+            travellerTableSql.initialize(Main.getDBPathName());
+            Traveller traveller = travellerTableSql.findTraveller(t.getTravellerID());
+
+            FlightTableSql flightTableSql = new FlightTableSql();
+            flightTableSql.initialize(Main.getDBPathName());
             while (rs2.next()) {
-                FlightTableSql flightTableSql = new FlightTableSql();
-                flightTableSql.initialize(Main.getDBPathName());
-                flightTableSql.getFlights();
-                TravellerTableSql travellerTableSql = new TravellerTableSql();
-                travellerTableSql.initialize(Main.getDBPathName());
-                travellerTableSql.getTravellers();
-                id = rs2.getInt("ID");
                 flightId = rs2.getString("FLIGHTID");
                 departureTime = rs2.getString("DEPARTURETIME");
-                bookedFlight = new BookedFlight(travellerTableSql.findTraveller(id), flightTableSql.findFlight(flightId, departureTime));
+                bookedFlight = new BookedFlight(traveller, flightTableSql.findFlight(flightId, departureTime));
                 results.add(bookedFlight);
             }
         } catch (Exception e) {

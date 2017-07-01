@@ -142,6 +142,11 @@ public class Flight {
         return departureTime;
     }
 
+    public String getDepartureTimeString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return sdf.format(departureTime);
+    }
+
     public void setDepartureTime(Date departureTime) {
         this.departureTime = departureTime;
     }

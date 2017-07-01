@@ -33,18 +33,13 @@ public class FlightTableSql implements FlightAccess {
     private String result;
     private static String EOF = "  ";
 
-
-    private ArrayList<Flight> flights = null;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CANADA);
-    //AirlineTableSql airlineTableSql;
+
     public FlightTableSql() {
     }
 
     public void initialize(String dbPath) {
-        //airlineTableSql = new AirlineTableSql();
-        //airlineTableSql.initialize(dbPath);
-
-        String url = "jdbc:hsqldb:file:" + dbPath;// TODO: 2017-06-24
+        String url = "jdbc:hsqldb:file:" + dbPath;
         try {
             Class.forName("org.hsqldb.jdbcDriver").newInstance();
             c1 = DriverManager.getConnection(url, "SA", "");
@@ -57,7 +52,7 @@ public class FlightTableSql implements FlightAccess {
     }
 
     public ArrayList<Flight> getFlights() {
-        flights = new ArrayList<Flight>();
+        ArrayList<Flight> flights = new ArrayList<Flight>();
         Flight flight;
         result = null;
 
@@ -82,18 +77,30 @@ public class FlightTableSql implements FlightAccess {
 
         return flights;
     }
-    public Flight findFlight(String flightId, String departureTime) throws ParseException {
-        Flight result = null;
 
-        for (Flight flight : flights) {
-            if (flight.getFlightCode().toLowerCase().contains(flightId.toLowerCase())) {
-                if ((flight.getDepartureTime()).compareTo(sdf.parse(departureTime)) == 0) {
-                    result = flight;
+    public Flight findFlight(String flightId, String departureTime) throws ParseException {
+        Flight flight = null;
+        ResultSet rs = null;
+
+        try {
+            cmdString = "Select * from FLIGHT where FLIGHTID = '" + flightId + "'" +
+                    " AND DEPARTURETIME = '" + departureTime + "'";
+            rs = st1.executeQuery(cmdString);
+        } catch (Exception e) {
+            processSQLError(e);
+        }
+        try {
+            if (rs != null) {
+                while (rs.next()) {
+                    flight = createFlightFromResultSet(rs);
+                    rs.close();
                 }
             }
+        } catch (Exception e) {
+            result = processSQLError(e);
         }
 
-        return result;
+        return flight;
     }
 
     public Flight findByFlightCode(String flightCode) {
@@ -123,7 +130,7 @@ public class FlightTableSql implements FlightAccess {
         int capacity, seattaken, classInt;
         double price;
         Airline company;
-        Airport departure,arrive;
+        Airport departure, arrive;
 
         flightID = rs.getString("FLIGHTID");
         departureDate = rs.getString("DEPARTURETIME");
@@ -147,11 +154,6 @@ public class FlightTableSql implements FlightAccess {
         departure = airportTableSql.findAirport(destination);
 
         Flight.FlightBuilder builder = new Flight.FlightBuilder(flightID, arrive, departure);
-        switch (classInt) {
-            case 0:
-
-        }
-
         return builder.setAirline(company)
                 .setDepartureTime(sdf.parse(departureDate))
                 .setArrivalTime(sdf.parse(arrivalDate))
@@ -160,7 +162,6 @@ public class FlightTableSql implements FlightAccess {
                 .setSeatsTaken(seattaken)
                 .build();
     }
-
 
     public boolean add(Flight flight) {
         String values;
@@ -209,7 +210,6 @@ public class FlightTableSql implements FlightAccess {
             processSQLError(e);
         }
         try {
-
             name = rs7.getString("AIRLINENAME");
             airline = new Airline(name);
             rs7.close();
@@ -218,21 +218,8 @@ public class FlightTableSql implements FlightAccess {
         }
         return airline;
     }
-    public ArrayList<Flight> findBySearchCriteria(SearchCriteria criteria) {
 
-//        String flightID,departureDate,arrivalDate,airline,origin,destination;
-//        int capacity,seattaken,classInt;
-//        double price;
-//        flightID = EOF;
-//        departureDate =EOF;
-//        arrivalDate = EOF;
-//        airline = EOF;
-//        origin = EOF;
-//        destination = EOF;
-//        price = 0;
-//        capacity = 0;
-//        seattaken = 0;
-//        classInt = 0;
+    public ArrayList<Flight> findBySearchCriteria(SearchCriteria criteria) {
         ArrayList<Flight> table;
         Flight flight;
         result = null;
@@ -258,25 +245,10 @@ public class FlightTableSql implements FlightAccess {
             }
             try {
                 while (rs3.next()) {
-//                    flightID = rs3.getString(0);
-//                    departureDate = rs3.getString(1);
-//                    arrivalDate = rs3.getString(2);
-//                    airline = rs3.getString(3);
-//                    origin = rs3.getString(4);
-//                    destination = rs3.getString(5);
-//                    price = rs3.getDouble(6);
-//                    capacity = rs3.getInt(7);
-//                    seattaken = rs3.getInt(8);
-//                    classInt = rs3.getInt(9);
-//
-//
-//                    flight = new Flight(flightID, sdf.parse(departureDate), sdf.parse(arrivalDate),
-//                            getAirlineByName(airline),getAirportByID(origin),getAirportByID(destination),
-//                            price,capacity,seattaken,FlightClassEnum.values()[classInt]);
                     flight = createFlightFromResultSet(rs3);
                     table.add(flight);
                 }
-                rs2.close();
+                rs3.close();
             } catch (Exception e) {
                 result = processSQLError(e);
             }
@@ -287,6 +259,7 @@ public class FlightTableSql implements FlightAccess {
 
         return null;
     }
+
     //// TODO: 2017-06-25
     public Airport getAirportByID(String targetID) {
         Airport airport = null;

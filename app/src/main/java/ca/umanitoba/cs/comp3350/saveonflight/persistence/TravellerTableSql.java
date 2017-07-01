@@ -10,23 +10,25 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
- /**
+
+/**
  * Created by zhengyugu on 2017-06-28.
  */
 
 public class TravellerTableSql implements TravellerAccess {
     private Statement st1;
     private Connection c1;
-    private ResultSet rs1,rs2,rs3;
+    private ResultSet rs1, rs2, rs3;
     private String cmdString;
     private int updateCount;
     private String result;
     private static String EOF = "  ";
     private ArrayList<Traveller> travellers = null;
 
-    public TravellerTableSql(){}
+    public TravellerTableSql() {
+    }
 
-    public void initialize(String dbPath){
+    public void initialize(String dbPath) {
         String url = "jdbc:hsqldb:file:" + dbPath;
         try {
             Class.forName("org.hsqldb.jdbcDriver").newInstance();
@@ -36,102 +38,90 @@ public class TravellerTableSql implements TravellerAccess {
             processSQLError(e);
         }
     }
+
     public ArrayList<Traveller> getTravellers() {
         Traveller traveller;
         int ID;
         String name;
         result = null;
-        try
-        {
+        try {
             cmdString = "SELECT * FROM TRAVELLER";
             rs1 = st1.executeQuery(cmdString);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             processSQLError(e);
         }
-        try
-        {
-            while (rs1.next())
-            {
+        try {
+            while (rs1.next()) {
                 ID = rs1.getInt("ID");
                 name = rs1.getString("NAME");
-                traveller = new Traveller(ID,name);
+                traveller = new Traveller(ID, name);
 
             }
             rs1.close();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             result = processSQLError(e);
         }
 
         return travellers;
     }
+
     public boolean add(Traveller traveller) {
         String values;
         Boolean results = false;
         result = null;
         try {
-            values = traveller.getTravellerID()
-                    + ",'" + traveller.getName() + "'";
-            cmdString = "Insert into Traveller " + " Values(" + values + ")";
+            values = "'" + traveller.getName() + "'";
+            cmdString = "Insert into Traveller(NAME) " + " Values(" + values + ")";
             updateCount = st1.executeUpdate(cmdString);
             result = checkWarning(st1, updateCount);
             results = true;
-
         } catch (Exception e) {
             result = processSQLError(e);
         }
         return results;
     }
-     public Traveller findTraveller(int id) {
-         Traveller result = null;
 
-         try {
-             cmdString = "Select * from Traveller where ID=" + id ;
-             rs1 = st1.executeQuery(cmdString);
+    public Traveller findTraveller(int id) {
+        Traveller result = null;
 
-             if (rs1 != null && rs1.next()) {
-                 result = createTravellerFromResultSet(rs1);
-             }
-         } catch (Exception e) {
-             processSQLError(e);
-         }
+        try {
+            cmdString = "Select * from Traveller where ID=" + id;
+            rs1 = st1.executeQuery(cmdString);
 
-         return result;
+            if (rs1 != null && rs1.next()) {
+                result = createTravellerFromResultSet(rs1);
+            }
+        } catch (Exception e) {
+            processSQLError(e);
+        }
 
-     }
-     private Traveller createTravellerFromResultSet(ResultSet rs) throws SQLException, ParseException {
-         return new Traveller(rs.getInt("ID"),rs.getString("NAME"));
-     }
+        return result;
 
-    public String checkWarning(Statement st, int updateCount)
-    {
+    }
+
+    private Traveller createTravellerFromResultSet(ResultSet rs) throws SQLException, ParseException {
+        return new Traveller(rs.getInt("ID"), rs.getString("NAME"));
+    }
+
+    public String checkWarning(Statement st, int updateCount) {
         String result;
 
         result = null;
-        try
-        {
+        try {
             SQLWarning warning = st.getWarnings();
-            if (warning != null)
-            {
+            if (warning != null) {
                 result = warning.getMessage();
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             result = processSQLError(e);
         }
-        if (updateCount != 1)
-        {
+        if (updateCount != 1) {
             result = "Tuple not inserted correctly.";
         }
         return result;
     }
 
-    public String processSQLError(Exception e)
-    {
+    public String processSQLError(Exception e) {
         String result = "*** SQL Error: " + e.getMessage();
 
         // Remember, this will NOT be seen by the user!
@@ -139,16 +129,13 @@ public class TravellerTableSql implements TravellerAccess {
 
         return result;
     }
-    public void close()
-    {
-        try
-        {	// commit all changes to the database
+
+    public void close() {
+        try {    // commit all changes to the database
             cmdString = "shutdown compact";
             rs2 = st1.executeQuery(cmdString);
             c1.close();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             processSQLError(e);
         }
         System.out.println("Closed database ");
