@@ -68,7 +68,7 @@ public class AirlineTableSqlTest {
 
     @Test
     public void testInitialize() {
-        assertEquals("Initialize is not work", original, AirlineTable.getAirlines());
+        assertEquals("Initialize is not work", original, airlineTable.getAirlines());
     }
 
 }

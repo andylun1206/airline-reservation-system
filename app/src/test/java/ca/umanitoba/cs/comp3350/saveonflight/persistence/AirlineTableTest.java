@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessAirlines;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 
 import static junit.framework.Assert.assertEquals;
@@ -20,13 +21,13 @@ import static junit.framework.Assert.assertTrue;
 
 public class AirlineTableTest {
     private static ArrayList<Airline> original;
-    private static DataAccess<Airline> airlineTable;
+    private static AirlineAccess airlineTable;
 
     @BeforeClass
     public static void setUp() {
         airlineTable = new AirlineTable();
         airlineTable.initialize("");
-        original = AirlineTable.getAirlines();
+        original = airlineTable.getAirlines();
     }
 
     @Test
@@ -36,7 +37,7 @@ public class AirlineTableTest {
 
     @Test
     public void testInitialize() {
-        assertEquals("Initialize is not work", original, AirlineTable.getAirlines());
+        assertEquals("Initialize is not work", original, airlineTable.getAirlines());
     }
 
 }
