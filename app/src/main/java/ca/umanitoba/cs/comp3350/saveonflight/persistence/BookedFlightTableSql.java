@@ -1,6 +1,5 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;

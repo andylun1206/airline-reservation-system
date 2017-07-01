@@ -4,9 +4,7 @@ import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerAccess;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTableSql;
 
 /**

@@ -5,9 +5,7 @@ import java.util.List;
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportAccess;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTableSql;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
 
 /**
  * AccessAirportsImpl.java

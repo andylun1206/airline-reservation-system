@@ -2,12 +2,10 @@ package ca.umanitoba.cs.comp3350.saveonflight.business;
 
 import java.util.ArrayList;
 
-import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.application.Services;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightAccess;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTableSql;
 
 /**

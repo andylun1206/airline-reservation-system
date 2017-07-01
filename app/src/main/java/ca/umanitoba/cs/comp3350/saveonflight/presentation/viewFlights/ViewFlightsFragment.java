@@ -16,17 +16,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
-import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchCriteriaHandler;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchCriteriaArrayAdapter;
-
-import java.util.ArrayList;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchCriteriaHandler;
 
 public class ViewFlightsFragment extends ListFragment {
     private static Activity activity;
