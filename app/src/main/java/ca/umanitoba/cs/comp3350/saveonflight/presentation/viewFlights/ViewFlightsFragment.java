@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlightsImpl;
@@ -56,7 +57,7 @@ public class ViewFlightsFragment extends ListFragment {
         setListAdapter(flightAdapter);
 
         searchCriteria = SearchCriteriaArrayAdapter.getCriteria();
-        flights = new AccessFlightsImpl().search(searchCriteria);
+        flights = new AccessFlightsImpl(Main.getFlightAccess()).search(searchCriteria);
         title = getString(R.string.view_flights_flight_path, "$0", "$1");
 
         return view;
@@ -133,7 +134,7 @@ public class ViewFlightsFragment extends ListFragment {
     public static void navgiateNextStep() {
         if (searchCriteria.isReturnTrip() && chosenFlights.size() == 1) {
             searchCriteria = SearchCriteriaHandler.reverseFlightDirection(searchCriteria);
-            flights = new AccessFlightsImpl().search(searchCriteria);
+            flights = new AccessFlightsImpl(Main.getFlightAccess()).search(searchCriteria);
 
             if (flights != null && !flights.isEmpty()) {
                 updateFlightList();

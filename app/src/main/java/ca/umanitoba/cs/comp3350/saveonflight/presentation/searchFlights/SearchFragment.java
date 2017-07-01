@@ -26,6 +26,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
@@ -108,8 +109,7 @@ public class SearchFragment extends ListFragment {
             @Override
             public void onClick(View view) {
                 if (SearchCriteriaHandler.validate(getActivity(), SearchCriteriaArrayAdapter.getCriteria())) {
-                    ArrayList<Flight> flightList = new AccessFlightsImpl().search(SearchCriteriaArrayAdapter.getCriteria());
-                    //ArrayList<Flight> flightList = new AccessFlightsImpl().getFlights();
+                    ArrayList<Flight> flightList = new AccessFlightsImpl(Main.getFlightAccess()).search(SearchCriteriaArrayAdapter.getCriteria());
                     if (flightList != null && !flightList.isEmpty()) {
                         FragmentNavigation.viewFlights();
                     } else {

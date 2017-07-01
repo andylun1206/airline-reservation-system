@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.AirlinePresentationUtils;
@@ -39,7 +40,7 @@ public class ViewFlightsSummaryFragment extends Fragment implements View.OnClick
         }
         View view = inflater.inflate(R.layout.fragment_trip_summary, container, false);
         flights = getArguments().getStringArrayList("chosen_flights");
-        AccessFlightsImpl flightAccess = new AccessFlightsImpl();
+        AccessFlightsImpl flightAccess = new AccessFlightsImpl(Main.getFlightAccess());
         depFlight = flightAccess.getFlightByCode(flights.get(0));
 
         total = depFlight.getPrice();

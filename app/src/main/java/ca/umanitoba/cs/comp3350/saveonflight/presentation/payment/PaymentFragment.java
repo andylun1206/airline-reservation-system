@@ -71,7 +71,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         buttonPurchase = (Button) view.findViewById(R.id.button_payment);
         buttonPurchase.setOnClickListener(this);
 
-        AccessFlightsImpl flightAccess = new AccessFlightsImpl();
+        AccessFlightsImpl flightAccess = new AccessFlightsImpl(Main.getFlightAccess());
         flights = new ArrayList<>();
 
         ArrayList<String> flightCodes = getArguments().getStringArrayList("flights_to_book");

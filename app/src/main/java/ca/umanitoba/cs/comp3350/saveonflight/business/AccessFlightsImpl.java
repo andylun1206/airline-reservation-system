@@ -19,11 +19,8 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTableSql;
 public class AccessFlightsImpl implements AccessFlights {
     private static FlightAccess flightsDB;
 
-    public AccessFlightsImpl() {
-        if (flightsDB == null) {
-            flightsDB = new FlightTableSql();
-            flightsDB = Services.createFlightAccess();
-        }
+    public AccessFlightsImpl(FlightAccess access) {
+        flightsDB = access;
     }
 
     @Override

@@ -58,16 +58,14 @@ public class Main {
      */
     public static FlightAccess getFlightAccess() {
         FlightAccess access = null;
-
         switch (dbType) {
             case STUB:
                 access = new FlightTable();
                 break;
             case HSQL:
-                access = new FlightTableSql();
+                access = Services.createFlightAccess();
                 break;
         }
-
         return access;
     }
 
