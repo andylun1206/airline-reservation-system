@@ -2,16 +2,12 @@ package ca.umanitoba.cs.comp3350.saveonflight.application;
 
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTable;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTableSql;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTable;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTableSql;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTable;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTableSql;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTable;
 
@@ -23,7 +19,7 @@ import static ca.umanitoba.cs.comp3350.saveonflight.application.Main.DatabaseTyp
  */
 
 public class Main {
-    public static enum DatabaseType {
+    public enum DatabaseType {
         STUB, HSQL
     }
 
@@ -138,6 +134,9 @@ public class Main {
     }
 
 
+    /**
+     * Closes the connection to the database.
+     */
     public static void shutDown() {
         Services.closeFlightAccess();
         Services.closeAirlineAccess();
@@ -146,10 +145,18 @@ public class Main {
         Services.closeBookedFlightAccess();
     }
 
+    /**
+     * @return the path to the database
+     */
     public static String getDBPathName() {
         return dbPathName;
     }
 
+    /**
+     * Sets the database path.
+     *
+     * @param pathName the path to the database
+     */
     public static void setDBPathName(String pathName) {
         System.out.println("Setting DB path to: " + pathName);
         dbPathName = pathName;
