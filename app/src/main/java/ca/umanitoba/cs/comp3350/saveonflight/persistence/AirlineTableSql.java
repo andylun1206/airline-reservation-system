@@ -27,15 +27,12 @@ public class AirlineTableSql implements AirlineAccess {
     private String result;
     private static String EOF = "  ";
 
-
-    private ArrayList<Airline> airlines = null;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CANADA);
 
     public AirlineTableSql() {
     }
 
     public void initialize(String dbPath) {
-        airlines = new ArrayList<Airline>();
         String url = "jdbc:hsqldb:file:" + dbPath;
         try {
             Class.forName("org.hsqldb.jdbcDriver").newInstance();
@@ -48,10 +45,7 @@ public class AirlineTableSql implements AirlineAccess {
     }
 
     public ArrayList<Airline> getAirlines() {
-        Airline airline;
-        String name;
-        int icon;
-        double price;
+        ArrayList<Airline> airlines = new ArrayList<>();
         result = null;
 
         try {
@@ -63,8 +57,7 @@ public class AirlineTableSql implements AirlineAccess {
         }
         try {
             while (rs1.next()) {
-                airline = createAirlineFromResultSet(rs1);
-                airlines.add(airline);
+                 airlines.add(createAirlineFromResultSet(rs1));
             }
             rs1.close();
         } catch (Exception e) {
@@ -76,13 +69,22 @@ public class AirlineTableSql implements AirlineAccess {
 
     public Airline findAirline(String airlineName) {
         Airline result = null;
-        if (airlineName != null) {
-            for (Airline airline : airlines) {
-                if (airline.getName().toLowerCase().contains(airlineName.toLowerCase())) {
-                    result = airline;
-                }
-            }
+
+        try {
+            cmdString = "Select * from AIRLINE where AIRLINENAME = '" + airlineName + "'";
+            rs1 = st1.executeQuery(cmdString);
+        } catch (Exception e) {
+            processSQLError(e);
         }
+        try {
+            if (rs1.next()) {
+                result = createAirlineFromResultSet(rs1);
+            }
+            rs1.close();
+        } catch (Exception e) {
+            processSQLError(e);
+        }
+
         return result;
     }
 
@@ -95,23 +97,24 @@ public class AirlineTableSql implements AirlineAccess {
     }
 
     public boolean add(Airline airline) {
+        boolean added = false;
+
         String values;
-        if (airline != null) {
-            if (airlines.contains(airline)) {
-                return false;
-            }
+        if (airline != null && !airline.getName().isEmpty()) {
             try {
                 values = "'" + airline.getName() + "'";
                 cmdString = "Insert into Airline " + " Values(" + values + ")";
-                //System.out.println(cmdString);
                 updateCount = st1.executeUpdate(cmdString);
                 result = checkWarning(st1, updateCount);
+                if (updateCount > 0) {
+                    added = true;
+                }
             } catch (Exception e) {
                 result = processSQLError(e);
             }
         }
-        airlines = getAirlines();
-        return true;
+
+        return added;
     }
 
 

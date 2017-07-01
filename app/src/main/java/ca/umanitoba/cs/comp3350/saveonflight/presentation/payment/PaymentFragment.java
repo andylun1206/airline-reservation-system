@@ -19,6 +19,7 @@ import com.stripe.android.view.CardInputWidget;
 import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
@@ -70,7 +71,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         buttonPurchase = (Button) view.findViewById(R.id.button_payment);
         buttonPurchase.setOnClickListener(this);
 
-        AccessFlightsImpl flightAccess = new AccessFlightsImpl();
+        AccessFlightsImpl flightAccess = new AccessFlightsImpl(Main.getFlightAccess());
         flights = new ArrayList<>();
 
         ArrayList<String> flightCodes = getArguments().getStringArrayList("flights_to_book");
@@ -101,13 +102,16 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    /**
+     * Stores the new traveller and booked flight information in the database upon a successful payment.
+     */
     public void paymentSuccess() {
         // Since we're not actually processing any payments... just add the BookedFlight(s) to the database
-        AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl();
+        AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl(Main.getBookedFlightAccess());
 
         // First, create a new Traveller and store it in the database
         Traveller traveller = new Traveller(-1, etName.getText().toString());
-        AccessTravellers accessTravellers = new AccessTravellersImpl();
+        AccessTravellers accessTravellers = new AccessTravellersImpl(Main.getTravellerAccess());
         int id = accessTravellers.insertTraveller(traveller);
         traveller.setTravellerId(id);
 
@@ -125,10 +129,20 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         showConfirmationDialog(id);
     }
 
+    /**
+     * Notify the user that payment has failed.
+     */
     public void paymentFailure() {
         Toast.makeText(getContext(), "Invalid card data", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Creates a Card object from the information in the input fields on the screen. The credit card
+     * number, expiry card, and security code must be valid for a Card object to me created. Otherwise,
+     * the method returns null.
+     *
+     * @return the Card object that was created
+     */
     private Card createCard() {
         Card cardToSave = mCardInputWidget.getCard();
 

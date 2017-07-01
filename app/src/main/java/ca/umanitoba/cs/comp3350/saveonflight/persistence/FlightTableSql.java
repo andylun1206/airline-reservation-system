@@ -162,6 +162,8 @@ public class FlightTableSql implements FlightAccess {
     }
 
     public boolean add(Flight flight) {
+        boolean added = false;
+
         String values;
         String departDate;
         String arriveDate;
@@ -185,20 +187,23 @@ public class FlightTableSql implements FlightAccess {
                 //System.out.println(cmdString);
                 updateCount = st1.executeUpdate(cmdString);
                 result = checkWarning(st1, updateCount);
+                if (updateCount > 0) {
+                    added = true;
+                }
             } catch (Exception e) {
                 result = processSQLError(e);
             }
         }
-        return true;
+
+        return added;
     }
 
     public ArrayList<Flight> findBySearchCriteria(SearchCriteria criteria) {
-        ArrayList<Flight> table;
+        ArrayList<Flight> table = new ArrayList<>();
         Flight flight;
         result = null;
 
         if (criteria != null) {
-            table = new ArrayList<Flight>();
             try {
                 cmdString = "Select * from Flight Where AIRPORTID1='"
                         + criteria.getOriginString() + "' AND AIRPORTID2='"
@@ -225,11 +230,9 @@ public class FlightTableSql implements FlightAccess {
             } catch (Exception e) {
                 result = processSQLError(e);
             }
-
-            return table;
         }
 
-        return null;
+        return table;
     }
 
     public Airport getAirportByID(String targetID) {

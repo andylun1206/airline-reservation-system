@@ -12,7 +12,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
  * @author Long Yu
  */
 
-public class AirportTable implements DataAccess<Airport> {
+public class AirportTable implements AirportAccess {
     private static ArrayList<Airport> airports = null;
 
     public AirportTable() {
@@ -31,11 +31,11 @@ public class AirportTable implements DataAccess<Airport> {
         }
     }
 
-    public static ArrayList<Airport> getAirports() {
+    public ArrayList<Airport> getAirports() {
         return airports;
     }
 
-    public static Airport findAirport(String city) {
+    public Airport findAirport(String city) {
         Airport result = null;
         for (Airport airport : airports) {
             if (airport.getAirportCode().toLowerCase().contains(city.toLowerCase())) {

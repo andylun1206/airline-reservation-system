@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessAirportsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
@@ -63,7 +64,7 @@ public class SearchCriteriaHandler {
         boolean valid = false;
 
         if (airport != null && !airport.getAirportCode().trim().isEmpty()
-                && new AccessAirportsImpl().findAirportByName(airport.getAirportCode()) != null) {
+                && new AccessAirportsImpl(Main.getAirportAccess()).findAirportByName(airport.getAirportCode()) != null) {
             valid = true;
         }
 

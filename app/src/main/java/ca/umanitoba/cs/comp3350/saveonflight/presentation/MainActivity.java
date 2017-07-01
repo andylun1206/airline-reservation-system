@@ -42,13 +42,10 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         copyDatabaseToDevice();
-        Main.startUp();
-
-        //Services.openDatabase();
+        Main.startUp(Main.DatabaseType.HSQL);
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -153,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         displaySelectedScreen(item.getItemId());
         return true;
     }
-    /*trying to connect database*/
+
     private void copyDatabaseToDevice() {
         final String DB_PATH = "db";
 
@@ -163,16 +160,13 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         AssetManager assetManager = getAssets();
 
         try {
-
             assetNames = assetManager.list(DB_PATH);
             for (int i = 0; i < assetNames.length; i++) {
                 assetNames[i] = DB_PATH + "/" + assetNames[i];
             }
 
             copyAssetsToDirectory(assetNames, dataDirectory);
-
             Main.setDBPathName(dataDirectory.toString() + "/" + Main.dbName);
-
         } catch (IOException ioe) {
             System.out.println("bad");
         }

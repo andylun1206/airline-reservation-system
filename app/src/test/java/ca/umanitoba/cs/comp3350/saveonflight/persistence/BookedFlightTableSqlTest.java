@@ -1,6 +1,5 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -21,11 +20,11 @@ import static junit.framework.Assert.assertTrue;
  * Created by longyu on 2017-06-29.
  */
 
-/*
+
 public class BookedFlightTableSqlTest {
     private static List<BookedFlight> original;
     private static BookedFlightTableSql bookedFlightTable;
-    ArrayList<Traveller> travellers = TravellerTable.getTravellers();
+    ArrayList<Traveller> travellers = new TravellerTable().getTravellers();
     FlightTableSql flightTable = new FlightTableSql();
     ArrayList<Flight> flights = flightTable.getFlights();
     private BookedFlight validCase = new BookedFlight(travellers.get(2), flights.get(7));
@@ -38,8 +37,7 @@ public class BookedFlightTableSqlTest {
         FlightTableSql flightTableSql = new FlightTableSql();
         flightTableSql.initialize(Main.getDBPathName());
         bookedFlightTable.initialize(Main.getDBPathName());
-        original = bookedFlightTable.gets();
-
+        original = bookedFlightTable.getAll();
     }
 
     @Test
@@ -84,4 +82,4 @@ public class BookedFlightTableSqlTest {
             assertEquals(f, bf.getFlight());
         }
     }
-}*/
+}

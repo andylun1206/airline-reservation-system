@@ -55,13 +55,13 @@ public class TravellerTableTest {
 
     @Test
     public void testAddValid() {
-        assertTrue("Failed to add Cathay Pacific to airlineTable.", travellerTable.add(validCase));
+        assertTrue("Failed to add Cathay Pacific to airlineTable.", travellerTable.add(validCase) > 0);
     }
 
     @Test
     public void testAddDuplicate() {
         Traveller t = new Traveller(15, "Amir");
-        assertTrue("Failed to add unique airline 'dup'", travellerTable.add(t));
-        assertFalse("Succeeded adding a duplicate.", travellerTable.add(t));
+        assertTrue("Failed to add unique airline 'dup'", travellerTable.add(t) > 0);
+        assertFalse("Succeeded adding a duplicate.", travellerTable.add(t) > 0);
     }
 }

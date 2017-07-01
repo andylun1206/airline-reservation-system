@@ -40,12 +40,6 @@ public class AirportTableSqlTest {
     }
 
     @Test
-    public void testFindAirportSample() {
-        assertEquals("Test is fail", null, airportTable.findAirport("Vancouver YVR"));
-        String city;
-    }
-
-    @Test
     public void testExistence() {
         assertNotNull("Initialize is not work", airportTable);
     }
