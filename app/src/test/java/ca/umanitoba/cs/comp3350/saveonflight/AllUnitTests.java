@@ -51,6 +51,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTableTest;
         FlightTableSqlTest.class
 })
 
-public class AllTests {
+public class AllUnitTests {
 }
 
