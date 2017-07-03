@@ -72,14 +72,4 @@ public class BookedFlightTableSqlTest {
             assertEquals(t, bf.getTraveller());
         }
     }
-
-    @Test
-    public void testSearchByFlight() {
-        Flight f = BookedFlightTable.getBookedFlights().get(0).getFlight();
-        ArrayList<BookedFlight> bfs = bookedFlightTable.searchByFlight(f);
-        assertNotNull(bfs);
-        for (BookedFlight bf : bfs) {
-            assertEquals(f, bf.getFlight());
-        }
-    }
 }

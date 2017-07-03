@@ -1,9 +1,12 @@
 package ca.umanitoba.cs.comp3350.saveonflight.integration;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
@@ -15,18 +18,47 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 import static org.junit.Assert.*;
 
 public class BookedFlightsBusinessPersistenceSeamTest {
-    private AccessBookedFlights access;
+    private static AccessBookedFlights access;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         Main.startUp(Main.DatabaseType.HSQL);
         access = new AccessBookedFlightsImpl(Main.getBookedFlightAccess());
     }
 
-    @After
-    public void tearDown() {
+    @AfterClass
+    public static void tearDown() {
         Main.shutDown();
         access = null;
+    }
+
+    @Test
+    public void testAddAndRemove() {
+        BookedFlight bf = access.searchByTraveller(new Traveller(1, "name doesn't matter")).get(0);
+
+        // Try to adding null
+        assertFalse(access.add(null));
+
+        // Add new row to table
+        bf.getFlight().setFlightCode("WJ 123");
+        assertTrue(access.add(bf));
+
+        // Add another row
+        bf.getFlight().setFlightCode("AC 123");
+        assertTrue(access.add(bf));
+
+        // Remove the row just added
+        assertTrue(access.remove(bf));
+
+        // Remove the first row that was added
+        bf.getFlight().setFlightCode("WJ 123");
+        assertTrue(access.remove(bf));
+
+        // Try to remove a row not in the table
+        assertFalse(access.remove(bf));
+
+        // Try to remove null
+        assertFalse(access.remove(null));
     }
 
     @Test

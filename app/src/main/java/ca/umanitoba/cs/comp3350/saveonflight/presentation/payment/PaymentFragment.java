@@ -123,7 +123,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
 
         // Finally, add all the BookedFlight(s) to the database
         for (BookedFlight bf : bfs) {
-            accessBookedFlights.addBookedFlight(bf);
+            accessBookedFlights.add(bf);
         }
 
         showConfirmationDialog(id);

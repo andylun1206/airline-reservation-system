@@ -28,8 +28,19 @@ public class AccessBookedFlightsImpl implements AccessBookedFlights {
      * @return true if the BookedFlight was added; false if not
      */
     @Override
-    public boolean addBookedFlight(BookedFlight bf) {
+    public boolean add(BookedFlight bf) {
         return bookedFlightsDB.add(bf);
+    }
+
+    /**
+     * Removes the specified BookedFlights from the table.
+     *
+     * @param bf specifies which BookedFlights to remove
+     * @return true if 1 or more rows were removed; false otherwise
+     */
+    @Override
+    public boolean remove(BookedFlight bf) {
+        return bookedFlightsDB.remove(bf);
     }
 
     /**

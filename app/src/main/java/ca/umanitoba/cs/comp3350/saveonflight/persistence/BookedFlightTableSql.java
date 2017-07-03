@@ -3,6 +3,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -78,19 +79,46 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         String values;
         boolean added = false;
         result = null;
-        try {
-            values = bookedFlight.getTraveller().getTravellerID()
-                    + ",'" + bookedFlight.getFlight().getFlightCode() + "','" + bookedFlight.getFlight().getDepartureTimeString() + "'";
-            cmdString = "Insert into BOOKEDFLIGHT " + " Values(" + values + ")";
-            updateCount = st1.executeUpdate(cmdString);
-            result = checkWarning(st1, updateCount);
-            if (updateCount > 0) {
-                added = true;
+
+        if (bookedFlight != null) {
+            try {
+                values = bookedFlight.getTraveller().getTravellerID()
+                        + ",'" + bookedFlight.getFlight().getFlightCode() + "','" + bookedFlight.getFlight().getDepartureTimeString() + "'";
+                cmdString = "Insert into BOOKEDFLIGHT " + " Values(" + values + ")";
+                updateCount = st1.executeUpdate(cmdString);
+                result = checkWarning(st1, updateCount);
+                if (updateCount > 0) {
+                    added = true;
+                }
+            } catch (Exception e) {
+                result = processSQLError(e);
             }
-        } catch (Exception e) {
-            result = processSQLError(e);
         }
+
         return added;
+    }
+
+    public boolean remove(BookedFlight bf) {
+        boolean removed = false;
+        String where;
+
+        if (bf != null) {
+            try {
+                where = "where ID=" + bf.getTraveller().getTravellerID()
+                        + " and FLIGHTID='" + bf.getFlight().getFlightCode()
+                        + "' and DEPARTURETIME='" + bf.getFlight().getDepartureTimeString() + "'";
+
+                cmdString = "Delete from BOOKEDFLIGHT " + where;
+                updateCount = st1.executeUpdate(cmdString);
+                if (updateCount > 0) {
+                    removed = true;
+                }
+            } catch (Exception e) {
+                processSQLError(e);
+            }
+        }
+
+        return removed;
     }
 
     public ArrayList<BookedFlight> searchByTraveller(Traveller t) {
@@ -122,10 +150,6 @@ public class BookedFlightTableSql implements BookedFlightAccess {
             result = processSQLError(e);
         }
         return results;
-    }
-
-    public ArrayList<BookedFlight> searchByFlight(Flight f) {
-        return null;
     }
 
     public String checkWarning(Statement st, int updateCount) {
