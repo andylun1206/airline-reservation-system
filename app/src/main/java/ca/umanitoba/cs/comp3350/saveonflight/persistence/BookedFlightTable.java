@@ -73,22 +73,10 @@ public class BookedFlightTable implements BookedFlightAccess {
         return result;
     }
 
-
     public ArrayList<BookedFlight> searchByTraveller(Traveller t) {
         ArrayList<BookedFlight> matches = new ArrayList<>();
         for (BookedFlight bf : bookedFlights) {
             if (bf.getTraveller().equals(t)) {
-                matches.add(bf);
-            }
-        }
-        return matches;
-    }
-
-
-    public ArrayList<BookedFlight> searchByFlight(Flight f) {
-        ArrayList<BookedFlight> matches = new ArrayList<>();
-        for (BookedFlight bf : bookedFlights) {
-            if (bf.getFlight().equals(f)) {
                 matches.add(bf);
             }
         }

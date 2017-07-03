@@ -17,18 +17,13 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
  * Created by longyu on 2017-06-27.
  */
 
-public class AirportTableSql implements AirportAccess{
+public class AirportTableSql implements AirportAccess {
     private Statement st1;
     private Connection c1;
-    private ResultSet rs1,rs2;
+    private ResultSet rs1, rs2;
     private String cmdString;
-    private int updateCount;
-    private String result;
-    private static String EOF = "  ";
-
 
     private List<Airport> airports = null;
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CANADA);
 
     public AirportTableSql() {
     }
@@ -43,11 +38,12 @@ public class AirportTableSql implements AirportAccess{
         } catch (Exception e) {
             processSQLError(e);
         }
-        System.out.println("Opened database ");
+        //System.out.println("Opened database ");
     }
+
     public List<Airport> getAirports() {
         Airport airport;
-        result = null;
+        String result = null;
 
         try {
             cmdString = "Select * from Airport";
@@ -68,28 +64,6 @@ public class AirportTableSql implements AirportAccess{
 
         return airports;
     }
-    private Airport createAirportFromResultSet(ResultSet rs) throws SQLException, ParseException {
-        return new Airport(rs.getString("AIRPORTID"));
-    }
-
-    public String processSQLError(Exception e) {
-        String result = "*** SQL Error: " + e.getMessage();
-
-        // Remember, this will NOT be seen by the user!
-        e.printStackTrace();
-
-        return result;
-    }
-    public void close() {
-        try {    // commit all changes to the database
-            cmdString = "shutdown compact";
-            rs2 = st1.executeQuery(cmdString);
-            c1.close();
-        } catch (Exception e) {
-            processSQLError(e);
-        }
-        System.out.println("Closed database ");
-    }
 
     public Airport findAirport(String city) {
         Airport airport = null;
@@ -107,4 +81,29 @@ public class AirportTableSql implements AirportAccess{
 
         return airport;
     }
+
+    private Airport createAirportFromResultSet(ResultSet rs) throws SQLException, ParseException {
+        return new Airport(rs.getString("AIRPORTID"));
+    }
+
+    public String processSQLError(Exception e) {
+        String result = "*** SQL Error: " + e.getMessage();
+
+        // Remember, this will NOT be seen by the user!
+        e.printStackTrace();
+
+        return result;
+    }
+
+    public void close() {
+        try {    // commit all changes to the database
+            cmdString = "shutdown compact";
+            rs2 = st1.executeQuery(cmdString);
+            c1.close();
+        } catch (Exception e) {
+            processSQLError(e);
+        }
+        //System.out.println("Closed database ");
+    }
+
 }

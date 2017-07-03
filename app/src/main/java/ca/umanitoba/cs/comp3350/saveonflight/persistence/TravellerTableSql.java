@@ -148,7 +148,7 @@ public class TravellerTableSql implements TravellerAccess {
         } catch (Exception e) {
             processSQLError(e);
         }
-        System.out.println("Closed database ");
+        // System.out.println("Closed database ");
     }
 }
 

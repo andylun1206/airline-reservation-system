@@ -138,11 +138,11 @@ public class Main {
      * Closes the connection to the database.
      */
     public static void shutDown() {
-        Services.closeFlightAccess();
-        Services.closeAirlineAccess();
-        Services.closeAirportAccess();
-        Services.closeTravellerAccess();
-        Services.closeBookedFlightAccess();
+        Services.closeFlightAccess(); // TODO: refactor close() method (we only need one of them)
+        //Services.closeAirlineAccess();
+        //Services.closeAirportAccess();
+        //Services.closeTravellerAccess();
+        //Services.closeBookedFlightAccess();
     }
 
     /**

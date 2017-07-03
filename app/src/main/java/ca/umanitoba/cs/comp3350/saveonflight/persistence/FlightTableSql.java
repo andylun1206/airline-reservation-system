@@ -46,7 +46,7 @@ public class FlightTableSql implements FlightAccess {
         } catch (Exception e) {
             processSQLError(e);
         }
-        System.out.println("Opened database ");
+        //System.out.println("Opened database ");
     }
 
     public ArrayList<Flight> getFlights() {
@@ -293,6 +293,6 @@ public class FlightTableSql implements FlightAccess {
         } catch (Exception e) {
             processSQLError(e);
         }
-        System.out.println("Closed database ");
+        // System.out.println("Closed database ");
     }
 }

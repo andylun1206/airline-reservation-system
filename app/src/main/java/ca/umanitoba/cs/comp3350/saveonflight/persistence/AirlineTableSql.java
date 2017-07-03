@@ -41,7 +41,7 @@ public class AirlineTableSql implements AirlineAccess {
         } catch (Exception e) {
             processSQLError(e);
         }
-        System.out.println("Opened database ");
+        //System.out.println("Opened database ");
     }
 
     public ArrayList<Airline> getAirlines() {
@@ -153,6 +153,6 @@ public class AirlineTableSql implements AirlineAccess {
         } catch (Exception e) {
             processSQLError(e);
         }
-        System.out.println("Closed database ");
+        //System.out.println("Closed database ");
     }
 }
