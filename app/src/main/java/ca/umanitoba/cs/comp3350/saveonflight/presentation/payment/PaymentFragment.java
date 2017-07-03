@@ -106,7 +106,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
      * Stores the new traveller and booked flight information in the database upon a successful payment.
      */
     public void paymentSuccess() {
-        // Since we're not actually processing any payments... just add the BookedFlight(s) to the database
+        // Since we're not actually processing any payments... just insertBookedFlight the BookedFlight(s) to the database
         AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl(Main.getBookedFlightAccess());
 
         // First, create a new Traveller and store it in the database
@@ -121,9 +121,9 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
             bfs.add(new BookedFlight(traveller, f));
         }
 
-        // Finally, add all the BookedFlight(s) to the database
+        // Finally, insertBookedFlight all the BookedFlight(s) to the database
         for (BookedFlight bf : bfs) {
-            accessBookedFlights.add(bf);
+            accessBookedFlights.insertBookedFlight(bf);
         }
 
         showConfirmationDialog(id);

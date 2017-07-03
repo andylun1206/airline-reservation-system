@@ -34,28 +34,28 @@ public class BookedFlightsBusinessPersistenceSeamTest {
         BookedFlight bf = accessBf.searchByTraveller(new Traveller(1, "name doesn't matter")).get(0);
 
         // Try to adding null
-        assertFalse(accessBf.add(null));
+        assertFalse(accessBf.insertBookedFlight(null));
 
         // Add new row to table
         bf.getFlight().setFlightCode("WJ 123");
-        assertTrue(accessBf.add(bf));
+        assertTrue(accessBf.insertBookedFlight(bf));
 
         // Add another row
         bf.getFlight().setFlightCode("AC 123");
-        assertTrue(accessBf.add(bf));
+        assertTrue(accessBf.insertBookedFlight(bf));
 
         // Remove the row just added
-        assertTrue(accessBf.remove(bf));
+        assertTrue(accessBf.removeBookedFlight(bf));
 
         // Remove the first row that was added
         bf.getFlight().setFlightCode("WJ 123");
-        assertTrue(accessBf.remove(bf));
+        assertTrue(accessBf.removeBookedFlight(bf));
 
-        // Try to remove a row not in the table
-        assertFalse(accessBf.remove(bf));
+        // Try to removeBookedFlight a row not in the table
+        assertFalse(accessBf.removeBookedFlight(bf));
 
-        // Try to remove null
-        assertFalse(accessBf.remove(null));
+        // Try to removeBookedFlight null
+        assertFalse(accessBf.removeBookedFlight(null));
     }
 
     @Test

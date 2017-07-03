@@ -91,6 +91,24 @@ public class TravellerTableSql implements TravellerAccess {
         return id;
     }
 
+    public boolean remove(Traveller traveller) {
+        boolean removed = false;
+
+        if (traveller != null) {
+            try {
+                cmdString = "Delete from TRAVELLER where ID=" + traveller.getTravellerID();
+                updateCount = st1.executeUpdate(cmdString);
+                if (updateCount > 0) {
+                    removed = true;
+                }
+            } catch (Exception e) {
+                processSQLError(e);
+            }
+        }
+
+        return removed;
+    }
+
     public Traveller findTraveller(int id) {
         Traveller result = null;
 

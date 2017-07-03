@@ -44,24 +44,24 @@ public class TravellerTableTest {
     @Test
     public void testAddNull() {
         travellerTable.add(null);
-        assertEquals("add null but actually add something", original, travellerTable.getTravellers());
+        assertEquals("insertBookedFlight null but actually insertBookedFlight something", original, travellerTable.getTravellers());
     }
 
     @Test
     public void testAddEmptyName() {
         travellerTable.add(emptyNameCase);
-        assertEquals("adding none since object but it shouldn't add", original, travellerTable.getTravellers());
+        assertEquals("adding none since object but it shouldn't insertBookedFlight", original, travellerTable.getTravellers());
     }
 
     @Test
     public void testAddValid() {
-        assertTrue("Failed to add Cathay Pacific to airlineTable.", travellerTable.add(validCase) > 0);
+        assertTrue("Failed to insertBookedFlight Cathay Pacific to airlineTable.", travellerTable.add(validCase) > 0);
     }
 
     @Test
     public void testAddDuplicate() {
         Traveller t = new Traveller(15, "Amir");
-        assertTrue("Failed to add unique airline 'dup'", travellerTable.add(t) > 0);
+        assertTrue("Failed to insertBookedFlight unique airline 'dup'", travellerTable.add(t) > 0);
         assertFalse("Succeeded adding a duplicate.", travellerTable.add(t) > 0);
     }
 }

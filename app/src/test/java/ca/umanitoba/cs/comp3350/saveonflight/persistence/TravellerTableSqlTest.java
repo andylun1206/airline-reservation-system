@@ -41,13 +41,13 @@ public class TravellerTableSqlTest {
 
     @Test
     public void testAddNull() {
-        assertTrue("add null but actually add something", travellerTable.add(null) < 0);
+        assertTrue("insertBookedFlight null but actually insertBookedFlight something", travellerTable.add(null) < 0);
     }
 
     @Test
     public void testAddEmptyName() {
         travellerTable.add(emptyNameCase);
-        assertEquals("adding none since object but it shouldn't add", original, travellerTable.getTravellers());
+        assertEquals("adding none since object but it shouldn't insertBookedFlight", original, travellerTable.getTravellers());
     }
 
     @Test

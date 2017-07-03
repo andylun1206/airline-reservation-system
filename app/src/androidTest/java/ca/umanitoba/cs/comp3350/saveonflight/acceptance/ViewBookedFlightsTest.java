@@ -24,7 +24,7 @@ public class ViewBookedFlightsTest extends ActivityInstrumentationTestCase2<Main
 
     /**
      * Passenger id's in this test all have booked flights associated with them. So, they should all
-     * cause the screen to remove with a list of flight(s).
+     * cause the screen to removeBookedFlight with a list of flight(s).
      */
     public void testValidPassengerIds() {
         solo.waitForActivity("MainActivity");  // Open home page

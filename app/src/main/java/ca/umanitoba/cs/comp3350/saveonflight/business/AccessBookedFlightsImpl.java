@@ -24,22 +24,22 @@ public class AccessBookedFlightsImpl implements AccessBookedFlights {
     /**
      * Adds a BookedFlight to the database.
      *
-     * @param bf the BookedFlight to add
+     * @param bf the BookedFlight to insertBookedFlight
      * @return true if the BookedFlight was added; false if not
      */
     @Override
-    public boolean add(BookedFlight bf) {
+    public boolean insertBookedFlight(BookedFlight bf) {
         return bookedFlightsDB.add(bf);
     }
 
     /**
      * Removes the specified BookedFlights from the table.
      *
-     * @param bf specifies which BookedFlights to remove
+     * @param bf specifies which BookedFlights to removeBookedFlight
      * @return true if 1 or more rows were removed; false otherwise
      */
     @Override
-    public boolean remove(BookedFlight bf) {
+    public boolean removeBookedFlight(BookedFlight bf) {
         return bookedFlightsDB.remove(bf);
     }
 
