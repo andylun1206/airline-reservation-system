@@ -163,6 +163,6 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         } catch (Exception e) {
             processSQLError(e);
         }
-        System.out.println("Closed database ");
+        // System.out.println("Closed database ");
     }
 }

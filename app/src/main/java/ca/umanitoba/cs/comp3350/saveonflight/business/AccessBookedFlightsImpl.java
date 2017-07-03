@@ -1,12 +1,10 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightAccess;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTableSql;
 
 /**
  * AccessBookedFlightImpl.java
@@ -23,12 +21,24 @@ public class AccessBookedFlightsImpl implements AccessBookedFlights {
         bookedFlightsDB = access;
     }
 
+    /**
+     * Adds a BookedFlight to the database.
+     *
+     * @param bf the BookedFlight to add
+     * @return true if the BookedFlight was added; false if not
+     */
     @Override
     public boolean addBookedFlight(BookedFlight bf) {
         return bookedFlightsDB.add(bf);
     }
 
-    public ArrayList<BookedFlight> searchByTraveller(Traveller t) {
+    /**
+     * Searches for BookedFlights that are associated with the specified Traveller.
+     *
+     * @param t the Traveller to search by
+     * @return all the BookedFlights that are associated with the given Traveller
+     */
+    public List<BookedFlight> searchByTraveller(Traveller t) {
         return bookedFlightsDB.searchByTraveller(t);
     }
 }

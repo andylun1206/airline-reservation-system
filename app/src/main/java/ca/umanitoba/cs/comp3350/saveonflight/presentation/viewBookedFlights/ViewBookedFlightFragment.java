@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
@@ -73,7 +74,7 @@ public class ViewBookedFlightFragment extends ListFragment implements View.OnCli
                     Toast.makeText(getContext(), "Please enter a passenger ID", Toast.LENGTH_SHORT).show();
                 } else {
                     final int PASSENGER_ID = Integer.parseInt(etPassengerId.getText().toString());
-                    ArrayList<BookedFlight> bfs = accessBookedFlights.searchByTraveller(new Traveller(PASSENGER_ID, null));
+                    List<BookedFlight> bfs = accessBookedFlights.searchByTraveller(new Traveller(PASSENGER_ID, null));
 
                     // Update the list
                     flights.clear();

@@ -1,6 +1,7 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
@@ -16,5 +17,5 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 public interface AccessBookedFlights {
     boolean addBookedFlight(BookedFlight bf);
 
-    ArrayList<BookedFlight> searchByTraveller(Traveller t);
+    List<BookedFlight> searchByTraveller(Traveller t);
 }
