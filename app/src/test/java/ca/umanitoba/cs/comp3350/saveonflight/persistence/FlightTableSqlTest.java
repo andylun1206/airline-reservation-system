@@ -46,9 +46,9 @@ public class FlightTableSqlTest {
         AirportTableSql airportTableSql = new AirportTableSql();
         airportTableSql.initialize(Main.getDBPathName());
 
-        Airline westJet = AirlineTable.findAirline("westjet");
-        Airport yyz = AirportTable.findAirport("YYZ");
-        Airport ywg = AirportTable.findAirport("YWG");
+        Airline westJet = airlineTableSql.findAirline("westjet");
+        Airport yyz = airportTableSql.findAirport("YYZ");
+        Airport ywg = airportTableSql.findAirport("YWG");
 
         builder = new Flight.FlightBuilder("", yyz, ywg);
         try {

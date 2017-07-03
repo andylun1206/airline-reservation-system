@@ -43,12 +43,15 @@ public class FlightTableTest {
         flightTable = new FlightTable();
         flightTable.initialize("");
         original = flightTable.getFlights();
-        new AirportTable().initialize("");
-        new AirlineTable().initialize("");
+        AirportAccess airportTable = new AirportTable();
+        airportTable.initialize("");
 
-        Airline westJet = AirlineTable.findAirline("westjet");
-        Airport yyz = AirportTable.findAirport("YYZ");
-        Airport ywg = AirportTable.findAirport("YWG");
+        AirlineAccess airlineTable = new AirlineTable();
+        airlineTable.initialize("");
+
+        Airline westJet = airlineTable.findAirline("westjet");
+        Airport yyz = airportTable.findAirport("YYZ");
+        Airport ywg = airportTable.findAirport("YWG");
 
         builder = new Flight.FlightBuilder("", yyz, ywg);
         try {

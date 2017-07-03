@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 
@@ -18,14 +19,14 @@ import static junit.framework.Assert.assertTrue;
 
 
 public class AirportTableTest {
-    private static ArrayList<Airport> original;
-    private static DataAccess<Airport> airportTable;
+    private static List<Airport> original;
+    private static AirportAccess airportTable;
 
     @BeforeClass
     public static void setUp() {
         airportTable = new AirportTable();
         airportTable.initialize("");
-        original = AirportTable.getAirports();
+        original = airportTable.getAirports();
     }
 
     @Test
@@ -35,6 +36,6 @@ public class AirportTableTest {
 
     @Test
     public void testInitialize() {
-        assertEquals("Initialize is not work", original, AirportTable.getAirports());
+        assertEquals("Initialize is not work", original, airportTable.getAirports());
     }
 }

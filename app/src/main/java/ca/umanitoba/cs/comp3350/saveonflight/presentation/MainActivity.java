@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         super.onCreate(savedInstanceState);
 
         copyDatabaseToDevice();
-        Main.startUp(Main.DatabaseType.HSQL);
+        Main.startUp(Main.DatabaseType.HSQL); // Change the argument to the startUp() method to switch between the stub and real databases
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

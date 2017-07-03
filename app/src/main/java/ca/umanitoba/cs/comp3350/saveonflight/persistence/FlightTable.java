@@ -137,6 +137,12 @@ public class FlightTable implements FlightAccess {
                         .setDepartureTime(sdf.parse("2017-12-11 21:00"))
                         .setArrivalTime(sdf.parse("2017-12-12 00:21"))
                         .build());
+                flights.add(builder.setFlightId("WJ 490")
+                        .setAirline(westJet)
+                        .setDepartureTime(sdf.parse("2017-12-11 18:15"))
+                        .setArrivalTime(sdf.parse("2017-12-11 21:35"))
+                        .setPrice(205.25)
+                        .build());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
