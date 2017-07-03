@@ -36,26 +36,27 @@ public class ViewBookedFlightsTest extends ActivityInstrumentationTestCase2<Main
         assertTrue(solo.searchText("05:30 - 08:51"));
         assertTrue(solo.searchText("3h 21m"));
         assertTrue(solo.searchText("350.52"));
-
-        solo.clearEditText(0);                 // Enter a passenger id of 1
-        solo.enterText(0, "1");
-        solo.clickOnButton(0);
-        assertTrue(solo.searchText("AC 260"));
+        assertTrue(solo.searchText("AC 260")); // This passenger has two flights; check that the second is shown as well
         assertTrue(solo.searchText("07:30 - 10:52"));
         assertTrue(solo.searchText("3h 22m"));
         assertTrue(solo.searchText("325.82"));
 
-        solo.clearEditText(0);                 // Enter a passenger id of 2
-        solo.enterText(0, "2");
+
+        solo.clearEditText(0);                 // Enter a passenger id of 1
+        solo.enterText(0, "1");
         solo.clickOnButton(0);
-        assertTrue(solo.searchText("AC 264")); // This passenger has two flights booked
+        assertTrue(solo.searchText("AC 264"));
         assertTrue(solo.searchText("10:50 - 14:10"));
         assertTrue(solo.searchText("3h 20m"));
         assertTrue(solo.searchText("403.20"));
-        assertTrue(solo.searchText("WJ 490")); // Check that the 2nd flight is shown as well
-        assertTrue(solo.searchText("18:15 - 21:35"));
-        assertTrue(solo.searchText("3h 20m"));
-        assertTrue(solo.searchText("344.25"));
+
+        solo.clearEditText(0);                 // Enter a passenger id of 2
+        solo.enterText(0, "2");
+        solo.clickOnButton(0);
+        assertTrue(solo.searchText("AC 266"));
+        assertTrue(solo.searchText("12:20 - 15:41"));
+        assertTrue(solo.searchText("3h 21m"));
+        assertTrue(solo.searchText("467.29"));
 
         // Clean up
         solo.clearEditText(0);
