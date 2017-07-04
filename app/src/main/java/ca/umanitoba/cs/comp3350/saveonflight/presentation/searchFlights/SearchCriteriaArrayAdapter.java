@@ -94,7 +94,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
             final AutoCompleteTextView input = (AutoCompleteTextView) view.findViewById(R.id.editText_search_criteria_input);
             input.setHint(row.getTitle());
             input.setThreshold(1);
-            setDefaults(input, row.getTitle());
+            //setDefaults(input, row.getTitle());
             input.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {

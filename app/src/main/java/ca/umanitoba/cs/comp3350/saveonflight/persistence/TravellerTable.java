@@ -43,7 +43,7 @@ public class TravellerTable implements TravellerAccess {
 
     public boolean remove(Traveller traveller) {
         boolean removed = false;
-        
+
         int i = 0;
         while (!removed && i < travellers.size()) {
             if (traveller.equals(travellers.get(i))) {
