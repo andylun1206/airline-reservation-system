@@ -1,4 +1,4 @@
-package ca.umanitoba.cs.comp3350.saveonflight.presentation;
+package ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights;
 
 /**
  * SearchFragment.java
@@ -18,21 +18,26 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.*;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListViewEntry;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
 
 public class SearchFragment extends ListFragment {
     private SearchCriteriaArrayAdapter criteriaAdapter;
     private ArrayList<SearchCriteriaListViewEntry> mandatoryCriteriaList;
     private ArrayList<SearchCriteriaListViewEntry> optionalCriteriaList;
+    private boolean showAdvanced = false;
 
 
     @Nullable
@@ -76,16 +81,15 @@ public class SearchFragment extends ListFragment {
 
                 switch (parent.getItemAtPosition(position).toString()) {
                     case "Return":
-                        setReturnCriterias();
+                        setReturnCriteria();
                         newCriteria.setReturnTrip(true);
                         break;
                     case "One Way":
-                        setOneWayCriterias();
+                        setOneWayCriteria();
                         newCriteria.setReturnTrip(false);
                         break;
                 }
                 criteriaAdapter.notifyDataSetChanged(false);
-                getView().findViewById(R.id.search_advanced_settings_checkboxes).setVisibility(View.GONE);
                 SearchCriteriaArrayAdapter.setCriteria(newCriteria);
             }
 
@@ -94,36 +98,18 @@ public class SearchFragment extends ListFragment {
             }
         });
 
-        ((CheckBox) view.findViewById(R.id.checkBox_search_nonstop)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                SearchCriteria criteria = SearchCriteriaArrayAdapter.getCriteria();
-                criteria.setNonstop(isChecked);
-                SearchCriteriaArrayAdapter.setCriteria(criteria);
-            }
-        });
-
-        ((CheckBox) view.findViewById(R.id.checkBox_search_refundable)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                SearchCriteria criteria = SearchCriteriaArrayAdapter.getCriteria();
-                criteria.setRefundable(isChecked);
-                SearchCriteriaArrayAdapter.setCriteria(criteria);
-            }
-        });
-
         view.findViewById(R.id.button_search_advance).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAdvancedCriterias();
+                setAdvancedCriteria();
             }
         });
 
         view.findViewById(R.id.button_search_search).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (criteriaAdapter.verifyCriteria(getActivity())) {
-                    ArrayList<Flight> flightList = new AccessFlightsImpl().search(SearchCriteriaArrayAdapter.getCriteria());
+                if (SearchCriteriaHandler.validate(getActivity(), SearchCriteriaArrayAdapter.getCriteria())) {
+                    ArrayList<Flight> flightList = new AccessFlightsImpl(Main.getFlightAccess()).search(SearchCriteriaArrayAdapter.getCriteria());
                     if (flightList != null && !flightList.isEmpty()) {
                         FragmentNavigation.viewFlights();
                     } else {
@@ -137,9 +123,9 @@ public class SearchFragment extends ListFragment {
     /**
      * Sets all on screen criteria to represent return trips.
      */
-    private void setReturnCriterias() {
+    private void setReturnCriteria() {
         if (mandatoryCriteriaList.size() == 0) {
-            setOneWayCriterias();
+            setOneWayCriteria();
         }
         mandatoryCriteriaList.add(3, new SearchCriteriaListViewEntry(R.drawable.ic_clock, getString(R.string.search_return_date)));
     }
@@ -147,7 +133,7 @@ public class SearchFragment extends ListFragment {
     /**
      * Sets all on screen criteria to represent one way trips.
      */
-    private void setOneWayCriterias() {
+    private void setOneWayCriteria() {
         if (mandatoryCriteriaList.size() == 0) {
             mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_takeoff, getString(R.string.search_origin)));
             mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_landing, getString(R.string.search_destination)));
@@ -161,21 +147,16 @@ public class SearchFragment extends ListFragment {
     /**
      * Toggles advance options to on screen criterias.
      */
-    private void setAdvancedCriterias() {
-        View checkboxes = getView().findViewById(R.id.search_advanced_settings_checkboxes);
-        boolean isVisible = (checkboxes.getVisibility() == View.VISIBLE);
-
-        if (isVisible) {
-            checkboxes.setVisibility(View.GONE);
-        } else {
-            if (optionalCriteriaList.size() == 0) {
-                optionalCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_dollar_sign, getString(R.string.search_max_price)));
-                optionalCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_plane, getString(R.string.search_airlines)));
-                optionalCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_seat, getString(R.string.search_class)));
-            }
-            checkboxes.setVisibility(View.VISIBLE);
+    private void setAdvancedCriteria() {
+        if (optionalCriteriaList.size() == 0) {
+            optionalCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_dollar_sign, getString(R.string.search_max_price)));
+            optionalCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_plane, getString(R.string.search_airlines)));
+            optionalCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_seat, getString(R.string.search_class)));
         }
 
-        criteriaAdapter.notifyDataSetChanged(!isVisible);
+        criteriaAdapter.notifyDataSetChanged(!showAdvanced);
+        showAdvanced = !showAdvanced;
     }
+
+
 }

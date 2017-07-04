@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stripe="http://schemas.android.com/apk/res-auto"
+    style="@android:style/TextAppearance.DeviceDefault.Small"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:text="@string/card_details"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textColor="#000"
+        android:textStyle="bold" />
+
+    <com.stripe.android.view.CardInputWidget
+        android:id="@+id/card_input_widget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        stripe:cardTextErrorColor="@android:color/holo_orange_dark"
+        stripe:cardTint="@android:color/holo_purple" />
+
+    <EditText
+        android:id="@+id/editText_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:hint="@string/full_name"
+        android:maxLength="40" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:text="@string/address"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textColor="#000"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editText_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:hint="@string/address_line"
+        android:maxLength="40" />
+
+    <EditText
+        android:id="@+id/editText_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:hint="@string/city"
+        android:maxLength="20" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_weight="30"
+            android:gravity="center_vertical"
+            android:text="PROVINCE"
+            android:textColor="#444"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinner_province"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="70"
+            android:entries="@array/provinces" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_weight="30"
+            android:gravity="center_vertical"
+            android:text="COUNTRY"
+            android:textColor="#444"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinner_country"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="70"
+            android:entries="@array/countries" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editText_postal_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:hint="@string/postal_code"
+        android:maxLength="7" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical"
+            android:text="@string/purchase" />
+    </LinearLayout>
+
+</LinearLayout>

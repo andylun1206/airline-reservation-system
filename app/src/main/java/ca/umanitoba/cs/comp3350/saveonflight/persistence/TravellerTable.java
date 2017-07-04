@@ -12,13 +12,15 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  * @author Long Yu
  */
 
-public class TravellerTable implements DataAccess<Traveller> {
+public class TravellerTable implements TravellerAccess {
+    public static int nextId = 3;
+
     private static ArrayList<Traveller> travellers = null;
 
     public TravellerTable() {
     }
 
-    public void initialize() {
+    public void initialize(String dbPath) {
         if (travellers == null) {
             travellers = new ArrayList<Traveller>();
             travellers.add(new Traveller(0, "Jack"));
@@ -27,58 +29,21 @@ public class TravellerTable implements DataAccess<Traveller> {
         }
     }
 
-    public static ArrayList<Traveller> getTravellers() {
+    public ArrayList<Traveller> getTravellers() {
         return travellers;
     }
 
-    public boolean add(Traveller traveller) {
+    public int add(Traveller traveller) {
         boolean result = true;
-        if (traveller != null && traveller.getTravellerID() != 0) {
-
-            for (Traveller traveller1 : travellers) {
-                if (traveller.equals(traveller1))
-                    result = false;
-            }
-            if (result)
-                result = travellers.add(traveller);
-        } else {
-            result = false;
+        if (traveller != null) {
+            traveller.setTravellerId(nextId);
+            travellers.add(traveller);
         }
-        return result;
+        return nextId++;
     }
-
-    public boolean update(Traveller traveller) {
-        boolean isUpdated = false;
-        if(traveller != null) {
-            int id = traveller.getTravellerID();
-            String name = traveller.getName();
-            int index = 0;
-            int changes = 0;
-            Traveller temp;
-            for (int i = 0; i < travellers.size(); i++) {
-                temp = travellers.get(i);
-                if (temp.getTravellerID() == id) {
-                    changes++;
-                    index = i;
-                }
-            }
-            if (changes != 0) {
-                travellers.get(index).setName(name);
-                isUpdated = true;
-            }
-        }
-        return isUpdated;
-    }
-
-    public boolean remove(Traveller traveller) {
-        boolean result = false;
-        int index;
-        index = travellers.indexOf(traveller);
-        if (index >= 0) {
-            travellers.remove(index);
-            result = true;
-        }
-        return result;
+    public void close()
+    {
+        System.out.println("Closed  database " );
     }
 
 }

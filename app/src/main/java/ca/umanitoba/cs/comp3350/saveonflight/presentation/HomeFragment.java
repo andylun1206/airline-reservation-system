@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewBookedFlights.ViewBookedFlightFragment;
 
 public class HomeFragment extends Fragment {
 
@@ -39,12 +41,6 @@ public class HomeFragment extends Fragment {
         ((NavigationView) getActivity().findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_home);
 
         ((TextView) view.findViewById(R.id.textView_home_greeting)).setText(getString(R.string.home_greeting, "Guest"));
-        view.findViewById(R.id.button_home_account_info).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ToastHandler.toastComingSoon(getActivity(), "Account");
-            }
-        });
 
         view.findViewById(R.id.button_home_search).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,10 +53,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.button_home_checkin).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.button_home_view_bookedflight).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                ToastHandler.toastComingSoon(getActivity(), getString(R.string.title_activity_checkin));
+            public void onClick(View v) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, new ViewBookedFlightFragment());
+                ft.commit();
             }
         });
     }

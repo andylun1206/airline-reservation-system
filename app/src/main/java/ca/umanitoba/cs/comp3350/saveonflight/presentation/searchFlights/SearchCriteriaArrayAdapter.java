@@ -1,4 +1,4 @@
-package ca.umanitoba.cs.comp3350.saveonflight.presentation;
+package ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights;
 
 /**
  * SearchCriteriaArrayAdapter.java
@@ -8,17 +8,23 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
  * @author Andy Lun
  */
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,8 +32,10 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.FlightClassEnum;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListViewEntry;
 
 public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListViewEntry> implements OnDateSetListener {
     private final Context context;
@@ -75,7 +83,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
             ((Spinner) view.findViewById(R.id.spinner_search_criteria_input)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    criteria.setField(view, Integer.toString(position + 1), row.getTitle());
+                    setField(view, Integer.toString(position + 1), row.getTitle());
                 }
 
                 @Override
@@ -83,9 +91,10 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
                 }
             });
         } else if (layoutResourceId == R.layout.list_item_search_criteria_text) {
-            final EditText input = (EditText) view.findViewById(R.id.editText_search_criteria_input);
+            final AutoCompleteTextView input = (AutoCompleteTextView) view.findViewById(R.id.editText_search_criteria_input);
             input.setHint(row.getTitle());
-
+            input.setThreshold(1);
+            setDefaults(input, row.getTitle());
             input.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
@@ -99,7 +108,7 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
                 public void afterTextChanged(Editable editable) {
                     String inputText = input.getText().toString().trim();
                     if (!inputText.isEmpty()) {
-                        criteria.setField(view, inputText, row.getTitle());
+                        setField(view, inputText, row.getTitle());
                     }
                 }
             });
@@ -128,8 +137,19 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
                     break;
                 case R.drawable.ic_dollar_sign:
                     input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                    input.setFilters(new InputFilter[] {new InputFilter.LengthFilter(8)});
                     break;
-                default:
+                case R.drawable.ic_takeoff:
+                case R.drawable.ic_landing:
+                    input.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, view.getResources().getStringArray(R.array.airport_list)));
+                    input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
+                    break;
+                case R.drawable.ic_plane:
+                    input.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, view.getResources().getStringArray(R.array.airline_list)));
+                    input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
+                    break;
+                case R.drawable.ic_seat:
+                    input.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, view.getResources().getStringArray(R.array.class_list)));
                     input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
                     break;
             }
@@ -201,34 +221,42 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
     }
 
     /**
-     * Verifies that the set of criterias match the set requirements
-     * @param activity current activity
-     * @return True if the requirements are met, else false
+     * Maps the input to the correct search criteria based on row key
+     * @param row row of the search criteria
+     * @param inputText user input text
+     * @param key key to map field
      */
-    public boolean verifyCriteria(Activity activity) {
-        boolean isValid = true;
-
-        if (criteria.getOrigin() == null || criteria.getOrigin().toString().trim().isEmpty()) {
-            isValid = missingRequiredField(activity, R.string.search_origin);
-        } else if (criteria.getDestination() == null || criteria.getDestination().toString().trim().isEmpty()) {
-            isValid = missingRequiredField(activity, R.string.search_destination);
-        } else if (criteria.getDepartureDate() == null || criteria.getDepartureDate().toString().trim().isEmpty()) {
-            isValid = missingRequiredField(activity, R.string.search_departure_date);
-        } else if (criteria.getNumTravellers() == 0) {
-            isValid = missingRequiredField(activity, R.string.search_num_passengers);
+    private void setField(View row, String inputText, String key) {
+        if (row.getResources().getString(R.string.search_origin).equals(key)) {
+            criteria.setOrigin(new Airport(inputText));
+        } else if (row.getResources().getString(R.string.search_destination).equals(key)) {
+            criteria.setDestination(new Airport(inputText));
+        } else if (row.getResources().getString(R.string.search_departure_date).equals(key)) {
+            criteria.setDepartureDate(SearchCriteriaHandler.parseDate(inputText));
+        } else if (row.getResources().getString(R.string.search_return_date).equals(key)) {
+            criteria.setReturnDate(SearchCriteriaHandler.parseDate(inputText));
+        } else if (row.getResources().getString(R.string.search_num_passengers).equals(key)) {
+            criteria.setNumTravellers(Integer.parseInt(inputText));
+        } else if (row.getResources().getString(R.string.search_max_price).equals(key)) {
+            criteria.setMaxPrice(Double.parseDouble(inputText));
+        } else if (row.getResources().getString(R.string.search_airlines).equals(key)) {
+            criteria.setPreferredAirlines(new Airline(inputText));
+        } else if (row.getResources().getString(R.string.search_class).equals(key)) {
+            criteria.setPreferredClass(FlightClassEnum.FIRST_CLASS);
         }
-
-        return isValid;
     }
 
-    /**
-     * Generates a toast message to notify the user that a field is mandatory
-     * @param activity current activity
-     * @param field field name
-     * @return false
-     */
-    private boolean missingRequiredField(Activity activity, int field) {
-        ToastHandler.toastMandatoryField(activity, activity.getString(field));
-        return false;
+    private void setDefaults(final EditText input, String title) {
+        if (title.equals("Origin")) {
+            input.setText("Winnipeg YWG");
+        } else if (title.equals("Destination")) {
+            input.setText("Toronto YYZ");
+        } else if (title.equals("Departure Date")) {
+            input.setText("2017-11-11");
+        } else if (title.equals("Return Date")) {
+            input.setText("2017-12-11");
+        } else if (title.equals("Number of Travellers")) {
+            input.setText("1");
+        }
     }
 }

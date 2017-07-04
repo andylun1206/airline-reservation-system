@@ -25,10 +25,23 @@ public class BookedFlightTest {
 
     @Before
     public void setUp() {
-        flight1 = new Flight("AC01", new Date(), new Date(), new Airline("Air Canada", R.mipmap.ic_aircanada),
-                new Airport("WPG", "Winnipeg"), new Airport("YVR", "Vancouver"), 599.99, 200, 2, FlightClassEnum.FIRST_CLASS);
-        flight2 = new Flight("WJ01", new Date(), new Date(), new Airline("WestJet", R.mipmap.ic_westjet),
-                new Airport("TRT", "Toronto"), new Airport("WPG", "Winnipeg"), 300.00, 150, 0, FlightClassEnum.BUSINESS);
+        Flight.FlightBuilder builder = new Flight.FlightBuilder("AC01", new Airport("WPG"), new Airport("YVR"));
+        flight1 = builder.setAirline(new Airline("Air Canada"))
+                .setPrice(599.99)
+                .setCapacity(200)
+                .setSeatsTaken(2)
+                .setFlightClass(FlightClassEnum.FIRST_CLASS)
+                .build();
+        flight2 = builder.setFlightId("WJ01")
+                .setAirline(new Airline("WestJet"))
+                .setOrigin(new Airport("TRT"))
+                .setDestination(new Airport("WPG"))
+                .setPrice(300.00)
+                .setCapacity(150)
+                .setSeatsTaken(0)
+                .setFlightClass(FlightClassEnum.BUSINESS)
+                .build();
+
         booked1 = new BookedFlight(JULIA, flight1);
         booked2 = new BookedFlight(JENNIE, flight2);
         booked3 = new BookedFlight(JULIA, flight2);

@@ -14,13 +14,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
  */
 
 public interface AccessFlights {
-    ArrayList<Flight> getFlights();
-
-    boolean insertFlight(Flight flight);
-
-    boolean updateFlight(Flight flight);
-
-    boolean deleteFlight(Flight flight);
+    Flight getFlightByCode(String flightCode);
 
     ArrayList<Flight> search(SearchCriteria searchCriteria);
 }

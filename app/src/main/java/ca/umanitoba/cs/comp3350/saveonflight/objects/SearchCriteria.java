@@ -8,14 +8,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
  * @author Andy Lun
  */
 
-import android.view.View;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
-
-import ca.umanitoba.cs.comp3350.saveonflight.R;
 
 public class SearchCriteria {
     private boolean returnTrip;
@@ -27,28 +20,19 @@ public class SearchCriteria {
     private double maxPrice;
     private Airline preferredAirlines;
     private FlightClassEnum preferredClass;
-    private boolean nonstop;
-    private boolean refundable;
 
     public SearchCriteria() {
     }
 
-    public SearchCriteria(Airport origin, Airport destination, Date departureDate,
-                          int numTravellers, double maxPrice, Airline preferredAirlines,
-                          FlightClassEnum preferredClass, boolean nonstop, boolean refundable) {
-        this.origin = origin;
-        this.destination = destination;
-        this.departureDate = departureDate;
-        this.numTravellers = numTravellers;
-        this.maxPrice = maxPrice;
-        this.preferredAirlines = preferredAirlines;
-        this.preferredClass = preferredClass;
-        this.nonstop = nonstop;
-        this.refundable = refundable;
+    public int getPreferredClassInt() {
+        return preferredClass.ordinal();
     }
 
     public Airport getOrigin() {
         return origin;
+    }
+    public String getOriginString() {
+        return origin.getAirportCode();
     }
 
     public void setOrigin(Airport origin) {
@@ -58,6 +42,7 @@ public class SearchCriteria {
     public Airport getDestination() {
         return destination;
     }
+    public String getDestinationString() {return destination.getAirportCode();}
 
     public void setDestination(Airport destination) {
         this.destination = destination;
@@ -95,7 +80,7 @@ public class SearchCriteria {
         this.maxPrice = maxPrice;
     }
 
-    public Airline getPreferredAirlines() {
+    public Airline getPreferredAirline() {
         return preferredAirlines;
     }
 
@@ -111,68 +96,11 @@ public class SearchCriteria {
         this.preferredClass = preferredClass;
     }
 
-    public boolean isNonstop() {
-        return nonstop;
-    }
-
-    public void setNonstop(boolean nonstop) {
-        this.nonstop = nonstop;
-    }
-
-    public boolean isRefundable() {
-        return refundable;
-    }
-
-    public void setRefundable(boolean refundable) {
-        this.refundable = refundable;
-    }
-
     public boolean isReturnTrip() {
         return this.returnTrip;
     }
 
     public void setReturnTrip(boolean isReturnTrip) {
         this.returnTrip = isReturnTrip;
-    }
-
-    public void setField(View row, String inputText, String title) {
-        if (row.getResources().getString(R.string.search_origin).equals(title)) {
-            setOrigin(new Airport(inputText));
-        } else if (row.getResources().getString(R.string.search_destination).equals(title)) {
-            setDestination(new Airport(inputText));
-        } else if (row.getResources().getString(R.string.search_departure_date).equals(title)) {
-            setDepartureDate(parseDate(inputText));
-        } else if (row.getResources().getString(R.string.search_return_date).equals(title)) {
-            setReturnDate(parseDate(inputText));
-        } else if (row.getResources().getString(R.string.search_num_passengers).equals(title)) {
-            setNumTravellers(Integer.parseInt(inputText));
-        } else if (row.getResources().getString(R.string.search_max_price).equals(title)) {
-            setMaxPrice(Double.parseDouble(inputText));
-        } else if (row.getResources().getString(R.string.search_airlines).equals(title)) {
-            setPreferredAirlines(new Airline(inputText, 0));
-        } else if (row.getResources().getString(R.string.search_class).equals(title)) {
-            setPreferredClass(FlightClassEnum.FIRST_CLASS);
-        }
-    }
-
-    public void reverseFlightDirection() {
-        Airport temp = getOrigin();
-        setOrigin(getDestination());
-        setDestination(temp);
-
-        setDepartureDate(getReturnDate());
-    }
-
-    private Date parseDate(String date) {
-        Date parsedDate = null;
-
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
-            parsedDate = sdf.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return parsedDate;
     }
 }

@@ -16,9 +16,9 @@ import static junit.framework.Assert.assertTrue;
 public class FlightTest {
     private Flight flight;
     private final String FLIGHT_ID = "WJ 101";
-    private final Airline AIRLINE = new Airline("WestJet", R.mipmap.ic_westjet);
-    private final Airport ORIGIN = new Airport("YWG", "");
-    private final Airport DEST = new Airport("YVR", "");
+    private final Airline AIRLINE = new Airline("WestJet");
+    private final Airport ORIGIN = new Airport("YWG");
+    private final Airport DEST = new Airport("YVR");
     private final double PRICE = 300.00;
     private final int CAP = 500;
     private final FlightClassEnum FLIGHT_CLASS = FlightClassEnum.BUSINESS;
@@ -26,6 +26,8 @@ public class FlightTest {
     private Date departureTime;
     private Date arrivalTime;
     private GregorianCalendar cal = new GregorianCalendar();
+
+    private Flight.FlightBuilder builder;
 
     @Before
     public void setUp() {
@@ -35,7 +37,14 @@ public class FlightTest {
         cal.set(2017, 1, 1, 15, 0);
         arrivalTime = cal.getTime();
 
-        flight = new Flight(FLIGHT_ID, departureTime, arrivalTime, AIRLINE, ORIGIN, DEST, PRICE, CAP, 0, FLIGHT_CLASS);
+        builder = new Flight.FlightBuilder(FLIGHT_ID, ORIGIN, DEST);
+        flight = builder.setDepartureTime(departureTime)
+                .setArrivalTime(arrivalTime)
+                .setAirline(AIRLINE)
+                .setPrice(PRICE)
+                .setCapacity(CAP)
+                .setFlightClass(FLIGHT_CLASS)
+                .build();
     }
 
     @After
@@ -80,18 +89,21 @@ public class FlightTest {
 
     @Test
     public void testEquals() {
-        final Airline AC = new Airline("Air Canada", R.mipmap.ic_aircanada);
         cal.set(2017, 1, 1, 12, 1);
         final Date DEPART = cal.getTime();
         cal.set(2017, 1, 1, 15, 1);
         final Date ARRIVE = cal.getTime();
-        Flight otherFlight = new Flight("AC101", DEPART, ARRIVE, AC, ORIGIN, DEST, PRICE, CAP, 0, FLIGHT_CLASS);
+
+        Flight otherFlight = builder.setFlightId("AC101")
+                .setDepartureTime(DEPART)
+                .setArrivalTime(ARRIVE)
+                .build();
 
         assertFalse(null == flight);              // null
         assertFalse(flight.equals(FLIGHT_ID));    // Not same class
         assertFalse(otherFlight.equals(flight));  // Same class, but not same Flight
 
-        otherFlight.setFlightID(FLIGHT_ID);
+        otherFlight.setFlightCode(FLIGHT_ID);
         assertEquals(otherFlight, flight);        // Same Flight
     }
 
@@ -99,15 +111,15 @@ public class FlightTest {
     @Test
     public void testFlightId() {
         final String NEW_ID = "ABCDEFG";
-        assertEquals(FLIGHT_ID, flight.getFlightID());
-        assertFalse(flight.getFlightID().equals(NEW_ID));
-        flight.setFlightID(NEW_ID);
-        assertEquals(NEW_ID, flight.getFlightID());
+        assertEquals(FLIGHT_ID, flight.getFlightCode());
+        assertFalse(flight.getFlightCode().equals(NEW_ID));
+        flight.setFlightCode(NEW_ID);
+        assertEquals(NEW_ID, flight.getFlightCode());
     }
 
     @Test
     public void testAirline() {
-        final Airline NEW_AIRLINE = new Airline("Air Spain", R.mipmap.ic_launcher);
+        final Airline NEW_AIRLINE = new Airline("Air Spain");
         assertEquals(AIRLINE, flight.getAirline());
         assertFalse(flight.getAirline().equals(NEW_AIRLINE));
         flight.setAirline(NEW_AIRLINE);
@@ -116,7 +128,7 @@ public class FlightTest {
 
     @Test
     public void testOrigin() {
-        final Airport NEW_ORIGIN = new Airport("YYY", "Flin Flon International");
+        final Airport NEW_ORIGIN = new Airport("Flin Flon International YYY");
         assertEquals(ORIGIN, flight.getOrigin());
         assertFalse(flight.getOrigin().equals(NEW_ORIGIN));
         flight.setOrigin(NEW_ORIGIN);
@@ -125,7 +137,7 @@ public class FlightTest {
 
     @Test
     public void testDestination() {
-        final Airport NEW_DEST = new Airport("", "The Moon");
+        final Airport NEW_DEST = new Airport("The Moon");
         assertEquals(DEST, flight.getDestination());
         assertFalse(flight.getDestination().equals(NEW_DEST));
         flight.setDestination(NEW_DEST);
@@ -189,6 +201,14 @@ public class FlightTest {
     public void testGetFlightTime() {
         final String EXPECTED = "12:00 - 15:00";
         assertEquals(EXPECTED, flight.getFlightTime());
+    }
+
+    @Test
+    public void testAirportCodes() {
+        assertEquals("YWG", flight.getOriginAirportCode());
+        assertFalse("YVR".equals(flight.getOriginAirportCode()));
+        assertEquals("YVR", flight.getDestinationAirportCode());
+        assertFalse("YWG".equals(flight.getDestinationAirportCode()));
     }
 
 }

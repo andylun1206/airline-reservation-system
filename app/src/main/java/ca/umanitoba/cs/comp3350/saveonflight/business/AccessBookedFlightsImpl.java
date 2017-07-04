@@ -1,13 +1,10 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTable;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightAccess;
 
 /**
  * AccessBookedFlightImpl.java
@@ -18,45 +15,41 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
  */
 
 public class AccessBookedFlightsImpl implements AccessBookedFlights {
-    private static DataAccess<BookedFlight> bookedFlightsDB;
+    private static BookedFlightAccess bookedFlightsDB;
 
-    public AccessBookedFlightsImpl() {
-        if (bookedFlightsDB == null) {
-            bookedFlightsDB = new BookedFlightTable();
-            bookedFlightsDB.initialize();
-        }
+    public AccessBookedFlightsImpl(BookedFlightAccess access) {
+        bookedFlightsDB = access;
     }
 
+    /**
+     * Adds a BookedFlight to the database.
+     *
+     * @param bf the BookedFlight to add
+     * @return true if the BookedFlight was added; false if not
+     */
     @Override
-    public List<BookedFlight> getFlights() {
-        return BookedFlightTable.getBookedFlights();
-    }
-
-    @Override
-    public boolean addBookedFlight(BookedFlight bf) {
+    public boolean add(BookedFlight bf) {
         return bookedFlightsDB.add(bf);
     }
 
+    /**
+     * Removes the specified BookedFlights from the table.
+     *
+     * @param bf specifies which BookedFlights to remove
+     * @return true if 1 or more rows were removed; false otherwise
+     */
     @Override
-    public boolean updateBookedFlight(BookedFlight bf) {
-        return bookedFlightsDB.update(bf);
-    }
-
-    @Override
-    public boolean deleteFlight(BookedFlight bf) {
+    public boolean remove(BookedFlight bf) {
         return bookedFlightsDB.remove(bf);
     }
 
-    @Override
-    public ArrayList<BookedFlight> getBookedFlightsOf(Traveller t) {
-//        return bookedFlightsDB.getTravellersBookedFlights(t);
-        return null;
+    /**
+     * Searches for BookedFlights that are associated with the specified Traveller.
+     *
+     * @param t the Traveller to search by
+     * @return all the BookedFlights that are associated with the given Traveller
+     */
+    public List<BookedFlight> searchByTraveller(Traveller t) {
+        return bookedFlightsDB.searchByTraveller(t);
     }
-
-    @Override
-    public ArrayList<BookedFlight> getTravellersOnFlight(Flight f) {
-//        return bookedFlightsDB.getTravellersOnFlight(f);
-        return null;
-    }
-
 }

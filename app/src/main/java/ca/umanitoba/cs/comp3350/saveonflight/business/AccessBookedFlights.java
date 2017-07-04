@@ -1,10 +1,10 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
 /**
@@ -16,15 +16,9 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  */
 
 public interface AccessBookedFlights {
-    List<BookedFlight> getFlights();
+    boolean add(BookedFlight bf);
 
-    boolean addBookedFlight(BookedFlight bf);
+    boolean remove(BookedFlight bf);
 
-    boolean updateBookedFlight(BookedFlight bf);
-
-    boolean deleteFlight(BookedFlight bf);
-
-    ArrayList<BookedFlight> getBookedFlightsOf(Traveller t);
-
-    ArrayList<BookedFlight> getTravellersOnFlight(Flight f);
+    List<BookedFlight> searchByTraveller(Traveller t);
 }

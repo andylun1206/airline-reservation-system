@@ -6,6 +6,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
+
 /**
  * BookedFlightTable.java
  * <p>
@@ -14,17 +15,27 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  * @author Long Yu
  */
 
-public class BookedFlightTable implements DataAccess<BookedFlight> {
+public class BookedFlightTable implements BookedFlightAccess {
     private static ArrayList<BookedFlight> bookedFlights = null;
 
     public BookedFlightTable() {
     }
 
-    public void initialize() {
+    public void initialize(String dbPath) {
         if (bookedFlights == null) {
             bookedFlights = new ArrayList<BookedFlight>();
-            ArrayList<Traveller> travellers = TravellerTable.getTravellers();
-            ArrayList<Flight> flights = FlightTable.getFlights();
+
+            TravellerTable travellerTable = new TravellerTable();
+            if (travellerTable.getTravellers() == null) {
+                new TravellerTable().initialize("");
+            }
+            ArrayList<Traveller> travellers = travellerTable.getTravellers();
+            FlightTable flightTable = new FlightTable();
+            ArrayList<Flight> flights = flightTable.getFlights();
+            if (flights == null) {
+                new FlightTable().initialize("");
+            }
+            flights = flightTable.getFlights();
             bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(0)));
             bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(1)));
             bookedFlights.add(new BookedFlight(travellers.get(1), flights.get(2)));
@@ -38,7 +49,7 @@ public class BookedFlightTable implements DataAccess<BookedFlight> {
 
     public boolean add(BookedFlight bookedFlight) {
         boolean result = true;
-        if (bookedFlight != null && bookedFlight.getTraveller().getTravellerID() != 0 && (!bookedFlight.getFlight().getFlightID().isEmpty() && !bookedFlight.getFlight().getDepartureTime().equals(null))) {
+        if (bookedFlight != null && bookedFlight.getTraveller().getTravellerID() != 0 && (!bookedFlight.getFlight().getFlightCode().isEmpty() && !bookedFlight.getFlight().getDepartureTime().equals(null))) {
             for (BookedFlight bookedFlight1 : bookedFlights) {
                 if (bookedFlight.equals(bookedFlight1))
                     result = false;
@@ -51,30 +62,6 @@ public class BookedFlightTable implements DataAccess<BookedFlight> {
         return result;
     }
 
-    public boolean update(BookedFlight bookedFlight) {
-        boolean isUpdated = false;
-        if(bookedFlight != null) {
-            int travelId = bookedFlight.getTraveller().getTravellerID();
-            String flightId = bookedFlight.getFlight().getFlightID();
-            int changes = 0;
-            int index = 0;
-            BookedFlight temp;
-            for (int i = 0; i < bookedFlights.size(); i++) {
-                temp = bookedFlights.get(i);
-                if (temp.getFlight().getFlightID().equals(flightId) && temp.getTraveller().getTravellerID() == travelId) {
-                    changes++;
-                    index = i;
-                }
-            }
-            if (changes != 0) {
-                bookedFlights.get(index).setFlight(bookedFlight.getFlight());
-                bookedFlights.get(index).setTraveller(bookedFlight.getTraveller());
-                isUpdated = true;
-            }
-        }
-        return isUpdated;
-    }
-
     public boolean remove(BookedFlight bookedFlight) {
         boolean result = false;
         int index;
@@ -84,7 +71,20 @@ public class BookedFlightTable implements DataAccess<BookedFlight> {
             result = true;
         }
         return result;
+    }
 
+    public ArrayList<BookedFlight> searchByTraveller(Traveller t) {
+        ArrayList<BookedFlight> matches = new ArrayList<>();
+        for (BookedFlight bf : bookedFlights) {
+            if (bf.getTraveller().equals(t)) {
+                matches.add(bf);
+            }
+        }
+        return matches;
+    }
+
+    public void close() {
+        System.out.println("Closed  database ");
     }
 
 }

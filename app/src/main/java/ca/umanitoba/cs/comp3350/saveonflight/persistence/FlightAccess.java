@@ -11,4 +11,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 
 public interface FlightAccess extends DataAccess<Flight> {
     public ArrayList<Flight> findBySearchCriteria(SearchCriteria criteria);
+    ArrayList<Flight> getFlights();
+    public Flight findByFlightCode(String flightCode);
 }

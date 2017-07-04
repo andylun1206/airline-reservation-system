@@ -27,6 +27,8 @@ and more time efficient than trying to come up with our own.
 - 1 model object for each table in the database.
 - 1 database access class for each table in the data base.
 
+### June 10, 2017
+Decided to change the way we assign developer tasks. Instead of assigning all of them upfront, just assign one or two. Then, when we finish our assigned tasks, we can pick any free issue on GitHub to work on.
 
 ## Iteration 1:
 ### Contributions
@@ -99,3 +101,66 @@ and more time efficient than trying to come up with our own.
         - Added logo and app name to splash screen
     - Added toast messaging for features that are not implemented in this iteration (GitHub issue #26)
     
+## Iteration 2:
+### Contributions
+
+
+#### You Tian Zhang
+- Problem: GUI - Payment Screen (GitHub issue #70)
+    - Need screen that allows users to input their payment and personal info
+    - Initially created layout in xml, implemented with a bunch of EditTexts
+    - Then, created PaymentInfo class + builder to model the user's card info
+    - Later, switched to just using the Card model object from the Stripe API as well as using their CardInputWidget
+        - Takes care of validating card info for us
+- Problem: GUI - display booked flight info (GitHub issue #71)
+    - Created input field for user's to input their passenger ID
+    - All flights that are booked for that passenger ID are shown in a ListView
+- Problem: Business - validate payment info (GitHub issue #72)
+    - Taken care of in issue #70 by using Stripe's CardInputWidget
+- Problem: Don't let users pick return dates before the departure date (GitHub isse #75)
+    - Handled by calling the setMinDate() method with the appropriate parameter
+        - Pass in the current date if it is the departure date datepicker
+        - Pass in the date on the departure date datepicker if it is the return date datepicker
+- Problem: Extract comparators to outside of the SortFlightsImpl class (GitHub issue #81)
+    - Placed comparators in a new comparators package in the business package
+    - Each as their own class
+    
+#### Andy Chi Fung Lun
+- Problem: GUI - Return flights screen (GitHub issue #64, #65)
+    - Needed a screen to display flights for return trip if round trip is selected
+    - Screen is similar to the first set of flights, should not duplicate code
+        - Found way to reuse screen by updating the ListView
+    - Requires message passing to other fragments
+        - Implemented FragmentNavigation to handle all navigation between fragments
+- Problem: Bug fixes from previous iteration (GitHub issue #73, #74, #77, #78, #92, #96)
+    - \#73: Keyboard was not losing focus when needed, keyboard will now be hidden if tapped on whitespace
+    - \#74: All input fields were EditText, it is now possible to swap to other components
+    - \#77: Integer overflow with input fields, there is a set max length now for each field
+    - \#78: Fixed through issue #74
+    - \#92: Chosen flights were not reset properly after going to view flights screen, fixed by reinitializing
+    - \#96: Deleting useless buttons and removing dead code
+- Problem: Fixing 'dat constructor' in search criteria (GitHub issue #80)
+    - Initially thought to use builder class to replace constructor
+    - Ultimately removed constructor since it was only used in testing
+    
+#### Shenyun Wang
+- Problem: GUI - flight summary screen (GitHub issue #63)
+	- Screen to display summary of flights chosen by user
+	- recieves message passing of flights from previous screen 
+	- hide return flight section if searching for one way trip
+	
+#### Zhengyu Gu & Long Yu
+- Problem: Database - Port stub database to HSQL (GitHub issue #66)
+		- implemented flight, airport, airline sql table
+		- connected database to code
+			- created hardcoded data for database
+			- created functions copyDatabaseToDevice() and copyAssetsToDirectory() in main activity
+			- created application package
+- Problem: Database - Dependency injection (Github issue #67)
+		- added dependencies into gradle
+		- build interfaces for all object tables
+		- removed addFunction, updateFunction, removeFunction
+		- added different add methods for different tables
+		
+    
+

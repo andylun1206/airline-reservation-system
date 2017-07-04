@@ -8,17 +8,14 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
  * @author Andy Lun
  */
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-public class Flight implements Parcelable {
+public class Flight {
     public static SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy, MM, dd, HH, mm", Locale.CANADA);
-    private String flightID;
+    private String flightCode;
     private Airline airline;
     private Date departureTime;
     private Date arrivalTime;
@@ -29,22 +26,10 @@ public class Flight implements Parcelable {
     private int seatsTaken;
     private FlightClassEnum flightClass;
 
-    public Flight(String flightID, Date departureTime, Date arrivalTime,
-                  Airline airline, Airport origin, Airport destination,
-                  double price, int capacity) {
-        this(flightID, departureTime, arrivalTime, airline, origin, destination, price, capacity, 0, FlightClassEnum.ECONOMY);
-    }
-
-    public Flight(String flightID, Date departureTime, Date arrivalTime,
-                  Airline airline, Airport origin, Airport destination,
-                  double price, int capacity, int seatsTaken) {
-        this(flightID, departureTime, arrivalTime, airline, origin, destination, price, capacity, seatsTaken, FlightClassEnum.ECONOMY);
-    }
-
-    public Flight(String flightID, Date departureTime, Date arrivalTime,
+    public Flight(String flightCode, Date departureTime, Date arrivalTime,
                   Airline airline, Airport origin, Airport destination,
                   double price, int capacity, int seatsTaken, FlightClassEnum flightClass) {
-        this.flightID = flightID;
+        this.flightCode = flightCode;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
         this.airline = airline;
@@ -75,19 +60,16 @@ public class Flight implements Parcelable {
         return result;
     }
 
-    public void setFlightID(String flightID) {
-        this.flightID = flightID;
-    }
-
-    public Airline getAirline() {
-        return airline;
-    }
     public String getAirlineString() {
         return airline.getName();
     }
 
-    public void setAirline(String airline) {
-        this.airline.setName(airline);
+    public void setFlightCode(String flightCode) {
+        this.flightCode = flightCode;
+    }
+
+    public Airline getAirline() {
+        return airline;
     }
 
     public void setAirline(Airline airline) {
@@ -96,6 +78,14 @@ public class Flight implements Parcelable {
 
     public Airport getOrigin() {
         return origin;
+    }
+
+    public String getOriginAirportCode() {
+        return origin.getAirportCode();
+    }
+
+    public String getDestinationAirportCode() {
+        return destination.getAirportCode();
     }
 
     public void setOrigin(Airport origin) {
@@ -137,18 +127,26 @@ public class Flight implements Parcelable {
     public FlightClassEnum getFlightClass() {
         return flightClass;
     }
-    public int getFlightClassInt() {return flightClass.ordinal();}
+
+    public int getFlightClassInt() {
+        return flightClass.ordinal();
+    }
 
     public void setFlightClass(FlightClassEnum flightClass) {
         this.flightClass = flightClass;
     }
 
-    public String getFlightID() {
-        return flightID;
+    public String getFlightCode() {
+        return flightCode;
     }
 
     public Date getDepartureTime() {
         return departureTime;
+    }
+
+    public String getDepartureTimeString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return sdf.format(departureTime);
     }
 
     public void setDepartureTime(Date departureTime) {
@@ -163,16 +161,12 @@ public class Flight implements Parcelable {
         this.arrivalTime = arrivalTime;
     }
 
-    public String toString() {
-        return "Flight: " + flightID + " " + departureTime + " " + arrivalTime + " " + airline + " " + "from " + origin + " to " + destination;
-    }
-
     public boolean equals(Object object) {
         boolean result = false;
 
         if (object instanceof Flight) {
             Flight other = (Flight) object;
-            if (other.flightID.equals(flightID)) {
+            if (other.flightCode.equals(flightCode)) {
                 result = true;
             }
         }
@@ -189,8 +183,14 @@ public class Flight implements Parcelable {
     }
 
     public long getDateDiff(TimeUnit timeUnit) {
-        long diffInMillis = arrivalTime.getTime() - departureTime.getTime();
-        return timeUnit.convert(diffInMillis, TimeUnit.MILLISECONDS);
+        if (arrivalTime == null) {
+            return Long.MIN_VALUE;
+        } else if (departureTime == null) {
+            return Long.MAX_VALUE;
+        } else {
+            long diffInMillis = arrivalTime.getTime() - departureTime.getTime();
+            return timeUnit.convert(diffInMillis, TimeUnit.MILLISECONDS);
+        }
     }
 
     public String getFlightTime() {
@@ -198,48 +198,86 @@ public class Flight implements Parcelable {
         return sdf.format(departureTime) + " - " + sdf.format(arrivalTime);
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
+    public static final class FlightBuilder {
+        private String flightId;
+        private Airline airline;
+        private Date departureTime;
+        private Date arrivalTime;
+        private Airport origin;
+        private Airport destination;
+        private double price;
+        private int capacity;
+        private int seatsTaken;
+        private FlightClassEnum flightClass;
 
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        @Override
-        public Flight[] newArray(int size) {
-            return new Flight[size];
+        public FlightBuilder(String flightId, Airport origin, Airport destination) {
+            this.flightId = flightId;
+            this.origin = origin;
+            this.destination = destination;
+
+            airline = null;
+            departureTime = null;
+            arrivalTime = null;
+            price = -1;
+            capacity = -1;
+            seatsTaken = 0;
+            flightClass = FlightClassEnum.ECONOMY;
         }
 
-        @Override
-        public Flight createFromParcel(Parcel in) {
-            return new Flight(in);
+        public FlightBuilder setFlightId(String flightId) {
+            this.flightId = flightId;
+            return this;
         }
-    };
 
-    @Override
-    public void writeToParcel(Parcel parcel, int flags) {
-        parcel.writeString(flightID);
-        parcel.writeParcelable(airline, flags);
-        parcel.writeSerializable(departureTime);
-        parcel.writeSerializable(arrivalTime);
-        parcel.writeParcelable(origin, flags);
-        parcel.writeParcelable(destination, flags);
-        parcel.writeDouble(price);
-        parcel.writeInt(capacity);
-        parcel.writeInt(seatsTaken);
-        parcel.writeSerializable(flightClass);
-    }
+        public FlightBuilder setAirline(Airline airline) {
+            this.airline = airline;
+            return this;
+        }
 
-    public Flight(Parcel in) {
-        flightID = in.readString();
-        airline = in.readParcelable(Airline.class.getClassLoader());
-        departureTime = (Date) in.readSerializable();
-        arrivalTime = (Date) in.readSerializable();
-        origin = in.readParcelable(Airport.class.getClassLoader());
-        destination = in.readParcelable(Airport.class.getClassLoader());
-        price = in.readDouble();
-        capacity = in.readInt();
-        seatsTaken = in.readInt();
-        flightClass = (FlightClassEnum) in.readSerializable();
+        public FlightBuilder setDepartureTime(Date departureTime) {
+            this.departureTime = departureTime;
+            return this;
+        }
+
+        public FlightBuilder setArrivalTime(Date arrivalTime) {
+            this.arrivalTime = arrivalTime;
+            return this;
+        }
+
+        public FlightBuilder setOrigin(Airport origin) {
+            this.origin = origin;
+            return this;
+        }
+
+        public FlightBuilder setDestination(Airport destination) {
+            this.destination = destination;
+            return this;
+        }
+
+        public FlightBuilder setPrice(double price) {
+            this.price = price;
+            return this;
+        }
+
+        public FlightBuilder setCapacity(int capacity) {
+            this.capacity = capacity;
+            return this;
+        }
+
+        public FlightBuilder setSeatsTaken(int seatsTaken) {
+            this.seatsTaken = seatsTaken;
+            return this;
+        }
+
+        public FlightBuilder setFlightClass(FlightClassEnum flightClass) {
+            this.flightClass = flightClass;
+            return this;
+        }
+
+        public Flight build() {
+            return new Flight(flightId, departureTime, arrivalTime, airline, origin, destination,
+                    price, capacity, seatsTaken, flightClass);
+        }
     }
 
 }

@@ -10,17 +10,41 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation;
 
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 
 import java.util.ArrayList;
+
+import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.flightSummary.ViewFlightsSummaryFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.payment.PaymentFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewBookedFlights.ViewBookedFlightFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights.ViewFlightsFragment;
 
 public class FragmentNavigation {
     private static FragmentManager fragmentManager;
 
     public static void setFragmentManager(FragmentManager newFragmentManager) {
         fragmentManager = newFragmentManager;
+    }
+
+    /**
+     * Switch context to the homepage fragment
+     */
+    public static void homepage() {
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, new HomeFragment())
+                .commit();
+    }
+
+    /**
+     * Switch context to viewing the search fragment
+     */
+    public static void flightSearch() {
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, new SearchFragment())
+                .commit();
     }
 
     /**
@@ -36,9 +60,38 @@ public class FragmentNavigation {
     /**
      * Switch context to flight summary fragment
      */
-    public static void flightSummary(ArrayList<Flight> flights) {
+    public static void flightSummary(ArrayList<String> flights) {
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("chosen_flights", flights);
+        bundle.putStringArrayList("chosen_flights", flights);
+
+        Fragment viewFlights = new ViewFlightsSummaryFragment();
+        viewFlights.setArguments(bundle);
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, viewFlights)
+                .commit();
+    }
+
+    /**
+     * Switch context to payment fragment
+     */
+    public static void viewPayment(ArrayList<String> flights) {
+        Bundle bundle = new Bundle();
+        bundle.putStringArrayList("flights_to_book", flights);
+
+        Fragment payment = new PaymentFragment();
+        payment.setArguments(bundle);
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, payment)
+                .commit();
+    }
+
+    /**
+     * Switch context to view booked flights fragment
+     */
+    public static void viewBookedFlights() {
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, new ViewBookedFlightFragment())
+                .commit();
     }
 
 }
