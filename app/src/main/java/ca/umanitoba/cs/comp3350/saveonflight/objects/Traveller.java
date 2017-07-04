@@ -25,6 +25,10 @@ public class Traveller {
         this.name = name;
     }
 
+    public void setTravellerId(int id) {
+        travellerID = id;
+    }
+
     public int getTravellerID() {
         return travellerID;
     }

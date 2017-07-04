@@ -148,4 +148,19 @@ Decided to change the way we assign developer tasks. Instead of assigning all of
 	- Screen to display summary of flights chosen by user
 	- recieves message passing of flights from previous screen 
 	- hide return flight section if searching for one way trip
+	
+#### Zhengyu Gu & Long Yu
+- Problem: Database - Port stub database to HSQL (GitHub issue #66)
+		- implemented flight, airport, airline sql table
+		- connected database to code
+			- created hardcoded data for database
+			- created functions copyDatabaseToDevice() and copyAssetsToDirectory() in main activity
+			- created application package
+- Problem: Database - Dependency injection (Github issue #67)
+		- added dependencies into gradle
+		- build interfaces for all object tables
+		- removed addFunction, updateFunction, removeFunction
+		- added different add methods for different tables
+		
     
+

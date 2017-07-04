@@ -41,14 +41,17 @@ public class FlightTableTest {
     @BeforeClass
     public static void setUp() {
         flightTable = new FlightTable();
-        flightTable.initialize();
-        original = FlightTable.getFlights();
-        new AirportTable().initialize();
-        new AirlineTable().initialize();
+        flightTable.initialize("");
+        original = flightTable.getFlights();
+        AirportAccess airportTable = new AirportTable();
+        airportTable.initialize("");
 
-        Airline westJet = AirlineTable.findAirline("westjet");
-        Airport yyz = AirportTable.findAirport("YYZ");
-        Airport ywg = AirportTable.findAirport("YWG");
+        AirlineAccess airlineTable = new AirlineTable();
+        airlineTable.initialize("");
+
+        Airline westJet = airlineTable.findAirline("westjet");
+        Airport yyz = airportTable.findAirport("YYZ");
+        Airport ywg = airportTable.findAirport("YWG");
 
         builder = new Flight.FlightBuilder("", yyz, ywg);
         try {
@@ -71,7 +74,7 @@ public class FlightTableTest {
 
     @Test
     public void testInitialize() {
-        assertEquals("Initialize is not work", original, FlightTable.getFlights());
+        assertEquals("Initialize is not work", original, flightTable.getFlights());
     }
 
     @Test

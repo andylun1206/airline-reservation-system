@@ -1,7 +1,6 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 

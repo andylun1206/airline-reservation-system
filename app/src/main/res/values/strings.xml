@@ -18,7 +18,7 @@
 
     <!-- Toast Messages -->
     <string name="toast_coming_soon">%1$s feature coming soon!</string>
-    <string name="toast_mandatory_field">%1$s is required!</string>
+    <string name="toast_mandatory_field">%1$s is invalid!</string>
     <string name="toast_no_result">No flights were found with these criterias!</string>
     <string name="toast_flight_picked">Flight %1$s chosen.</string>
 

@@ -28,24 +28,26 @@ public class FlightTable implements FlightAccess {
     public FlightTable() {
     }
 
-    public void initialize() {
+    public void initialize(String dbPath) {
         if (flights == null) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CANADA);
             flights = new ArrayList<Flight>();
 
-            if (AirlineTable.getAirlines() == null) {
-                new AirlineTable().initialize();
+            AirlineTable airlineTable = new AirlineTable();
+            if (airlineTable.getAirlines() == null) {
+                new AirlineTable().initialize("");
             }
 
-            if (AirportTable.getAirports() == null) {
-                new AirportTable().initialize();
+            AirportTable airportTable = new AirportTable();
+            if (airportTable.getAirports() == null) {
+                new AirportTable().initialize("");
             }
 
             try {
-                Airline airCanada = AirlineTable.findAirline("Air Canada");
-                Airline westJet = AirlineTable.findAirline("WestJet");
-                Airport wpg = AirportTable.findAirport("Winnipeg YWG");
-                Airport tor = AirportTable.findAirport("Toronto YYZ");
+                Airline airCanada = airlineTable.findAirline("Air Canada");
+                Airline westJet = airlineTable.findAirline("WestJet");
+                Airport wpg = airportTable.findAirport("Winnipeg YWG");
+                Airport tor = airportTable.findAirport("Toronto YYZ");
 
                 Flight.FlightBuilder builder = new Flight.FlightBuilder("AC 256", wpg, tor);
 
@@ -135,6 +137,12 @@ public class FlightTable implements FlightAccess {
                         .setDepartureTime(sdf.parse("2017-12-11 21:00"))
                         .setArrivalTime(sdf.parse("2017-12-12 00:21"))
                         .build());
+                flights.add(builder.setFlightId("WJ 490")
+                        .setAirline(westJet)
+                        .setDepartureTime(sdf.parse("2017-12-11 18:15"))
+                        .setArrivalTime(sdf.parse("2017-12-11 21:35"))
+                        .setPrice(205.25)
+                        .build());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -153,7 +161,7 @@ public class FlightTable implements FlightAccess {
         return flight;
     }
 
-    public static ArrayList<Flight> getFlights() {
+    public ArrayList<Flight> getFlights() {
         return flights;
     }
 
@@ -260,6 +268,10 @@ public class FlightTable implements FlightAccess {
             }
         }
         return table;
+    }
+    public void close()
+    {
+        System.out.println("Closed  database " );
     }
 
 }

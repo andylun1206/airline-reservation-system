@@ -16,17 +16,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
-import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchCriteriaHandler;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchCriteriaArrayAdapter;
-
-import java.util.ArrayList;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchCriteriaHandler;
 
 public class ViewFlightsFragment extends ListFragment {
     private static Activity activity;
@@ -56,10 +57,8 @@ public class ViewFlightsFragment extends ListFragment {
         setListAdapter(flightAdapter);
 
         searchCriteria = SearchCriteriaArrayAdapter.getCriteria();
-        flights = new AccessFlightsImpl().search(searchCriteria);
-
+        flights = new AccessFlightsImpl(Main.getFlightAccess()).search(searchCriteria);
         title = getString(R.string.view_flights_flight_path, "$0", "$1");
-        setTitle(flights.get(0).getOrigin().getAirportCode(), flights.get(0).getDestination().getAirportCode());
 
         return view;
     }
@@ -70,7 +69,7 @@ public class ViewFlightsFragment extends ListFragment {
 
         if (flights != null && flights.size() != 0) {
             updateFlightList();
-            setTitle(flights.get(0).getOrigin().toString(), flights.get(0).getDestination().toString());
+            setTitle(flights.get(0).getOrigin().getAirportCode(), flights.get(0).getDestination().getAirportCode());
         }
 
         view.findViewById(R.id.button_view_flight_sort_duration).setOnClickListener(new View.OnClickListener() {
@@ -135,7 +134,7 @@ public class ViewFlightsFragment extends ListFragment {
     public static void navgiateNextStep() {
         if (searchCriteria.isReturnTrip() && chosenFlights.size() == 1) {
             searchCriteria = SearchCriteriaHandler.reverseFlightDirection(searchCriteria);
-            flights = new AccessFlightsImpl().search(searchCriteria);
+            flights = new AccessFlightsImpl(Main.getFlightAccess()).search(searchCriteria);
 
             if (flights != null && !flights.isEmpty()) {
                 updateFlightList();

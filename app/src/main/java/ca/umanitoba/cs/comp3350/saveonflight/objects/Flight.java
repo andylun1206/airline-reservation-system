@@ -26,9 +26,9 @@ public class Flight {
     private int seatsTaken;
     private FlightClassEnum flightClass;
 
-    private Flight(String flightCode, Date departureTime, Date arrivalTime,
-                   Airline airline, Airport origin, Airport destination,
-                   double price, int capacity, int seatsTaken, FlightClassEnum flightClass) {
+    public Flight(String flightCode, Date departureTime, Date arrivalTime,
+                  Airline airline, Airport origin, Airport destination,
+                  double price, int capacity, int seatsTaken, FlightClassEnum flightClass) {
         this.flightCode = flightCode;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
@@ -58,6 +58,12 @@ public class Flight {
         }
 
         return result;
+    }
+
+    public int getFlightClassInt() {return flightClass.ordinal();}
+
+    public String getAirlineString() {
+        return airline.getName();
     }
 
     public void setFlightCode(String flightCode) {
@@ -134,6 +140,11 @@ public class Flight {
 
     public Date getDepartureTime() {
         return departureTime;
+    }
+
+    public String getDepartureTimeString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return sdf.format(departureTime);
     }
 
     public void setDepartureTime(Date departureTime) {

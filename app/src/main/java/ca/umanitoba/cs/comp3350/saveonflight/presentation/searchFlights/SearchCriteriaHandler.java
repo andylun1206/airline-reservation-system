@@ -1,16 +1,18 @@
 package ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights;
 
 import android.app.Activity;
-import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.business.AccessAirportsImpl;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
-import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessAirportsImpl;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
 
 /**
  * Created by Shenyun Wang on 2017-06-27.
@@ -26,7 +28,7 @@ public class SearchCriteriaHandler {
             valid = missingRequiredField(activity, R.string.search_destination);
         } else if (!validateDepartureDate(criteria.getDepartureDate())) {
             valid = missingRequiredField(activity, R.string.search_departure_date);
-        } else if (!validateReturnDate(criteria.getDepartureDate(), criteria.getReturnDate())) {
+        } else if (criteria.isReturnTrip() && !validateReturnDate(criteria.getDepartureDate(), criteria.getReturnDate())) {
             valid = missingRequiredField(activity, R.string.search_return_date);
         } else if (!validatePassengers(criteria.getNumTravellers())) {
             valid = missingRequiredField(activity, R.string.search_num_passengers);
@@ -62,7 +64,7 @@ public class SearchCriteriaHandler {
         boolean valid = false;
 
         if (airport != null && !airport.getAirportCode().trim().isEmpty()
-                && new AccessAirportsImpl().findAirportByName(airport.getAirportCode()) != null) {
+                && new AccessAirportsImpl(Main.getAirportAccess()).findAirportByName(airport.getAirportCode()) != null) {
             valid = true;
         }
 

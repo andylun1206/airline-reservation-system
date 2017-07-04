@@ -2,7 +2,6 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
 import java.util.ArrayList;
 
-import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 
 /**
@@ -13,13 +12,13 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
  * @author Long Yu
  */
 
-public class AirlineTable implements DataAccess<Airline> {
+public class AirlineTable implements AirlineAccess {
     private static ArrayList<Airline> airlines = null;
 
     public AirlineTable() {
     }
 
-    public void initialize() {
+    public void initialize(String dbPath) {
         if (airlines == null) {
             airlines = new ArrayList<Airline>();
             airlines.add(new Airline("WestJet"));
@@ -27,11 +26,16 @@ public class AirlineTable implements DataAccess<Airline> {
         }
     }
 
-    public static ArrayList<Airline> getAirlines() {
+    public ArrayList<Airline> getAirlines() {
         return airlines;
     }
 
-    public static Airline findAirline(String airlineName) {
+    @Override
+    public boolean add(Airline airline) {
+        return airlines.add(airline);
+    }
+
+    public Airline findAirline(String airlineName) {
         Airline result = null;
 
         for (Airline airline : airlines) {
@@ -42,4 +46,9 @@ public class AirlineTable implements DataAccess<Airline> {
 
         return result;
     }
+    public void close()
+    {
+        System.out.println("Closed  database " );
+    }
+
 }

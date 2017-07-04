@@ -24,8 +24,15 @@ public class SearchCriteria {
     public SearchCriteria() {
     }
 
+    public int getPreferredClassInt() {
+        return preferredClass.ordinal();
+    }
+
     public Airport getOrigin() {
         return origin;
+    }
+    public String getOriginString() {
+        return origin.getAirportCode();
     }
 
     public void setOrigin(Airport origin) {
@@ -35,6 +42,7 @@ public class SearchCriteria {
     public Airport getDestination() {
         return destination;
     }
+    public String getDestinationString() {return destination.getAirportCode();}
 
     public void setDestination(Airport destination) {
         this.destination = destination;

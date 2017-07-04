@@ -15,13 +15,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import ca.umanitoba.cs.comp3350.saveonflight.R;
-import ca.umanitoba.cs.comp3350.saveonflight.presentation.MainActivity;
-import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
-import ca.umanitoba.cs.comp3350.saveonflight.presentation.AirlinePresentationUtils;
 
 import java.util.ArrayList;
 import java.util.Locale;
+
+import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.AirlinePresentationUtils;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.MainActivity;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
 
 public class ViewFlightsArrayAdapter extends ArrayAdapter<ViewFlightsListViewEntry> {
     private final Context context;
