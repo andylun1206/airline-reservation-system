@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.robotium.solo.Solo;
 import com.stripe.android.view.CardInputWidget;
 import com.stripe.android.view.CardNumberEditText;
+import com.stripe.android.view.ExpiryDateEditText;
+import com.stripe.android.view.StripeEditText;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.MainActivity;
@@ -37,40 +39,35 @@ public class PaymentTest extends ActivityInstrumentationTestCase2<MainActivity> 
         solo.waitForActivity("MainActivity");
         navigateToPaymentScreen();
 
+
         // Enter valid payment info
-        /*
         CardNumberEditText etCardNum = (CardNumberEditText) solo.getView(R.id.et_card_number);
+        ExpiryDateEditText etExp = (ExpiryDateEditText) solo.getView(R.id.et_expiry_date);
+        StripeEditText etCvc = (StripeEditText) solo.getView(R.id.et_cvc_number);
         try {
-            setCard(etCardNum);
+            setCard(etCardNum, etExp, etCvc);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
-        }*/
+        }
 
-        solo.enterText(1, "08/18");
-        solo.enterText(2, "850");
         solo.enterText(3, "Bob Marley");
         solo.enterText(4, "474 Main Street");
         solo.enterText(5, "Winnipeg");
-        //solo.pressSpinnerItem(0, 2);
+        solo.pressSpinnerItem(0, 2);
         solo.enterText(6, "R3P 7C8");
 
-        /*
-        CardInputWidget cardInputWidget = (CardInputWidget) solo.getView(R.id.card_input_widget);
-        try {
-            setCard(cardInputWidget);
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }*/
-
         solo.clickOnButton(0);
-
+        solo.clickOnText("Return to Homepage");
+        solo.assertCurrentActivity("Expected Activity MainActivity", "MainActivity");
     }
 
-    private void setCard(final CardNumberEditText et) throws Throwable {
+    private void setCard(final CardNumberEditText etCardNum, final ExpiryDateEditText etExp, final StripeEditText etCvc) throws Throwable {
         runTestOnUiThread(new Runnable() {
             @Override
             public void run() {
-                et.setText("4242424242424242");
+                etCardNum.setText("4242424242424242");
+                etExp.setText("08/18");
+                etCvc.setText("850");
             }
         });
     }
