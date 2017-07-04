@@ -23,58 +23,62 @@ import static junit.framework.Assert.assertTrue;
 
 public class BookedFlightTableSqlTest {
     private static List<BookedFlight> original;
-    private static BookedFlightTableSql bookedFlightTable;
-    ArrayList<Traveller> travellers = new TravellerTable().getTravellers();
-    FlightTableSql flightTable = new FlightTableSql();
-    ArrayList<Flight> flights = flightTable.getFlights();
-    private BookedFlight validCase = new BookedFlight(travellers.get(2), flights.get(7));
+    private static BookedFlightTableSql bookedFlightTableSql;
+    private static TravellerTable travellerTable = new TravellerTable();
+    private static FlightTable flightTable = new FlightTable();
+    private static BookedFlight validCase;
 
     @BeforeClass
     public static void setUp() {
         Main.startUp(Main.DatabaseType.HSQL);
-        bookedFlightTable = new BookedFlightTableSql();
-        TravellerTableSql travellerTableSql = new TravellerTableSql();
-        travellerTableSql.initialize(Main.getDBPathName());
-        FlightTableSql flightTableSql = new FlightTableSql();
-        flightTableSql.initialize(Main.getDBPathName());
-        bookedFlightTable.initialize(Main.getDBPathName());
-        original = bookedFlightTable.getAll();
+        bookedFlightTableSql = new BookedFlightTableSql();
+        bookedFlightTableSql.initialize(Main.getDBPathName());
+        BookedFlightTable bookedFlightTable = new BookedFlightTable();
+        bookedFlightTable.initialize("");
+        travellerTable.initialize("");
+        flightTable.initialize("");
+        ArrayList<Traveller> travellers = travellerTable.getTravellers();
+        ArrayList<Flight> flights = flightTable.getFlights();
+        validCase = new BookedFlight(travellers.get(1), flights.get(7));
+        original = bookedFlightTableSql.getAll();
     }
 
     @Test
     public void testExistence() {
-        assertNotNull("Initialize is not work", bookedFlightTable);
+        assertNotNull("Initialize is not work", bookedFlightTableSql);
     }
 
     @Test
     public void testInitialize() {
-        assertEquals("Initialize is not work", original, BookedFlightTable.getBookedFlights());
+        assertEquals("Initialize is not work", original, bookedFlightTableSql.getAll());
     }
 
     @Test
     public void testAddNull() {
-        bookedFlightTable.add(null);
-        assertEquals("Add null but actually add something", original, BookedFlightTable.getBookedFlights());
+        bookedFlightTableSql.add(null);
+        assertEquals("Add null but actually add something", original, bookedFlightTableSql.getAll());
     }
+
     @Test
     public void testAddDuplicate() {
-        bookedFlightTable.add(validCase);
-        assertFalse("Failed to add duplicate to BookedFlightTable.", bookedFlightTable.add(validCase));
-        bookedFlightTable.remove(validCase);
+        //TODO:fix the delete old bookedFlight 2017-07-04
+        bookedFlightTableSql.add(validCase);
+        assertFalse("Failed to add duplicate to BookedFlightTable.", bookedFlightTableSql.add(validCase));
+        bookedFlightTableSql.remove(validCase);
+        bookedFlightTableSql.remove(validCase);
     }
 
     @Test
     public void testAddValid() {
-        //bookedFlightTable.add(validCase);
-        assertTrue("Failed to add validCase to BookedFlightTable.", bookedFlightTable.add(validCase));
-        bookedFlightTable.remove(validCase);
+        assertTrue("Failed to add validCase to BookedFlightTable.", bookedFlightTableSql.add(validCase));
+        bookedFlightTableSql.remove(validCase);
     }
 
 
     @Test
     public void testSearchByTraveller() {
         Traveller t = BookedFlightTable.getBookedFlights().get(0).getTraveller();
-        ArrayList<BookedFlight> bfs = bookedFlightTable.searchByTraveller(t);
+        ArrayList<BookedFlight> bfs = bookedFlightTableSql.searchByTraveller(t);
         assertNotNull(bfs);
         for (BookedFlight bf : bfs) {
             assertEquals(t, bf.getTraveller());
