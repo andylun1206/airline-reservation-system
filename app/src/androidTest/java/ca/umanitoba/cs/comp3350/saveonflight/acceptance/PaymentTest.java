@@ -39,13 +39,14 @@ public class PaymentTest extends ActivityInstrumentationTestCase2<MainActivity> 
         solo.waitForActivity("MainActivity");
         navigateToPaymentScreen();
 
-
         // Enter valid payment info
         CardNumberEditText etCardNum = (CardNumberEditText) solo.getView(R.id.et_card_number);
         ExpiryDateEditText etExp = (ExpiryDateEditText) solo.getView(R.id.et_expiry_date);
         StripeEditText etCvc = (StripeEditText) solo.getView(R.id.et_cvc_number);
         try {
-            setCard(etCardNum, etExp, etCvc);
+            setCardInputField(etCardNum, "4242424242424242");
+            setCardInputField(etExp, "08/18");
+            setCardInputField(etCvc, "850");
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
@@ -59,17 +60,6 @@ public class PaymentTest extends ActivityInstrumentationTestCase2<MainActivity> 
         solo.clickOnButton(0);
         solo.clickOnText("Return to Homepage");
         solo.assertCurrentActivity("Expected Activity MainActivity", "MainActivity");
-    }
-
-    private void setCard(final CardNumberEditText etCardNum, final ExpiryDateEditText etExp, final StripeEditText etCvc) throws Throwable {
-        runTestOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                etCardNum.setText("4242424242424242");
-                etExp.setText("08/18");
-                etCvc.setText("850");
-            }
-        });
     }
 
     private void navigateToPaymentScreen() {
@@ -93,6 +83,23 @@ public class PaymentTest extends ActivityInstrumentationTestCase2<MainActivity> 
 
         // Proceed to the payment screen
         solo.clickOnButton(1);
+    }
+
+    /**
+     * Using solo.enterText() causes a NullPointerException when setting  the text for EditTexts in
+     * Stripe's CardInputWidget for some reason. Still not sure what the reason is... but setting
+     * them with this method works.
+     *
+     * @param et the StripeEditText to set
+     * @param value what we want to set the StripeEditText's text to
+     */
+    private void setCardInputField(final StripeEditText et, final String value) throws Throwable {
+        runTestOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                et.setText(value);
+            }
+        });
     }
 
 }
