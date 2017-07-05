@@ -47,7 +47,7 @@ public class AccessBookedFlightsImpl implements AccessBookedFlights {
      * Searches for BookedFlights that are associated with the specified Traveller.
      *
      * @param t the Traveller to search by
-     * @return all the BookedFlights that are associated with the given Traveller
+     * @return the List of BookedFlights that are associated with the given Traveller
      */
     public List<BookedFlight> searchByTraveller(Traveller t) {
         return bookedFlightsDB.searchByTraveller(t);

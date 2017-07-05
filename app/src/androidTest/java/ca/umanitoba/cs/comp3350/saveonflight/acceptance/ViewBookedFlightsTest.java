@@ -41,7 +41,6 @@ public class ViewBookedFlightsTest extends ActivityInstrumentationTestCase2<Main
         assertTrue(solo.searchText("3h 22m"));
         assertTrue(solo.searchText("325.82"));
 
-
         solo.clearEditText(0);                 // Enter a passenger id of 1
         solo.enterText(0, "1");
         solo.clickOnButton(0);

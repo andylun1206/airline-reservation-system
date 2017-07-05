@@ -80,7 +80,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         boolean added = false;
         result = null;
 
-        if (bookedFlight != null) {
+        if (bookedFlight != null && bookedFlight.getFlight() != null && bookedFlight.getTraveller() != null) {
             try {
                 values = bookedFlight.getTraveller().getTravellerID()
                         + ",'" + bookedFlight.getFlight().getFlightCode() + "','" + bookedFlight.getFlight().getDepartureTimeString() + "'";
@@ -102,7 +102,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         boolean removed = false;
         String where;
 
-        if (bf != null) {
+        if (bf != null && bf.getFlight() != null && bf.getTraveller() != null) {
             try {
                 where = "where ID=" + bf.getTraveller().getTravellerID()
                         + " and FLIGHTID='" + bf.getFlight().getFlightCode()
