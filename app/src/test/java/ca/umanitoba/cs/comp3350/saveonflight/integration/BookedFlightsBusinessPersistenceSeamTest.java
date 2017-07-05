@@ -26,7 +26,6 @@ public class BookedFlightsBusinessPersistenceSeamTest {
 
     @AfterClass
     public static void tearDown() {
-        Main.shutDown();
         accessBf = null;
     }
 
@@ -43,7 +42,7 @@ public class BookedFlightsBusinessPersistenceSeamTest {
         bf.setFlight(null);
         assertFalse(accessBf.insertBookedFlight(bf));
 
-        // Try inserting a BookedFlight with a no Traveller
+        // Try adding a BookedFlight with a no Traveller
         bf.setFlight(f);
         bf.setTraveller(null);
         assertFalse(accessBf.insertBookedFlight(bf));
@@ -72,7 +71,7 @@ public class BookedFlightsBusinessPersistenceSeamTest {
         // Try passing null to the remove() method
         assertFalse(accessBf.removeBookedFlight(null));
 
-        // Try removing BookedFlights with a missing Flight/Traveller
+        // Try removing BookedFlights with a missing Flight and/or Traveller
         bf.setFlight(null);
         assertFalse(accessBf.removeBookedFlight(bf));
         bf.setTraveller(null);

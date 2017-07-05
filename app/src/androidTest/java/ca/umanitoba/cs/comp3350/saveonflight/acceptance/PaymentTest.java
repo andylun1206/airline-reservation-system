@@ -60,6 +60,8 @@ public class PaymentTest extends ActivityInstrumentationTestCase2<MainActivity> 
         solo.clickOnButton(0);
         solo.clickOnText("Return to Homepage");
         solo.assertCurrentActivity("Expected Activity MainActivity", "MainActivity");
+
+        // TODO: remove the Traveller and BookedFlight that we just added to the database
     }
 
     private void navigateToPaymentScreen() {
@@ -86,7 +88,7 @@ public class PaymentTest extends ActivityInstrumentationTestCase2<MainActivity> 
     }
 
     /**
-     * Using solo.enterText() causes a NullPointerException when setting the text for EditTexts in
+     * Using solo.enterText() causes a runtime error when setting the text for EditTexts in
      * Stripe's CardInputWidget for some reason. Still not sure what the reason is... but setting
      * them with this method works.
      *

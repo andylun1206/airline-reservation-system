@@ -66,23 +66,17 @@ public class TravellerTableSql implements TravellerAccess {
     public boolean add(Traveller traveller) {
         boolean added = false;
 
-        if (traveller != null) {
+        if (traveller != null && traveller.getName() != null && !traveller.getName().isEmpty()) {
             String values;
-            int id = -1;
             result = null;
             try {
                 values = "'" + traveller.getName() + "'";
-                cmdString = "Insert into Traveller(NAME) " + " Values(" + values + ")";
+                cmdString = "Insert into Traveller(NAME) Values(" + values + ")";
                 updateCount = st1.executeUpdate(cmdString);
                 result = checkWarning(st1, updateCount);
 
                 if (updateCount > 0) {
                     added = true;
-                }
-                cmdString = "SELECT MAX(ID) FROM Traveller";
-                ResultSet rs = st1.executeQuery(cmdString);
-                if (rs.next()) {
-                    id = rs.getInt(1);
                 }
             } catch (Exception e) {
                 result = processSQLError(e);
@@ -94,6 +88,7 @@ public class TravellerTableSql implements TravellerAccess {
 
     public int getMaxId() {
         int id = -1;
+
         try {
             cmdString = "SELECT MAX(ID) FROM Traveller";
             ResultSet rs = st1.executeQuery(cmdString);
@@ -110,7 +105,7 @@ public class TravellerTableSql implements TravellerAccess {
     public boolean remove(Traveller traveller) {
         boolean removed = false;
 
-        if (traveller != null) {
+        if (traveller != null && traveller.getName() != null && !traveller.getName().isEmpty()) {
             try {
                 cmdString = "Delete from TRAVELLER where ID=" + traveller.getTravellerID();
                 updateCount = st1.executeUpdate(cmdString);
@@ -125,7 +120,7 @@ public class TravellerTableSql implements TravellerAccess {
         return removed;
     }
 
-    public Traveller findTraveller(int id) {
+    Traveller findTraveller(int id) {
         Traveller result = null;
 
         try {

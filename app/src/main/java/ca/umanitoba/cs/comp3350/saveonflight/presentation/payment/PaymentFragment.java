@@ -31,13 +31,12 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
 
 /**
- * Payment.java
+ * PaymentFragment.java
  * <p>
  * Fragment for the payment screen of the application.
  *
  * @author Kenny Zhang
  */
-
 
 public class PaymentFragment extends Fragment implements View.OnClickListener {
     private CardInputWidget mCardInputWidget;
@@ -142,7 +141,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
 
     /**
      * Creates a Card object from the information in the input fields on the screen. The credit card
-     * number, expiry card, and security code must be valid for a Card object to me created. Otherwise,
+     * number, expiry card, and security code must be valid for a Card object to be created. Otherwise,
      * the method returns null.
      *
      * @return the Card object that was created

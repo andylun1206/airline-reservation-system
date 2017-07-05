@@ -41,7 +41,7 @@ public class TravellerTableSqlTest {
 
     @Test
     public void testAddNull() {
-        assertTrue("insertBookedFlight null but actually insertBookedFlight something", travellerTable.add(null) < 0);
+        assertFalse("insertBookedFlight null but actually insertBookedFlight something", travellerTable.add(null));
     }
 
     @Test
@@ -52,6 +52,6 @@ public class TravellerTableSqlTest {
 
     @Test
     public void testAddValid() {
-        assertTrue(travellerTable.add(validCase) > 0);
+        assertTrue(travellerTable.add(validCase));
     }
 }

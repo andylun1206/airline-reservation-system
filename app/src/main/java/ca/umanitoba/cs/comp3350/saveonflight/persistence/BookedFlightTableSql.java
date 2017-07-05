@@ -134,6 +134,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
             result = processSQLError(e);
         }
         try {
+            // TODO: maybe join tables and perform a single SQL query instead?
             TravellerTableSql travellerTableSql = new TravellerTableSql();
             travellerTableSql.initialize(Main.getDBPathName());
             Traveller traveller = travellerTableSql.findTraveller(t.getTravellerID());
