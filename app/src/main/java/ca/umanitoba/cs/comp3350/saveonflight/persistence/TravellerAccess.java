@@ -15,9 +15,9 @@ public interface TravellerAccess extends DataAccess<Traveller> {
      * Insert a new Traveller into the database.
      *
      * @param t the Traveller to insert into the database
-     * @return the ID of the Traveller (this column is auto-incremented)
+     * @return true if the Traveller was added to the table; false otherwise
      */
-    int add(Traveller t);
+    boolean add(Traveller t);
 
     /**
      * Remove a Traveller from the database.
@@ -26,4 +26,9 @@ public interface TravellerAccess extends DataAccess<Traveller> {
      * @return true if any rows were delete; false if the table was not changed
      */
     boolean remove(Traveller t);
+
+    /**
+     * @return the max value in the column ID of the Traveller table
+     */
+    int getMaxId();
 }

@@ -18,11 +18,10 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 public class TravellerTableSql implements TravellerAccess {
     private Statement st1;
     private Connection c1;
-    private ResultSet rs1, rs2, rs3;
+    private ResultSet rs1, rs2;
     private String cmdString;
     private int updateCount;
     private String result;
-    private static String EOF = "  ";
     private ArrayList<Traveller> travellers = null;
 
     public TravellerTableSql() {
@@ -40,7 +39,7 @@ public class TravellerTableSql implements TravellerAccess {
     }
 
     public ArrayList<Traveller> getTravellers() {
-        Traveller traveller;
+        ArrayList<Traveller> travellers = new ArrayList<>();
         int ID;
         String name;
         result = null;
@@ -54,8 +53,7 @@ public class TravellerTableSql implements TravellerAccess {
             while (rs1.next()) {
                 ID = rs1.getInt("ID");
                 name = rs1.getString("NAME");
-                traveller = new Traveller(ID, name);
-
+                travellers.add(new Traveller(ID, name));
             }
             rs1.close();
         } catch (Exception e) {
@@ -65,27 +63,45 @@ public class TravellerTableSql implements TravellerAccess {
         return travellers;
     }
 
-    public int add(Traveller traveller) {
-        if (traveller == null) {
-            return -1;
+    public boolean add(Traveller traveller) {
+        boolean added = false;
+
+        if (traveller != null) {
+            String values;
+            int id = -1;
+            result = null;
+            try {
+                values = "'" + traveller.getName() + "'";
+                cmdString = "Insert into Traveller(NAME) " + " Values(" + values + ")";
+                updateCount = st1.executeUpdate(cmdString);
+                result = checkWarning(st1, updateCount);
+
+                if (updateCount > 0) {
+                    added = true;
+                }
+                cmdString = "SELECT MAX(ID) FROM Traveller";
+                ResultSet rs = st1.executeQuery(cmdString);
+                if (rs.next()) {
+                    id = rs.getInt(1);
+                }
+            } catch (Exception e) {
+                result = processSQLError(e);
+            }
         }
 
-        String values;
-        int id = -1;
-        result = null;
-        try {
-            values = "'" + traveller.getName() + "'";
-            cmdString = "Insert into Traveller(NAME) " + " Values(" + values + ")";
-            updateCount = st1.executeUpdate(cmdString);
-            result = checkWarning(st1, updateCount);
+        return added;
+    }
 
+    public int getMaxId() {
+        int id = -1;
+        try {
             cmdString = "SELECT MAX(ID) FROM Traveller";
             ResultSet rs = st1.executeQuery(cmdString);
             if (rs.next()) {
                 id = rs.getInt(1);
             }
         } catch (Exception e) {
-            result = processSQLError(e);
+            processSQLError(e);
         }
 
         return id;

@@ -28,12 +28,17 @@ public class AccessTravellersImpl implements AccessTravellers {
     }
 
     @Override
-    public int insertTraveller(Traveller traveller) {
+    public boolean insertTraveller(Traveller traveller) {
         return travellerDB.add(traveller);
     }
 
     @Override
     public boolean removeTraveller(Traveller traveller) {
         return travellerDB.remove(traveller);
+    }
+
+    @Override
+    public int getMaxId() {
+        return travellerDB.getMaxId();
     }
 }
