@@ -65,11 +65,11 @@ public class AirportTableSql implements AirportAccess {
         return airports;
     }
 
-    public Airport findAirport(String city) {
+    public Airport findAirport(String key) {
         Airport airport = null;
 
         try {
-            cmdString = "Select * from Airport where AIRPORTID='" + city + "'";
+            cmdString = "Select * from Airport where AIRPORTID='" + key + "'";
             rs1 = st1.executeQuery(cmdString);
 
             if (rs1 != null && rs1.next()) {

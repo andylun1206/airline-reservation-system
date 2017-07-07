@@ -34,7 +34,7 @@ public class TravellerBusinessPersistenceSeamTest {
     }
 
     @Test
-    public void testGetAll() {
+    public void testGetTravellers() {
         List<Traveller> travellers = access.getTravellers();
         assertNotNull(travellers);
         for (Traveller t : travellers) {
