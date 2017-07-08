@@ -207,9 +207,7 @@ public class FlightTableSql implements FlightAccess {
             try {
                 cmdString = "Select * from Flight Where AIRPORTID1='"
                         + criteria.getOriginString() + "' AND AIRPORTID2='"
-                        + criteria.getDestinationString()
-                        + "' AND CAPACITY >= "
-                        + criteria.getNumTravellers();
+                        + criteria.getDestinationString() + "'";
                 if (!(criteria.getMaxPrice() == 0.0))
                     cmdString += " AND PRICE <= " + criteria.getMaxPrice();
                 if (!(criteria.getPreferredAirline() == null))
