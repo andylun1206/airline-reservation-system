@@ -13,7 +13,29 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  */
 
 public interface AccessTravellers {
+    /**
+     * @return a List of all Travellers in the database
+     */
     List<Traveller> getTravellers();
 
-    int insertTraveller(Traveller traveller);
+    /**
+     * Inserts a new Traveller into the database.
+     *
+     * @param traveller the Traveller to insert
+     * @return true if the Traveller was inserted; false otherwise
+     */
+    boolean insertTraveller(Traveller traveller);
+
+    /**
+     * Removes a Traveller from the database.
+     *
+     * @param traveller the Traveller to remove
+     * @return true if the Traveller was removed; false otherwise
+     */
+    boolean removeTraveller(Traveller traveller);
+
+    /**
+     * @return the max value in the ID column of the Traveller table
+     */
+    int getMaxId();
 }

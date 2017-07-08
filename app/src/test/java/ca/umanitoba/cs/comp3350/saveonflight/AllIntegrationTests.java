@@ -5,10 +5,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import ca.umanitoba.cs.comp3350.saveonflight.integration.BookedFlightsBusinessPersistenceSeamTest;
+import ca.umanitoba.cs.comp3350.saveonflight.integration.TravellerBusinessPersistenceSeamTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-    BookedFlightsBusinessPersistenceSeamTest.class
+        BookedFlightsBusinessPersistenceSeamTest.class,
+        TravellerBusinessPersistenceSeamTest.class
 })
 
 public class AllIntegrationTests {

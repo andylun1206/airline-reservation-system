@@ -48,7 +48,7 @@ public class SortFlightsImpl implements SortFlights {
         }
 
         Collections.sort(flights, comparator);
-        // Re-add the null elements to the end of the list
+        // Re-insertBookedFlight the null elements to the end of the list
         for (int i = 0; i < numNull; i++) {
             flights.add(null);
         }
