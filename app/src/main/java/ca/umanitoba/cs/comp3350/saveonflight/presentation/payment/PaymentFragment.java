@@ -120,6 +120,9 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
             // Then, create the BookedFlight(s) objects
             ArrayList<BookedFlight> bfs = new ArrayList<>();
             for (Flight f : flights) {
+                // TODO: update seats taken
+                // flightAccess.updateFlight(flight, new seats taken)
+
                 bfs.add(new BookedFlight(traveller, f));
             }
 
@@ -129,6 +132,8 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
             }
 
             showConfirmationDialog(id);
+        } else {
+            Toast.makeText(getContext(), "Please enter your name", Toast.LENGTH_SHORT).show();
         }
     }
 
