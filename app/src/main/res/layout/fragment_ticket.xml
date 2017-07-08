@@ -22,7 +22,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <TextView
-            android:id="@+id/ticket_from_flight_code_title"
+            android:id="@+id/textView_ticket_from_flight_code_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -30,10 +30,9 @@
             android:text="@string/ticket_flight"
             android:textAppearance="?android:attr/textAppearanceSmall"/>
     <TextView
-            android:id="@+id/ticket_flight_code"
+            android:id="@+id/textView_ticket_flight_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:text="AC 123"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
@@ -56,14 +55,14 @@
                 android:orientation="vertical"
                 android:layout_gravity="center">
             <TextView
-                    android:id="@+id/ticket_from_title"
+                    android:id="@+id/textView_ticket_from_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/ticket_from"
                     android:textAppearance="?android:attr/textAppearanceSmall"/>
             <TextView
-                    android:id="@+id/ticket_from"
+                    android:id="@+id/textView_ticket_from"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -71,14 +70,14 @@
                     android:text="airport a"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
             <TextView
-                    android:id="@+id/ticket_to_title"
+                    android:id="@+id/textView_ticket_to_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/ticket_to"
                     android:textAppearance="?android:attr/textAppearanceSmall"/>
             <TextView
-                    android:id="@+id/ticket_to"
+                    android:id="@+id/textView_ticket_to"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -228,6 +227,6 @@
             android:layout_gravity="center"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:id="@+id/imageView_ticket_QR_code"
-            android:src="@mipmap/ic_test_qr_code"/>
+            android:src="@mipmap/ic_qr_code"/>
 
 </LinearLayout>
