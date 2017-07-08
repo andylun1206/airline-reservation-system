@@ -45,7 +45,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         List<BookedFlight> bfs = new ArrayList<>();
         BookedFlight bookedFlight;
         int id;
-        String flightId, departureTime;
+        String flightId, departureTime,seatNumber;
         result = null;
         try {
             cmdString = "SELECT * FROM BOOKEDFLIGHT";
@@ -64,7 +64,8 @@ public class BookedFlightTableSql implements BookedFlightAccess {
                 id = rs1.getInt("ID");
                 flightId = rs1.getString("FLIGHTID");
                 departureTime = rs1.getString("DEPARTURETIME");
-                bookedFlight = new BookedFlight(travellerTableSql.findTraveller(id), flightTableSql.findFlight(flightId, departureTime));
+                seatNumber = rs1.getString("SEATNUMBER");
+                bookedFlight = new BookedFlight(travellerTableSql.findTraveller(id), flightTableSql.findFlight(flightId, departureTime),seatNumber);
                 bfs.add(bookedFlight);
             }
             rs1.close();
@@ -83,7 +84,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         if (bookedFlight != null && bookedFlight.getFlight() != null && bookedFlight.getTraveller() != null) {
             try {
                 values = bookedFlight.getTraveller().getTravellerID()
-                        + ",'" + bookedFlight.getFlight().getFlightCode() + "','" + bookedFlight.getFlight().getDepartureTimeString() + "'";
+                        + ",'" + bookedFlight.getFlight().getFlightCode() + "','" + bookedFlight.getFlight().getDepartureTimeString() + "'"+","+bookedFlight.getFlight().getSeatsTaken();
                 cmdString = "Insert into BOOKEDFLIGHT " + " Values(" + values + ")";
                 updateCount = st1.executeUpdate(cmdString);
                 result = checkWarning(st1, updateCount);
@@ -124,7 +125,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
     public ArrayList<BookedFlight> searchByTraveller(Traveller t) {
         ArrayList<BookedFlight> results = new ArrayList<BookedFlight>();
         BookedFlight bookedFlight;
-        String flightId, departureTime;
+        String flightId, departureTime,seatNumber;
         result = null;
         try {
             cmdString = "Select * from BOOKEDFLIGHT WHERE ID =" + t.getTravellerID();
@@ -144,7 +145,8 @@ public class BookedFlightTableSql implements BookedFlightAccess {
             while (rs2.next()) {
                 flightId = rs2.getString("FLIGHTID");
                 departureTime = rs2.getString("DEPARTURETIME");
-                bookedFlight = new BookedFlight(traveller, flightTableSql.findFlight(flightId, departureTime));
+                seatNumber = rs2.getString("SEATNUMBER");
+                bookedFlight = new BookedFlight(traveller, flightTableSql.findFlight(flightId, departureTime),seatNumber);
                 results.add(bookedFlight);
             }
         } catch (Exception e) {
