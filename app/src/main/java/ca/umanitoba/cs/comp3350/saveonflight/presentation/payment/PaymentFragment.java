@@ -31,13 +31,12 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
 
 /**
- * Payment.java
+ * PaymentFragment.java
  * <p>
  * Fragment for the payment screen of the application.
  *
  * @author Kenny Zhang
  */
-
 
 public class PaymentFragment extends Fragment implements View.OnClickListener {
     private CardInputWidget mCardInputWidget;
@@ -106,27 +105,33 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
      * Stores the new traveller and booked flight information in the database upon a successful payment.
      */
     public void paymentSuccess() {
-        // Since we're not actually processing any payments... just add the BookedFlight(s) to the database
+        // Since we're not actually processing any payments... just insertBookedFlight the BookedFlight(s) to the database
         AccessBookedFlights accessBookedFlights = new AccessBookedFlightsImpl(Main.getBookedFlightAccess());
 
         // First, create a new Traveller and store it in the database
-        Traveller traveller = new Traveller(-1, etName.getText().toString());
         AccessTravellers accessTravellers = new AccessTravellersImpl(Main.getTravellerAccess());
-        int id = accessTravellers.insertTraveller(traveller);
-        traveller.setTravellerId(id);
+        Traveller traveller = new Traveller(accessTravellers.getMaxId() + 1, etName.getText().toString());
+        boolean added = accessTravellers.insertTraveller(traveller);
 
-        // Then, create the BookedFlight(s) objects
-        ArrayList<BookedFlight> bfs = new ArrayList<>();
-        for (Flight f : flights) {
-            bfs.add(new BookedFlight(traveller, f));
+        if (added) {
+            // Then, create the BookedFlight(s) objects
+            ArrayList<BookedFlight> bfs = new ArrayList<>();
+            for (Flight f : flights) {
+                // TODO: update seats taken
+                // flightAccess.updateFlight(flight, new seats taken)
+
+                bfs.add(new BookedFlight(traveller, f));
+            }
+
+            // Finally, insertBookedFlight all the BookedFlight(s) to the database
+            for (BookedFlight bf : bfs) {
+                accessBookedFlights.insertBookedFlight(bf);
+            }
+
+            showConfirmationDialog(traveller.getTravellerID());
+        } else {
+            Toast.makeText(getContext(), "Please enter your name", Toast.LENGTH_SHORT).show();
         }
-
-        // Finally, add all the BookedFlight(s) to the database
-        for (BookedFlight bf : bfs) {
-            accessBookedFlights.add(bf);
-        }
-
-        showConfirmationDialog(id);
     }
 
     /**
@@ -138,7 +143,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
 
     /**
      * Creates a Card object from the information in the input fields on the screen. The credit card
-     * number, expiry card, and security code must be valid for a Card object to me created. Otherwise,
+     * number, expiry card, and security code must be valid for a Card object to be created. Otherwise,
      * the method returns null.
      *
      * @return the Card object that was created
