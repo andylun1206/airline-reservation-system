@@ -15,6 +15,7 @@ import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.AirlinePresentationUtils;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights.ViewFlightsListViewEntry;
 
 /**
@@ -23,12 +24,14 @@ import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights.ViewFlight
  * ArrayAdapter for ViewBookedFlights used to populate the ListView.
  *
  * @author Kenny Zhang
+ * @author Andy Lun
  */
 
 public class ViewBookedFlightArrayAdapter extends ArrayAdapter<ViewFlightsListViewEntry> {
     private final Context context;
     private final int layoutResourceId;
     private final ArrayList<ViewFlightsListViewEntry> flightList;
+    private static int passengerId;
 
     public ViewBookedFlightArrayAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<ViewFlightsListViewEntry> flights) {
         super(context, resource, flights);
@@ -49,7 +52,18 @@ public class ViewBookedFlightArrayAdapter extends ArrayAdapter<ViewFlightsListVi
         ((TextView) view.findViewById(R.id.textView_view_flight_flightid)).setText(row.getFlightId());
         ((TextView) view.findViewById(R.id.textView_view_flight_duration)).setText(row.getDuration());
 
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentNavigation.viewTicket(passengerId, row.getFlightId());
+            }
+        });
+
         return view;
+    }
+
+    public static void setPassengerId(int travellerId) {
+        passengerId = travellerId;
     }
 }
 

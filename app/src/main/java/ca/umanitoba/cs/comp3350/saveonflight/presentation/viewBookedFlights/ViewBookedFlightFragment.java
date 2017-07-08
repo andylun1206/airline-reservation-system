@@ -74,6 +74,7 @@ public class ViewBookedFlightFragment extends ListFragment implements View.OnCli
                     Toast.makeText(getContext(), "Please enter a passenger ID", Toast.LENGTH_SHORT).show();
                 } else {
                     final int PASSENGER_ID = Integer.parseInt(etPassengerId.getText().toString());
+                    ViewBookedFlightArrayAdapter.setPassengerId(PASSENGER_ID);
                     List<BookedFlight> bfs = accessBookedFlights.searchByTraveller(new Traveller(PASSENGER_ID, null));
 
                     // Update the list
