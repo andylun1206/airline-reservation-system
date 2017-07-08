@@ -10,6 +10,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlights;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
 import static org.junit.Assert.*;
@@ -25,37 +26,58 @@ public class BookedFlightsBusinessPersistenceSeamTest {
 
     @AfterClass
     public static void tearDown() {
-        Main.shutDown();
         accessBf = null;
     }
 
     @Test
     public void testAddAndRemove() {
         BookedFlight bf = accessBf.searchByTraveller(new Traveller(1, "name doesn't matter")).get(0);
+        Flight f = bf.getFlight();
+        Traveller t = bf.getTraveller();
 
         // Try to adding null
-        assertFalse(accessBf.add(null));
+        assertFalse(accessBf.insertBookedFlight(null));
+
+        // Try adding a BookedFlight with a no Flight
+        bf.setFlight(null);
+        assertFalse(accessBf.insertBookedFlight(bf));
+
+        // Try adding a BookedFlight with a no Traveller
+        bf.setFlight(f);
+        bf.setTraveller(null);
+        assertFalse(accessBf.insertBookedFlight(bf));
+
+        // Return the BookedFlight to its original state
+        bf.setTraveller(t);
 
         // Add new row to table
         bf.getFlight().setFlightCode("WJ 123");
-        assertTrue(accessBf.add(bf));
+        assertTrue(accessBf.insertBookedFlight(bf));
 
         // Add another row
         bf.getFlight().setFlightCode("AC 123");
-        assertTrue(accessBf.add(bf));
+        assertTrue(accessBf.insertBookedFlight(bf));
 
         // Remove the row just added
-        assertTrue(accessBf.remove(bf));
+        assertTrue(accessBf.removeBookedFlight(bf));
 
         // Remove the first row that was added
         bf.getFlight().setFlightCode("WJ 123");
-        assertTrue(accessBf.remove(bf));
+        assertTrue(accessBf.removeBookedFlight(bf));
 
-        // Try to remove a row not in the table
-        assertFalse(accessBf.remove(bf));
+        // Try to removeBookedFlight a row not in the table
+        assertFalse(accessBf.removeBookedFlight(bf));
 
-        // Try to remove null
-        assertFalse(accessBf.remove(null));
+        // Try passing null to the remove() method
+        assertFalse(accessBf.removeBookedFlight(null));
+
+        // Try removing BookedFlights with a missing Flight and/or Traveller
+        bf.setFlight(null);
+        assertFalse(accessBf.removeBookedFlight(bf));
+        bf.setTraveller(null);
+        assertFalse(accessBf.removeBookedFlight(bf));
+        bf.setFlight(f);
+        assertFalse(accessBf.removeBookedFlight(bf));
     }
 
     @Test

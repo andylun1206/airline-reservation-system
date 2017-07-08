@@ -53,13 +53,13 @@ public class BookedFlightTableSqlTest {
     @Test
     public void testAddNull() {
         bookedFlightTable.add(null);
-        assertEquals("Add null but actually add something", original, BookedFlightTable.getBookedFlights());
+        assertEquals("Add null but actually insertBookedFlight something", original, BookedFlightTable.getBookedFlights());
     }
 
     @Test
     public void testAddValid() {
         bookedFlightTable.add(validCase);
-        assertFalse("Failed to add validCase to BookedFlightTable.", bookedFlightTable.add(validCase));
+        assertFalse("Failed to insertBookedFlight validCase to BookedFlightTable.", bookedFlightTable.add(validCase));
     }
 
 
