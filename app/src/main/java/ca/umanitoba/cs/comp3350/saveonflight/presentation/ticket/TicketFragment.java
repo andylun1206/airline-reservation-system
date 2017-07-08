@@ -21,7 +21,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Andy on 2017-07-08.
+ * TicketFragment.java
+ * <p>
+ * Fragment for the ticket screen of the application
+ *
+ * @author Andy Lun
  */
 
 public class TicketFragment extends Fragment {
@@ -57,10 +61,20 @@ public class TicketFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Parses date to the displayed format
+     * @param date date to display
+     * @return parsed date
+     */
     private String parseDate(Date date) {
         return new SimpleDateFormat("MMM dd HH:mm").format(date);
     }
 
+    /**
+     * Parses departure time to boarding time
+     * @param date departure date
+     * @return boarding time
+     */
     private String getBoardingTime(Date date) {
         final long ONE_MINUTE_IN_MILLIS = 60000;
         final int BOARDING_MINS = 45;
