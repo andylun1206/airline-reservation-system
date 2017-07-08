@@ -209,15 +209,16 @@ public class FlightTableSql implements FlightAccess {
                         + criteria.getOriginString() + "' AND AIRPORTID2='"
                         + criteria.getDestinationString()
                         + "' AND CAPACITY >= "
-                        + criteria.getNumTravellers();
+                        + criteria.getNumTravellers()
+                        + " AND DEPARTURETIME LIKE '%" + criteria.getDepartureDateString() + "%'";
                 if (!(criteria.getMaxPrice() == 0.0))
                     cmdString += " AND PRICE <= " + criteria.getMaxPrice();
                 if (!(criteria.getPreferredAirline() == null))
-                    cmdString += " AND AIRLINENAME = " + criteria.getPreferredAirline();
+                    cmdString += " AND AIRLINENAME = '" + criteria.getPreferredAirline().getName() + "'";
                 if (!(criteria.getPreferredClass() == null))
                     cmdString += " AND CLASS = " + criteria.getPreferredClassInt();
-                rs3 = st1.executeQuery(cmdString);
 
+                rs3 = st1.executeQuery(cmdString);
             } catch (Exception e) {
                 processSQLError(e);
             }

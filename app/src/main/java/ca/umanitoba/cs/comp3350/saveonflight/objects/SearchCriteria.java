@@ -8,6 +8,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
  * @author Andy Lun
  */
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SearchCriteria {
@@ -102,5 +103,10 @@ public class SearchCriteria {
 
     public void setReturnTrip(boolean isReturnTrip) {
         this.returnTrip = isReturnTrip;
+    }
+
+    public String getDepartureDateString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(departureDate);
     }
 }
