@@ -113,4 +113,14 @@
     </string-array>
     <string name="passenger_id">Passenger ID:</string>
     <string name="booked_flights">Booked Flights</string>
+
+    <!-- Ticket Screen -->
+    <string name="ticket_flight">FLIGHT</string>
+    <string name="ticket_from">FROM</string>
+    <string name="ticket_to">TO</string>
+    <string name="ticket_depature_time">DEPARTURE TIME</string>
+    <string name="ticket_arrival_time">ARRIVAL TIME</string>
+    <string name="ticket_duration">DURATION</string>
+
+
 </resources>

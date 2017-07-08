@@ -2,65 +2,61 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              android:paddingBottom="@dimen/activity_vertical_margin">
+    <TextView
+            android:id="@+id/textView_ticket_flight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Flight #"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/activity_vertical_margin">
-        <TextView
-                android:id="@+id/textView_ticket_flight"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:ems="15"
-                android:text="Flight #"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
-        <TextView
-                android:id="@+id/textView_ticket_price"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:text="$400"
-                android:gravity="end"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/activity_vertical_margin"
             android:orientation="horizontal">
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="vertical"
-                android:paddingStart="@dimen/activity_horizontal_margin">
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin">
             <ImageView
                     android:id="@+id/imageView_ticket_airline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:src="@mipmap/ic_aircanada"
                     android:layout_gravity="center"/>
+            <TextView
+                    android:id="@+id/ticket_from_flight_code_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/ticket_flight"
+                    android:textAppearance="?android:attr/textAppearanceSmall"/>
             <TextView
                     android:id="@+id/ticket_flight_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
                     android:text="AC 123"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
         </LinearLayout>
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="@dimen/activity_horizontal_margin">
+                android:orientation="vertical" android:layout_gravity="center">
             <TextView
                     android:id="@+id/ticket_from_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="From"
+                    android:text="@string/ticket_from"
                     android:textAppearance="?android:attr/textAppearanceSmall"/>
             <TextView
                     android:id="@+id/ticket_from"
@@ -75,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="To"
+                    android:text="@string/ticket_to"
                     android:textAppearance="?android:attr/textAppearanceSmall"/>
             <TextView
                     android:id="@+id/ticket_to"
@@ -103,7 +99,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:text="Departure Time"
+                    android:text="@string/ticket_depature_time"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:gravity="center_horizontal"/>
 
@@ -112,7 +108,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:text="Arrival Time"
+                    android:text="@string/ticket_arrival_time"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:gravity="center_horizontal"/>
             <TextView
@@ -120,7 +116,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:text="Duration"
+                    android:text="@string/ticket_duration"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:gravity="center_horizontal"/>
         </LinearLayout>
@@ -155,5 +151,12 @@
                     android:gravity="center_horizontal"/>
         </LinearLayout>
     </LinearLayout>
+    <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:id="@+id/imageView_ticket_QR_code"
+            android:src="@mipmap/ic_test_qr_code"
+            android:layout_gravity="center"/>
 
 </LinearLayout>
