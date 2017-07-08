@@ -31,4 +31,17 @@ public class AccessTravellersImpl implements AccessTravellers {
     public int insertTraveller(Traveller traveller) {
         return travellerDB.add(traveller);
     }
+
+    @Override
+    public Traveller getTraveller(int travellerId) {
+        Traveller traveller = null;
+
+        for (Traveller t : getTravellers()) {
+            if (t.getTravellerID() == travellerId) {
+                traveller = t;
+            }
+        }
+
+        return traveller;
+    }
 }
