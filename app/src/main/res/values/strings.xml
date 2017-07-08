@@ -118,9 +118,12 @@
     <string name="ticket_flight">FLIGHT</string>
     <string name="ticket_from">FROM</string>
     <string name="ticket_to">TO</string>
-    <string name="ticket_depature_time">DEPARTURE TIME</string>
-    <string name="ticket_arrival_time">ARRIVAL TIME</string>
+    <string name="ticket_depature_time">DEPARTURE</string>
+    <string name="ticket_arrival_time">ARRIVAL</string>
     <string name="ticket_duration">DURATION</string>
-
+    <string name="ticket_boarding_time">BOARDING</string>
+    <string name="ticket_gate">GATE</string>
+    <string name="ticket_seat">SEAT</string>
+    <string name="ticket_passenger">PASSENGER</string>
 
 </resources>
