@@ -54,7 +54,7 @@ public class TicketFragment extends Fragment {
                 ((TextView) view.findViewById(R.id.textView_ticket_duration)).setText(flight.getFlightDuration());
                 ((TextView) view.findViewById(R.id.textView_ticket_boarding_time)).setText(getBoardingTime(flight.getDepartureTime()));
 
-//                ((TextView) view.findViewById(R.id.textView_ticket_seat)).setText(bookedFlight.getSeat());
+                ((TextView) view.findViewById(R.id.textView_ticket_seat)).setText(bookedFlight.getSeatNumber());
             }
         }
 
