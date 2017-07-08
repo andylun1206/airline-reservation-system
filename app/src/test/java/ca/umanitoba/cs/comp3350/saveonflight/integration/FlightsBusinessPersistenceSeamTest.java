@@ -64,44 +64,50 @@ public class FlightsBusinessPersistenceSeamTest {
         searchCriteria.setDestination(yyz);
 
         Calendar cal = new GregorianCalendar();
-        cal.set(2017, 11, 11);
+        cal.set(2017, 10, 11);
         Date departureDate = cal.getTime();
         searchCriteria.setDepartureDate(departureDate);
 
-        cal.set(2017, 12, 11);
+        cal.set(2017, 11, 11);
         Date returnDate = cal.getTime();
         searchCriteria.setReturnDate(returnDate);
 
         searchCriteria.setNumTravellers(1);
         searchCriteria.setMaxPrice(400.50);
-        Airline westJet = new Airline("WestJet");
-        searchCriteria.setPreferredAirlines(westJet);
-        searchCriteria.setPreferredClass(FlightClassEnum.ECONOMY);
+        Airline airCanada = new Airline("Air Canada");
+        searchCriteria.setPreferredAirlines(airCanada);
 
-        ArrayList<Flight> flights = access.search(searchCriteria);
+        ArrayList<Flight> flights = access.search(searchCriteria); // Valid search which should return results
         assertNotNull(flights);
+        assertFalse(flights.isEmpty());
         for (Flight f : flights) {
             assertEquals(ywg, f.getOrigin());
             assertEquals(yyz, f.getDestination());
-            assertEquals(departureDate, f.getDepartureTime());
+
+            Calendar c1 = new GregorianCalendar();
+            c1.setTimeInMillis(f.getDepartureTime().getTime());
+            Calendar c2 = new GregorianCalendar();
+            c2.setTimeInMillis(departureDate.getTime());
+            assertEquals(c1.get(Calendar.YEAR), c2.get(Calendar.YEAR));
+            assertEquals(c1.get(Calendar.MONTH), c2.get(Calendar.MONTH));
+            assertEquals(c1.get(Calendar.DAY_OF_MONTH), c2.get(Calendar.DAY_OF_MONTH));
+
             assertTrue(f.getSeatsRemaining() >= 1);
             assertTrue(f.getPrice() <= 400.50);
-            assertTrue(f.getAirline().equals(westJet));
-            assertEquals(FlightClassEnum.ECONOMY, f.getFlightClass());
+            assertTrue(f.getAirline().equals(airCanada));
         }
 
-        ArrayList<Flight> returnFlights = access.search(searchCriteria);
-        assertNotNull(returnFlights);
-        for (Flight f : flights) {
-            assertEquals(yyz, f.getOrigin());
-            assertEquals(ywg, f.getDestination());
-            assertTrue(f.getSeatsRemaining() >= 1);
-            assertTrue(f.getPrice() <= 400.50);
-            assertTrue(f.getAirline().equals(westJet));
-            assertEquals(FlightClassEnum.ECONOMY, f.getFlightClass());
-        }
-
-        ArrayList<Flight> shouldBeEmpty = access.search(null);
+        ArrayList<Flight> shouldBeEmpty = access.search(null); // Searching for null should return an empty list
         assertTrue(shouldBeEmpty.isEmpty());
+
+        searchCriteria.setOrigin(new Airport("Beijing PEK")); // No flights in db to/from Beijing so should return empty list
+        ArrayList<Flight> flightsFromBeijing = access.search(searchCriteria);
+        assertTrue(flightsFromBeijing.isEmpty());
+
+        searchCriteria.setOrigin(ywg);
+        cal.set(3576, 1, 11);
+        searchCriteria.setDepartureDate(cal.getTime());
+        ArrayList<Flight> flightsIn2019 = access.search(searchCriteria); // No flights in db for year 3576
+        assertTrue(flightsIn2019.isEmpty());
     }
 }

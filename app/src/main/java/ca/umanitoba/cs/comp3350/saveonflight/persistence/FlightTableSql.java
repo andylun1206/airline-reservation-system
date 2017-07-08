@@ -236,29 +236,6 @@ public class FlightTableSql implements FlightAccess {
         return table;
     }
 
-    public Airport getAirportByID(String targetID) {
-        Airport airport = null;
-        String ID;
-
-        result = null;
-        try {
-            cmdString = "Select * from Airport where AIRPORTID='" + targetID + "'";
-            rs8 = st3.executeQuery(cmdString);
-        } catch (Exception e) {
-            processSQLError(e);
-        }
-        try {
-            if (rs8.next()) {
-                ID = rs8.getString("AIRPORTID");
-                airport = new Airport(ID);
-            }
-            rs8.close();
-        } catch (Exception e) {
-            result = processSQLError(e);
-        }
-        return airport;
-    }
-
     public String checkWarning(Statement st, int updateCount) {
         String result;
 
