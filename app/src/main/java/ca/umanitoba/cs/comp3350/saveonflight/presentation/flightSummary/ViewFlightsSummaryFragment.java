@@ -29,7 +29,7 @@ public class ViewFlightsSummaryFragment extends Fragment implements View.OnClick
     private ArrayList<String> flights;
     private Flight depFlight;
     private Flight retFlight;
-    private static DateFormat DATE = new SimpleDateFormat("MM/dd/yyy HH:mm");
+    private static DateFormat DATE = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     private static double total;
 
     @Override

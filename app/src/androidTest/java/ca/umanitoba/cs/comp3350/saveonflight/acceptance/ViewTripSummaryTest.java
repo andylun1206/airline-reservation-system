@@ -48,8 +48,8 @@ public class ViewTripSummaryTest extends ActivityInstrumentationTestCase2<MainAc
         Assert.assertTrue(solo.searchText("AC 100"));
         Assert.assertTrue(solo.searchText("Winnipeg YWG"));
         Assert.assertTrue(solo.searchText("Toronto YYZ"));
-        Assert.assertTrue(solo.searchText("11/11/2017"));
-        Assert.assertTrue(solo.searchText("12/11/2017"));
+        Assert.assertTrue(solo.searchText("2017-11-11"));
+        Assert.assertTrue(solo.searchText("2017-12-11"));
         Assert.assertTrue(solo.searchText(Double.toString(420.12+350.52)));
 
     }
@@ -61,7 +61,7 @@ public class ViewTripSummaryTest extends ActivityInstrumentationTestCase2<MainAc
         solo.clickOnText("One Way");
         Assert.assertTrue(solo.searchText("Toronto YYZ"));
         Assert.assertTrue(solo.searchText("Winnipeg YWG"));
-
+        Assert.assertTrue(solo.searchText("2017-11-11"));
         solo.clickOnButton("Search");
         //check flight to be chosen
         Assert.assertTrue(solo.searchText("AC 260"));
@@ -73,11 +73,13 @@ public class ViewTripSummaryTest extends ActivityInstrumentationTestCase2<MainAc
         Assert.assertTrue(solo.searchText("AC 260"));
         Assert.assertTrue(solo.searchText("325.82"));
         Assert.assertTrue(solo.searchText("3h 22m"));
+        Assert.assertTrue(solo.searchText("2017-11-11"));
 
         //make sure no return flight was chosen
         Assert.assertFalse(solo.searchText("AC 100"));
         Assert.assertFalse(solo.searchText("AC 101"));
         Assert.assertFalse(solo.searchText("WJ 491"));
+        Assert.assertFalse(solo.searchText("2017-12-11"));
     }
 
 
