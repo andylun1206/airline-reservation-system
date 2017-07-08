@@ -55,7 +55,6 @@ public class AccessBookedFlightsImpl implements AccessBookedFlights {
     public String seatNumber(int seatTaken){
         String seatNumber=null;
         int number, character;
-        if(seatTaken==0) {
             number = seatTaken/4+1;
             character = seatTaken%4;
             switch(character) {
@@ -72,7 +71,6 @@ public class AccessBookedFlightsImpl implements AccessBookedFlights {
                     seatNumber=number+"C";
                     break;
             }
-        }
         return seatNumber;
     }
 }
