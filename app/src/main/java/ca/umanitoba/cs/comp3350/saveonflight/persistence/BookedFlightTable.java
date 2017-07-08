@@ -36,10 +36,10 @@ public class BookedFlightTable implements BookedFlightAccess {
                 new FlightTable().initialize("");
             }
             flights = flightTable.getFlights();
-            bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(0),1));
-            bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(1),1));
-            bookedFlights.add(new BookedFlight(travellers.get(1), flights.get(2),1));
-            bookedFlights.add(new BookedFlight(travellers.get(2), flights.get(3),1));
+            bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(0),"1A"));
+            bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(1),"1A"));
+            bookedFlights.add(new BookedFlight(travellers.get(1), flights.get(2),"1A"));
+            bookedFlights.add(new BookedFlight(travellers.get(2), flights.get(3),"1A"));
         }
     }
 

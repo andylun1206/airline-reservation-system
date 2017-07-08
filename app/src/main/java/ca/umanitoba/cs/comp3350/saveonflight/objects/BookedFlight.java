@@ -9,19 +9,19 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
 public class BookedFlight {
     private Traveller traveller;
     private Flight flight;
-    private int seatNumber;
+    private String seatNumber;
 
-    public BookedFlight(Traveller traveller, Flight flight,int seatNumber) {
+    public BookedFlight(Traveller traveller, Flight flight,String seatNumber) {
         this.traveller = traveller;
         this.flight = flight;
         this.seatNumber = seatNumber;
     }
 
-    public int getSeatNumber() {
+    public String getSeatNumber() {
         return seatNumber;
     }
 
-    public void setSeatNumber(int seatNumber) {
+    public void setSeatNumber(String seatNumber) {
         this.seatNumber = seatNumber;
     }
 

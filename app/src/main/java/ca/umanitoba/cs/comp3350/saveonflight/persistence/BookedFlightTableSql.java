@@ -44,8 +44,8 @@ public class BookedFlightTableSql implements BookedFlightAccess {
     public List<BookedFlight> getAll() {
         List<BookedFlight> bfs = new ArrayList<>();
         BookedFlight bookedFlight;
-        int id,seatNumber;
-        String flightId, departureTime;
+        int id;
+        String flightId, departureTime,seatNumber;
         result = null;
         try {
             cmdString = "SELECT * FROM BOOKEDFLIGHT";
@@ -64,7 +64,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
                 id = rs1.getInt("ID");
                 flightId = rs1.getString("FLIGHTID");
                 departureTime = rs1.getString("DEPARTURETIME");
-                seatNumber = rs1.getInt("SEATNUMBER");
+                seatNumber = rs1.getString("SEATNUMBER");
                 bookedFlight = new BookedFlight(travellerTableSql.findTraveller(id), flightTableSql.findFlight(flightId, departureTime),seatNumber);
                 bfs.add(bookedFlight);
             }
@@ -125,8 +125,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
     public ArrayList<BookedFlight> searchByTraveller(Traveller t) {
         ArrayList<BookedFlight> results = new ArrayList<BookedFlight>();
         BookedFlight bookedFlight;
-        String flightId, departureTime;
-        int seatNumber;
+        String flightId, departureTime,seatNumber;
         result = null;
         try {
             cmdString = "Select * from BOOKEDFLIGHT WHERE ID =" + t.getTravellerID();
@@ -146,7 +145,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
             while (rs2.next()) {
                 flightId = rs2.getString("FLIGHTID");
                 departureTime = rs2.getString("DEPARTURETIME");
-                seatNumber = rs2.getInt("SEATNUMBER");
+                seatNumber = rs2.getString("SEATNUMBER");
                 bookedFlight = new BookedFlight(traveller, flightTableSql.findFlight(flightId, departureTime),seatNumber);
                 results.add(bookedFlight);
             }
