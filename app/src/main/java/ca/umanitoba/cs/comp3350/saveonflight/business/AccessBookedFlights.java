@@ -21,4 +21,6 @@ public interface AccessBookedFlights {
     boolean removeBookedFlight(BookedFlight bf);
 
     List<BookedFlight> searchByTraveller(Traveller t);
+
+    String seatNumber(int seatTaken);
 }
