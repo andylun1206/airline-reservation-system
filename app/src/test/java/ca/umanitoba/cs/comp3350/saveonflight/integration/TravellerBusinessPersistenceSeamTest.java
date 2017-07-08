@@ -2,10 +2,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.integration;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.notification.RunListener;
-import org.junit.runner.notification.RunListener.ThreadSafe;
 
 import java.util.List;
 
@@ -46,9 +43,9 @@ public class TravellerBusinessPersistenceSeamTest {
 
     @Test
     public void testAddAndRemove() {
-        Traveller valid = new Traveller("Bob Bob");
-        Traveller invalid = new Traveller(null);
-        Traveller alsoInvalid = new Traveller("");
+        Traveller valid = new Traveller(access.getMaxId() + 1, "Bob Bob");
+        Traveller invalid = new Traveller(5, null);
+        Traveller alsoInvalid = new Traveller(6, "");
 
         // Additions
         assertTrue(access.insertTraveller(valid));

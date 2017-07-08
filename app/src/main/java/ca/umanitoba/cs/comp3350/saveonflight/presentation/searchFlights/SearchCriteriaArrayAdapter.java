@@ -94,7 +94,6 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
             final AutoCompleteTextView input = (AutoCompleteTextView) view.findViewById(R.id.editText_search_criteria_input);
             input.setHint(row.getTitle());
             input.setThreshold(1);
-            //setDefaults(input, row.getTitle());
             input.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
@@ -243,20 +242,6 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
             criteria.setPreferredAirlines(new Airline(inputText));
         } else if (row.getResources().getString(R.string.search_class).equals(key)) {
             criteria.setPreferredClass(FlightClassEnum.FIRST_CLASS);
-        }
-    }
-
-    private void setDefaults(final EditText input, String title) {
-        if (title.equals("Origin")) {
-            input.setText("Winnipeg YWG");
-        } else if (title.equals("Destination")) {
-            input.setText("Toronto YYZ");
-        } else if (title.equals("Departure Date")) {
-            input.setText("2017-11-11");
-        } else if (title.equals("Return Date")) {
-            input.setText("2017-12-11");
-        } else if (title.equals("Number of Travellers")) {
-            input.setText("1");
         }
     }
 }
