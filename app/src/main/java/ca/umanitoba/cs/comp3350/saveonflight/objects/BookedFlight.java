@@ -9,10 +9,20 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
 public class BookedFlight {
     private Traveller traveller;
     private Flight flight;
+    private int seatNumber;
 
-    public BookedFlight(Traveller traveller, Flight flight) {
+    public BookedFlight(Traveller traveller, Flight flight,int seatNumber) {
         this.traveller = traveller;
         this.flight = flight;
+        this.seatNumber = seatNumber;
+    }
+
+    public int getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(int seatNumber) {
+        this.seatNumber = seatNumber;
     }
 
     public Traveller getTraveller() {

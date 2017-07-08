@@ -118,7 +118,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         // Then, create the BookedFlight(s) objects
         ArrayList<BookedFlight> bfs = new ArrayList<>();
         for (Flight f : flights) {
-            bfs.add(new BookedFlight(traveller, f));
+            bfs.add(new BookedFlight(traveller, f,f.getSeatsTaken()));
         }
 
         // Finally, add all the BookedFlight(s) to the database
