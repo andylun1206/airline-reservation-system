@@ -81,7 +81,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         boolean added = false;
         result = null;
 
-        if (bookedFlight != null) {
+        if (bookedFlight != null && bookedFlight.getFlight() != null && bookedFlight.getTraveller() != null) {
             try {
                 values = bookedFlight.getTraveller().getTravellerID()
                         + ",'" + bookedFlight.getFlight().getFlightCode() + "','" + bookedFlight.getFlight().getDepartureTimeString() + "'"+","+bookedFlight.getFlight().getSeatsTaken();
@@ -103,7 +103,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         boolean removed = false;
         String where;
 
-        if (bf != null) {
+        if (bf != null && bf.getFlight() != null && bf.getTraveller() != null) {
             try {
                 where = "where ID=" + bf.getTraveller().getTravellerID()
                         + " and FLIGHTID='" + bf.getFlight().getFlightCode()
@@ -136,6 +136,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
             result = processSQLError(e);
         }
         try {
+            // TODO: maybe join tables and perform a single SQL query instead?
             TravellerTableSql travellerTableSql = new TravellerTableSql();
             travellerTableSql.initialize(Main.getDBPathName());
             Traveller traveller = travellerTableSql.findTraveller(t.getTravellerID());

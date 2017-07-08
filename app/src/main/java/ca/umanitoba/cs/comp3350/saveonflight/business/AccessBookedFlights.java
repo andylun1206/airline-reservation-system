@@ -16,9 +16,9 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
  */
 
 public interface AccessBookedFlights {
-    boolean add(BookedFlight bf);
+    boolean insertBookedFlight(BookedFlight bf);
 
-    boolean remove(BookedFlight bf);
+    boolean removeBookedFlight(BookedFlight bf);
 
     List<BookedFlight> searchByTraveller(Traveller t);
 }

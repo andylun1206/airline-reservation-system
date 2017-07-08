@@ -49,19 +49,19 @@ public class BookedFlightTableTest {
     @Test
     public void testAddNull() {
         bookedFlightTable.add(null);
-        assertEquals("Add null but actually add something", original, BookedFlightTable.getBookedFlights());
+        assertEquals("Add null but actually insertBookedFlight something", original, BookedFlightTable.getBookedFlights());
     }
 
     @Test
     public void testAddValid() {
         bookedFlightTable.add(validCase);
-        assertFalse("Failed to add validCase to BookedFlightTable.", bookedFlightTable.add(validCase));
+        assertFalse("Failed to insertBookedFlight validCase to BookedFlightTable.", bookedFlightTable.add(validCase));
     }
 
     @Test
     public void testAddDuplicate() {
         BookedFlight bf = new BookedFlight(travellers.get(2), flights.get(8));
-        assertTrue("Failed to add unique airline 'dup'", bookedFlightTable.add(bf));
+        assertTrue("Failed to insertBookedFlight unique airline 'dup'", bookedFlightTable.add(bf));
         assertFalse("Succeeded adding a duplicate.", bookedFlightTable.add(bf));
     }
 
