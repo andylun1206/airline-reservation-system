@@ -2,10 +2,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.integration;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.notification.RunListener;
-import org.junit.runner.notification.RunListener.ThreadSafe;
 
 import java.util.List;
 
@@ -34,7 +31,7 @@ public class TravellerBusinessPersistenceSeamTest {
     }
 
     @Test
-    public void testGetAll() {
+    public void testGetTravellers() {
         List<Traveller> travellers = access.getTravellers();
         assertNotNull(travellers);
         for (Traveller t : travellers) {
