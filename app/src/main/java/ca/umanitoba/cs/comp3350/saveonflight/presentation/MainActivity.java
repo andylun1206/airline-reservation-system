@@ -87,8 +87,10 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
             if (f instanceof ViewFlightsFragment || f instanceof PaymentFragment || f instanceof ViewFlightsSummaryFragment) {
                 displaySelectedScreen(R.id.nav_search);
-            } else if (f instanceof SearchFragment || f instanceof ViewBookedFlightFragment || f instanceof TicketFragment) {
+            } else if (f instanceof SearchFragment || f instanceof ViewBookedFlightFragment) {
                 displaySelectedScreen(R.id.nav_home);
+            } else if (f instanceof TicketFragment) {
+                displaySelectedScreen(R.id.nav_bookedflights);
             } else {
                 super.onBackPressed();
             }
