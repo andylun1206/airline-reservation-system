@@ -34,7 +34,6 @@ public class SearchCriteriaTest {
         searchCriteria.setOrigin(ORIGIN);
         searchCriteria.setDestination(DEST);
         searchCriteria.setDepartureDate(DEPARTURE_DATE);
-        searchCriteria.setNumTravellers(NUM_TRAVELLERS);
         searchCriteria.setMaxPrice(MAX);
         searchCriteria.setPreferredAirlines(AIRLINE);
         searchCriteria.setPreferredClass(PREFERRED_CLASS);
@@ -43,7 +42,6 @@ public class SearchCriteriaTest {
         searchCriteriaTest1.setOrigin(new Airport("YWG"));
         searchCriteriaTest1.setDestination(new Airport("YVR"));
         searchCriteriaTest1.setDepartureDate(new Date(117, 5, 6, 14, 40));
-        searchCriteriaTest1.setNumTravellers(3);
         searchCriteriaTest1.setMaxPrice(1000);
         searchCriteriaTest1.setPreferredAirlines(new Airline("WestJet"));
         searchCriteriaTest1.setPreferredClass(FlightClassEnum.FIRST_CLASS);
@@ -52,7 +50,6 @@ public class SearchCriteriaTest {
         searchCriteriaTest2.setOrigin(null);
         searchCriteriaTest2.setDestination(null);
         searchCriteriaTest2.setDepartureDate(null);
-        searchCriteriaTest2.setNumTravellers(0);
         searchCriteriaTest2.setMaxPrice(0);
         searchCriteriaTest2.setPreferredAirlines(null);
         searchCriteriaTest2.setPreferredClass(null);
@@ -70,7 +67,6 @@ public class SearchCriteriaTest {
         assertTrue(ORIGIN.equals(searchCriteriaTest1.getOrigin()));
         assertTrue(DEST.equals(searchCriteriaTest1.getDestination()));
         assertTrue(DEPARTURE_DATE.equals(searchCriteriaTest1.getDepartureDate()));
-        assertTrue(NUM_TRAVELLERS == searchCriteriaTest1.getNumTravellers());
         assertTrue(MAX == searchCriteriaTest1.getMaxPrice());
         assertTrue(AIRLINE.equals(searchCriteriaTest1.getPreferredAirline()));
         assertTrue(PREFERRED_CLASS.equals(searchCriteriaTest1.getPreferredClass()));

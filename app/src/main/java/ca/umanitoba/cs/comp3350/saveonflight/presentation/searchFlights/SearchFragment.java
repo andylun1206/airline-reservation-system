@@ -51,7 +51,7 @@ public class SearchFragment extends ListFragment {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         mandatoryCriteriaList = new ArrayList<>();
         optionalCriteriaList = new ArrayList<>();
-        criteriaAdapter = new SearchCriteriaArrayAdapter(getActivity(), R.layout.list_item_search_criteria_text,
+        criteriaAdapter = new SearchCriteriaArrayAdapter(getActivity(), R.layout.list_item_search_criteria,
                 mandatoryCriteriaList, optionalCriteriaList);
         setListAdapter(criteriaAdapter);
 
@@ -138,7 +138,6 @@ public class SearchFragment extends ListFragment {
             mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_takeoff, getString(R.string.search_origin)));
             mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_landing, getString(R.string.search_destination)));
             mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_clock, getString(R.string.search_departure_date)));
-            mandatoryCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_person, getString(R.string.search_num_passengers)));
         } else {
             mandatoryCriteriaList.remove(3);
         }

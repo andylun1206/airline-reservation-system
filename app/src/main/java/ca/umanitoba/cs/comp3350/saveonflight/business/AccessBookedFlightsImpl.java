@@ -24,22 +24,22 @@ public class AccessBookedFlightsImpl implements AccessBookedFlights {
     /**
      * Adds a BookedFlight to the database.
      *
-     * @param bf the BookedFlight to add
+     * @param bf the BookedFlight to insertBookedFlight
      * @return true if the BookedFlight was added; false if not
      */
     @Override
-    public boolean add(BookedFlight bf) {
+    public boolean insertBookedFlight(BookedFlight bf) {
         return bookedFlightsDB.add(bf);
     }
 
     /**
      * Removes the specified BookedFlights from the table.
      *
-     * @param bf specifies which BookedFlights to remove
+     * @param bf specifies which BookedFlights to removeBookedFlight
      * @return true if 1 or more rows were removed; false otherwise
      */
     @Override
-    public boolean remove(BookedFlight bf) {
+    public boolean removeBookedFlight(BookedFlight bf) {
         return bookedFlightsDB.remove(bf);
     }
 
@@ -47,9 +47,30 @@ public class AccessBookedFlightsImpl implements AccessBookedFlights {
      * Searches for BookedFlights that are associated with the specified Traveller.
      *
      * @param t the Traveller to search by
-     * @return all the BookedFlights that are associated with the given Traveller
+     * @return the List of BookedFlights that are associated with the given Traveller
      */
     public List<BookedFlight> searchByTraveller(Traveller t) {
         return bookedFlightsDB.searchByTraveller(t);
+    }
+    public String seatNumber(int seatTaken){
+        String seatNumber=null;
+        int number, character;
+            number = seatTaken/4+1;
+            character = seatTaken%4;
+            switch(character) {
+                case 0:
+                    seatNumber=number+"D";
+                    break;
+                case 1:
+                    seatNumber=number+"A";
+                    break;
+                case 2:
+                    seatNumber=number+"B";
+                    break;
+                case 3:
+                    seatNumber=number+"C";
+                    break;
+            }
+        return seatNumber;
     }
 }

@@ -28,7 +28,29 @@ public class AccessTravellersImpl implements AccessTravellers {
     }
 
     @Override
-    public int insertTraveller(Traveller traveller) {
+    public boolean insertTraveller(Traveller traveller) {
         return travellerDB.add(traveller);
+    }
+
+    @Override
+    public Traveller getTraveller(int travellerId) {
+        Traveller traveller = null;
+
+        for (Traveller t : getTravellers()) {
+            if (t.getTravellerID() == travellerId) {
+                traveller = t;
+            }
+        }
+
+        return traveller;
+    }
+
+    public boolean removeTraveller(Traveller traveller) {
+        return travellerDB.remove(traveller);
+    }
+
+    @Override
+    public int getMaxId() {
+        return travellerDB.getMaxId();
     }
 }

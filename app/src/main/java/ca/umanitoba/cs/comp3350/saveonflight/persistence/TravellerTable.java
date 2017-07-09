@@ -33,14 +33,34 @@ public class TravellerTable implements TravellerAccess {
         return travellers;
     }
 
-    public int add(Traveller traveller) {
-        boolean result = true;
+    public boolean add(Traveller traveller) {
+        boolean added = false;
         if (traveller != null) {
-            traveller.setTravellerId(nextId);
+            traveller.setTravellerId(nextId++);
             travellers.add(traveller);
+            added = true;
         }
-        return nextId++;
+        return added;
     }
+
+    public int getMaxId() {
+        return nextId - 1;
+    }
+
+    public boolean remove(Traveller traveller) {
+        boolean removed = false;
+
+        int i = 0;
+        while (!removed && i < travellers.size()) {
+            if (traveller.equals(travellers.get(i))) {
+                travellers.remove(i);
+                removed = true;
+            }
+        }
+
+        return removed;
+    }
+
     public void close()
     {
         System.out.println("Closed  database " );

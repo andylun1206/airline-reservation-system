@@ -9,10 +9,16 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
 public class BookedFlight {
     private Traveller traveller;
     private Flight flight;
+    private String seatNumber;
 
-    public BookedFlight(Traveller traveller, Flight flight) {
+    public BookedFlight(Traveller traveller, Flight flight,String seatNumber) {
         this.traveller = traveller;
         this.flight = flight;
+        this.seatNumber = seatNumber;
+    }
+
+    public String getSeatNumber() {
+        return seatNumber;
     }
 
     public Traveller getTraveller() {

@@ -1,5 +1,8 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * SearchCriteria.java
  * <p>
@@ -8,15 +11,12 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
  * @author Andy Lun
  */
 
-import java.util.Date;
-
 public class SearchCriteria {
     private boolean returnTrip;
     private Airport origin;
     private Airport destination;
     private Date departureDate;
     private Date returnDate;
-    private int numTravellers;
     private double maxPrice;
     private Airline preferredAirlines;
     private FlightClassEnum preferredClass;
@@ -64,14 +64,6 @@ public class SearchCriteria {
         this.returnDate = returnDate;
     }
 
-    public int getNumTravellers() {
-        return numTravellers;
-    }
-
-    public void setNumTravellers(int numTravellers) {
-        this.numTravellers = numTravellers;
-    }
-
     public double getMaxPrice() {
         return maxPrice;
     }
@@ -102,5 +94,10 @@ public class SearchCriteria {
 
     public void setReturnTrip(boolean isReturnTrip) {
         this.returnTrip = isReturnTrip;
+    }
+
+    public String getDepartureDateString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(departureDate);
     }
 }
