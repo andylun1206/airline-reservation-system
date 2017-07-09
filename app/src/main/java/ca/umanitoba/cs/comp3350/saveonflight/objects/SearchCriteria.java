@@ -17,7 +17,6 @@ public class SearchCriteria {
     private Airport destination;
     private Date departureDate;
     private Date returnDate;
-    private int numTravellers;
     private double maxPrice;
     private Airline preferredAirlines;
     private FlightClassEnum preferredClass;
@@ -63,14 +62,6 @@ public class SearchCriteria {
 
     public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
-    }
-
-    public int getNumTravellers() {
-        return numTravellers;
-    }
-
-    public void setNumTravellers(int numTravellers) {
-        this.numTravellers = numTravellers;
     }
 
     public double getMaxPrice() {

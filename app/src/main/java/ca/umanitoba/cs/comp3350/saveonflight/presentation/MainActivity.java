@@ -35,6 +35,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.flightSummary.ViewFlightsSummaryFragment;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.payment.PaymentFragment;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.ticket.TicketFragment;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewBookedFlights.ViewBookedFlightFragment;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights.ViewFlightsFragment;
 
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
             if (f instanceof ViewFlightsFragment || f instanceof PaymentFragment || f instanceof ViewFlightsSummaryFragment) {
                 displaySelectedScreen(R.id.nav_search);
-            } else if (f instanceof SearchFragment || f instanceof ViewBookedFlightFragment) {
+            } else if (f instanceof SearchFragment || f instanceof ViewBookedFlightFragment || f instanceof TicketFragment) {
                 displaySelectedScreen(R.id.nav_home);
             } else {
                 super.onBackPressed();

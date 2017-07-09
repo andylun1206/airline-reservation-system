@@ -169,7 +169,6 @@ public class FlightTable implements FlightAccess {
         ArrayList<Flight> table;
         table = createTableByOriginAndDestination(new ArrayList<Flight>(), criteria.getOrigin(), criteria.getDestination());
         table = removeByDepartureDate(table, criteria.getDepartureDate());
-        table = removeByNumTravellers(table, criteria.getNumTravellers());
         if (!(criteria.getMaxPrice() == 0.0))
             table = removeByMaxPrice(table, criteria.getMaxPrice());
         if (!(criteria.getPreferredAirline() == null))
@@ -206,20 +205,6 @@ public class FlightTable implements FlightAccess {
                 calTemp.setTime(temp.getDepartureTime());
                 if (calTemp.get(Calendar.YEAR) != calFilterBy.get(Calendar.YEAR) ||
                         calTemp.get(Calendar.DAY_OF_YEAR) != calFilterBy.get(Calendar.DAY_OF_YEAR)) {
-                    table.remove(temp);
-                    i--;
-                }
-            }
-        }
-        return table;
-    }
-
-    private ArrayList<Flight> removeByNumTravellers(ArrayList<Flight> table, int numTravellers) {
-        if (!table.isEmpty()) {
-            Flight temp;
-            for (int i = 0; i < table.size(); i++) {
-                temp = table.get(i);
-                if (temp.getCapacity() < numTravellers) {
                     table.remove(temp);
                     i--;
                 }
