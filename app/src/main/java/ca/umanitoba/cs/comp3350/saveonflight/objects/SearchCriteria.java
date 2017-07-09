@@ -100,4 +100,17 @@ public class SearchCriteria {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(departureDate);
     }
+
+    public SearchCriteria clone() {
+        SearchCriteria sc = new SearchCriteria();
+        sc.setReturnTrip(returnTrip);
+        sc.setOrigin(origin);
+        sc.setDestination(destination);
+        sc.setDepartureDate(departureDate);
+        sc.setReturnDate(returnDate);
+        sc.setMaxPrice(maxPrice);
+        sc.setPreferredAirlines(preferredAirlines);
+        sc.setPreferredClass(preferredClass);
+        return sc;
+    }
 }

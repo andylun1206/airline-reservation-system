@@ -5,12 +5,16 @@ import android.app.Activity;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.business.AccessAirportsImpl;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlights;
+import ca.umanitoba.cs.comp3350.saveonflight.business.AccessFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteria;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
 
@@ -30,6 +34,13 @@ public class SearchCriteriaHandler {
             valid = missingRequiredField(activity, R.string.search_departure_date);
         } else if (criteria.isReturnTrip() && !validateReturnDate(criteria.getDepartureDate(), criteria.getReturnDate())) {
             valid = missingRequiredField(activity, R.string.search_return_date);
+        }
+
+        if (valid) {
+            valid = checkThatDatabaseHasFlights(criteria);
+            if (!valid) {
+                ToastHandler.toastNoResults(activity);
+            }
         }
 
         return valid;
@@ -75,6 +86,27 @@ public class SearchCriteriaHandler {
 
     private static boolean validateReturnDate(Date departureDate, Date returnDate) {
         return (returnDate != null && departureDate.compareTo(returnDate) <= 0);
+    }
+
+    private static boolean checkThatDatabaseHasFlights(SearchCriteria criteria) {
+        boolean valid = false;
+
+        SearchCriteria copy = criteria.clone();
+        AccessFlights access = new AccessFlightsImpl(Main.getFlightAccess());
+        List<Flight> departingFlights = access.search(copy);
+        if (!departingFlights.isEmpty()) {
+            if (copy.isReturnTrip()) {
+                reverseFlightDirection(copy);
+                List<Flight> returnFlights = access.search(copy);
+                if (!returnFlights.isEmpty()) {
+                    valid = true;
+                }
+            } else {
+                valid = true;
+            }
+        }
+
+        return valid;
     }
 
     /**
