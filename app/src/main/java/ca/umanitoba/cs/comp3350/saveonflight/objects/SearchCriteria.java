@@ -101,7 +101,7 @@ public class SearchCriteria {
         return sdf.format(departureDate);
     }
 
-    public SearchCriteria clone() {
+    public SearchCriteria copy() {
         SearchCriteria sc = new SearchCriteria();
         sc.setReturnTrip(returnTrip);
         sc.setOrigin(origin);

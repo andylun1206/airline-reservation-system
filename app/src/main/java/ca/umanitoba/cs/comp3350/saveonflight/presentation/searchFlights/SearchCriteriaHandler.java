@@ -91,7 +91,7 @@ public class SearchCriteriaHandler {
     private static boolean checkThatDatabaseHasFlights(SearchCriteria criteria) {
         boolean valid = false;
 
-        SearchCriteria copy = criteria.clone();
+        SearchCriteria copy = criteria.copy();
         AccessFlights access = new AccessFlightsImpl(Main.getFlightAccess());
         List<Flight> departingFlights = access.search(copy);
         if (!departingFlights.isEmpty()) {
