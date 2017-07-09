@@ -66,8 +66,14 @@ public class FlightTableSqlTest {
             e.printStackTrace();
         }
         mockedList = mock(FlightTableSql.class);
+        mockedList.add(null);
+        mockedList.add(emptyNameCase);
         mockedList.add(validCase);
+        mockedList.findByFlightCode(null);
+        mockedList.findByFlightCode("");
         mockedList.findByFlightCode("WJ 009");
+        mockedList.findFlight(null, null);
+        mockedList.findFlight("", "");
         mockedList.findFlight("WJ 009", "2017-11-11 05:30");
         //mockedList.findBySearchCriteria();
         mockedList.close();

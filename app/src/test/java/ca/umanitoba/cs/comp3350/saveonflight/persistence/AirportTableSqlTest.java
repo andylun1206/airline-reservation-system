@@ -31,7 +31,10 @@ public class AirportTableSqlTest {
         airportTable.initialize(Main.getDBPathName());
         original = airportTable.getAirports();
         mockedList = mock(AirportTableSql.class);
+        mockedList.findAirport(null);
+        mockedList.findAirport("");
         mockedList.findAirport("Vancouver YVR");
+        mockedList.findAirport("China cnm");
         mockedList.close();
 
         verify(mockedList).findAirport(null);

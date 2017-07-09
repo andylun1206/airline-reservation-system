@@ -33,7 +33,12 @@ public class AirlineTableSqlTest {
         airlineTable.initialize(Main.getDBPathName());
         original = airlineTable.getAirlines();
         mockedList = mock(AirlineTableSql.class);
+        mockedList.add(null);
+        mockedList.add(new Airline(""));
         mockedList.add(new Airline("WinnipegAirline"));
+        mockedList.findAirline(null);
+        mockedList.findAirline("");
+        mockedList.findAirline("WinnipegAirline");
         mockedList.findAirline("AirCanada");
         mockedList.close();
 

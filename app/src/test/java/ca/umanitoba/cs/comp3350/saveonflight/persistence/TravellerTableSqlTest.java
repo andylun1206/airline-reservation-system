@@ -1,4 +1,5 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -32,29 +33,36 @@ public class TravellerTableSqlTest {
         travellerTable.initialize(Main.getDBPathName());
         original = travellerTable.getTravellers();
         mockedList = mock(TravellerTableSql.class);
-        mockedList.add(new Airline("WinnipegAirline"));
-        mockedList.findAirline("AirCanada");
+        mockedList.add(null);
+        mockedList.add(new Traveller(0, ""));
+        mockedList.add(new Traveller(100, "CNM"));
+        mockedList.remove(null);
+        mockedList.remove(new Traveller(0, ""));
+        mockedList.remove(new Traveller(0, "Jack"));
+        mockedList.findTraveller(10000);
+        mockedList.findTraveller(0);
         mockedList.close();
 
         verify(mockedList).add(null);
-        verify(mockedList).add(new Airline(""));
-        verify(mockedList).add(new Airline("WinnipegAirline"));
-        verify(mockedList).findAirline(null);
-        verify(mockedList).findAirline("");
-        verify(mockedList).findAirline("WinnipegAirline");
-        verify(mockedList).findAirline("AirCanada");
+        verify(mockedList).add(new Traveller(0, ""));
+        verify(mockedList).add(new Traveller(100, "CNM"));
+        verify(mockedList).remove(null);
+        verify(mockedList).remove(new Traveller(0, ""));
+        verify(mockedList).remove(new Traveller(0, "Jack"));
+        verify(mockedList).findTraveller(10000);
+        verify(mockedList).findTraveller(0);
         verify(mockedList).close();
 
         when(mockedList.add(null)).thenReturn(false);
-        when(mockedList.add(new Airline(""))).thenReturn(true);
-        when(mockedList.add(new Airline("WinnipegAirline"))).thenReturn(true);
+        when(mockedList.add(new Traveller(0, ""))).thenReturn(true);
+        when(mockedList.add(new Traveller(100, "CNM"))).thenReturn(true);
 
+        when(mockedList.remove(null)).thenReturn(false);
+        when(mockedList.remove(new Traveller(0, ""))).thenReturn(false);
+        when(mockedList.remove(new Traveller(0, "Jack"))).thenReturn(true);
 
-        when(mockedList.findAirline(null)).thenReturn(null);
-        when(mockedList.findAirline("")).thenReturn(null);
-        when(mockedList.findAirline("WinnipegAirline")).thenReturn(null);
-        when(mockedList.findAirline("AirCanada")).thenReturn(new Airline("AirCanada"));
-
+        when(mockedList.findTraveller(10000)).thenReturn(null);
+        when(mockedList.findTraveller(0)).thenReturn(new Traveller(0, "Jack"));
     }
 
     @Test
@@ -69,17 +77,41 @@ public class TravellerTableSqlTest {
 
     @Test
     public void testAddNull() {
-        assertTrue("add null but actually add something", travellerTable.add(null) < 0);
+        assertFalse("Test add null fail", mockedList.add(null));
     }
 
     @Test
     public void testAddEmptyName() {
-        travellerTable.add(emptyNameCase);
-        assertEquals("adding none since object but it shouldn't add", original, travellerTable.getTravellers());
+        assertTrue("Test add empty fail", mockedList.add(new Traveller(0, "")));
     }
 
     @Test
     public void testAddValid() {
-        assertTrue(travellerTable.add(validCase) > 0);
+        assertTrue("Test add valid fail", mockedList.add(new Traveller(100, "CNM")));
+    }
+
+    @Test
+    public void testRemoveNull() {
+        assertFalse("Test remove null fail", mockedList.remove(null));
+    }
+
+    @Test
+    public void testRemoveEmpty() {
+        assertFalse("Test remove empty fail", mockedList.remove(new Traveller(0, "")));
+    }
+
+    @Test
+    public void testRemoveValid() {
+        assertFalse("Test remove valid fail", mockedList.remove(new Traveller(0, "Jack")));
+    }
+
+    @Test
+    public void testFindTravellerNotIn() {
+        assertEquals("Test find traveller not in table fail", null, mockedList.findTraveller(10000));
+    }
+
+    @Test
+    public void testFindTravellerIn() {
+        assertEquals("Test find traveller in table fail", new Traveller(0, "Jack"), mockedList.findTraveller(0));
     }
 }
