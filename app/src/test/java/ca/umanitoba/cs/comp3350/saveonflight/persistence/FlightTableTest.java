@@ -94,7 +94,6 @@ public class FlightTableTest {
         Date returnDate = cal.getTime();
         searchCriteria.setReturnDate(returnDate);
 
-        searchCriteria.setNumTravellers(1);
         searchCriteria.setMaxPrice(400.50);
         Airline westJet = new Airline("WestJet");
         searchCriteria.setPreferredAirlines(westJet);

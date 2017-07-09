@@ -52,4 +52,25 @@ public class AccessBookedFlightsImpl implements AccessBookedFlights {
     public List<BookedFlight> searchByTraveller(Traveller t) {
         return bookedFlightsDB.searchByTraveller(t);
     }
+    public String seatNumber(int seatTaken){
+        String seatNumber=null;
+        int number, character;
+            number = seatTaken/4+1;
+            character = seatTaken%4;
+            switch(character) {
+                case 0:
+                    seatNumber=number+"D";
+                    break;
+                case 1:
+                    seatNumber=number+"A";
+                    break;
+                case 2:
+                    seatNumber=number+"B";
+                    break;
+                case 3:
+                    seatNumber=number+"C";
+                    break;
+            }
+        return seatNumber;
+    }
 }

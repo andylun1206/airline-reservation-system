@@ -19,6 +19,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.flightSummary.ViewFlightsSummaryFragment;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.payment.PaymentFragment;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.searchFlights.SearchFragment;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.ticket.TicketFragment;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewBookedFlights.ViewBookedFlightFragment;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights.ViewFlightsFragment;
 
@@ -91,6 +92,22 @@ public class FragmentNavigation {
     public static void viewBookedFlights() {
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, new ViewBookedFlightFragment())
+                .commit();
+    }
+
+    /**
+     * Switch context to ticket fragment
+     */
+    public static void viewTicket(int travellerId, String flightCode) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("traveller_id", travellerId);
+        bundle.putString("flight_code", flightCode);
+
+        Fragment viewTicket = new TicketFragment();
+        viewTicket.setArguments(bundle);
+
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, viewTicket)
                 .commit();
     }
 
