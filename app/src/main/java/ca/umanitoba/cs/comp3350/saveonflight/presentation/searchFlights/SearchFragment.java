@@ -112,8 +112,6 @@ public class SearchFragment extends ListFragment {
                     ArrayList<Flight> flightList = new AccessFlightsImpl(Main.getFlightAccess()).search(SearchCriteriaArrayAdapter.getCriteria());
                     if (flightList != null && !flightList.isEmpty()) {
                         FragmentNavigation.viewFlights();
-                    } else {
-                        ToastHandler.toastNoResults(getActivity());
                     }
                 }
             }

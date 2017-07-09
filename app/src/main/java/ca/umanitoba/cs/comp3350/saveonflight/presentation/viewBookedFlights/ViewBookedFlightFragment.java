@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +19,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.business.AccessBookedFlightsImpl;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.viewFlights.ViewFlightsListViewEntry;
 
 /**
@@ -71,7 +71,7 @@ public class ViewBookedFlightFragment extends ListFragment implements View.OnCli
                 String passengerId = etPassengerId.getText().toString();
 
                 if (passengerId.isEmpty()) {
-                    Toast.makeText(getContext(), "Please enter a passenger ID", Toast.LENGTH_SHORT).show();
+                    ToastHandler.toastShowShortText(getActivity(), "Please enter a passenger ID");
                 } else {
                     final int PASSENGER_ID = Integer.parseInt(etPassengerId.getText().toString());
                     ViewBookedFlightArrayAdapter.setPassengerId(PASSENGER_ID);
@@ -89,7 +89,7 @@ public class ViewBookedFlightFragment extends ListFragment implements View.OnCli
                     flightAdapter.notifyDataSetChanged();
 
                     if (flightList.isEmpty()) {
-                        Toast.makeText(getContext(), "No booked flights were found for this passenger", Toast.LENGTH_SHORT).show();
+                        ToastHandler.toastShowShortText(getActivity(), "No booked flights were found for this passenger");
                     }
                 }
 
