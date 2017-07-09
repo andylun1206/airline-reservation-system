@@ -72,7 +72,6 @@ public class FlightsBusinessPersistenceSeamTest {
         Date returnDate = cal.getTime();
         searchCriteria.setReturnDate(returnDate);
 
-        searchCriteria.setNumTravellers(1);
         searchCriteria.setMaxPrice(400.50);
         Airline airCanada = new Airline("Air Canada");
         searchCriteria.setPreferredAirlines(airCanada);

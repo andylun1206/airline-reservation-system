@@ -27,7 +27,7 @@ public class BookedFlightTableSqlTest {
     ArrayList<Traveller> travellers = new TravellerTable().getTravellers();
     FlightTableSql flightTable = new FlightTableSql();
     ArrayList<Flight> flights = flightTable.getFlights();
-    private BookedFlight validCase = new BookedFlight(travellers.get(2), flights.get(7));
+    private BookedFlight validCase = new BookedFlight(travellers.get(2), flights.get(7), "1A");
 
     @BeforeClass
     public static void setUp() {

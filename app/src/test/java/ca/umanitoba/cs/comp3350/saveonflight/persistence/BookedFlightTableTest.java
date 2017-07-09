@@ -25,7 +25,7 @@ public class BookedFlightTableTest {
     ArrayList<Traveller> travellers = new TravellerTable().getTravellers();
     FlightTable flightTable=new FlightTable();
     ArrayList<Flight> flights = flightTable.getFlights();
-    private BookedFlight validCase = new BookedFlight(travellers.get(2), flights.get(7));
+    private BookedFlight validCase = new BookedFlight(travellers.get(2), flights.get(7), "B3");
 
     @BeforeClass
     public static void setUp() {
@@ -60,7 +60,7 @@ public class BookedFlightTableTest {
 
     @Test
     public void testAddDuplicate() {
-        BookedFlight bf = new BookedFlight(travellers.get(2), flights.get(8));
+        BookedFlight bf = new BookedFlight(travellers.get(2), flights.get(8), "C4");
         assertTrue("Failed to insertBookedFlight unique airline 'dup'", bookedFlightTable.add(bf));
         assertFalse("Succeeded adding a duplicate.", bookedFlightTable.add(bf));
     }

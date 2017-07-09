@@ -1,5 +1,8 @@
 package ca.umanitoba.cs.comp3350.saveonflight.objects;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * SearchCriteria.java
  * <p>
@@ -7,9 +10,6 @@ package ca.umanitoba.cs.comp3350.saveonflight.objects;
  *
  * @author Andy Lun
  */
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class SearchCriteria {
     private boolean returnTrip;
