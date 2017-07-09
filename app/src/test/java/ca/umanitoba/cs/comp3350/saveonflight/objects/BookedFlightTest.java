@@ -42,16 +42,15 @@ public class BookedFlightTest {
                 .setFlightClass(FlightClassEnum.BUSINESS)
                 .build();
 
-        booked1 = new BookedFlight(JULIA, flight1);
-        booked2 = new BookedFlight(JENNIE, flight2);
-        booked3 = new BookedFlight(JULIA, flight2);
-        booked4 = new BookedFlight(JULIA, flight1);
+        booked1 = new BookedFlight(JULIA, flight1, "A1");
+        booked2 = new BookedFlight(JENNIE, flight2, "A1");
+        booked3 = new BookedFlight(JULIA, flight2, "A2");
+        booked4 = new BookedFlight(JULIA, flight1, "A2");
         assertNotNull(booked1);
         assertNotNull(booked2);
         assertNotNull(booked3);
         assertNotNull(booked4);
     }
-
 
     @After
     public void tearDown() {

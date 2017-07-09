@@ -205,17 +205,17 @@ public class FlightTableSql implements FlightAccess {
 
         if (criteria != null) {
             try {
-                cmdString = "Select * from Flight Where AIRPORTID1='"
-                        + criteria.getOriginString() + "' AND AIRPORTID2='"
-                        + criteria.getDestinationString() + "'";
+                cmdString = "Select * from Flight Where AIRPORTID1='" + criteria.getOriginString()
+                        + "' AND AIRPORTID2='" + criteria.getDestinationString()
+                        + "' AND DEPARTURETIME LIKE '%" + criteria.getDepartureDateString() + "%'";
                 if (!(criteria.getMaxPrice() == 0.0))
                     cmdString += " AND PRICE <= " + criteria.getMaxPrice();
                 if (!(criteria.getPreferredAirline() == null))
-                    cmdString += " AND AIRLINENAME = " + criteria.getPreferredAirline();
+                    cmdString += " AND AIRLINENAME = '" + criteria.getPreferredAirline().getName() + "'";
                 if (!(criteria.getPreferredClass() == null))
                     cmdString += " AND CLASS = " + criteria.getPreferredClassInt();
-                rs3 = st1.executeQuery(cmdString);
 
+                rs3 = st1.executeQuery(cmdString);
             } catch (Exception e) {
                 processSQLError(e);
             }
@@ -231,29 +231,6 @@ public class FlightTableSql implements FlightAccess {
         }
 
         return table;
-    }
-
-    public Airport getAirportByID(String targetID) {
-        Airport airport = null;
-        String ID;
-
-        result = null;
-        try {
-            cmdString = "Select * from Airport where AIRPORTID='" + targetID + "'";
-            rs8 = st3.executeQuery(cmdString);
-        } catch (Exception e) {
-            processSQLError(e);
-        }
-        try {
-            if (rs8.next()) {
-                ID = rs8.getString("AIRPORTID");
-                airport = new Airport(ID);
-            }
-            rs8.close();
-        } catch (Exception e) {
-            result = processSQLError(e);
-        }
-        return airport;
     }
 
     public String checkWarning(Statement st, int updateCount) {

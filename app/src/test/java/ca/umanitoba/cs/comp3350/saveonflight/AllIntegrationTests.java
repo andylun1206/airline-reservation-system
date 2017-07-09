@@ -7,6 +7,7 @@ import org.junit.runners.Suite;
 import ca.umanitoba.cs.comp3350.saveonflight.integration.AirlineBusinessPersistenceSeamTest;
 import ca.umanitoba.cs.comp3350.saveonflight.integration.AirportsBusinessPersistenceSeamTest;
 import ca.umanitoba.cs.comp3350.saveonflight.integration.BookedFlightsBusinessPersistenceSeamTest;
+import ca.umanitoba.cs.comp3350.saveonflight.integration.FlightsBusinessPersistenceSeamTest;
 import ca.umanitoba.cs.comp3350.saveonflight.integration.TravellerBusinessPersistenceSeamTest;
 
 @RunWith(Suite.class)
@@ -14,7 +15,8 @@ import ca.umanitoba.cs.comp3350.saveonflight.integration.TravellerBusinessPersis
         BookedFlightsBusinessPersistenceSeamTest.class,
         TravellerBusinessPersistenceSeamTest.class,
         AirportsBusinessPersistenceSeamTest.class,
-        AirlineBusinessPersistenceSeamTest.class
+        AirlineBusinessPersistenceSeamTest.class,
+        FlightsBusinessPersistenceSeamTest.class
 })
 
 public class AllIntegrationTests {

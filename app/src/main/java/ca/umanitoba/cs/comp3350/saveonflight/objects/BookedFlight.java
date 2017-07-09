@@ -21,10 +21,6 @@ public class BookedFlight {
         return seatNumber;
     }
 
-    public void setSeatNumber(String seatNumber) {
-        this.seatNumber = seatNumber;
-    }
-
     public Traveller getTraveller() {
         return traveller;
     }
