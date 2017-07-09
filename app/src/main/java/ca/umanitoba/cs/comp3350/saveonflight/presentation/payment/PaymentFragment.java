@@ -29,6 +29,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
 
 /**
  * PaymentFragment.java
@@ -79,7 +80,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
                 flights.add(flightAccess.getFlightByCode(f));
             }
         } else {
-            Toast.makeText(getContext(), "Error: no flights to book", Toast.LENGTH_SHORT).show();
+            ToastHandler.toastShowShortText(getActivity(), "Error: no flights to book");
         }
 
         return view;
@@ -128,7 +129,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
 
             showConfirmationDialog(traveller.getTravellerID());
         } else {
-            Toast.makeText(getContext(), "Please enter your name", Toast.LENGTH_SHORT).show();
+            ToastHandler.toastShowShortText(getActivity(), "Please enter your name");
         }
     }
 
@@ -136,7 +137,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
      * Notify the user that payment has failed.
      */
     public void paymentFailure() {
-        Toast.makeText(getContext(), "Invalid card data", Toast.LENGTH_SHORT).show();
+        ToastHandler.toastShowShortText(getActivity(), "Invalid card data");
     }
 
     /**

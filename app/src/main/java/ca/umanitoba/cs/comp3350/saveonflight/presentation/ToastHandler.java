@@ -35,14 +35,10 @@ public class ToastHandler {
     /**
      * Generic toast handler for showing any text a brief amount of time
      *
-     * @param activity
-     * @param text
+     * @param activity current activity
+     * @param text     text to show in the Toast
      */
     public static void toastShowShortText(Activity activity, String text) {
         Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
-    }
-
-    public static void toastInvalidCardInfo(Activity activity) {
-        Toast.makeText(activity, "Invalid Card Data", Toast.LENGTH_SHORT).show();
     }
 }
