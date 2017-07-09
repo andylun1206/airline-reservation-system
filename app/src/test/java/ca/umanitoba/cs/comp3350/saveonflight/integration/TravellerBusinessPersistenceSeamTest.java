@@ -46,9 +46,9 @@ public class TravellerBusinessPersistenceSeamTest {
 
     @Test
     public void testAddAndRemove() {
-        Traveller valid = new Traveller("Bob Bob");
-        Traveller invalid = new Traveller(null);
-        Traveller alsoInvalid = new Traveller("");
+        Traveller valid = new Traveller(access.getMaxId() + 1, "Bob Bob");
+        Traveller invalid = new Traveller(5, null);
+        Traveller alsoInvalid = new Traveller(6, "");
 
         // Additions
         assertTrue(access.insertTraveller(valid));

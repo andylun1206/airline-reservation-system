@@ -12,10 +12,6 @@ public class Traveller {
     private int travellerID;
     private String name;
 
-    public Traveller(String name) {
-        this(-1, name);
-    }
-
     public Traveller(int travellerID, String name) {
         this.travellerID = travellerID;
         this.name = name;

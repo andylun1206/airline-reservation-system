@@ -4,11 +4,9 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
  * Created by zhengyugu on 2017-06-08.
  */
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
