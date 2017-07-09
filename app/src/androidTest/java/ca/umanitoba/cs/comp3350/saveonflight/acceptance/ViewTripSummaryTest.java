@@ -5,28 +5,30 @@ package ca.umanitoba.cs.comp3350.saveonflight.acceptance;
  */
 
 import junit.framework.Assert;
+
 import android.test.ActivityInstrumentationTestCase2;
+
 import com.robotium.solo.Solo;
 
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.MainActivity;
 
-public class ViewTripSummaryTest extends ActivityInstrumentationTestCase2<MainActivity>{
+public class ViewTripSummaryTest extends ActivityInstrumentationTestCase2<MainActivity> {
     private Solo solo;
 
-    public ViewTripSummaryTest(){
+    public ViewTripSummaryTest() {
         super(MainActivity.class);
     }
 
-    public void setUp() throws Exception{
-        solo=new Solo(getInstrumentation(), getActivity());
+    public void setUp() throws Exception {
+        solo = new Solo(getInstrumentation(), getActivity());
     }
 
     @Override
-    public void tearDown() throws Exception{
+    public void tearDown() throws Exception {
         solo.finishOpenedActivities();
     }
 
-    public void testTripSummary(){
+    public void testTripSummary() {
         solo.waitForActivity("MainActivity");
         solo.clickOnButton("SEARCH FOR FLIGHTS");
         Assert.assertTrue(solo.searchText("Winnipeg YWG"));
@@ -50,10 +52,11 @@ public class ViewTripSummaryTest extends ActivityInstrumentationTestCase2<MainAc
         Assert.assertTrue(solo.searchText("Toronto YYZ"));
         Assert.assertTrue(solo.searchText("2017-11-11"));
         Assert.assertTrue(solo.searchText("2017-12-11"));
-        Assert.assertTrue(solo.searchText(Double.toString(420.12+350.52)));
+        Assert.assertTrue(solo.searchText(Double.toString(420.12 + 350.52)));
 
     }
-    public void testOneWayTrips(){
+
+    public void testOneWayTrips() {
         solo.waitForActivity("MainActivity");
         solo.clickOnButton("SEARCH FOR FLIGHTS");
         //choose one way search
@@ -81,6 +84,4 @@ public class ViewTripSummaryTest extends ActivityInstrumentationTestCase2<MainAc
         Assert.assertFalse(solo.searchText("WJ 491"));
         Assert.assertFalse(solo.searchText("2017-12-11"));
     }
-
-
 }
