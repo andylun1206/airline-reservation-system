@@ -7,7 +7,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.business.DepartureTimeComparatorTes
 import ca.umanitoba.cs.comp3350.saveonflight.business.DurationComparatorTest;
 import ca.umanitoba.cs.comp3350.saveonflight.business.PriceComparatorTest;
 import ca.umanitoba.cs.comp3350.saveonflight.business.SortFlightsTest;
-import ca.umanitoba.cs.comp3350.saveonflight.business.comparators.DepartureTimeComparator;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.AirlineTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.AirportTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlightTest;
@@ -17,16 +16,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaListViewEntry
 import ca.umanitoba.cs.comp3350.saveonflight.objects.SearchCriteriaTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.TravellerTest;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.ViewFlightsListViewEntryTest;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTableSqlTest;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirlineTableTest;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTableSqlTest;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTableTest;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTableSqlTest;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTableTest;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTableSqlTest;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTableTest;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTableSqlTest;
-import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTableTest;
 
 
 @RunWith(Suite.class)
@@ -44,11 +33,6 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerTableTest;
         DepartureTimeComparatorTest.class,
         DurationComparatorTest.class,
         PriceComparatorTest.class,
-        AirlineTableSqlTest.class,
-        AirportTableSqlTest.class,
-        TravellerTableSqlTest.class,
-        BookedFlightTableSqlTest.class,
-        FlightTableSqlTest.class
 })
 
 public class AllUnitTests {

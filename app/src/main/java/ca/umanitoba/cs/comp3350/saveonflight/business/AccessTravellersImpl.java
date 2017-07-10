@@ -33,6 +33,18 @@ public class AccessTravellersImpl implements AccessTravellers {
     }
 
     @Override
+    public Traveller getTraveller(int travellerId) {
+        Traveller traveller = null;
+
+        for (Traveller t : getTravellers()) {
+            if (t.getTravellerID() == travellerId) {
+                traveller = t;
+            }
+        }
+
+        return traveller;
+    }
+
     public boolean removeTraveller(Traveller traveller) {
         return travellerDB.remove(traveller);
     }

@@ -18,6 +18,8 @@ public interface AccessTravellers {
      */
     List<Traveller> getTravellers();
 
+    Traveller getTraveller(int travellerId);
+
     /**
      * Inserts a new Traveller into the database.
      *

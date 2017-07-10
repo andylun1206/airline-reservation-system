@@ -30,8 +30,6 @@ public class SearchCriteriaHandler {
             valid = missingRequiredField(activity, R.string.search_departure_date);
         } else if (criteria.isReturnTrip() && !validateReturnDate(criteria.getDepartureDate(), criteria.getReturnDate())) {
             valid = missingRequiredField(activity, R.string.search_return_date);
-        } else if (!validatePassengers(criteria.getNumTravellers())) {
-            valid = missingRequiredField(activity, R.string.search_num_passengers);
         }
 
         return valid;
@@ -77,10 +75,6 @@ public class SearchCriteriaHandler {
 
     private static boolean validateReturnDate(Date departureDate, Date returnDate) {
         return (returnDate != null && departureDate.compareTo(returnDate) <= 0);
-    }
-
-    private static boolean validatePassengers(int numPassengers) {
-        return numPassengers > 0;
     }
 
     /**

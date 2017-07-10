@@ -18,13 +18,11 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -64,94 +62,73 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
     @Override
     public View getView(final int position, final View convertView, final ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        int layoutResourceId;
-
-        if ((criteria.isReturnTrip() && position == 4) ||
-                (!criteria.isReturnTrip() && position == 3)) {
-            layoutResourceId = R.layout.list_item_search_criteria_drop_down;
-        } else {
-            layoutResourceId = R.layout.list_item_search_criteria_text;
-
-        }
+        int layoutResourceId = R.layout.list_item_search_criteria;
 
         final View view = inflater.inflate(layoutResourceId, parent, false);
         final SearchCriteriaListViewEntry row = fullCriteriaList.get(position);
 
         ((ImageView) view.findViewById(R.id.imageView_search_criteria_icon)).setImageResource(row.getIcon());
 
-        if (layoutResourceId == R.layout.list_item_search_criteria_drop_down) {
-            ((Spinner) view.findViewById(R.id.spinner_search_criteria_input)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    setField(view, Integer.toString(position + 1), row.getTitle());
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
-            });
-        } else if (layoutResourceId == R.layout.list_item_search_criteria_text) {
-            final AutoCompleteTextView input = (AutoCompleteTextView) view.findViewById(R.id.editText_search_criteria_input);
-            input.setHint(row.getTitle());
-            input.setThreshold(1);
-            input.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    String inputText = input.getText().toString().trim();
-                    if (!inputText.isEmpty()) {
-                        setField(view, inputText, row.getTitle());
-                    }
-                }
-            });
-
-            switch (row.getIcon()) {
-                case R.drawable.ic_clock:
-                    input.setInputType(InputType.TYPE_CLASS_DATETIME);
-                    input.setFocusable(false);
-                    if (input.getHint().toString().equals("Departure Date")) {
-                        input.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                activeDateDisplay = input;
-                                showDatePickerDialog(System.currentTimeMillis() - 1000);
-                            }
-                        });
-                    } else {
-                        input.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                activeDateDisplay = input;
-                                showDatePickerDialog(minDate.getTimeInMillis());
-                            }
-                        });
-                    }
-                    break;
-                case R.drawable.ic_dollar_sign:
-                    input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-                    input.setFilters(new InputFilter[] {new InputFilter.LengthFilter(8)});
-                    break;
-                case R.drawable.ic_takeoff:
-                case R.drawable.ic_landing:
-                    input.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, view.getResources().getStringArray(R.array.airport_list)));
-                    input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
-                    break;
-                case R.drawable.ic_plane:
-                    input.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, view.getResources().getStringArray(R.array.airline_list)));
-                    input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
-                    break;
-                case R.drawable.ic_seat:
-                    input.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, view.getResources().getStringArray(R.array.class_list)));
-                    input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
-                    break;
+        final AutoCompleteTextView input = (AutoCompleteTextView) view.findViewById(R.id.editText_search_criteria_input);
+        input.setHint(row.getTitle());
+        input.setThreshold(1);
+        input.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
             }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String inputText = input.getText().toString().trim();
+                if (!inputText.isEmpty()) {
+                    setField(view, inputText, row.getTitle());
+                }
+            }
+        });
+
+        switch (row.getIcon()) {
+            case R.drawable.ic_clock:
+                input.setInputType(InputType.TYPE_CLASS_DATETIME);
+                input.setFocusable(false);
+                if (input.getHint().toString().equals("Departure Date")) {
+                    input.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            activeDateDisplay = input;
+                            showDatePickerDialog(System.currentTimeMillis() - 1000);
+                        }
+                    });
+                } else {
+                    input.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            activeDateDisplay = input;
+                            showDatePickerDialog(minDate.getTimeInMillis());
+                        }
+                    });
+                }
+                break;
+            case R.drawable.ic_dollar_sign:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                input.setFilters(new InputFilter[] {new InputFilter.LengthFilter(8)});
+                break;
+            case R.drawable.ic_takeoff:
+            case R.drawable.ic_landing:
+                input.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, view.getResources().getStringArray(R.array.airport_list)));
+                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
+                break;
+            case R.drawable.ic_plane:
+                input.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, view.getResources().getStringArray(R.array.airline_list)));
+                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
+                break;
+            case R.drawable.ic_seat:
+                input.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, view.getResources().getStringArray(R.array.class_list)));
+                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
+                break;
         }
 
         return view;
@@ -234,8 +211,6 @@ public class SearchCriteriaArrayAdapter extends ArrayAdapter<SearchCriteriaListV
             criteria.setDepartureDate(SearchCriteriaHandler.parseDate(inputText));
         } else if (row.getResources().getString(R.string.search_return_date).equals(key)) {
             criteria.setReturnDate(SearchCriteriaHandler.parseDate(inputText));
-        } else if (row.getResources().getString(R.string.search_num_passengers).equals(key)) {
-            criteria.setNumTravellers(Integer.parseInt(inputText));
         } else if (row.getResources().getString(R.string.search_max_price).equals(key)) {
             criteria.setMaxPrice(Double.parseDouble(inputText));
         } else if (row.getResources().getString(R.string.search_airlines).equals(key)) {
