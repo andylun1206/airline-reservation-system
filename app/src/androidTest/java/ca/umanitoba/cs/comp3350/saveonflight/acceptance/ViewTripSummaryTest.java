@@ -8,6 +8,7 @@ import junit.framework.Assert;
 import android.test.ActivityInstrumentationTestCase2;
 import com.robotium.solo.Solo;
 
+import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.MainActivity;
 
 public class ViewTripSummaryTest extends ActivityInstrumentationTestCase2<MainActivity>{
@@ -29,10 +30,16 @@ public class ViewTripSummaryTest extends ActivityInstrumentationTestCase2<MainAc
     public void testTripSummary(){
         solo.waitForActivity("MainActivity");
         solo.clickOnButton("SEARCH FOR FLIGHTS");
-        Assert.assertTrue(solo.searchText("Winnipeg YWG"));
-        Assert.assertTrue(solo.searchText("Toronto YYZ"));
-        Assert.assertTrue(solo.searchText("2017-11-11"));
-        Assert.assertTrue(solo.searchText("2017-12-11"));
+        solo.enterText(0, "Winnipeg YWG");
+        solo.enterText(1, "Toronto YYZ");
+        solo.clickOnText("Departure Date");
+        solo.setDatePicker(0, 2017, 10, 11); // Passing a month of 10 maps to November (11th month)?
+        solo.clickOnText("OK");
+        solo.clickOnText("Return Date");
+        solo.setDatePicker(0, 2017, 11, 11); // And passing a month of 11 maps to December???
+        solo.clickOnText("OK");
+
+
 
         solo.clickOnButton("Search");
         //check departure flight to be chosen
@@ -59,9 +66,11 @@ public class ViewTripSummaryTest extends ActivityInstrumentationTestCase2<MainAc
         //choose one way search
         solo.clickOnText("Return");
         solo.clickOnText("One Way");
-        Assert.assertTrue(solo.searchText("Toronto YYZ"));
-        Assert.assertTrue(solo.searchText("Winnipeg YWG"));
-        Assert.assertTrue(solo.searchText("2017-11-11"));
+        solo.enterText(0, "Winnipeg YWG");
+        solo.enterText(1, "Toronto YYZ");
+        solo.clickOnText("Departure Date");
+        solo.setDatePicker(0, 2017, 10, 11); // Passing a month of 10 maps to November (11th month)?
+        solo.clickOnText("OK");
         solo.clickOnButton("Search");
         //check flight to be chosen
         Assert.assertTrue(solo.searchText("AC 260"));
