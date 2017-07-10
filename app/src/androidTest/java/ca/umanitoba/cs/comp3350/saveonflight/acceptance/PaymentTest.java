@@ -1,19 +1,14 @@
 package ca.umanitoba.cs.comp3350.saveonflight.acceptance;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.robotium.solo.Solo;
-import com.stripe.android.view.CardInputWidget;
 import com.stripe.android.view.CardNumberEditText;
 import com.stripe.android.view.ExpiryDateEditText;
 import com.stripe.android.view.StripeEditText;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.MainActivity;
-import ca.umanitoba.cs.comp3350.saveonflight.presentation.payment.PaymentFragment;
 
 public class PaymentTest extends ActivityInstrumentationTestCase2<MainActivity> {
     private Solo solo;
@@ -81,8 +76,14 @@ public class PaymentTest extends ActivityInstrumentationTestCase2<MainActivity> 
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
+        solo.enterText(3, "Bob Marley");
+        solo.enterText(4, "474 Main Street");
+        solo.enterText(5, "Winnipeg");
+        solo.pressSpinnerItem(0, 2);
+        solo.enterText(6, "R3P 7C8");
+
         solo.clickOnButton(0);
-        assertTrue(solo.waitForText("Invalid card data", 1, 3000));
+        assertTrue(solo.waitForText("Invalid card", 1, 3000));
 
         // Enter invalid expiry date (in the past)
         try {
@@ -105,16 +106,68 @@ public class PaymentTest extends ActivityInstrumentationTestCase2<MainActivity> 
         }
         solo.clickOnButton(0);
         assertTrue(solo.waitForText("Invalid card data", 1, 3000));
+
+        solo.goBack();
+        solo.goBack();
     }
 
     /**
      * Personal info entered in this test is invalid.
      */
-    public void testInvalidPersonalInfo() {
+    public void testMissingFields() {
+        final String FIELD_REQUIRED_MSG = "This field is required";
         solo.waitForActivity("MainActivity");
         navigateToPaymentScreen();
 
-        // TODO after validating payment info dev. task is done
+        solo.clickOnButton(0);
+        assertTrue(solo.searchText("Invalid card"));
+        assertTrue(solo.searchText(FIELD_REQUIRED_MSG));
+
+        StripeEditText[] editTexts = getCardInputFields();
+        try {
+            setCardInputField(editTexts[0], "4242424242424242");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        solo.clickOnButton(0);
+        assertTrue(solo.searchText(FIELD_REQUIRED_MSG));
+
+        try {
+            setCardInputField(editTexts[1], "08/18");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        solo.clickOnButton(0);
+        assertTrue(solo.searchText(FIELD_REQUIRED_MSG));
+
+        try {
+            setCardInputField(editTexts[2], "850");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        solo.clickOnButton(0);
+        assertTrue(solo.searchText(FIELD_REQUIRED_MSG));
+
+        solo.clickOnText("FULL NAME");
+        assertTrue(solo.searchText(FIELD_REQUIRED_MSG));
+        solo.enterText(3, "First Last");
+
+        solo.clickOnText("ADDRESS LINE");
+        assertTrue(solo.searchText(FIELD_REQUIRED_MSG));
+        solo.enterText(4, "474 Mandalay Road");
+
+        solo.clickOnText("CITY");
+        assertTrue(solo.searchText(FIELD_REQUIRED_MSG));
+        solo.enterText(5, "Winnipeg");
+
+        solo.clickOnText("POSTAL CODE");
+        assertTrue(solo.searchText(FIELD_REQUIRED_MSG));
+        solo.enterText(6, "R4T 8D3");
+
+        solo.clickOnButton(0);
+        solo.clickOnText("Return to Homepage");
+
+        solo.goBack();
     }
 
     private void navigateToPaymentScreen() {

@@ -94,7 +94,10 @@ public class SearchCriteriaHandler {
         SearchCriteria copy = criteria.copy();
         AccessFlights access = new AccessFlightsImpl(Main.getFlightAccess());
         List<Flight> departingFlights = access.search(copy);
+
+        // Check that we have departing flights in the database
         if (!departingFlights.isEmpty()) {
+            // If the search is a return trip (not one way), check that we have return flights in the database
             if (copy.isReturnTrip()) {
                 reverseFlightDirection(copy);
                 List<Flight> returnFlights = access.search(copy);
@@ -102,6 +105,7 @@ public class SearchCriteriaHandler {
                     valid = true;
                 }
             } else {
+                // If the search is just one way, having departing flights is enough
                 valid = true;
             }
         }
