@@ -37,7 +37,7 @@ public class TravellerTableSqlTest {
         mockedList.add(new Traveller(0, ""));
         mockedList.add(new Traveller(100, "CNM"));
         mockedList.remove(null);
-        mockedList.remove(new Traveller(0, ""));
+        mockedList.remove(new Traveller(20, ""));
         mockedList.remove(new Traveller(0, "Jack"));
         mockedList.findTraveller(10000);
         mockedList.findTraveller(0);
@@ -47,7 +47,7 @@ public class TravellerTableSqlTest {
         verify(mockedList).add(new Traveller(0, ""));
         verify(mockedList).add(new Traveller(100, "CNM"));
         verify(mockedList).remove(null);
-        verify(mockedList).remove(new Traveller(0, ""));
+        verify(mockedList).remove(new Traveller(20, ""));
         verify(mockedList).remove(new Traveller(0, "Jack"));
         verify(mockedList).findTraveller(10000);
         verify(mockedList).findTraveller(0);
@@ -97,12 +97,12 @@ public class TravellerTableSqlTest {
 
     @Test
     public void testRemoveEmpty() {
-        assertFalse("Test remove empty fail", mockedList.remove(new Traveller(0, "")));
+        assertFalse("Test remove empty fail", mockedList.remove(new Traveller(20, "")));
     }
 
     @Test
     public void testRemoveValid() {
-        assertFalse("Test remove valid fail", mockedList.remove(new Traveller(0, "Jack")));
+        assertTrue("Test remove valid fail", mockedList.remove(new Traveller(0, "Jack")));
     }
 
     @Test

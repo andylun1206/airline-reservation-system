@@ -3,10 +3,15 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
+import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
@@ -24,11 +29,14 @@ import static org.mockito.Mockito.*;
 
 public class BookedFlightTableSqlTest {
     private static List<BookedFlight> original;
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CANADA);
     private static BookedFlightTableSql bookedFlightTableSql;
     private static TravellerTable travellerTable = new TravellerTable();
     private static FlightTable flightTable = new FlightTable();
     private static BookedFlight emptyCase, validCase;
+    private static Flight emptyFlight;
     private static BookedFlightTableSql mockedList;
+    private static Flight.FlightBuilder builder;
 
     @BeforeClass
     public static void setUp() {
@@ -41,7 +49,25 @@ public class BookedFlightTableSqlTest {
         flightTable.initialize("");
         ArrayList<Traveller> travellers = travellerTable.getTravellers();
         ArrayList<Flight> flights = flightTable.getFlights();
-        emptyCase = new BookedFlight(null, null, "");
+        AirlineTableSql airlineTableSql = new AirlineTableSql();
+        airlineTableSql.initialize(Main.getDBPathName());
+        AirportTableSql airportTableSql = new AirportTableSql();
+        airportTableSql.initialize(Main.getDBPathName());
+        Airline westJet = airlineTableSql.findAirline("westjet");
+        Airport yyz = airportTableSql.findAirport("YYZ");
+        Airport ywg = airportTableSql.findAirport("YWG");
+        builder = new Flight.FlightBuilder("", yyz, ywg);
+        try {
+            emptyFlight = builder.setDepartureTime(sdf.parse("2017-11-11 05:30"))
+                    .setArrivalTime(sdf.parse("2017-11-11 08:51"))
+                    .setAirline(westJet)
+                    .setPrice(350.52)
+                    .setCapacity(200)
+                    .build();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        emptyCase = new BookedFlight(new Traveller(100,""),emptyFlight , "");
         validCase = new BookedFlight(travellers.get(1), flights.get(7), "8A");
         original = bookedFlightTableSql.getAll();
         mockedList = mock(BookedFlightTableSql.class);
@@ -60,12 +86,10 @@ public class BookedFlightTableSqlTest {
         verify(mockedList).add(emptyCase);
         verify(mockedList).add(validCase);
         verify(mockedList).remove(null);
-        ;
         verify(mockedList).remove(emptyCase);
         verify(mockedList).remove(validCase);
         verify(mockedList).searchByTraveller(null);
         verify(mockedList).searchByTraveller(new Traveller(10, ""));
-        //verify(mockedList).searchByTraveller(new Traveller(0, "Jack"));
         verify(mockedList).close();
 
         when(mockedList.add(null)).thenReturn(false);
@@ -78,7 +102,6 @@ public class BookedFlightTableSqlTest {
 
         when(mockedList.searchByTraveller(null)).thenReturn(null);
         when(mockedList.searchByTraveller(new Traveller(10, ""))).thenReturn(null);
-        //when(mockedList.searchByTraveller(new Traveller(0, "Jack"))).thenReturn();
 
     }
 
@@ -120,7 +143,7 @@ public class BookedFlightTableSqlTest {
 
     @Test
     public void testRemoveValid() {
-        assertFalse("Test remove valid fail", mockedList.remove(validCase));
+        assertTrue("Test remove valid fail", mockedList.remove(validCase));
     }
 
     @Test
@@ -132,13 +155,4 @@ public class BookedFlightTableSqlTest {
     public void testSearchByTravellerEmpty() {
         assertEquals("Test search null fail", null, mockedList.searchByTraveller(new Traveller(10, "")));
     }
-    /*@Test
-    public void testSearchByTraveller() {
-        Traveller t = BookedFlightTable.getBookedFlights().get(0).getTraveller();
-        ArrayList<BookedFlight> bfs = bookedFlightTableSql.searchByTraveller(t);
-        assertNotNull(bfs);
-        for (BookedFlight bf : bfs) {
-            assertEquals(t, bf.getTraveller());
-        }
-    }*/
 }

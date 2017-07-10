@@ -87,7 +87,7 @@ public class AirlineTableSqlTest {
 
     @Test
     public void testAddEmpty() {
-        assertFalse("Test empty fail", mockedList.add(new Airline("")));
+        assertTrue("Test empty fail", mockedList.add(new Airline("")));
         //airlineTable.remove(new Airline(""));
     }
 
