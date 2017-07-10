@@ -65,7 +65,7 @@ public class SearchTest extends ActivityInstrumentationTestCase2<MainActivity> {
         solo.clickOnText("AC 260");
 
         Assert.assertTrue(solo.searchText("2017-11-11"));
-        Assert.assertTrue(solo.searchText("2017-12-11"));
+        Assert.assertFalse(solo.searchText("2017-12-11"));
         Assert.assertTrue(solo.searchText("Winnipeg YWG"));
         Assert.assertTrue(solo.searchText("Toronto YYZ"));
         Assert.assertTrue(solo.searchText("AC 260"));
