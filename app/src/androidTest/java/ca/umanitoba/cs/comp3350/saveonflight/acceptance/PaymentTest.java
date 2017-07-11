@@ -8,6 +8,7 @@ import com.stripe.android.view.ExpiryDateEditText;
 import com.stripe.android.view.StripeEditText;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
+import ca.umanitoba.cs.comp3350.saveonflight.presentation.FragmentNavigation;
 import ca.umanitoba.cs.comp3350.saveonflight.presentation.MainActivity;
 
 public class PaymentTest extends ActivityInstrumentationTestCase2<MainActivity> {
@@ -172,7 +173,7 @@ public class PaymentTest extends ActivityInstrumentationTestCase2<MainActivity> 
 
     private void navigateToPaymentScreen() {
         // Go to the search screen
-        solo.clickOnButton("Search for Flights");
+        solo.clickOnButton("SEARCH FOR FLIGHTS");
 
         // Enter return trip info and proceed to the view flights screen
         solo.enterText(0, "Winnipeg YWG");

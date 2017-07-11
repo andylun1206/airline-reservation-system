@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
@@ -48,6 +49,8 @@ public class TicketFragment extends Fragment {
 
                 Flight flight = new AccessFlightsImpl(Main.getFlightAccess()).getFlightByCode(flightCode);
                 ((TextView) view.findViewById(R.id.textView_ticket_flight_code)).setText(flightCode);
+                ((ImageView) view.findViewById(R.id.imageView_ticket_airline))
+                        .setImageResource((flight.getAirline().getName().equals("Air Canada")) ? R.mipmap.ic_aircanada : R.mipmap.ic_westjet);
                 ((TextView) view.findViewById(R.id.textView_ticket_from)).setText(flight.getOriginAirportCode());
                 ((TextView) view.findViewById(R.id.textView_ticket_to)).setText(flight.getDestinationAirportCode());
                 ((TextView) view.findViewById(R.id.textView_ticket_departure_time)).setText(parseDate(flight.getDepartureTime()));
