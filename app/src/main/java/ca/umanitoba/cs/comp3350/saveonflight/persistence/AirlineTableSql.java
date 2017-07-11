@@ -27,8 +27,6 @@ public class AirlineTableSql implements AirlineAccess {
     private String result;
     private static String EOF = "  ";
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CANADA);
-
     public AirlineTableSql() {
     }
 

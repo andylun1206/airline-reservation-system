@@ -41,8 +41,6 @@ public class ViewTripSummaryTest extends ActivityInstrumentationTestCase2<MainAc
         solo.setDatePicker(0, 2017, 11, 11); // And passing a month of 11 maps to December???
         solo.clickOnText("OK");
 
-
-
         solo.clickOnButton("Search");
         //check departure flight to be chosen
         Assert.assertTrue(solo.searchText("AC 256"));
