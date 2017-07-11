@@ -69,6 +69,14 @@
             android:text="To"
             android:textAppearance="@style/TextAppearance.AppCompat" />
     </LinearLayout>
+    <TextView
+        android:id="@+id/depFlightCode"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:textSize="15sp"
+        android:text="Flight Code"
+        android:layout_marginLeft="18dp"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -107,7 +115,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="73dp"
+        android:layout_height="55dp"
         android:orientation="horizontal"
         android:weightSum = "1">
 
@@ -198,16 +206,17 @@
                 android:layout_height="69dp"
                 app:srcCompat="@mipmap/ic_aircanada"
                 android:layout_weight="0.1"  />
+
             <TextView
                 android:id="@+id/trip_summary_from2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.50"
                 android:ems="10"
-                android:text="From"
-                android:textSize="17sp"
                 android:gravity="center_vertical"
-                android:textAppearance="@style/TextAppearance.AppCompat"  />
+                android:text="From"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/trip_summary_to2"
@@ -220,7 +229,14 @@
                 android:text="To"
                 android:textAppearance="@style/TextAppearance.AppCompat"  />
         </LinearLayout>
-
+        <TextView
+            android:id="@+id/retFlightCode"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:textSize="15sp"
+            android:text="Flight Code"
+            android:layout_marginLeft="18dp"
+            android:textAppearance="@style/TextAppearance.AppCompat" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
