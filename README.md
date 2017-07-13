@@ -71,6 +71,8 @@ Finally, various bug fixes and refactoring of code from iteration two took place
 - Added additional checks to search criteria validation
 - Moved all Toast creation to the ToastHandler class
 
+The canonical copy of the database file can be found at:
+- app\src\main\assets\db\SOF.script
 
 
 
