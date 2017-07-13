@@ -14,6 +14,8 @@ import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
+import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseUtils.processSQLError;
+
 /**
  * Created by zhengyugu on 2017-06-29.
  */
@@ -172,15 +174,6 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         if (updateCount != 1) {
             result = "Tuple not inserted correctly.";
         }
-        return result;
-    }
-
-    public String processSQLError(Exception e) {
-        String result = "*** SQL Error: " + e.getMessage();
-
-        // Remember, this will NOT be seen by the user!
-        e.printStackTrace();
-
         return result;
     }
 

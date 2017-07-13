@@ -13,6 +13,8 @@ import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 
+import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseUtils.processSQLError;
+
 /**
  * Created by longyu on 2017-06-27.
  */
@@ -84,15 +86,6 @@ public class AirportTableSql implements AirportAccess {
 
     private Airport createAirportFromResultSet(ResultSet rs) throws SQLException, ParseException {
         return new Airport(rs.getString("AIRPORTID"));
-    }
-
-    public String processSQLError(Exception e) {
-        String result = "*** SQL Error: " + e.getMessage();
-
-        // Remember, this will NOT be seen by the user!
-        e.printStackTrace();
-
-        return result;
     }
 
     public void close() {

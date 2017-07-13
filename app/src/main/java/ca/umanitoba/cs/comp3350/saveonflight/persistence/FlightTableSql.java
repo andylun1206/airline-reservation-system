@@ -44,7 +44,7 @@ public class FlightTableSql implements FlightAccess {
             st1 = c1.createStatement();
 
         } catch (Exception e) {
-            processSQLError(e);
+            DatabaseUtils.processSQLError(e);
         }
         //System.out.println("Opened database ");
     }
@@ -59,7 +59,7 @@ public class FlightTableSql implements FlightAccess {
             cmdString = "Select * from FLIGHT";
             rs = st1.executeQuery(cmdString);
         } catch (Exception e) {
-            processSQLError(e);
+            DatabaseUtils.processSQLError(e);
         }
         try {
             if (rs != null) {
@@ -70,7 +70,7 @@ public class FlightTableSql implements FlightAccess {
                 rs.close();
             }
         } catch (Exception e) {
-            result = processSQLError(e);
+            result = DatabaseUtils.processSQLError(e);
         }
 
         return flights;
@@ -85,7 +85,7 @@ public class FlightTableSql implements FlightAccess {
                     " AND DEPARTURETIME = '" + departureTime + "'";
             rs = st1.executeQuery(cmdString);
         } catch (Exception e) {
-            processSQLError(e);
+            DatabaseUtils.processSQLError(e);
         }
         try {
             if (rs != null) {
@@ -95,7 +95,7 @@ public class FlightTableSql implements FlightAccess {
                 }
             }
         } catch (Exception e) {
-            result = processSQLError(e);
+            result = DatabaseUtils.processSQLError(e);
         }
 
         return flight;
@@ -109,7 +109,7 @@ public class FlightTableSql implements FlightAccess {
             rs1 = st1.executeQuery(cmdString);
             result = checkWarning(st1, updateCount);
         } catch (Exception e) {
-            result = processSQLError(e);
+            result = DatabaseUtils.processSQLError(e);
         }
         try {
             while (rs1.next()) {
@@ -117,7 +117,7 @@ public class FlightTableSql implements FlightAccess {
             }
             rs1.close();
         } catch (Exception e) {
-            result = processSQLError(e);
+            result = DatabaseUtils.processSQLError(e);
         }
         return flight;
     }
@@ -191,7 +191,7 @@ public class FlightTableSql implements FlightAccess {
                     added = true;
                 }
             } catch (Exception e) {
-                result = processSQLError(e);
+                result = DatabaseUtils.processSQLError(e);
             }
         }
 
@@ -217,7 +217,7 @@ public class FlightTableSql implements FlightAccess {
 
                 rs3 = st1.executeQuery(cmdString);
             } catch (Exception e) {
-                processSQLError(e);
+                DatabaseUtils.processSQLError(e);
             }
             try {
                 while (rs3.next()) {
@@ -226,7 +226,7 @@ public class FlightTableSql implements FlightAccess {
                 }
                 rs3.close();
             } catch (Exception e) {
-                result = processSQLError(e);
+                result = DatabaseUtils.processSQLError(e);
             }
         }
 
@@ -243,20 +243,11 @@ public class FlightTableSql implements FlightAccess {
                 result = warning.getMessage();
             }
         } catch (Exception e) {
-            result = processSQLError(e);
+            result = DatabaseUtils.processSQLError(e);
         }
         if (updateCount != 1) {
             result = "Tuple not inserted correctly.";
         }
-        return result;
-    }
-
-    public String processSQLError(Exception e) {
-        String result = "*** SQL Error: " + e.getMessage();
-
-        // Remember, this will NOT be seen by the user!
-        e.printStackTrace();
-
         return result;
     }
 
@@ -266,7 +257,7 @@ public class FlightTableSql implements FlightAccess {
             rs2 = st1.executeQuery(cmdString);
             c1.close();
         } catch (Exception e) {
-            processSQLError(e);
+            DatabaseUtils.processSQLError(e);
         }
         // System.out.println("Closed database ");
     }
