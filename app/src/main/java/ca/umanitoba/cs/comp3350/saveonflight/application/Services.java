@@ -109,7 +109,7 @@ public class Services {
     /**
      * Closes the connection to the database.
      */
-    public static void closeFlightAccess() {
+    public static void closeDatabaseConnection() {
         DatabaseUtils.closeConnection();
     }
 
