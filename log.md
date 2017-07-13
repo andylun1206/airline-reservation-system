@@ -162,5 +162,23 @@ Decided to change the way we assign developer tasks. Instead of assigning all of
 		- removed addFunction, updateFunction, removeFunction
 		- added different add methods for different tables
 		
+
+## Iteration 3:
+### Contributions
+
+
+#### You Tian Zhang
+- Problem: Acceptance Testing (GitHub issues #125, #126, #127, #128)
+    - Wrote acceptance tests for ticket page, view (comparison) page, payment page, and view booked flights page
+    - Used Robotium
+- Problem: Integration Testing (GitHub issues #134 - #138)
+    - Tested dependency of business layer on the persistence layer
+- Problem: Move Toast Creation to ToastHandler (GitHub issue #143)
+    - We had created the ToastHandler class to handle creation of Toasts
+    - But, we were not using it for all Toast creation in our app
+    - Refactored code so that all Toast creation is in the ToastHandler class
+- Problem: App would go form search screen to view flights screen for return trip searches even if we didn't have return flights
+    - Added additional checks to the SearchCriteria validation that ensured we had return flights
+  
     
 
