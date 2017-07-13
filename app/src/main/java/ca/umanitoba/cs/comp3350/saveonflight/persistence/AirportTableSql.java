@@ -88,15 +88,4 @@ public class AirportTableSql implements AirportAccess {
         return new Airport(rs.getString("AIRPORTID"));
     }
 
-    public void close() {
-        try {    // commit all changes to the database
-            cmdString = "shutdown compact";
-            rs2 = st1.executeQuery(cmdString);
-            c1.close();
-        } catch (Exception e) {
-            processSQLError(e);
-        }
-        //System.out.println("Closed database ");
-    }
-
 }

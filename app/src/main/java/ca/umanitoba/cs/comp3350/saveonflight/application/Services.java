@@ -11,6 +11,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTableSql;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.DataAccess;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseUtils;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTableSql;
@@ -106,53 +107,10 @@ public class Services {
     }
 
     /**
-     * Closes the connection to the Flight table.
+     * Closes the connection to the database.
      */
     public static void closeFlightAccess() {
-        if (flightAccessService != null) {
-            flightAccessService.close();
-        }
-        flightAccessService = null;
-    }
-
-    /**
-     * Closes the connection to the Airport table.
-     */
-    public static void closeAirportAccess() {
-        if (airportAccessService != null) {
-            airportAccessService.close();
-        }
-        airportAccessService = null;
-    }
-
-    /**
-     * Closes the connection to the Airline table.
-     */
-    public static void closeAirlineAccess() {
-        if (airlineAccessService != null) {
-            airlineAccessService.close();
-        }
-        airlineAccessService = null;
-    }
-
-    /**
-     * Closes the connection to the Traveller table.
-     */
-    public static void closeTravellerAccess() {
-        if (travellerAccessService != null) {
-            travellerAccessService.close();
-        }
-        travellerAccessService = null;
-    }
-
-    /**
-     * Closes the connection to the BookedFlight table.
-     */
-    public static void closeBookedFlightAccess() {
-        if (bookedFlightAccessService != null) {
-            bookedFlightAccessService.close();
-        }
-        bookedFlightAccessService = null;
+        DatabaseUtils.closeConnection();
     }
 
 }
