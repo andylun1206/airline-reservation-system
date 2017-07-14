@@ -6,6 +6,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.AirportTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.BookedFlightTable;
+import ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightAccess;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.FlightTable;
 import ca.umanitoba.cs.comp3350.saveonflight.persistence.TravellerAccess;
@@ -43,6 +44,7 @@ public class Main {
         if (databaseType == STUB) {
             Services.initializeStubDatabase();
         } else {
+            DatabaseHandler.createConnection(dbPathName);
             Services.createFlightAccess();
             Services.createAirlineAccess();
             Services.createAirportAccess();

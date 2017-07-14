@@ -3,7 +3,6 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -11,10 +10,9 @@ import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
-import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseUtils.processSQLError;
+import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.processSQLError;
 
 /**
  * Created by zhengyugu on 2017-06-29.
@@ -32,11 +30,9 @@ public class BookedFlightTableSql implements BookedFlightAccess {
     public BookedFlightTableSql() {
     }
 
-    public void initialize(String dbPath) {
-        String url = "jdbc:hsqldb:file:" + dbPath;
+    public void initialize() {
         try {
-            Class.forName("org.hsqldb.jdbcDriver").newInstance();
-            c1 = DriverManager.getConnection(url, "SA", "");
+            c1 = DatabaseHandler.getConnection();
             st1 = c1.createStatement();
         } catch (Exception e) {
             processSQLError(e);
@@ -58,10 +54,10 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         try {
             while (rs1.next()) {
                 FlightTableSql flightTableSql = new FlightTableSql();
-                flightTableSql.initialize(Main.getDBPathName());
+                flightTableSql.initialize();
                 flightTableSql.getFlights();
                 TravellerTableSql travellerTableSql = new TravellerTableSql();
-                travellerTableSql.initialize(Main.getDBPathName());
+                travellerTableSql.initialize();
                 travellerTableSql.getTravellers();
                 id = rs1.getInt("ID");
                 flightId = rs1.getString("FLIGHTID");
@@ -141,11 +137,11 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         try {
             // TODO: maybe join tables and perform a single SQL query instead?
             TravellerTableSql travellerTableSql = new TravellerTableSql();
-            travellerTableSql.initialize(Main.getDBPathName());
+            travellerTableSql.initialize();
             Traveller traveller = travellerTableSql.findTraveller(t.getTravellerID());
 
             FlightTableSql flightTableSql = new FlightTableSql();
-            flightTableSql.initialize(Main.getDBPathName());
+            flightTableSql.initialize();
             while (rs2.next()) {
                 flightId = rs2.getString("FLIGHTID");
                 departureTime = rs2.getString("DEPARTURETIME");

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
-import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseUtils.processSQLError;
+import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.processSQLError;
 
 /**
  * Created by zhengyugu on 2017-06-28.
@@ -29,11 +29,9 @@ public class TravellerTableSql implements TravellerAccess {
     public TravellerTableSql() {
     }
 
-    public void initialize(String dbPath) {
-        String url = "jdbc:hsqldb:file:" + dbPath;
+    public void initialize() {
         try {
-            Class.forName("org.hsqldb.jdbcDriver").newInstance();
-            c1 = DriverManager.getConnection(url, "SA", "");
+            c1 = DatabaseHandler.getConnection();
             st1 = c1.createStatement();
         } catch (Exception e) {
             processSQLError(e);

@@ -20,7 +20,7 @@ public class TravellerTable implements TravellerAccess {
     public TravellerTable() {
     }
 
-    public void initialize(String dbPath) {
+    public void initialize() {
         if (travellers == null) {
             travellers = new ArrayList<Traveller>();
             travellers.add(new Traveller(0, "Jack"));

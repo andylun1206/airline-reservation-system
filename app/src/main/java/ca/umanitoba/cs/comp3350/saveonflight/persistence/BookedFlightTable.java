@@ -21,19 +21,19 @@ public class BookedFlightTable implements BookedFlightAccess {
     public BookedFlightTable() {
     }
 
-    public void initialize(String dbPath) {
+    public void initialize() {
         if (bookedFlights == null) {
             bookedFlights = new ArrayList<BookedFlight>();
 
             TravellerTable travellerTable = new TravellerTable();
             if (travellerTable.getTravellers() == null) {
-                new TravellerTable().initialize("");
+                new TravellerTable().initialize();
             }
             ArrayList<Traveller> travellers = travellerTable.getTravellers();
             FlightTable flightTable = new FlightTable();
             ArrayList<Flight> flights = flightTable.getFlights();
             if (flights == null) {
-                new FlightTable().initialize("");
+                new FlightTable().initialize();
             }
             flights = flightTable.getFlights();
             bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(0),"1A"));

@@ -7,13 +7,11 @@ import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 
-import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseUtils.processSQLError;
+import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.processSQLError;
 
 /**
  * Created by longyu on 2017-06-27.
@@ -32,16 +30,13 @@ public class AirlineTableSql implements AirlineAccess {
     public AirlineTableSql() {
     }
 
-    public void initialize(String dbPath) {
-        String url = "jdbc:hsqldb:file:" + dbPath;
+    public void initialize() {
         try {
-            Class.forName("org.hsqldb.jdbcDriver").newInstance();
-            c1 = DriverManager.getConnection(url, "SA", "");
+            c1 = DatabaseHandler.getConnection();
             st1 = c1.createStatement();
         } catch (Exception e) {
             processSQLError(e);
         }
-        //System.out.println("Opened database ");
     }
 
     public ArrayList<Airline> getAirlines() {

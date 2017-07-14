@@ -2,10 +2,9 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class DatabaseUtils {
+public class DatabaseHandler {
     private static Connection currentConnection;
 
     public static Connection createConnection(String dbPath) {
@@ -42,5 +41,9 @@ public class DatabaseUtils {
         e.printStackTrace();
 
         return result;
+    }
+
+    public static Connection getConnection() {
+        return currentConnection;
     }
 }

@@ -12,5 +12,5 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
  */
 
 public interface DataAccess<E> {
-    void initialize(String dbPath);
+    void initialize();
 }

@@ -1,7 +1,6 @@
 package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
@@ -9,10 +8,8 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
-import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
@@ -36,17 +33,13 @@ public class FlightTableSql implements FlightAccess {
     public FlightTableSql() {
     }
 
-    public void initialize(String dbPath) {
-        String url = "jdbc:hsqldb:file:" + dbPath;
+    public void initialize() {
         try {
-            Class.forName("org.hsqldb.jdbcDriver").newInstance();
-            c1 = DriverManager.getConnection(url, "SA", "");
+            c1 = DatabaseHandler.getConnection();
             st1 = c1.createStatement();
-
         } catch (Exception e) {
-            DatabaseUtils.processSQLError(e);
+            DatabaseHandler.processSQLError(e);
         }
-        //System.out.println("Opened database ");
     }
 
     public ArrayList<Flight> getFlights() {
@@ -59,7 +52,7 @@ public class FlightTableSql implements FlightAccess {
             cmdString = "Select * from FLIGHT";
             rs = st1.executeQuery(cmdString);
         } catch (Exception e) {
-            DatabaseUtils.processSQLError(e);
+            DatabaseHandler.processSQLError(e);
         }
         try {
             if (rs != null) {
@@ -70,7 +63,7 @@ public class FlightTableSql implements FlightAccess {
                 rs.close();
             }
         } catch (Exception e) {
-            result = DatabaseUtils.processSQLError(e);
+            result = DatabaseHandler.processSQLError(e);
         }
 
         return flights;
@@ -85,7 +78,7 @@ public class FlightTableSql implements FlightAccess {
                     " AND DEPARTURETIME = '" + departureTime + "'";
             rs = st1.executeQuery(cmdString);
         } catch (Exception e) {
-            DatabaseUtils.processSQLError(e);
+            DatabaseHandler.processSQLError(e);
         }
         try {
             if (rs != null) {
@@ -95,7 +88,7 @@ public class FlightTableSql implements FlightAccess {
                 }
             }
         } catch (Exception e) {
-            result = DatabaseUtils.processSQLError(e);
+            result = DatabaseHandler.processSQLError(e);
         }
 
         return flight;
@@ -109,7 +102,7 @@ public class FlightTableSql implements FlightAccess {
             rs1 = st1.executeQuery(cmdString);
             result = checkWarning(st1, updateCount);
         } catch (Exception e) {
-            result = DatabaseUtils.processSQLError(e);
+            result = DatabaseHandler.processSQLError(e);
         }
         try {
             while (rs1.next()) {
@@ -117,15 +110,14 @@ public class FlightTableSql implements FlightAccess {
             }
             rs1.close();
         } catch (Exception e) {
-            result = DatabaseUtils.processSQLError(e);
+            result = DatabaseHandler.processSQLError(e);
         }
         return flight;
     }
 
     private Flight createFlightFromResultSet(ResultSet rs) throws SQLException, ParseException {
-        Flight flight;
         String flightID, departureDate, arrivalDate, airline, origin, destination;
-        int capacity, seattaken, classInt;
+        int capacity, seatsTaken;
         double price;
         Airline company;
         Airport departure, arrive;
@@ -138,16 +130,13 @@ public class FlightTableSql implements FlightAccess {
         destination = rs.getString("AIRPORTID2");
         price = rs.getDouble("PRICE");
         capacity = rs.getInt("CAPACITY");
-        seattaken = rs.getInt("SEATSTAKEN");
-        classInt = rs.getInt("CLASS");
+        seatsTaken = rs.getInt("SEATSTAKEN");
         AirlineTableSql airlineTableSql = new AirlineTableSql();
 
-        airlineTableSql.initialize(Main.getDBPathName());
-        List<Airline> airlines1 = airlineTableSql.getAirlines();
+        airlineTableSql.initialize();
         company = airlineTableSql.findAirline(airline);
         AirportTableSql airportTableSql = new AirportTableSql();
-        airportTableSql.initialize(Main.getDBPathName());
-        List<Airport> airports = airportTableSql.getAirports();
+        airportTableSql.initialize();
         arrive = airportTableSql.findAirport(origin);
         departure = airportTableSql.findAirport(destination);
 
@@ -157,7 +146,7 @@ public class FlightTableSql implements FlightAccess {
                 .setArrivalTime(sdf.parse(arrivalDate))
                 .setPrice(price)
                 .setCapacity(capacity)
-                .setSeatsTaken(seattaken)
+                .setSeatsTaken(seatsTaken)
                 .build();
     }
 
@@ -191,7 +180,7 @@ public class FlightTableSql implements FlightAccess {
                     added = true;
                 }
             } catch (Exception e) {
-                result = DatabaseUtils.processSQLError(e);
+                result = DatabaseHandler.processSQLError(e);
             }
         }
 
@@ -217,7 +206,7 @@ public class FlightTableSql implements FlightAccess {
 
                 rs3 = st1.executeQuery(cmdString);
             } catch (Exception e) {
-                DatabaseUtils.processSQLError(e);
+                DatabaseHandler.processSQLError(e);
             }
             try {
                 while (rs3.next()) {
@@ -226,7 +215,7 @@ public class FlightTableSql implements FlightAccess {
                 }
                 rs3.close();
             } catch (Exception e) {
-                result = DatabaseUtils.processSQLError(e);
+                result = DatabaseHandler.processSQLError(e);
             }
         }
 
@@ -243,7 +232,7 @@ public class FlightTableSql implements FlightAccess {
                 result = warning.getMessage();
             }
         } catch (Exception e) {
-            result = DatabaseUtils.processSQLError(e);
+            result = DatabaseHandler.processSQLError(e);
         }
         if (updateCount != 1) {
             result = "Tuple not inserted correctly.";

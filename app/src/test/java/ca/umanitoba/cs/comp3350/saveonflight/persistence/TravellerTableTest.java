@@ -25,7 +25,7 @@ public class TravellerTableTest {
     @BeforeClass
     public static void setUp() {
         travellerTable = new TravellerTable();
-        travellerTable.initialize("");
+        travellerTable.initialize();
         original = travellerTable.getTravellers();
     }
 

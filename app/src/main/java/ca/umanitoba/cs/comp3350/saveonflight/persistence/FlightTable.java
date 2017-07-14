@@ -28,19 +28,19 @@ public class FlightTable implements FlightAccess {
     public FlightTable() {
     }
 
-    public void initialize(String dbPath) {
+    public void initialize() {
         if (flights == null) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CANADA);
             flights = new ArrayList<Flight>();
 
             AirlineTable airlineTable = new AirlineTable();
             if (airlineTable.getAirlines() == null) {
-                new AirlineTable().initialize("");
+                new AirlineTable().initialize();
             }
 
             AirportTable airportTable = new AirportTable();
             if (airportTable.getAirports() == null) {
-                new AirportTable().initialize("");
+                new AirportTable().initialize();
             }
 
             try {

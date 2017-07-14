@@ -25,7 +25,7 @@ public class AirportTableTest {
     @BeforeClass
     public static void setUp() {
         airportTable = new AirportTable();
-        airportTable.initialize("");
+        airportTable.initialize();
         original = airportTable.getAirports();
     }
 

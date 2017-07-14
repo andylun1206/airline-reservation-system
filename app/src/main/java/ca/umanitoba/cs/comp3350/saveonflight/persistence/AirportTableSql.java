@@ -6,14 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airport;
 
-import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseUtils.processSQLError;
+import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.processSQLError;
 
 /**
  * Created by longyu on 2017-06-27.
@@ -25,25 +23,20 @@ public class AirportTableSql implements AirportAccess {
     private ResultSet rs1, rs2;
     private String cmdString;
 
-    private List<Airport> airports = null;
-
     public AirportTableSql() {
     }
 
-    public void initialize(String dbPath) {
-        airports = new ArrayList<Airport>();
-        String url = "jdbc:hsqldb:file:" + dbPath;
+    public void initialize() {
         try {
-            Class.forName("org.hsqldb.jdbcDriver").newInstance();
-            c1 = DriverManager.getConnection(url, "SA", "");
+            c1 = DatabaseHandler.getConnection();
             st1 = c1.createStatement();
         } catch (Exception e) {
             processSQLError(e);
         }
-        //System.out.println("Opened database ");
     }
 
     public List<Airport> getAirports() {
+        List<Airport> airports = new ArrayList<>();
         Airport airport;
         String result = null;
 

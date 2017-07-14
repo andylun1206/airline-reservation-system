@@ -41,13 +41,13 @@ public class FlightTableTest {
     @BeforeClass
     public static void setUp() {
         flightTable = new FlightTable();
-        flightTable.initialize("");
+        flightTable.initialize();
         original = flightTable.getFlights();
         AirportAccess airportTable = new AirportTable();
-        airportTable.initialize("");
+        airportTable.initialize();
 
         AirlineAccess airlineTable = new AirlineTable();
-        airlineTable.initialize("");
+        airlineTable.initialize();
 
         Airline westJet = airlineTable.findAirline("westjet");
         Airport yyz = airportTable.findAirport("YYZ");

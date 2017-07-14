@@ -30,9 +30,9 @@ public class BookedFlightTableTest {
     @BeforeClass
     public static void setUp() {
         bookedFlightTable = new BookedFlightTable();
-        new TravellerTable().initialize("");
-        new FlightTable().initialize("");
-        bookedFlightTable.initialize("");
+        new TravellerTable().initialize();
+        new FlightTable().initialize();
+        bookedFlightTable.initialize();
         original = BookedFlightTable.getBookedFlights();
     }
 
