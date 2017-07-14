@@ -3,6 +3,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -75,25 +76,21 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         return bfs;
     }
 
-    public boolean add(BookedFlight bookedFlight) {
+    public boolean add(BookedFlight bookedFlight) throws SQLException {
         String values;
         boolean added = false;
         result = null;
 
         if (bookedFlight != null && bookedFlight.getFlight() != null && bookedFlight.getTraveller() != null) {
-            try {
-                values = bookedFlight.getTraveller().getTravellerID()
-                        + ",'" + bookedFlight.getFlight().getFlightCode() + "', '"
-                        + bookedFlight.getFlight().getDepartureTimeString() + "', '"
-                        + bookedFlight.getSeatNumber() + "'";
-                cmdString = "Insert into BOOKEDFLIGHT " + " Values(" + values + ")";
-                updateCount = st1.executeUpdate(cmdString);
-                result = checkWarning(st1, updateCount);
-                if (updateCount > 0) {
-                    added = true;
-                }
-            } catch (Exception e) {
-                result = processSQLError(e);
+            values = bookedFlight.getTraveller().getTravellerID()
+                    + ",'" + bookedFlight.getFlight().getFlightCode() + "', '"
+                    + bookedFlight.getFlight().getDepartureTimeString() + "', '"
+                    + bookedFlight.getSeatNumber() + "'";
+            cmdString = "Insert into BOOKEDFLIGHT " + " Values(" + values + ")";
+            updateCount = st1.executeUpdate(cmdString);
+            result = checkWarning(st1, updateCount);
+            if (updateCount > 0) {
+                added = true;
             }
         }
 

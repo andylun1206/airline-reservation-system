@@ -49,7 +49,7 @@ public class BookedFlightTable implements BookedFlightAccess {
 
     public boolean add(BookedFlight bookedFlight) {
         boolean result = true;
-        if (bookedFlight != null && bookedFlight.getTraveller().getTravellerID() != 0 && (!bookedFlight.getFlight().getFlightCode().isEmpty() && !bookedFlight.getFlight().getDepartureTime().equals(null))) {
+        if (bookedFlight != null && (!bookedFlight.getFlight().getFlightCode().isEmpty() && bookedFlight.getFlight().getDepartureTime() != null)) {
             for (BookedFlight bookedFlight1 : bookedFlights) {
                 if (bookedFlight.equals(bookedFlight1))
                     result = false;

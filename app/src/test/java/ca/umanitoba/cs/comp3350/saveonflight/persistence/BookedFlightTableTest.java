@@ -4,10 +4,10 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
  * Created by zhengyugu on 2017-06-08.
  */
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
@@ -23,9 +23,9 @@ public class BookedFlightTableTest {
     private static ArrayList<BookedFlight> original;
     private static BookedFlightAccess bookedFlightTable;
     ArrayList<Traveller> travellers = new TravellerTable().getTravellers();
-    FlightTable flightTable=new FlightTable();
+    FlightTable flightTable = new FlightTable();
     ArrayList<Flight> flights = flightTable.getFlights();
-    private BookedFlight validCase = new BookedFlight(travellers.get(2), flights.get(7), "B3");
+    private BookedFlight validCase = new BookedFlight(travellers.get(0), flights.get(7), "B3");
 
     public static void setBookedFlightAccess(BookedFlightAccess b) {
         bookedFlightTable = b;
@@ -54,18 +54,22 @@ public class BookedFlightTableTest {
 
     @Test
     public void testAddNull() {
-        bookedFlightTable.add(null);
-        assertEquals("Add null but actually insertBookedFlight something", original, BookedFlightTable.getBookedFlights());
+        try {
+            bookedFlightTable.add(null);
+            assertEquals("Add null but actually insertBookedFlight something", original, BookedFlightTable.getBookedFlights());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void testAddValid() {
-        bookedFlightTable.add(validCase);
+    public void testAddValid() throws SQLException {
+        assertTrue(bookedFlightTable.add(validCase));
         assertFalse("Failed to insertBookedFlight validCase to BookedFlightTable.", bookedFlightTable.add(validCase));
     }
 
     @Test
-    public void testAddDuplicate() {
+    public void testAddDuplicate() throws SQLException {
         BookedFlight bf = new BookedFlight(travellers.get(2), flights.get(8), "C4");
         assertTrue("Failed to insertBookedFlight unique airline 'dup'", bookedFlightTable.add(bf));
         assertFalse("Succeeded adding a duplicate.", bookedFlightTable.add(bf));
