@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
 
+import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.checkWarning;
 import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.processSQLError;
 
 /**
@@ -111,24 +112,4 @@ public class AirlineTableSql implements AirlineAccess {
 
         return added;
     }
-
-
-    public String checkWarning(Statement st, int updateCount) {
-        String result;
-
-        result = null;
-        try {
-            SQLWarning warning = st.getWarnings();
-            if (warning != null) {
-                result = warning.getMessage();
-            }
-        } catch (Exception e) {
-            result = processSQLError(e);
-        }
-        if (updateCount != 1) {
-            result = "Tuple not inserted correctly.";
-        }
-        return result;
-    }
-
 }

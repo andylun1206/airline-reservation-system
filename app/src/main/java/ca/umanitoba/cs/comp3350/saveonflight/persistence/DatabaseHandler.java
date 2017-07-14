@@ -2,6 +2,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLWarning;
 import java.sql.Statement;
 
 public class DatabaseHandler {
@@ -20,8 +21,6 @@ public class DatabaseHandler {
         return currentConnection;
     }
 
-    // TODO: use createConnection method once, instead of creating a bunch of new connections for each table
-
     public static void closeConnection() {
         try {    // commit all changes to the database
             String cmdString = "shutdown compact";
@@ -32,6 +31,24 @@ public class DatabaseHandler {
         } catch (Exception e) {
             processSQLError(e);
         }
+    }
+
+    public static String checkWarning(Statement st, int updateCount) {
+        String result;
+
+        result = null;
+        try {
+            SQLWarning warning = st.getWarnings();
+            if (warning != null) {
+                result = warning.getMessage();
+            }
+        } catch (Exception e) {
+            result = processSQLError(e);
+        }
+        if (updateCount != 1) {
+            result = "Tuple not inserted correctly.";
+        }
+        return result;
     }
 
     public static String processSQLError(Exception e) {

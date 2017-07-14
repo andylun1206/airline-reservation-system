@@ -20,7 +20,7 @@ import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.
 public class AirportTableSql implements AirportAccess {
     private Statement st1;
     private Connection c1;
-    private ResultSet rs1, rs2;
+    private ResultSet rs1;
     private String cmdString;
 
     public AirportTableSql() {

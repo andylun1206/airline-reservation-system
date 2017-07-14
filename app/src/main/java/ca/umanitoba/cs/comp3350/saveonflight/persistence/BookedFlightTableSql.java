@@ -12,6 +12,7 @@ import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
+import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.checkWarning;
 import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.processSQLError;
 
 /**
@@ -153,23 +154,5 @@ public class BookedFlightTableSql implements BookedFlightAccess {
             result = processSQLError(e);
         }
         return results;
-    }
-
-    public String checkWarning(Statement st, int updateCount) {
-        String result;
-
-        result = null;
-        try {
-            SQLWarning warning = st.getWarnings();
-            if (warning != null) {
-                result = warning.getMessage();
-            }
-        } catch (Exception e) {
-            result = processSQLError(e);
-        }
-        if (updateCount != 1) {
-            result = "Tuple not inserted correctly.";
-        }
-        return result;
     }
 }
