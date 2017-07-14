@@ -27,12 +27,18 @@ public class BookedFlightTableTest {
     ArrayList<Flight> flights = flightTable.getFlights();
     private BookedFlight validCase = new BookedFlight(travellers.get(2), flights.get(7), "B3");
 
+    public static void setBookedFlightAccess(BookedFlightAccess b) {
+        bookedFlightTable = b;
+    }
+
     @BeforeClass
     public static void setUp() {
-        bookedFlightTable = new BookedFlightTable();
-        new TravellerTable().initialize();
-        new FlightTable().initialize();
-        bookedFlightTable.initialize();
+        if (bookedFlightTable == null) {
+            bookedFlightTable = new BookedFlightTable();
+            new TravellerTable().initialize();
+            new FlightTable().initialize();
+            bookedFlightTable.initialize();
+        }
         original = BookedFlightTable.getBookedFlights();
     }
 

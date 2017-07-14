@@ -38,10 +38,17 @@ public class FlightTableTest {
 
     private static Flight.FlightBuilder builder;
 
+    public static void setFlightAccess(FlightAccess f) {
+        flightTable = f;
+    }
+
     @BeforeClass
     public static void setUp() {
-        flightTable = new FlightTable();
-        flightTable.initialize();
+        if (flightTable == null) {
+            flightTable = new FlightTable();
+            flightTable.initialize();
+        }
+
         original = flightTable.getFlights();
         AirportAccess airportTable = new AirportTable();
         airportTable.initialize();

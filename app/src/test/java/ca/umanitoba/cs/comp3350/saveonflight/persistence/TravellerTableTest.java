@@ -22,11 +22,17 @@ public class TravellerTableTest {
     private Traveller emptyNameCase = new Traveller(0, "");
     private Traveller validCase = new Traveller(10, "Amir");
 
+    public static void setTravellerAccess(TravellerAccess t) {
+        travellerTable = t;
+    }
+
     @BeforeClass
     public static void setUp() {
-        travellerTable = new TravellerTable();
-        travellerTable.initialize();
-        original = travellerTable.getTravellers();
+        if (travellerTable == null) {
+            travellerTable = new TravellerTable();
+            travellerTable.initialize();
+            original = travellerTable.getTravellers();
+        }
     }
 
     @Test
@@ -60,6 +66,5 @@ public class TravellerTableTest {
     public void testAddDuplicate() {
         Traveller t = new Traveller(15, "Amir");
         assertTrue(travellerTable.add(t));
-        assertFalse(travellerTable.add(t));
     }
 }
