@@ -23,11 +23,9 @@ import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.
 public class BookedFlightTableSql implements BookedFlightAccess {
     private Statement st1;
     private Connection c1;
-    private ResultSet rs1, rs2, rs8;
+    private ResultSet rs1, rs2;
     private String cmdString;
     private int updateCount;
-    private String result;
-    private static String EOF = "  ";
 
     public BookedFlightTableSql() {
     }
@@ -46,7 +44,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         BookedFlight bookedFlight;
         int id;
         String flightId, departureTime, seatNumber;
-        result = null;
+
         try {
             cmdString = "SELECT * FROM BOOKEDFLIGHT";
             rs1 = st1.executeQuery(cmdString);
@@ -70,7 +68,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
             }
             rs1.close();
         } catch (Exception e) {
-            result = processSQLError(e);
+            processSQLError(e);
         }
 
         return bfs;
@@ -79,7 +77,6 @@ public class BookedFlightTableSql implements BookedFlightAccess {
     public boolean add(BookedFlight bookedFlight) throws SQLException {
         String values;
         boolean added = false;
-        result = null;
 
         if (bookedFlight != null && bookedFlight.getFlight() != null && bookedFlight.getTraveller() != null) {
             values = bookedFlight.getTraveller().getTravellerID()
@@ -88,7 +85,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
                     + bookedFlight.getSeatNumber() + "'";
             cmdString = "Insert into BOOKEDFLIGHT " + " Values(" + values + ")";
             updateCount = st1.executeUpdate(cmdString);
-            result = checkWarning(st1, updateCount);
+            checkWarning(st1, updateCount);
             if (updateCount > 0) {
                 added = true;
             }
@@ -124,13 +121,13 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         ArrayList<BookedFlight> results = new ArrayList<BookedFlight>();
         BookedFlight bookedFlight;
         String flightId, departureTime, seatNumber;
-        result = null;
+
         try {
             cmdString = "Select * from BOOKEDFLIGHT WHERE ID =" + t.getTravellerID();
             rs2 = st1.executeQuery(cmdString);
 
         } catch (Exception e) {
-            result = processSQLError(e);
+            processSQLError(e);
         }
         try {
             // maybe join tables and perform a single SQL query instead?
@@ -148,7 +145,7 @@ public class BookedFlightTableSql implements BookedFlightAccess {
                 results.add(bookedFlight);
             }
         } catch (Exception e) {
-            result = processSQLError(e);
+            processSQLError(e);
         }
         return results;
     }

@@ -21,12 +21,10 @@ import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.
 public class AirlineTableSql implements AirlineAccess {
     private Statement st1;
     private Connection c1;
-    private ResultSet rs1, rs2, rs3, rs4, rs5, rs6, rs7, rs8;
+    private ResultSet rs1;
 
     private String cmdString;
     private int updateCount;
-    private String result;
-    private static String EOF = "  ";
 
     public AirlineTableSql() {
     }
@@ -42,7 +40,6 @@ public class AirlineTableSql implements AirlineAccess {
 
     public ArrayList<Airline> getAirlines() {
         ArrayList<Airline> airlines = new ArrayList<>();
-        result = null;
 
         try {
             cmdString = "Select * from AIRLINE";
@@ -57,7 +54,7 @@ public class AirlineTableSql implements AirlineAccess {
             }
             rs1.close();
         } catch (Exception e) {
-            result = processSQLError(e);
+            processSQLError(e);
         }
 
         return airlines;
@@ -101,12 +98,12 @@ public class AirlineTableSql implements AirlineAccess {
                 values = "'" + airline.getName() + "'";
                 cmdString = "Insert into Airline " + " Values(" + values + ")";
                 updateCount = st1.executeUpdate(cmdString);
-                result = checkWarning(st1, updateCount);
+                checkWarning(st1, updateCount);
                 if (updateCount > 0) {
                     added = true;
                 }
             } catch (Exception e) {
-                result = processSQLError(e);
+                processSQLError(e);
             }
         }
 

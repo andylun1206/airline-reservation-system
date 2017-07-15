@@ -21,11 +21,10 @@ import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.
 public class TravellerTableSql implements TravellerAccess {
     private Statement st1;
     private Connection c1;
-    private ResultSet rs1, rs2;
+    private ResultSet rs1;
     private String cmdString;
     private int updateCount;
     private String result;
-    private ArrayList<Traveller> travellers = null;
 
     public TravellerTableSql() {
     }

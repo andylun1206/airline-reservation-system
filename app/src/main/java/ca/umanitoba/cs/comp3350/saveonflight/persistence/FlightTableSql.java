@@ -3,7 +3,6 @@ package ca.umanitoba.cs.comp3350.saveonflight.persistence;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,13 +21,12 @@ import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.
  */
 
 public class FlightTableSql implements FlightAccess {
-    private Statement st1, st2, st3;
+    private Statement st1;
     private Connection c1;
-    private ResultSet rs1, rs2, rs3, rs4, rs5, rs6, rs7, rs8;
+    private ResultSet rs1, rs2;
 
     private String cmdString;
     private int updateCount;
-    private String result;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CANADA);
 
@@ -47,7 +45,6 @@ public class FlightTableSql implements FlightAccess {
     public ArrayList<Flight> getFlights() {
         ArrayList<Flight> flights = new ArrayList<Flight>();
         Flight flight;
-        result = null;
 
         ResultSet rs = null;
         try {
@@ -65,7 +62,7 @@ public class FlightTableSql implements FlightAccess {
                 rs.close();
             }
         } catch (Exception e) {
-            result = DatabaseHandler.processSQLError(e);
+            DatabaseHandler.processSQLError(e);
         }
 
         return flights;
@@ -90,7 +87,7 @@ public class FlightTableSql implements FlightAccess {
                 }
             }
         } catch (Exception e) {
-            result = DatabaseHandler.processSQLError(e);
+            DatabaseHandler.processSQLError(e);
         }
 
         return flight;
@@ -98,13 +95,13 @@ public class FlightTableSql implements FlightAccess {
 
     public Flight findByFlightCode(String flightCode) {
         Flight flight = null;
-        result = null;
+
         try {
             cmdString = "Select * from Flight where FLIGHTID = '" + flightCode + "'";
             rs1 = st1.executeQuery(cmdString);
-            result = checkWarning(st1, updateCount);
+            checkWarning(st1, updateCount);
         } catch (Exception e) {
-            result = DatabaseHandler.processSQLError(e);
+            DatabaseHandler.processSQLError(e);
         }
         try {
             while (rs1.next()) {
@@ -112,7 +109,7 @@ public class FlightTableSql implements FlightAccess {
             }
             rs1.close();
         } catch (Exception e) {
-            result = DatabaseHandler.processSQLError(e);
+            DatabaseHandler.processSQLError(e);
         }
         return flight;
     }
@@ -177,12 +174,12 @@ public class FlightTableSql implements FlightAccess {
                 cmdString = "Insert into Flight " + " Values(" + values + ")";
                 //System.out.println(cmdString);
                 updateCount = st1.executeUpdate(cmdString);
-                result = checkWarning(st1, updateCount);
+                checkWarning(st1, updateCount);
                 if (updateCount > 0) {
                     added = true;
                 }
             } catch (Exception e) {
-                result = DatabaseHandler.processSQLError(e);
+                DatabaseHandler.processSQLError(e);
             }
         }
 
@@ -192,7 +189,6 @@ public class FlightTableSql implements FlightAccess {
     public ArrayList<Flight> findBySearchCriteria(SearchCriteria criteria) {
         ArrayList<Flight> table = new ArrayList<>();
         Flight flight;
-        result = null;
 
         if (criteria != null) {
             try {
@@ -206,18 +202,18 @@ public class FlightTableSql implements FlightAccess {
                 if (!(criteria.getPreferredClass() == null))
                     cmdString += " AND CLASS = " + criteria.getPreferredClassInt();
 
-                rs3 = st1.executeQuery(cmdString);
+                rs2 = st1.executeQuery(cmdString);
             } catch (Exception e) {
                 DatabaseHandler.processSQLError(e);
             }
             try {
-                while (rs3.next()) {
-                    flight = createFlightFromResultSet(rs3);
+                while (rs2.next()) {
+                    flight = createFlightFromResultSet(rs2);
                     table.add(flight);
                 }
-                rs3.close();
+                rs2.close();
             } catch (Exception e) {
-                result = DatabaseHandler.processSQLError(e);
+                DatabaseHandler.processSQLError(e);
             }
         }
 

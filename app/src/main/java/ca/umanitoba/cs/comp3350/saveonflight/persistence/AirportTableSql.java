@@ -38,7 +38,6 @@ public class AirportTableSql implements AirportAccess {
     public List<Airport> getAirports() {
         List<Airport> airports = new ArrayList<>();
         Airport airport;
-        String result = null;
 
         try {
             cmdString = "Select * from Airport";
@@ -54,7 +53,7 @@ public class AirportTableSql implements AirportAccess {
             }
             rs1.close();
         } catch (Exception e) {
-            result = processSQLError(e);
+            processSQLError(e);
         }
 
         return airports;
