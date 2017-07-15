@@ -14,7 +14,6 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class Flight {
-    public static SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy, MM, dd, HH, mm", Locale.CANADA);
     private String flightCode;
     private Airline airline;
     private Date departureTime;

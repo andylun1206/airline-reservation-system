@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -44,20 +45,21 @@ public class SortFlightsTest {
         Date d5 = null;
         Date a5 = null;
         try {
-            d1 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 06, 54"); // 3 hours
-            a1 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 09, 54");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy, MM, dd, HH, mm");
+            d1 = sdf.parse("2017, 08, 07, 06, 54"); // 3 hours
+            a1 = sdf.parse("2017, 08, 07, 09, 54");
 
-            d2 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 08, 07, 30"); // 4 hours 24 min
-            a2 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 08, 11, 54");
+            d2 = sdf.parse("2017, 08, 08, 07, 30"); // 4 hours 24 min
+            a2 = sdf.parse("2017, 08, 08, 11, 54");
 
-            d3 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 09, 08, 24"); // 4 hours 30 min
-            a3 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 09, 12, 54");
+            d3 = sdf.parse("2017, 08, 09, 08, 24"); // 4 hours 30 min
+            a3 = sdf.parse("2017, 08, 09, 12, 54");
 
-            d4 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 09, 01, 13, 00"); // 2 hours 54 min
-            a4 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 15, 54");
+            d4 = sdf.parse("2017, 09, 01, 13, 00"); // 2 hours 54 min
+            a4 = sdf.parse("2017, 08, 07, 15, 54");
 
-            d5 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 06, 55"); // 3 hours 1 min
-            a5 = Flight.SIMPLE_DATE_FORMAT.parse("2017, 08, 07, 09, 56");
+            d5 = sdf.parse("2017, 08, 07, 06, 55"); // 3 hours 1 min
+            a5 = sdf.parse("2017, 08, 07, 09, 56");
         } catch (ParseException e) {
             e.printStackTrace();
         }
