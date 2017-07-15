@@ -149,18 +149,18 @@ Decided to change the way we assign developer tasks. Instead of assigning all of
 	- recieves message passing of flights from previous screen 
 	- hide return flight section if searching for one way trip
 	
-#### Zhengyu Gu & Long Yu
+#### Zhengyu Gu and Long Yu
 - Problem: Database - Port stub database to HSQL (GitHub issue #66)
-		- implemented flight, airport, airline sql table
-		- connected database to code
-			- created hardcoded data for database
-			- created functions copyDatabaseToDevice() and copyAssetsToDirectory() in main activity
-			- created application package
+	- implemented flight, airport, airline sql table
+	- connected database to code
+	- created hardcoded data for database
+	- created functions copyDatabaseToDevice() and copyAssetsToDirectory() in main activity
+	- created application package
 - Problem: Database - Dependency injection (Github issue #67)
-		- added dependencies into gradle
-		- build interfaces for all object tables
-		- removed addFunction, updateFunction, removeFunction
-		- added different add methods for different tables
+	- added dependencies into gradle
+	- build interfaces for all object tables
+	- removed addFunction, updateFunction, removeFunction
+	- added different add methods for different tables
 		
 
 ## Iteration 3:
@@ -177,8 +177,23 @@ Decided to change the way we assign developer tasks. Instead of assigning all of
     - We had created the ToastHandler class to handle creation of Toasts
     - But, we were not using it for all Toast creation in our app
     - Refactored code so that all Toast creation is in the ToastHandler class
-- Problem: App would go form search screen to view flights screen for return trip searches even if we didn't have return flights
+- Problem: App would go from search screen to view flights screen for return trip searches even if we didn't have return flights
     - Added additional checks to the SearchCriteria validation that ensured we had return flights
-  
+    
+#### Andy Chi Fung Lun
+- Problem: Create check in page layout (GitHub issue # 130)
+    - Created ticket (boarding pass) page instead
+    - Includes QR code which can be scanned at the airport (GitHub issue #131)
+- Problem: Airline icon on ticket is static (GitHub issue #155)
+    - Bug was found after implementing ticket page
+    
+#### Shenyun Wang
+- Problem: Acceptance Testing (GitHub issue numbers #129 and #133)
+    - Used Robotium to write acceptance tests for the trip summary and search pages
+
+#### Zhengyu Gu and Long Yu
+- Added seat number column to BookedFlight table in the database
+    - Needed for the boarding pass
+    
     
 
