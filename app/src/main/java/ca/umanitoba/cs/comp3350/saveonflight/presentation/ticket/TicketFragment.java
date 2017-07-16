@@ -35,6 +35,7 @@ public class TicketFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ticket, container, false);
+        getActivity().setTitle("Ticket");
 
         int travellerId = getArguments().getInt("traveller_id");
         String flightCode = getArguments().getString("flight_code");
