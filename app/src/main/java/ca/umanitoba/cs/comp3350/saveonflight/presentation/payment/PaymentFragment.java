@@ -13,10 +13,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.CreditCard;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.stripe.android.model.Card;
 import com.stripe.android.view.CardInputWidget;
+import com.stripe.android.view.StripeEditText;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.R;
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
@@ -39,17 +45,37 @@ import ca.umanitoba.cs.comp3350.saveonflight.presentation.ToastHandler;
  * @author Kenny Zhang
  */
 
-public class PaymentFragment extends Fragment implements View.OnClickListener {
-    private CardInputWidget mCardInputWidget;
+public class PaymentFragment extends Fragment implements View.OnClickListener, Validator.ValidationListener {
+    private Validator validator;
+    private ArrayList<Flight> flights;
+
+    // UI elements
+    @NotEmpty
     private EditText etName;
+
+    @NotEmpty
     private EditText etAddress;
+
+    @NotEmpty
     private EditText etCity;
+
+    @NotEmpty
+    private EditText etPostalCode;
+
+    @NotEmpty
+    @CreditCard
+    private StripeEditText etCardNum;
+
+    @NotEmpty
+    private StripeEditText etExpDate;
+
+    @NotEmpty
+    private StripeEditText etCvc;
+
+    private CardInputWidget mCardInputWidget;
     private Spinner spinnerProvince;
     private Spinner spinnerCountry;
-    private EditText etPostalCode;
     private Button buttonPurchase;
-
-    private ArrayList<Flight> flights;
 
     @Nullable
     @Override
@@ -61,6 +87,9 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         getActivity().setTitle("Payment");
 
         mCardInputWidget = (CardInputWidget) view.findViewById(R.id.card_input_widget);
+        etCardNum = (StripeEditText) view.findViewById(R.id.et_card_number);
+        etExpDate = (StripeEditText) view.findViewById(R.id.et_expiry_date);
+        etCvc = (StripeEditText) view.findViewById(R.id.et_cvc_number);
         etName = (EditText) view.findViewById(R.id.editText_name);
         etAddress = (EditText) view.findViewById(R.id.editText_address);
         etCity = (EditText) view.findViewById(R.id.editText_city);
@@ -83,6 +112,9 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
             ToastHandler.toastShowShortText(getActivity(), "Error: no flights to book");
         }
 
+        validator = new Validator(this);
+        validator.setValidationListener(this);
+
         return view;
     }
 
@@ -90,15 +122,33 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_payment:
-                Card card = createCard();
-
-                if (card != null) {
-                    paymentSuccess();
-                } else {
-                    paymentFailure();
-                }
-
+                validator.validate();
                 break;
+        }
+    }
+
+    @Override
+    public void onValidationSucceeded() {
+        Card card = createCard();
+        if (card != null) {
+            paymentSuccess();
+        } else {
+            paymentFailure();
+        }
+    }
+
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(getContext());
+
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -128,8 +178,6 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
             }
 
             showConfirmationDialog(traveller.getTravellerID());
-        } else {
-            ToastHandler.toastShowShortText(getActivity(), "Please enter your name");
         }
     }
 

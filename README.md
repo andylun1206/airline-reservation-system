@@ -56,6 +56,23 @@ Additionally, various improvements and bug fixes from the first iteration were c
 
 Moreover, we ported our stub database to a HSQL database. The stub database was kept for testing purposes and dependency injection was used to switch between the two.
 
+### Iteration 3:
+This iteration, we added the ticket generation feature to our application. From the ‘View Booked Flights’ screen, one can enter their passenger id to see a list of flights that they’ve booked. Upon clicking any flight in the list, they will be brought to a ticket page with their digital boarding pass. This page includes their flight information, as well as a QR code to be scanned at the airport. 
+
+Originally, we planned on adding user accounts this iteration. However, we chose to switch to ticket generation instead due to time constraints.
+
+We also added form validation to the payment screen. While Stripe’s CardInputWidget handled most of the credit card validation for us, it did not validate any of the personal info we got from our own EditTexts. Now, if any fields are left empty, the user is notified that they must fill in any missing fields. 
+
+Furthermore, we added integration tests and acceptance tests. The integration tests are found in the integration package in our test package. In the test package, there is a file called AllIntegrationTests.java, which can be used to run all the integration tests. In the same package, you will find AllUnitTests.java, which can be used to run all of our unit tests. The acceptance tests are found in the acceptance package in the androidTest package. Our acceptance tests cover the search, flight selection (comparison), trip summary, payment, booked flight viewing, and ticket screens. In the androidTest package, you will also find the file AllAcceptanceTests.java which can be used to run all of our acceptance tests. 
+
+Finally, various bug fixes and refactoring of code from iteration two took place:
+- Fixed and connected ‘real’ HSQL database implementation to our application
+- Added a ‘seat number’ column to the BookedFlight table
+- Added additional checks to search criteria validation
+- Moved all Toast creation to the ToastHandler class
+
+The canonical copy of the database file can be found at:
+- app\src\main\assets\db\SOF.script
 
 
 
