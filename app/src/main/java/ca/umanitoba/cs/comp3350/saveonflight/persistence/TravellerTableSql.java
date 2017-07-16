@@ -11,6 +11,9 @@ import java.util.ArrayList;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
 
+import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.checkWarning;
+import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.processSQLError;
+
 /**
  * Created by zhengyugu on 2017-06-28.
  */
@@ -27,11 +30,9 @@ public class TravellerTableSql implements TravellerAccess {
     public TravellerTableSql() {
     }
 
-    public void initialize(String dbPath) {
-        String url = "jdbc:hsqldb:file:" + dbPath;
+    public void initialize() {
         try {
-            Class.forName("org.hsqldb.jdbcDriver").newInstance();
-            c1 = DriverManager.getConnection(url, "SA", "");
+            c1 = DatabaseHandler.getConnection();
             st1 = c1.createStatement();
         } catch (Exception e) {
             processSQLError(e);
@@ -140,44 +141,6 @@ public class TravellerTableSql implements TravellerAccess {
 
     private Traveller createTravellerFromResultSet(ResultSet rs) throws SQLException, ParseException {
         return new Traveller(rs.getInt("ID"), rs.getString("NAME"));
-    }
-
-    public String checkWarning(Statement st, int updateCount) {
-        String result;
-
-        result = null;
-        try {
-            SQLWarning warning = st.getWarnings();
-            if (warning != null) {
-                result = warning.getMessage();
-            }
-        } catch (Exception e) {
-            result = processSQLError(e);
-        }
-        if (updateCount != 1) {
-            result = "Tuple not inserted correctly.";
-        }
-        return result;
-    }
-
-    public String processSQLError(Exception e) {
-        String result = "*** SQL Error: " + e.getMessage();
-
-        // Remember, this will NOT be seen by the user!
-        e.printStackTrace();
-
-        return result;
-    }
-
-    public void close() {
-        try {    // commit all changes to the database
-            cmdString = "shutdown compact";
-            rs2 = st1.executeQuery(cmdString);
-            c1.close();
-        } catch (Exception e) {
-            processSQLError(e);
-        }
-        // System.out.println("Closed database ");
     }
 }
 

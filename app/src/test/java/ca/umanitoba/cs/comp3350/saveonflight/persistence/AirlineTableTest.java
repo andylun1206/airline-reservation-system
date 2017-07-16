@@ -23,11 +23,18 @@ public class AirlineTableTest {
     private static ArrayList<Airline> original;
     private static AirlineAccess airlineTable;
 
+    public static void setAirlineAccess(AirlineAccess a) {
+        airlineTable = a;
+    }
+
     @BeforeClass
     public static void setUp() {
-        airlineTable = new AirlineTable();
-        airlineTable.initialize("");
-        original = airlineTable.getAirlines();
+        // By default, run with stub
+        if (airlineTable == null) {
+            airlineTable = new AirlineTable();
+            airlineTable.initialize();
+            original = airlineTable.getAirlines();
+        }
     }
 
     @Test

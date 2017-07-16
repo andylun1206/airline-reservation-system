@@ -7,11 +7,12 @@ import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Airline;
+
+import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.checkWarning;
+import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.processSQLError;
 
 /**
  * Created by longyu on 2017-06-27.
@@ -30,16 +31,13 @@ public class AirlineTableSql implements AirlineAccess {
     public AirlineTableSql() {
     }
 
-    public void initialize(String dbPath) {
-        String url = "jdbc:hsqldb:file:" + dbPath;
+    public void initialize() {
         try {
-            Class.forName("org.hsqldb.jdbcDriver").newInstance();
-            c1 = DriverManager.getConnection(url, "SA", "");
+            c1 = DatabaseHandler.getConnection();
             st1 = c1.createStatement();
         } catch (Exception e) {
             processSQLError(e);
         }
-        //System.out.println("Opened database ");
     }
 
     public ArrayList<Airline> getAirlines() {
@@ -113,44 +111,5 @@ public class AirlineTableSql implements AirlineAccess {
         }
 
         return added;
-    }
-
-
-    public String checkWarning(Statement st, int updateCount) {
-        String result;
-
-        result = null;
-        try {
-            SQLWarning warning = st.getWarnings();
-            if (warning != null) {
-                result = warning.getMessage();
-            }
-        } catch (Exception e) {
-            result = processSQLError(e);
-        }
-        if (updateCount != 1) {
-            result = "Tuple not inserted correctly.";
-        }
-        return result;
-    }
-
-    public String processSQLError(Exception e) {
-        String result = "*** SQL Error: " + e.getMessage();
-
-        // Remember, this will NOT be seen by the user!
-        e.printStackTrace();
-
-        return result;
-    }
-
-    public void close() {
-        try {    // commit all changes to the database
-            cmdString = "shutdown compact";
-            rs2 = st1.executeQuery(cmdString);
-            c1.close();
-        } catch (Exception e) {
-            processSQLError(e);
-        }
-        //System.out.println("Closed database ");
     }
 }

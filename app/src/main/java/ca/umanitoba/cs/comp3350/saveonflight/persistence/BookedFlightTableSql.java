@@ -11,8 +11,10 @@ import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.application.Main;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
-import ca.umanitoba.cs.comp3350.saveonflight.objects.Flight;
 import ca.umanitoba.cs.comp3350.saveonflight.objects.Traveller;
+
+import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.checkWarning;
+import static ca.umanitoba.cs.comp3350.saveonflight.persistence.DatabaseHandler.processSQLError;
 
 /**
  * Created by zhengyugu on 2017-06-29.
@@ -30,11 +32,9 @@ public class BookedFlightTableSql implements BookedFlightAccess {
     public BookedFlightTableSql() {
     }
 
-    public void initialize(String dbPath) {
-        String url = "jdbc:hsqldb:file:" + dbPath;
+    public void initialize() {
         try {
-            Class.forName("org.hsqldb.jdbcDriver").newInstance();
-            c1 = DriverManager.getConnection(url, "SA", "");
+            c1 = DatabaseHandler.getConnection();
             st1 = c1.createStatement();
         } catch (Exception e) {
             processSQLError(e);
@@ -56,10 +56,10 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         try {
             while (rs1.next()) {
                 FlightTableSql flightTableSql = new FlightTableSql();
-                flightTableSql.initialize(Main.getDBPathName());
+                flightTableSql.initialize();
                 flightTableSql.getFlights();
                 TravellerTableSql travellerTableSql = new TravellerTableSql();
-                travellerTableSql.initialize(Main.getDBPathName());
+                travellerTableSql.initialize();
                 travellerTableSql.getTravellers();
                 id = rs1.getInt("ID");
                 flightId = rs1.getString("FLIGHTID");
@@ -76,25 +76,21 @@ public class BookedFlightTableSql implements BookedFlightAccess {
         return bfs;
     }
 
-    public boolean add(BookedFlight bookedFlight) {
+    public boolean add(BookedFlight bookedFlight) throws SQLException {
         String values;
         boolean added = false;
         result = null;
 
         if (bookedFlight != null && bookedFlight.getFlight() != null && bookedFlight.getTraveller() != null) {
-            try {
-                values = bookedFlight.getTraveller().getTravellerID()
-                        + ",'" + bookedFlight.getFlight().getFlightCode() + "', '"
-                        + bookedFlight.getFlight().getDepartureTimeString() + "', '"
-                        + bookedFlight.getSeatNumber() + "'";
-                cmdString = "Insert into BOOKEDFLIGHT " + " Values(" + values + ")";
-                updateCount = st1.executeUpdate(cmdString);
-                result = checkWarning(st1, updateCount);
-                if (updateCount > 0) {
-                    added = true;
-                }
-            } catch (Exception e) {
-                result = processSQLError(e);
+            values = bookedFlight.getTraveller().getTravellerID()
+                    + ",'" + bookedFlight.getFlight().getFlightCode() + "', '"
+                    + bookedFlight.getFlight().getDepartureTimeString() + "', '"
+                    + bookedFlight.getSeatNumber() + "'";
+            cmdString = "Insert into BOOKEDFLIGHT " + " Values(" + values + ")";
+            updateCount = st1.executeUpdate(cmdString);
+            result = checkWarning(st1, updateCount);
+            if (updateCount > 0) {
+                added = true;
             }
         }
 
@@ -137,13 +133,13 @@ public class BookedFlightTableSql implements BookedFlightAccess {
             result = processSQLError(e);
         }
         try {
-            // TODO: maybe join tables and perform a single SQL query instead?
+            // maybe join tables and perform a single SQL query instead?
             TravellerTableSql travellerTableSql = new TravellerTableSql();
-            travellerTableSql.initialize(Main.getDBPathName());
+            travellerTableSql.initialize();
             Traveller traveller = travellerTableSql.findTraveller(t.getTravellerID());
 
             FlightTableSql flightTableSql = new FlightTableSql();
-            flightTableSql.initialize(Main.getDBPathName());
+            flightTableSql.initialize();
             while (rs2.next()) {
                 flightId = rs2.getString("FLIGHTID");
                 departureTime = rs2.getString("DEPARTURETIME");
@@ -155,43 +151,5 @@ public class BookedFlightTableSql implements BookedFlightAccess {
             result = processSQLError(e);
         }
         return results;
-    }
-
-    public String checkWarning(Statement st, int updateCount) {
-        String result;
-
-        result = null;
-        try {
-            SQLWarning warning = st.getWarnings();
-            if (warning != null) {
-                result = warning.getMessage();
-            }
-        } catch (Exception e) {
-            result = processSQLError(e);
-        }
-        if (updateCount != 1) {
-            result = "Tuple not inserted correctly.";
-        }
-        return result;
-    }
-
-    public String processSQLError(Exception e) {
-        String result = "*** SQL Error: " + e.getMessage();
-
-        // Remember, this will NOT be seen by the user!
-        e.printStackTrace();
-
-        return result;
-    }
-
-    public void close() {
-        try {    // commit all changes to the database
-            cmdString = "shutdown compact";
-            rs2 = st1.executeQuery(cmdString);
-            c1.close();
-        } catch (Exception e) {
-            processSQLError(e);
-        }
-        // System.out.println("Closed database ");
     }
 }

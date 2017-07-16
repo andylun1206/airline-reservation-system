@@ -21,19 +21,19 @@ public class BookedFlightTable implements BookedFlightAccess {
     public BookedFlightTable() {
     }
 
-    public void initialize(String dbPath) {
+    public void initialize() {
         if (bookedFlights == null) {
             bookedFlights = new ArrayList<BookedFlight>();
 
             TravellerTable travellerTable = new TravellerTable();
             if (travellerTable.getTravellers() == null) {
-                new TravellerTable().initialize("");
+                new TravellerTable().initialize();
             }
             ArrayList<Traveller> travellers = travellerTable.getTravellers();
             FlightTable flightTable = new FlightTable();
             ArrayList<Flight> flights = flightTable.getFlights();
             if (flights == null) {
-                new FlightTable().initialize("");
+                new FlightTable().initialize();
             }
             flights = flightTable.getFlights();
             bookedFlights.add(new BookedFlight(travellers.get(0), flights.get(0),"1A"));
@@ -49,7 +49,7 @@ public class BookedFlightTable implements BookedFlightAccess {
 
     public boolean add(BookedFlight bookedFlight) {
         boolean result = true;
-        if (bookedFlight != null && bookedFlight.getTraveller().getTravellerID() != 0 && (!bookedFlight.getFlight().getFlightCode().isEmpty() && !bookedFlight.getFlight().getDepartureTime().equals(null))) {
+        if (bookedFlight != null && (!bookedFlight.getFlight().getFlightCode().isEmpty() && bookedFlight.getFlight().getDepartureTime() != null)) {
             for (BookedFlight bookedFlight1 : bookedFlights) {
                 if (bookedFlight.equals(bookedFlight1))
                     result = false;

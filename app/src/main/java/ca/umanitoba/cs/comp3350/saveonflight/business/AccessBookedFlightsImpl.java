@@ -1,5 +1,6 @@
 package ca.umanitoba.cs.comp3350.saveonflight.business;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import ca.umanitoba.cs.comp3350.saveonflight.objects.BookedFlight;
@@ -29,7 +30,13 @@ public class AccessBookedFlightsImpl implements AccessBookedFlights {
      */
     @Override
     public boolean insertBookedFlight(BookedFlight bf) {
-        return bookedFlightsDB.add(bf);
+        boolean added = false;
+        try {
+            added = bookedFlightsDB.add(bf);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return added;
     }
 
     /**

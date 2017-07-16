@@ -18,7 +18,7 @@ public class AirlineTable implements AirlineAccess {
     public AirlineTable() {
     }
 
-    public void initialize(String dbPath) {
+    public void initialize() {
         if (airlines == null) {
             airlines = new ArrayList<Airline>();
             airlines.add(new Airline("WestJet"));

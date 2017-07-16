@@ -22,11 +22,17 @@ public class AirportTableTest {
     private static List<Airport> original;
     private static AirportAccess airportTable;
 
+    public static void setAirportAccess(AirportAccess a) {
+        airportTable = a;
+    }
+
     @BeforeClass
     public static void setUp() {
-        airportTable = new AirportTable();
-        airportTable.initialize("");
-        original = airportTable.getAirports();
+        if (airportTable == null) {
+            airportTable = new AirportTable();
+            airportTable.initialize();
+            original = airportTable.getAirports();
+        }
     }
 
     @Test

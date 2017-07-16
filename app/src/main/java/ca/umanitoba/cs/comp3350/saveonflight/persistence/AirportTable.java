@@ -18,7 +18,7 @@ public class AirportTable implements AirportAccess {
     public AirportTable() {
     }
 
-    public void initialize(String dbPath) {
+    public void initialize() {
         if (airports == null) {
             airports = new ArrayList<Airport>();
             airports.add(new Airport("Vancouver YVR"));
