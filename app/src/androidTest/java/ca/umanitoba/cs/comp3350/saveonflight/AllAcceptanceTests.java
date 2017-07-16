@@ -13,10 +13,10 @@ public class AllAcceptanceTests {
 
     public static Test suite() {
         suite = new TestSuite("Acceptance Tests");
-//        suite.addTestSuite(ViewTripSummaryTest.class);
+        suite.addTestSuite(ViewTripSummaryTest.class);
         suite.addTestSuite(SearchTest.class);
-//        suite.addTestSuite(ViewBookedFlightsTest.class);
-//        suite.addTestSuite(PaymentTest.class);
+        suite.addTestSuite(ViewBookedFlightsTest.class);
+        suite.addTestSuite(PaymentTest.class);
         return suite;
     }
 }
