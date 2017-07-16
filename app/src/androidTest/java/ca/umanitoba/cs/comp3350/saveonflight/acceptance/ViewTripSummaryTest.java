@@ -58,7 +58,6 @@ public class ViewTripSummaryTest extends ActivityInstrumentationTestCase2<MainAc
         Assert.assertTrue(solo.searchText("2017-11-11"));
         Assert.assertTrue(solo.searchText("2017-12-11"));
         Assert.assertTrue(solo.searchText(Double.toString(420.12 + 350.52)));
-
     }
 
     public void testOneWayTrips() {
