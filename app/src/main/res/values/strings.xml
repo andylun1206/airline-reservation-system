@@ -42,7 +42,7 @@
     </string-array>
     <string-array name="airline_list">
         <item>Air Canada</item>
-        <item>West Jet</item>
+        <item>WestJet</item>
     </string-array>
     <string-array name="class_list">
         <item>First Class</item>
