@@ -42,7 +42,9 @@ public class SearchTest extends ActivityInstrumentationTestCase2<MainActivity> {
         solo.clickOnText("OK");
 
         solo.clickOnButton("Search");
+        Assert.assertTrue(solo.searchText("AC 266"));
         solo.clickOnText("AC 266");
+        Assert.assertTrue(solo.searchText("AC 101"));
         solo.clickOnText("AC 101");
 
         Assert.assertTrue(solo.searchText("2017-11-11"));
@@ -56,12 +58,15 @@ public class SearchTest extends ActivityInstrumentationTestCase2<MainActivity> {
         solo.clickOnButton("SEARCH FOR FLIGHTS");
         solo.clickOnText("Return");
         solo.clickOnText("One Way");
+        Assert.assertFalse(solo.searchText("Return Date"));
         solo.enterText(0, "Winnipeg YWG");
         solo.enterText(1, "Toronto YYZ");
         solo.clickOnText("Departure Date");
         solo.setDatePicker(0, 2017, 10, 11);
         solo.clickOnText("OK");
         solo.clickOnButton("Search");
+
+        Assert.assertTrue(solo.searchText("AC 260"));
         solo.clickOnText("AC 260");
 
         Assert.assertTrue(solo.searchText("2017-11-11"));
@@ -121,5 +126,93 @@ public class SearchTest extends ActivityInstrumentationTestCase2<MainActivity> {
         solo.clickOnText("OK");
         solo.clickOnButton(1);
         assertTrue(solo.waitForText("No flights were found with these criterias!"));
+    }
+
+    public void testAdvancedRoundTrip(){
+        //west jet
+        solo.waitForActivity("MainActivity");
+        solo.clickOnButton("SEARCH FOR FLIGHTS");
+        solo.clickOnText("Advanced Options");
+        solo.enterText(0, "Winnipeg YWG");
+        solo.enterText(1, "Toronto YYZ");
+        solo.clickOnText("Departure Date");
+        solo.setDatePicker(0, 2017, 10, 11);
+        solo.clickOnText("OK");
+        solo.clickOnText("Return Date");
+        solo.setDatePicker(0, 2017, 11, 11);
+        solo.clickOnText("OK");
+        solo.enterText(4,"400.00");
+        solo.enterText(5,"WestJet");
+        solo.clickOnButton("Search");
+        Assert.assertTrue(solo.searchText("WJ 258"));
+        Assert.assertFalse(solo.searchText("AC"));
+        solo.clickOnText("WJ 258");
+        Assert.assertTrue(solo.searchText("WJ 491"));
+        Assert.assertFalse(solo.searchText("AC"));
+        solo.clickOnText("WJ 491");
+        Assert.assertTrue(solo.searchText("Return Flight"));
+        Assert.assertFalse(solo.searchText("AC"));
+
+        //air canada
+        solo.clickOnButton("Modify Search");
+        solo.clickOnText("Advanced Options");
+        solo.enterText(0, "Winnipeg YWG");
+        solo.enterText(1, "Toronto YYZ");
+        solo.clickOnText("Departure Date");
+        solo.setDatePicker(0, 2017, 10, 11);
+        solo.clickOnText("OK");
+        solo.clickOnText("Return Date");
+        solo.setDatePicker(0, 2017, 11, 11);
+        solo.clickOnText("OK");
+        solo.enterText(4,"500");
+        solo.enterText(5,"Air Canada");
+        solo.clickOnButton("Search");
+
+        Assert.assertFalse(solo.searchText("WJ"));
+        Assert.assertTrue(solo.searchText("AC 260"));
+        solo.clickOnText("AC 260");
+        Assert.assertFalse(solo.searchText("WJ"));
+        Assert.assertTrue(solo.searchText("AC 100"));
+        solo.clickOnText("AC 100");
+        Assert.assertTrue(solo.searchText("Return Flight"));
+        Assert.assertFalse(solo.searchText("WJ"));
+    }
+
+    public void testAdvancedOneway(){
+        solo.waitForActivity("MainActivity");
+        solo.clickOnButton("SEARCH FOR FLIGHTS");
+        solo.clickOnText("Return");
+        solo.clickOnText("One Way");
+        solo.clickOnText("Advanced Options");
+        Assert.assertFalse(solo.searchText("Return Date"));
+        solo.enterText(0, "Winnipeg YWG");
+        solo.enterText(1, "Toronto YYZ");
+        solo.clickOnText("Departure Date");
+        solo.setDatePicker(0, 2017, 10, 11);
+        solo.clickOnText("OK");
+        solo.enterText(3,"400");
+        solo.enterText(4,"Air Canada");
+        solo.clickOnButton("Search");
+        Assert.assertTrue(solo.searchText("AC 268"));
+        Assert.assertFalse(solo.searchText("WJ"));
+        solo.clickOnText("AC 268");
+        Assert.assertFalse(solo.searchText("WJ"));
+        //westjet advanced search
+        solo.clickOnButton("Modify Search");
+        solo.clickOnText("Return");
+        solo.clickOnText("One Way");
+        solo.clickOnText("Advanced Options");
+        solo.enterText(0, "Winnipeg YWG");
+        solo.enterText(1, "Toronto YYZ");
+        solo.clickOnText("Departure Date");
+        solo.setDatePicker(0, 2017, 10, 11);
+        solo.clickOnText("OK");
+        solo.enterText(3,"200");
+        solo.enterText(4,"WestJet");
+        solo.clickOnButton("Search");
+        Assert.assertFalse(solo.searchText("AC"));
+        Assert.assertTrue(solo.searchText("WJ 546"));
+        solo.clickOnText("WJ 546");
+        Assert.assertFalse(solo.searchText("AC"));
     }
 }

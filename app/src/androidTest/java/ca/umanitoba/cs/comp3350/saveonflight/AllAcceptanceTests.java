@@ -4,6 +4,11 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import ca.umanitoba.cs.comp3350.saveonflight.acceptance.PaymentTest;
+<<<<<<< HEAD
+=======
+import ca.umanitoba.cs.comp3350.saveonflight.acceptance.TicketTest;
+
+>>>>>>> master
 import ca.umanitoba.cs.comp3350.saveonflight.acceptance.SearchTest;
 import ca.umanitoba.cs.comp3350.saveonflight.acceptance.TicketTest;
 import ca.umanitoba.cs.comp3350.saveonflight.acceptance.ViewBookedFlightsTest;
