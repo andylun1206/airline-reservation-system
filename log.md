@@ -192,8 +192,11 @@ Decided to change the way we assign developer tasks. Instead of assigning all of
     - Used Robotium to write acceptance tests for the trip summary and search pages
 
 #### Zhengyu Gu and Long Yu
+- update database's storage
+    - add some new flights
 - Added seat number column to BookedFlight table in the database
     - Needed for the boarding pass
-    
+- add mock(unit) testing for testing sql database
+    - done with mock test for each table
     
 
