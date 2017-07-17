@@ -30,7 +30,7 @@ public class TravellerTableSqlTest {
     public static void setUp() {
         Main.startUp(Main.DatabaseType.HSQL);
         travellerTable = new TravellerTableSql();
-        travellerTable.initialize(Main.getDBPathName());
+        travellerTable.initialize();
         original = travellerTable.getTravellers();
         mockedList = mock(TravellerTableSql.class);
         mockedList.add(null);
@@ -41,7 +41,6 @@ public class TravellerTableSqlTest {
         mockedList.remove(new Traveller(0, "Jack"));
         mockedList.findTraveller(10000);
         mockedList.findTraveller(0);
-        mockedList.close();
 
         verify(mockedList).add(null);
         verify(mockedList).add(new Traveller(0, ""));
@@ -51,7 +50,6 @@ public class TravellerTableSqlTest {
         verify(mockedList).remove(new Traveller(0, "Jack"));
         verify(mockedList).findTraveller(10000);
         verify(mockedList).findTraveller(0);
-        verify(mockedList).close();
 
         when(mockedList.add(null)).thenReturn(false);
         when(mockedList.add(new Traveller(0, ""))).thenReturn(true);

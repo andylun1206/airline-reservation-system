@@ -42,12 +42,12 @@ public class FlightTableSqlTest {
     public static void setUp() throws ParseException {
         Main.startUp(Main.DatabaseType.HSQL);
         flightTable = new FlightTableSql();
-        flightTable.initialize(Main.getDBPathName());
+        flightTable.initialize();
         original = flightTable.getFlights();
         AirlineTableSql airlineTableSql = new AirlineTableSql();
-        airlineTableSql.initialize(Main.getDBPathName());
+        airlineTableSql.initialize();
         AirportTableSql airportTableSql = new AirportTableSql();
-        airportTableSql.initialize(Main.getDBPathName());
+        airportTableSql.initialize();
 
         Airline westJet = airlineTableSql.findAirline("westjet");
         Airport yyz = airportTableSql.findAirport("YYZ");
@@ -75,8 +75,6 @@ public class FlightTableSqlTest {
         mockedList.findFlight(null, null);
         mockedList.findFlight("", "");
         mockedList.findFlight("WJ 009", "2017-11-11 05:30");
-        //mockedList.findBySearchCriteria();
-        mockedList.close();
 
         verify(mockedList).add(null);
         verify(mockedList).add(emptyNameCase);
@@ -87,8 +85,6 @@ public class FlightTableSqlTest {
         verify(mockedList).findFlight(null, null);
         verify(mockedList).findFlight("", "");
         verify(mockedList).findFlight("WJ 009", "2017-11-11 05:30");
-        //verify(mockedList).findBySearchCriteria();
-        verify(mockedList).close();
 
         when(mockedList.add(null)).thenReturn(false);
         when(mockedList.add(emptyNameCase)).thenReturn(true);
@@ -101,7 +97,6 @@ public class FlightTableSqlTest {
         when(mockedList.findFlight(null, null)).thenReturn(null);
         when(mockedList.findFlight("", "")).thenReturn(null);
         when(mockedList.findFlight("WJ 009", "2017-11-11 05:30")).thenReturn(validCase);
-
     }
 
     @Test
@@ -159,50 +154,4 @@ public class FlightTableSqlTest {
         assertEquals("Test findFlight sample fail", validCase, mockedList.findFlight("WJ 009", "2017-11-11 05:30"));
     }
 
-
-    /*@Test
-    public void testSearchBySearchCriteria() {
-        SearchCriteria searchCriteria = new SearchCriteria();
-        Airport ywg = new Airport("Winnipeg YWG");
-        Airport yyz = new Airport("Toronto YYZ");
-        searchCriteria.setOrigin(ywg);
-        searchCriteria.setDestination(yyz);
-
-        Calendar cal = new GregorianCalendar();
-        cal.set(2017, 11, 11);
-        Date departureDate = cal.getTime();
-        searchCriteria.setDepartureDate(departureDate);
-
-        cal.set(2017, 12, 11);
-        Date returnDate = cal.getTime();
-        searchCriteria.setReturnDate(returnDate);
-
-        searchCriteria.setMaxPrice(400.50);
-        Airline westJet = new Airline("WestJet");
-        searchCriteria.setPreferredAirlines(westJet);
-        searchCriteria.setPreferredClass(FlightClassEnum.ECONOMY);
-
-        ArrayList<Flight> flights = flightTable.findBySearchCriteria(searchCriteria);
-        assertNotNull(flights);
-        for (Flight f : flights) {
-            assertEquals(ywg, f.getOrigin());
-            assertEquals(yyz, f.getDestination());
-            assertEquals(departureDate, f.getDepartureTime());
-            assertTrue(f.getSeatsRemaining() >= 1);
-            assertTrue(f.getPrice() <= 400.50);
-            assertTrue(f.getAirline().equals(westJet));
-            assertEquals(FlightClassEnum.ECONOMY, f.getFlightClass());
-        }
-
-        ArrayList<Flight> returnFlights = flightTable.findBySearchCriteria(searchCriteria);
-        assertNotNull(returnFlights);
-        for (Flight f : flights) {
-            assertEquals(yyz, f.getOrigin());
-            assertEquals(ywg, f.getDestination());
-            assertTrue(f.getSeatsRemaining() >= 1);
-            assertTrue(f.getPrice() <= 400.50);
-            assertTrue(f.getAirline().equals(westJet));
-            assertEquals(FlightClassEnum.ECONOMY, f.getFlightClass());
-        }
-    }*/
 }

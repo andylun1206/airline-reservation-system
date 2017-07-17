@@ -76,25 +76,6 @@ public class SearchTest extends ActivityInstrumentationTestCase2<MainActivity> {
         Assert.assertTrue(solo.searchText("AC 260"));
     }
 
-    public void testAdvancedSearch() {
-        solo.waitForActivity("MainActivity");
-        solo.clickOnButton("SEARCH FOR FLIGHTS");
-        solo.clickOnText("Advanced Options");
-        solo.enterText(0, "Winnipeg YWG");
-        solo.enterText(1, "Toronto YYZ");
-        solo.clickOnText("Departure Date");
-        solo.setDatePicker(0, 2017, 10, 11);
-        solo.clickOnText("OK");
-        solo.clickOnText("Return Date");
-        solo.setDatePicker(0, 2017, 11, 11);
-        solo.clickOnText("OK");
-        solo.enterText(5, "WestJet");
-        solo.clickOnButton("Search");
-
-        assertTrue(solo.searchText("WJ"));
-        assertFalse(solo.searchText("AC"));
-    }
-
     public void testNoResults() {
         solo.waitForActivity("MainActivity");
         solo.clickOnButton("SEARCH FOR FLIGHTS");

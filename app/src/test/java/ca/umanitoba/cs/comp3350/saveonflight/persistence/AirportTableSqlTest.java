@@ -28,20 +28,18 @@ public class AirportTableSqlTest {
     public static void setUp() {
         Main.startUp(Main.DatabaseType.HSQL);
         airportTable = new AirportTableSql();
-        airportTable.initialize(Main.getDBPathName());
+        airportTable.initialize();
         original = airportTable.getAirports();
         mockedList = mock(AirportTableSql.class);
         mockedList.findAirport(null);
         mockedList.findAirport("");
         mockedList.findAirport("Vancouver YVR");
         mockedList.findAirport("China cnm");
-        mockedList.close();
 
         verify(mockedList).findAirport(null);
         verify(mockedList).findAirport("");
         verify(mockedList).findAirport("Vancouver YVR");
         verify(mockedList).findAirport("China cnm");
-        verify(mockedList).close();
 
         when(mockedList.findAirport(null)).thenReturn(null);
         when(mockedList.findAirport("")).thenReturn(null);
