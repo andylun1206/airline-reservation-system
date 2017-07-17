@@ -3,6 +3,7 @@ package ca.umanitoba.cs.comp3350.saveonflight.presentation.payment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -181,12 +182,14 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 FragmentNavigation.viewBookedFlights();
+                ((NavigationView) getActivity().findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_bookedflights);
             }
         });
         builder.setNegativeButton("Return to Homepage", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 FragmentNavigation.homepage();
+                ((NavigationView) getActivity().findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_home);
             }
         });
         builder.create().show();
