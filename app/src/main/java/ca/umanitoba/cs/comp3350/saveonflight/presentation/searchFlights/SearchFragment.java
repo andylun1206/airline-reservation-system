@@ -148,7 +148,6 @@ public class SearchFragment extends ListFragment {
         if (optionalCriteriaList.size() == 0) {
             optionalCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_dollar_sign, getString(R.string.search_max_price)));
             optionalCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_plane, getString(R.string.search_airlines)));
-            optionalCriteriaList.add(new SearchCriteriaListViewEntry(R.drawable.ic_seat, getString(R.string.search_class)));
         }
 
         criteriaAdapter.notifyDataSetChanged(!showAdvanced);
