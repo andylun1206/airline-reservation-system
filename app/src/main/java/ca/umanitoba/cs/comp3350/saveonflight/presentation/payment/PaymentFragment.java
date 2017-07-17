@@ -69,11 +69,6 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         spinnerCountry = (Spinner) view.findViewById(R.id.spinner_country);
         etPostalCode = (EditText) view.findViewById(R.id.editText_postal_code);
 
-        etName.setText("Franklin Bristow");
-        etAddress.setText("66 Chancellors Cir");
-        etCity.setText("Winnipeg");
-        etPostalCode.setText("R3T2N2");
-
         buttonPurchase = (Button) view.findViewById(R.id.button_payment);
         buttonPurchase.setOnClickListener(this);
 
