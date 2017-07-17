@@ -16,20 +16,20 @@ public class SearchTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     private Solo solo;
 
-    public SearchTest(){
+    public SearchTest() {
         super(MainActivity.class);
     }
 
-    public void setUp() throws Exception{
+    public void setUp() throws Exception {
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
     @Override
-    public void tearDown() throws Exception{
+    public void tearDown() throws Exception {
         solo.finishOpenedActivities();
     }
 
-    public void testRoundTrip(){
+    public void testRoundTrip() {
         solo.waitForActivity("MainActivity");
         solo.clickOnButton("SEARCH FOR FLIGHTS");
         solo.enterText(0, "Winnipeg YWG");
@@ -53,7 +53,7 @@ public class SearchTest extends ActivityInstrumentationTestCase2<MainActivity> {
         Assert.assertTrue(solo.searchText("Toronto YYZ"));
     }
 
-    public void testOneWay(){
+    public void testOneWay() {
         solo.waitForActivity("MainActivity");
         solo.clickOnButton("SEARCH FOR FLIGHTS");
         solo.clickOnText("Return");
@@ -74,7 +74,39 @@ public class SearchTest extends ActivityInstrumentationTestCase2<MainActivity> {
         Assert.assertTrue(solo.searchText("Winnipeg YWG"));
         Assert.assertTrue(solo.searchText("Toronto YYZ"));
         Assert.assertTrue(solo.searchText("AC 260"));
+    }
 
+    public void testNoResults() {
+        solo.waitForActivity("MainActivity");
+        solo.clickOnButton("SEARCH FOR FLIGHTS");
+
+        solo.clickOnButton(1);
+        assertTrue(solo.waitForText("Origin is invalid!"));
+
+        solo.enterText(0, "Winnipeg YWG");
+        solo.clickOnButton(1);
+        assertTrue(solo.waitForText("Destination is invalid!"));
+
+        solo.enterText(1, "Toooooronto YYZ");
+        solo.clickOnButton(1);
+        assertTrue(solo.waitForText("Destination is invalid!"));
+
+        solo.clearEditText(1);
+        solo.enterText(1, "Toronto YYZ");
+        solo.clickOnButton(1);
+        assertTrue(solo.waitForText("Departure Date is invalid!"));
+
+        solo.clickOnText("Departure Date");
+        solo.setDatePicker(0, 2017, 10, 11);
+        solo.clickOnText("OK");
+        solo.clickOnButton(1);
+        assertTrue(solo.waitForText("Return Date is invalid!"));
+
+        solo.clickOnText("Return Date");
+        solo.setDatePicker(0, 2017, 11, 12);
+        solo.clickOnText("OK");
+        solo.clickOnButton(1);
+        assertTrue(solo.waitForText("No flights were found with these criterias!"));
     }
 
     public void testAdvancedRoundTrip(){

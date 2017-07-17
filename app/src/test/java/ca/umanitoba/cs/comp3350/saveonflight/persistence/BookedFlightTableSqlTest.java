@@ -42,17 +42,17 @@ public class BookedFlightTableSqlTest {
     public static void setUp() {
         Main.startUp(Main.DatabaseType.HSQL);
         bookedFlightTableSql = new BookedFlightTableSql();
-        bookedFlightTableSql.initialize(Main.getDBPathName());
+        bookedFlightTableSql.initialize();
         BookedFlightTable bookedFlightTable = new BookedFlightTable();
-        bookedFlightTable.initialize("");
-        travellerTable.initialize("");
-        flightTable.initialize("");
+        bookedFlightTable.initialize();
+        travellerTable.initialize();
+        flightTable.initialize();
         ArrayList<Traveller> travellers = travellerTable.getTravellers();
         ArrayList<Flight> flights = flightTable.getFlights();
         AirlineTableSql airlineTableSql = new AirlineTableSql();
-        airlineTableSql.initialize(Main.getDBPathName());
+        airlineTableSql.initialize();
         AirportTableSql airportTableSql = new AirportTableSql();
-        airportTableSql.initialize(Main.getDBPathName());
+        airportTableSql.initialize();
         Airline westJet = airlineTableSql.findAirline("westjet");
         Airport yyz = airportTableSql.findAirport("YYZ");
         Airport ywg = airportTableSql.findAirport("YWG");
@@ -67,34 +67,37 @@ public class BookedFlightTableSqlTest {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        emptyCase = new BookedFlight(new Traveller(100,""),emptyFlight , "");
+        emptyCase = new BookedFlight(new Traveller(100, ""), emptyFlight, "");
         validCase = new BookedFlight(travellers.get(1), flights.get(7), "8A");
         original = bookedFlightTableSql.getAll();
         mockedList = mock(BookedFlightTableSql.class);
-        mockedList.add(null);
-        mockedList.add(emptyCase);
-        mockedList.add(validCase);
-        mockedList.remove(null);
-        mockedList.remove(emptyCase);
-        mockedList.remove(validCase);
-        mockedList.searchByTraveller(null);
-        mockedList.searchByTraveller(new Traveller(10, ""));
-        mockedList.searchByTraveller(new Traveller(0, "Jack"));
-        mockedList.close();
 
-        verify(mockedList).add(null);
-        verify(mockedList).add(emptyCase);
-        verify(mockedList).add(validCase);
-        verify(mockedList).remove(null);
-        verify(mockedList).remove(emptyCase);
-        verify(mockedList).remove(validCase);
-        verify(mockedList).searchByTraveller(null);
-        verify(mockedList).searchByTraveller(new Traveller(10, ""));
-        verify(mockedList).close();
+        try {
+            mockedList.add(null);
+            mockedList.add(emptyCase);
+            mockedList.add(validCase);
+            mockedList.remove(null);
+            mockedList.remove(emptyCase);
+            mockedList.remove(validCase);
+            mockedList.searchByTraveller(null);
+            mockedList.searchByTraveller(new Traveller(10, ""));
+            mockedList.searchByTraveller(new Traveller(0, "Jack"));
 
-        when(mockedList.add(null)).thenReturn(false);
-        when(mockedList.add(emptyCase)).thenReturn(true);
-        when(mockedList.add(validCase)).thenReturn(true);
+            verify(mockedList).add(null);
+            verify(mockedList).add(emptyCase);
+            verify(mockedList).add(validCase);
+            verify(mockedList).remove(null);
+            verify(mockedList).remove(emptyCase);
+            verify(mockedList).remove(validCase);
+            verify(mockedList).searchByTraveller(null);
+            verify(mockedList).searchByTraveller(new Traveller(10, ""));
+
+            when(mockedList.add(null)).thenReturn(false);
+            when(mockedList.add(emptyCase)).thenReturn(true);
+            when(mockedList.add(validCase)).thenReturn(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         when(mockedList.remove(null)).thenReturn(false);
         when(mockedList.remove(emptyCase)).thenReturn(false);
@@ -117,18 +120,29 @@ public class BookedFlightTableSqlTest {
 
     @Test
     public void testAddNull() {
-        assertFalse("Test add null fail", mockedList.add(null));
+        try {
+            assertFalse("Test add null fail", mockedList.add(null));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void testAddEmpty() {
-
-        assertTrue("Test add empty fail", mockedList.add(emptyCase));
+        try {
+            assertTrue("Test add empty fail", mockedList.add(emptyCase));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void testAddValid() {
-        assertTrue("Failed to add validCase to BookedFlightTable.", mockedList.add(validCase));
+        try {
+            assertTrue("Failed to add validCase to BookedFlightTable.", mockedList.add(validCase));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test

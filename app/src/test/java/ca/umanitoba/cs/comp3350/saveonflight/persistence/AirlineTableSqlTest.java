@@ -30,7 +30,7 @@ public class AirlineTableSqlTest {
     public static void setUp() {
         Main.startUp(Main.DatabaseType.HSQL);
         airlineTable = new AirlineTableSql();
-        airlineTable.initialize(Main.getDBPathName());
+        airlineTable.initialize();
         original = airlineTable.getAirlines();
         mockedList = mock(AirlineTableSql.class);
         mockedList.add(null);
@@ -40,7 +40,6 @@ public class AirlineTableSqlTest {
         mockedList.findAirline("");
         mockedList.findAirline("WinnipegAirline");
         mockedList.findAirline("AirCanada");
-        mockedList.close();
 
         verify(mockedList).add(null);
         verify(mockedList).add(new Airline(""));
@@ -49,18 +48,15 @@ public class AirlineTableSqlTest {
         verify(mockedList).findAirline("");
         verify(mockedList).findAirline("WinnipegAirline");
         verify(mockedList).findAirline("AirCanada");
-        verify(mockedList).close();
 
         when(mockedList.add(null)).thenReturn(false);
         when(mockedList.add(new Airline(""))).thenReturn(true);
         when(mockedList.add(new Airline("WinnipegAirline"))).thenReturn(true);
 
-
         when(mockedList.findAirline(null)).thenReturn(null);
         when(mockedList.findAirline("")).thenReturn(null);
         when(mockedList.findAirline("WinnipegAirline")).thenReturn(null);
         when(mockedList.findAirline("AirCanada")).thenReturn(new Airline("AirCanada"));
-
     }
 
     @Test

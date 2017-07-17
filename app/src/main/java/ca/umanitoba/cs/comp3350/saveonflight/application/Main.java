@@ -144,13 +144,6 @@ public class Main {
     }
 
     /**
-     * @return the path to the database
-     */
-    public static String getDBPathName() {
-        return dbPathName;
-    }
-
-    /**
      * Sets the database path.
      *
      * @param pathName the path to the database
